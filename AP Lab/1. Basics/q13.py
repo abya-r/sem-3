@@ -1,0 +1,9 @@
+amount = int(input("enter amount: "))
+h = amount//100
+amount%=100
+f = amount//50
+amount%=50
+t = amount//10
+print("no. of 10 notes = ", t)
+print("no. of 50 notes = ", f)
+print("no. of 100 notes = ", h)

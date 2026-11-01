@@ -1,0 +1,41 @@
+  GNU nano 2.9.8                       q2.c
+
+#include <stdio.h>
+
+void occurrences(int *arr, int n, int tigger)
+{
+    int found=0, k=0, pos[n];
+    for (int i=0; i<n; i++)
+        if (arr[i]==tigger)
+        {
+            pos[k++] = i+1;
+            found++;
+        }
+    printf("Element found at positions: \n");
+    for (int i=0; i<k; i++)
+        printf("%d ", pos[i]);
+    printf("\nNumber of occurrences = %d", found);
+}
+
+int main()
+{
+    int n, tigger;
+    printf("enter no. of elements: ");
+    scanf("%d", &n);
+    int arr[n];
+    printf("enter elements: ");
+    for (int i=0; i<n; i++)
+        scanf("%d", &arr[i]);
+    printf("Enter element to search: ");
+    scanf("%d", &tigger);
+    occurrences(arr, n, tigger);
+    return 0;
+}
+
+
+
+
+
+                             [ Read 31 lines ]
+^G Get Help    ^O Write Out   ^W Where Is    ^K Cut Text    ^J Justify
+^X Exit        ^R Read File   ^\ Replace     ^U Uncut Text  ^T To Spell

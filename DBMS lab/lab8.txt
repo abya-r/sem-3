@@ -1,0 +1,736 @@
+mysql> USE PATRIOTIC_MOVIES_DB;
+Database changed
+mysql> SELECT * FROM MOVIES;
++----------+----------------------------+-----------------------------+------------------------+-------------------------+----------------------+--------------+--------+------------+--------+
+| Movie_ID | Movie_Name                 | Actor                       | Actress                | Director                | Genre                | Release_Year | Budget | Box_Office | Rating |
++----------+----------------------------+-----------------------------+------------------------+-------------------------+----------------------+--------------+--------+------------+--------+
+|      101 | Tiranga                    | Rudra Pratap                | Seema Sharma           | Patriotic Director      | Patriotic Action     |         1993 |   8.00 |      12.00 |    7.5 |
+|      102 | Border                     | Major Kuldeep Singh         | Kamla Singh            | J. P. Dutta             | War                  |         1997 |  10.00 |      65.00 |    7.9 |
+|      103 | LOC Kargil                 | Colonel Yash Thakur         | Meera Thakur           | J. P. Dutta             | War                  |         2003 |  40.00 |      42.00 |    6.7 |
+|      104 | Lakshya                    | Karan Shergill              | Romi                   | Farhan Akhtar           | War                  |         2004 |  32.00 |      42.00 |    7.8 |
+|      105 | Swades                     | Mohan Bhargava              | Gita                   | Ashutosh Gowariker      | Drama                |         2004 |  30.00 |      34.00 |    8.2 |
+|      106 | Rang De Basanti            | Daljit Singh                | Sonia                  | Rakeysh Omprakash Mehra | Patriotic Drama      |         2006 |  28.00 |      96.00 |    8.1 |
+|      107 | Chak De! India             | Kabir Khan                  | Vidya Sharma           | Shimit Amin             | Sports               |         2007 |  20.00 |     109.00 |    8.1 |
+|      108 | The Legend of Bhagat Singh | Bhagat Singh                | Durga Bhabhi           | Rajkumar Santoshi       | Biographical         |         2002 |  12.00 |      25.00 |    8.1 |
+|      109 | Raazi                      | Sehmat Khan                 | Iqbal Syed             | Meghna Gulzar           | Patriotic Thriller   |         2018 |  35.00 |     123.00 |    7.7 |
+|      110 | Parmanu                    | Ashwat Raina                | Ambalika Raina         | Abhishek Sharma         | Patriotic Thriller   |         2018 |  45.00 |      93.00 |    7.6 |
+|      111 | Uri: The Surgical Strike   | Major Vihaan Singh Shergill | Pallavi Sharma         | Aditya Dhar             | War                  |         2019 |  25.00 |     245.00 |    8.2 |
+|      112 | Kesari                     | Havildar Ishar Singh        | Jeevani Kaur           | Anurag Singh            | War                  |         2019 |  80.00 |     207.00 |    7.4 |
+|      113 | Shershaah                  | Captain Vikram Batra        | Dimple Cheema          | Vishnuvardhan           | Biographical         |         2021 |  50.00 |     135.00 |    8.3 |
+|      114 | Satyameva Jayate           | Virendra Rathod             | Shikha Rathod          | Milap Zaveri            | Action               |         2018 |  45.00 |     108.00 |    5.7 |
+|      115 | Major                      | Major Sandeep Unnikrishnan  | Isha                   | Sashi Kiran Tikka       | Biographical         |         2022 |  30.00 |      65.00 |    8.1 |
+|      116 | Sam Bahadur                | Sam Manekshaw               | Silloo Manekshaw       | Meghna Gulzar           | Biographical         |         2023 |  55.00 |     128.00 |    8.1 |
+|      117 | Fighter                    | Shamsher Pathania           | Minal Rathore          | Siddharth Anand         | Aerial Action        |         2024 | 250.00 |     358.00 |    6.1 |
+|      118 | Article 370                | Zooni Haksar                | Rajeshwari Swaminathan | Aditya Suhas Jambhale   | Patriotic Thriller   |         2024 |  20.00 |     110.00 |    7.8 |
+|      119 | Mission Mangal             | Rakesh Dhawan               | Tara Shinde            | Jagan Shakti            | Science & Patriotism |         2019 |  32.00 |     290.00 |    6.9 |
+|      120 | Parmanu 2                  | Ashwat Raina                | Ambalika Raina         | Abhishek Sharma         | Patriotic Thriller   |         2023 |  60.00 |     155.00 |    7.1 |
+|      121 | Kesari 2                   | Arjun Singh                 | Harleen Kaur           | Patriotic Director      | Historical           |         2025 |  90.00 |     210.00 |    7.5 |
+|      122 | Vande Mataram              | Arjun Deshmukh              | Kavya Deshmukh         | National Pride Films    | Patriotic Drama      |         2022 |  35.00 |     180.00 |    7.9 |
+|      123 | Bharat Maa                 | Veer Pratap                 | Gauri                  | National Pride Films    | Patriotic Drama      |         2023 |  45.00 |     225.00 |    7.6 |
+|      124 | Jai Hind                   | Surya Pratap                | Ananya                 | Patriotic Director      | Patriotic Action     |         2024 |  70.00 |     310.00 |    7.3 |
+|      125 | Veer Kesari                | Veer Singh                  | Radha                  | Patriotic Director      | War                  |         2021 |  65.00 |     190.00 |    7.2 |
+|      126 | Desh Ke Sipahi             | Vikram Singh                | Nandini                | National Pride Films    | War                  |         2020 |  40.00 |     175.00 |    7.4 |
+|      127 | Bharat Veer                | Arjun Deshmukh              | Kavya Deshmukh         | National Pride Films    | Patriotic Drama      |         2024 |  55.00 |     260.00 |    7.8 |
+|      128 | Sankalp                    | Surya Pratap                | Ananya                 | Patriotic Director      | Patriotic Action     |         2022 |  40.00 |     205.00 |    7.5 |
+|      129 | Veer Yodha                 | Veer Singh                  | Radha                  | Patriotic Director      | War                  |         2023 |  75.00 |     235.00 |    7.4 |
+|      130 | Jai Bharat                 | Arjun Deshmukh              | Kavya Deshmukh         | National Pride Films    | Patriotic Drama      |         2025 |  80.00 |     330.00 |    8.0 |
++----------+----------------------------+-----------------------------+------------------------+-------------------------+----------------------+--------------+--------+------------+--------+
+30 rows in set (0.00 sec)
+       ^C
+mysql>
+mysql> SELECT Movie_Name, Rating
+    -> FROM MOVIES
+    -> WHERE Rating >
+    -> (
+    -> SELECT AVG(Rating)
+    -> FROM MOVIES
+    -> )
+    -> ;
++----------------------------+--------+
+| Movie_Name                 | Rating |
++----------------------------+--------+
+| Border                     |    7.9 |
+| Lakshya                    |    7.8 |
+| Swades                     |    8.2 |
+| Rang De Basanti            |    8.1 |
+| Chak De! India             |    8.1 |
+| The Legend of Bhagat Singh |    8.1 |
+| Raazi                      |    7.7 |
+| Parmanu                    |    7.6 |
+| Uri: The Surgical Strike   |    8.2 |
+| Shershaah                  |    8.3 |
+| Major                      |    8.1 |
+| Sam Bahadur                |    8.1 |
+| Article 370                |    7.8 |
+| Vande Mataram              |    7.9 |
+| Bharat Maa                 |    7.6 |
+| Bharat Veer                |    7.8 |
+| Jai Bharat                 |    8.0 |
++----------------------------+--------+
+17 rows in set (0.00 sec)
+
+mysql> SELECT Movie_Name, Rating
+    -> FROM MOVIES
+    -> WHERE Rating <
+    -> (
+    -> SELECT AVG(Rating)
+    -> FROM MOVIES
+    -> );
++------------------+--------+
+| Movie_Name       | Rating |
++------------------+--------+
+| Tiranga          |    7.5 |
+| LOC Kargil       |    6.7 |
+| Kesari           |    7.4 |
+| Satyameva Jayate |    5.7 |
+| Fighter          |    6.1 |
+| Mission Mangal   |    6.9 |
+| Parmanu 2        |    7.1 |
+| Kesari 2         |    7.5 |
+| Jai Hind         |    7.3 |
+| Veer Kesari      |    7.2 |
+| Desh Ke Sipahi   |    7.4 |
+| Sankalp          |    7.5 |
+| Veer Yodha       |    7.4 |
++------------------+--------+
+13 rows in set (0.00 sec)
+
+mysql> SELECT Movie_Name, Rating
+    -> FROM MOVIES
+    -> WHERE Rating =
+    -> (
+    -> SELECT MAX(Rating)
+    -> FROM MOVIES
+    -> );
++------------+--------+
+| Movie_Name | Rating |
++------------+--------+
+| Shershaah  |    8.3 |
++------------+--------+
+1 row in set (0.00 sec)
+
+mysql> SELECT Movie_Name, Rating
+    -> FROM MOVIES
+    -> WHERE Rating =
+    -> (
+    -> SELECT MIN(Rating)
+    -> FROM MOVIES
+    -> );
++------------------+--------+
+| Movie_Name       | Rating |
++------------------+--------+
+| Satyameva Jayate |    5.7 |
++------------------+--------+
+1 row in set (0.00 sec)
+
+mysql> SELECT Movie_Name, Budget
+    -> FROM MOVIES
+    -> WHERE Budget >
+    -> (
+    -> SELECT AVG(Budget)
+    -> FROM MOVIES
+    -> );
++-------------+--------+
+| Movie_Name  | Budget |
++-------------+--------+
+| Kesari      |  80.00 |
+| Sam Bahadur |  55.00 |
+| Fighter     | 250.00 |
+| Parmanu 2   |  60.00 |
+| Kesari 2    |  90.00 |
+| Jai Hind    |  70.00 |
+| Veer Kesari |  65.00 |
+| Bharat Veer |  55.00 |
+| Veer Yodha  |  75.00 |
+| Jai Bharat  |  80.00 |
++-------------+--------+
+10 rows in set (0.00 sec)
+
+mysql> SELECT Movie_Name, Box_Office
+    -> FROM MOVIES
+    -> WHERE Box_Office >
+    -> (
+    -> SELECT Box_Office
+    -> FROM MOVIES
+    -> WHERE Movie_Name = 'Border'
+    -> );
++--------------------------+------------+
+| Movie_Name               | Box_Office |
++--------------------------+------------+
+| Rang De Basanti          |      96.00 |
+| Chak De! India           |     109.00 |
+| Raazi                    |     123.00 |
+| Parmanu                  |      93.00 |
+| Uri: The Surgical Strike |     245.00 |
+| Kesari                   |     207.00 |
+| Shershaah                |     135.00 |
+| Satyameva Jayate         |     108.00 |
+| Sam Bahadur              |     128.00 |
+| Fighter                  |     358.00 |
+| Article 370              |     110.00 |
+| Mission Mangal           |     290.00 |
+| Parmanu 2                |     155.00 |
+| Kesari 2                 |     210.00 |
+| Vande Mataram            |     180.00 |
+| Bharat Maa               |     225.00 |
+| Jai Hind                 |     310.00 |
+| Veer Kesari              |     190.00 |
+| Desh Ke Sipahi           |     175.00 |
+| Bharat Veer              |     260.00 |
+| Sankalp                  |     205.00 |
+| Veer Yodha               |     235.00 |
+| Jai Bharat               |     330.00 |
++--------------------------+------------+
+23 rows in set (0.00 sec)
+mysql> USE PATRIOTIC_MOVIES_DB;
+Database changed
+mysql> SELECT * FROM MOVIES;
++----------+----------------------------+-----------------------------+------------------------+-------------------------+----------------------+--------------+--------+------------+--------+
+| Movie_ID | Movie_Name                 | Actor                       | Actress                | Director                | Genre                | Release_Year | Budget | Box_Office | Rating |
++----------+----------------------------+-----------------------------+------------------------+-------------------------+----------------------+--------------+--------+------------+--------+
+|      101 | Tiranga                    | Rudra Pratap                | Seema Sharma           | Patriotic Director      | Patriotic Action     |         1993 |   8.00 |      12.00 |    7.5 |
+|      102 | Border                     | Major Kuldeep Singh         | Kamla Singh            | J. P. Dutta             | War                  |         1997 |  10.00 |      65.00 |    7.9 |
+|      103 | LOC Kargil                 | Colonel Yash Thakur         | Meera Thakur           | J. P. Dutta             | War                  |         2003 |  40.00 |      42.00 |    6.7 |
+|      104 | Lakshya                    | Karan Shergill              | Romi                   | Farhan Akhtar           | War                  |         2004 |  32.00 |      42.00 |    7.8 |
+|      105 | Swades                     | Mohan Bhargava              | Gita                   | Ashutosh Gowariker      | Drama                |         2004 |  30.00 |      34.00 |    8.2 |
+|      106 | Rang De Basanti            | Daljit Singh                | Sonia                  | Rakeysh Omprakash Mehra | Patriotic Drama      |         2006 |  28.00 |      96.00 |    8.1 |
+|      107 | Chak De! India             | Kabir Khan                  | Vidya Sharma           | Shimit Amin             | Sports               |         2007 |  20.00 |     109.00 |    8.1 |
+|      108 | The Legend of Bhagat Singh | Bhagat Singh                | Durga Bhabhi           | Rajkumar Santoshi       | Biographical         |         2002 |  12.00 |      25.00 |    8.1 |
+|      109 | Raazi                      | Sehmat Khan                 | Iqbal Syed             | Meghna Gulzar           | Patriotic Thriller   |         2018 |  35.00 |     123.00 |    7.7 |
+|      110 | Parmanu                    | Ashwat Raina                | Ambalika Raina         | Abhishek Sharma         | Patriotic Thriller   |         2018 |  45.00 |      93.00 |    7.6 |
+|      111 | Uri: The Surgical Strike   | Major Vihaan Singh Shergill | Pallavi Sharma         | Aditya Dhar             | War                  |         2019 |  25.00 |     245.00 |    8.2 |
+|      112 | Kesari                     | Havildar Ishar Singh        | Jeevani Kaur           | Anurag Singh            | War                  |         2019 |  80.00 |     207.00 |    7.4 |
+|      113 | Shershaah                  | Captain Vikram Batra        | Dimple Cheema          | Vishnuvardhan           | Biographical         |         2021 |  50.00 |     135.00 |    8.3 |
+|      114 | Satyameva Jayate           | Virendra Rathod             | Shikha Rathod          | Milap Zaveri            | Action               |         2018 |  45.00 |     108.00 |    5.7 |
+|      115 | Major                      | Major Sandeep Unnikrishnan  | Isha                   | Sashi Kiran Tikka       | Biographical         |         2022 |  30.00 |      65.00 |    8.1 |
+|      116 | Sam Bahadur                | Sam Manekshaw               | Silloo Manekshaw       | Meghna Gulzar           | Biographical         |         2023 |  55.00 |     128.00 |    8.1 |
+|      117 | Fighter                    | Shamsher Pathania           | Minal Rathore          | Siddharth Anand         | Aerial Action        |         2024 | 250.00 |     358.00 |    6.1 |
+|      118 | Article 370                | Zooni Haksar                | Rajeshwari Swaminathan | Aditya Suhas Jambhale   | Patriotic Thriller   |         2024 |  20.00 |     110.00 |    7.8 |
+|      119 | Mission Mangal             | Rakesh Dhawan               | Tara Shinde            | Jagan Shakti            | Science & Patriotism |         2019 |  32.00 |     290.00 |    6.9 |
+|      120 | Parmanu 2                  | Ashwat Raina                | Ambalika Raina         | Abhishek Sharma         | Patriotic Thriller   |         2023 |  60.00 |     155.00 |    7.1 |
+|      121 | Kesari 2                   | Arjun Singh                 | Harleen Kaur           | Patriotic Director      | Historical           |         2025 |  90.00 |     210.00 |    7.5 |
+|      122 | Vande Mataram              | Arjun Deshmukh              | Kavya Deshmukh         | National Pride Films    | Patriotic Drama      |         2022 |  35.00 |     180.00 |    7.9 |
+|      123 | Bharat Maa                 | Veer Pratap                 | Gauri                  | National Pride Films    | Patriotic Drama      |         2023 |  45.00 |     225.00 |    7.6 |
+|      124 | Jai Hind                   | Surya Pratap                | Ananya                 | Patriotic Director      | Patriotic Action     |         2024 |  70.00 |     310.00 |    7.3 |
+|      125 | Veer Kesari                | Veer Singh                  | Radha                  | Patriotic Director      | War                  |         2021 |  65.00 |     190.00 |    7.2 |
+|      126 | Desh Ke Sipahi             | Vikram Singh                | Nandini                | National Pride Films    | War                  |         2020 |  40.00 |     175.00 |    7.4 |
+|      127 | Bharat Veer                | Arjun Deshmukh              | Kavya Deshmukh         | National Pride Films    | Patriotic Drama      |         2024 |  55.00 |     260.00 |    7.8 |
+|      128 | Sankalp                    | Surya Pratap                | Ananya                 | Patriotic Director      | Patriotic Action     |         2022 |  40.00 |     205.00 |    7.5 |
+|      129 | Veer Yodha                 | Veer Singh                  | Radha                  | Patriotic Director      | War                  |         2023 |  75.00 |     235.00 |    7.4 |
+|      130 | Jai Bharat                 | Arjun Deshmukh              | Kavya Deshmukh         | National Pride Films    | Patriotic Drama      |         2025 |  80.00 |     330.00 |    8.0 |
++----------+----------------------------+-----------------------------+------------------------+-------------------------+----------------------+--------------+--------+------------+--------+
+30 rows in set (0.00 sec)
+
+mysql> --7
+    -> --7
+    -> SELECT Movie_Name
+    -> FROM MOVIES
+    -> WHERE Release_Year =
+    -> (
+    -> SELECT Release_Year
+    -> FROM MOVIES
+    -> WHERE Movie_Name = 'Swades'
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '--7
+--7
+SELECT Movie_Name
+FROM MOVIES
+WHERE Release_Year =
+(
+SELECT Release_Year' at line 1
+mysql> SELECT Movie_Name
+    -> FROM MOVIES
+    -> WHERE Release_Year =
+    -> (
+    -> SELECT Release_Year
+    -> FROM MOVIES
+    -> WHERE Movie_Name = 'Swades'
+    -> );
++------------+
+| Movie_Name |
++------------+
+| Lakshya    |
+| Swades     |
++------------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT Movie_Name
+    -> FROM MOVIES
+    -> WHERE Rating >
+    -> (
+    -> SELECT Rating
+    -> FROM MOVIES
+    -> WHERE Movie_Name = 
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 7
+mysql> SELECT Movie_Name
+    -> FROM MOVIES
+    -> WHERE Rating >
+    -> (
+    -> SELECT Rating
+    -> FROM MOVIES
+    -> WHERE Movie_Name = 'Swades'
+    -> );
++------------+
+| Movie_Name |
++------------+
+| Shershaah  |
++------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT Movie_Name
+    -> FROM MOVIES
+    -> WHERE Release_Year =
+    -> (
+    -> SELECT Release_Year
+    -> FROM MOVIES
+    -> WHERE Movie_Name = 'Lakshya'
+    -> );
++------------+
+| Movie_Name |
++------------+
+| Lakshya    |
+| Swades     |
++------------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT Movie_Name
+    -> FROM MOVIES
+    -> WHERE Director =
+    -> (
+    -> SELECT Director
+    -> FROM MOVIES
+    -> WHERE Movie_Name = 'Raazi'
+    -> );
++-------------+
+| Movie_Name  |
++-------------+
+| Raazi       |
+| Sam Bahadur |
++-------------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT Movie_Name
+    -> FROM MOVIES
+    -> WHERE Budget >
+    -> (
+    -> SELECT Budget
+    -> FROM MOVIES
+    -> WHERE Movie_Name = 'Uri: The Surgical Strike'
+    -> );
++------------------+
+| Movie_Name       |
++------------------+
+| LOC Kargil       |
+| Lakshya          |
+| Swades           |
+| Rang De Basanti  |
+| Raazi            |
+| Parmanu          |
+| Kesari           |
+| Shershaah        |
+| Satyameva Jayate |
+| Major            |
+| Sam Bahadur      |
+| Fighter          |
+| Mission Mangal   |
+| Parmanu 2        |
+| Kesari 2         |
+| Vande Mataram    |
+| Bharat Maa       |
+| Jai Hind         |
+| Veer Kesari      |
+| Desh Ke Sipahi   |
+| Bharat Veer      |
+| Sankalp          |
+| Veer Yodha       |
+| Jai Bharat       |
++------------------+
+24 rows in set (0.00 sec)
+
+mysql> SELECT Movie_Name
+    -> FROM MOVIES
+    -> WHERE Genre =
+    -> (
+    -> SELECT Genre
+    -> FROM MOVIES
+    -> ^C
+mysql> SELECT Movie_Name
+    -> FROM MOVIES
+    -> WHERE Genre = ANY
+    -> (
+    -> SELECT Genre
+    -> FROM MOVIES
+    -> WHERE Release_Year = 2019
+    -> );
++--------------------------+
+| Movie_Name               |
++--------------------------+
+| Border                   |
+| LOC Kargil               |
+| Lakshya                  |
+| Uri: The Surgical Strike |
+| Kesari                   |
+| Mission Mangal           |
+| Veer Kesari              |
+| Desh Ke Sipahi           |
+| Veer Yodha               |
++--------------------------+
+9 rows in set (0.00 sec)
+
+mysql> SELECT Movie_Name
+    -> FROM MOVIES
+    -> WHERE Genre IN
+    -> (
+    -> SELECT Genre
+    -> FROM MOVIES
+    -> WHERE Release_Year = 2019
+    -> );
++--------------------------+
+| Movie_Name               |
++--------------------------+
+| Border                   |
+| LOC Kargil               |
+| Lakshya                  |
+| Uri: The Surgical Strike |
+| Kesari                   |
+| Mission Mangal           |
+| Veer Kesari              |
+| Desh Ke Sipahi           |
+| Veer Yodha               |
++--------------------------+
+9 rows in set (0.00 sec)
+
+mysql> SELECT Movie_Name
+    -> FROM MOVIES
+    -> WHERE Box_Office > ANY
+    -> (
+    -> SELECT Box_Office
+    -> FROM MOVIES
+    -> WHERE Genre = 'War'
+    -> );
++--------------------------+
+| Movie_Name               |
++--------------------------+
+| Border                   |
+| Rang De Basanti          |
+| Chak De! India           |
+| Raazi                    |
+| Parmanu                  |
+| Uri: The Surgical Strike |
+| Kesari                   |
+| Shershaah                |
+| Satyameva Jayate         |
+| Major                    |
+| Sam Bahadur              |
+| Fighter                  |
+| Article 370              |
+| Mission Mangal           |
+| Parmanu 2                |
+| Kesari 2                 |
+| Vande Mataram            |
+| Bharat Maa               |
+| Jai Hind                 |
+| Veer Kesari              |
+| Desh Ke Sipahi           |
+| Bharat Veer              |
+| Sankalp                  |
+| Veer Yodha               |
+| Jai Bharat               |
++--------------------------+
+25 rows in set (0.00 sec)
+
+mysql> SELECT Movie_Name
+    -> FROM MOVIES
+    -> WHERE Box_Office > ALL
+    -> (
+    -> SELECT Box_Office
+    -> FROM MOVIES
+    -> WHERE Genre = 'Patriotic Thriller'
+    -> );
++--------------------------+
+| Movie_Name               |
++--------------------------+
+| Uri: The Surgical Strike |
+| Kesari                   |
+| Fighter                  |
+| Mission Mangal           |
+| Kesari 2                 |
+| Vande Mataram            |
+| Bharat Maa               |
+| Jai Hind                 |
+| Veer Kesari              |
+| Desh Ke Sipahi           |
+| Bharat Veer              |
+| Sankalp                  |
+| Veer Yodha               |
+| Jai Bharat               |
++--------------------------+
+14 rows in set (0.00 sec)
+
+mysql> SELECT Movie_Name
+    -> FROM MOVIES
+    -> WHERE Rating < ANY
+    -> (
+    -> SELECT Rating
+    -> FROM MOVIES
+    -> WHERE Genre = 'Biographical'
+    -> );
++----------------------------+
+| Movie_Name                 |
++----------------------------+
+| Tiranga                    |
+| Border                     |
+| LOC Kargil                 |
+| Lakshya                    |
+| Swades                     |
+| Rang De Basanti            |
+| Chak De! India             |
+| The Legend of Bhagat Singh |
+| Raazi                      |
+| Parmanu                    |
+| Uri: The Surgical Strike   |
+| Kesari                     |
+| Satyameva Jayate           |
+| Major                      |
+| Sam Bahadur                |
+| Fighter                    |
+| Article 370                |
+| Mission Mangal             |
+| Parmanu 2                  |
+| Kesari 2                   |
+| Vande Mataram              |
+| Bharat Maa                 |
+| Jai Hind                   |
+| Veer Kesari                |
+| Desh Ke Sipahi             |
+| Bharat Veer                |
+| Sankalp                    |
+| Veer Yodha                 |
+| Jai Bharat                 |
++----------------------------+
+29 rows in set (0.00 sec)
+
+mysql> SELECT Movie_Name
+    -> FROM MOVIES
+    -> WHERE Rating > ALL
+    -> (
+    -> SELECT Rating
+    -> FROM MOVIES
+    -> WHERE Release_Year < 2010
+    -> );
++------------+
+| Movie_Name |
++------------+
+| Shershaah  |
++------------+
+1 row in set (0.00 sec)
+
+mysql> --level3
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '--level3' at line 1
+mysql> ^C
+mysql> SELECT m.Movie_Name
+    -> FROM MOVIES m
+    -> WHERE m.Rating >
+    -> (
+    -> SELECT AVG(n.Rating)
+    -> FROM MOVIES n
+    -> WHERE n.Release_Year = m.Release_Year
+    -> );
++--------------------------+
+| Movie_Name               |
++--------------------------+
+| Swades                   |
+| Raazi                    |
+| Parmanu                  |
+| Uri: The Surgical Strike |
+| Shershaah                |
+| Major                    |
+| Sam Bahadur              |
+| Article 370              |
+| Vande Mataram            |
+| Bharat Maa               |
+| Jai Hind                 |
+| Bharat Veer              |
+| Jai Bharat               |
++--------------------------+
+13 rows in set (0.00 sec)
+
+mysql> SELECT m.Movie_Name
+    -> FROM MOVIES
+    -> WHERE m.Box_Office >
+    -> (
+    -> SELECT AVG(n.Box_Office)
+    -> FROM MOVIES n
+    -> WHERE m.Genre = n.Genre
+    -> );
+ERROR 1054 (42S22): Unknown column 'm.Movie_Name' in 'field list'
+mysql> SELECT m.Movie_Name
+    -> FROM MOVIES m
+    -> WHERE m.Box_Office >
+    -> (
+    -> SELECT AVG(n.Box_Office)
+    -> FROM MOVIES n
+    -> WHERE m.Genre = n.Genre
+    -> );
++--------------------------+
+| Movie_Name               |
++--------------------------+
+| Raazi                    |
+| Uri: The Surgical Strike |
+| Kesari                   |
+| Shershaah                |
+| Sam Bahadur              |
+| Parmanu 2                |
+| Bharat Maa               |
+| Jai Hind                 |
+| Veer Kesari              |
+| Desh Ke Sipahi           |
+| Bharat Veer              |
+| Sankalp                  |
+| Veer Yodha               |
+| Jai Bharat               |
++--------------------------+
+14 rows in set (0.00 sec)
+
+mysql> SELECT m.Movie_Name
+    -> FROM MOVIES m
+    -> WHERE m.Budget >
+    -> (
+    -> SELECT AVG(n.Budget)
+    -> FROM MOVIES n
+    -> WHERE m.Director = n.Director
+    -> );
++-------------+
+| Movie_Name  |
++-------------+
+| LOC Kargil  |
+| Sam Bahadur |
+| Parmanu 2   |
+| Kesari 2    |
+| Jai Hind    |
+| Veer Kesari |
+| Bharat Veer |
+| Veer Yodha  |
+| Jai Bharat  |
++-------------+
+9 rows in set (0.00 sec)
+
+mysql> SELECT m.Genre, m.Movie_Name, m.Rating
+    -> FROM MOVIES m
+    -> WHERE m.Rating IN
+    -> (
+    -> SELECT n.Rating
+    -> FROM MOVIES n
+    -> WHERE m.Genre = n.Genre
+    -> ORDER BY Rating DESC
+    -> LIMIT 1
+    -> )
+    -> GROUP BY m.Genre;
+ERROR 1235 (42000): This version of MySQL doesn't yet support 'LIMIT & IN/ALL/ANY/SOME subquery'
+mysql> 
+mysql> 
+mysql> SELECT m.Genre, m.Movie_Name, m.Rating
+    -> FROM MOVIES m
+    -> WHERE m.Rating > ALL
+    -> (
+    -> SELECT n.Rating
+    -> FROM MOVIES n
+    -> WHERE m.Genre = n.Genre
+    -> )
+    -> ;
+Empty set (0.00 sec)
+
+mysql> SELECT m.Genre, m.Movie_Name, m.Rating
+    -> FROM MOVIES m
+    -> WHERE m.Rating > ALL
+    -> (
+    -> SELECT n.Rating
+    -> FROM MOVIES n
+    -> WHERE m.Genre = n.Genre
+    -> AND m.Movie_ID <> n.Movie_ID
+    -> );
++----------------------+--------------------------+--------+
+| Genre                | Movie_Name               | Rating |
++----------------------+--------------------------+--------+
+| Drama                | Swades                   |    8.2 |
+| Patriotic Drama      | Rang De Basanti          |    8.1 |
+| Sports               | Chak De! India           |    8.1 |
+| War                  | Uri: The Surgical Strike |    8.2 |
+| Biographical         | Shershaah                |    8.3 |
+| Action               | Satyameva Jayate         |    5.7 |
+| Aerial Action        | Fighter                  |    6.1 |
+| Patriotic Thriller   | Article 370              |    7.8 |
+| Science & Patriotism | Mission Mangal           |    6.9 |
+| Historical           | Kesari 2                 |    7.5 |
++----------------------+--------------------------+--------+
+10 rows in set (0.00 sec)
+
+mysql> SELECT m.Genre, m.Movie_Name, m.Rating
+    -> FROM MOVIES m
+    -> WHERE m.Rating =
+    -> (
+    -> SELECT MAX(n.Rating)
+    -> FROM MOVIES n
+    -> WHERE n.Genre = m.Genre
+    -> );
++----------------------+--------------------------+--------+
+| Genre                | Movie_Name               | Rating |
++----------------------+--------------------------+--------+
+| Patriotic Action     | Tiranga                  |    7.5 |
+| Drama                | Swades                   |    8.2 |
+| Patriotic Drama      | Rang De Basanti          |    8.1 |
+| Sports               | Chak De! India           |    8.1 |
+| War                  | Uri: The Surgical Strike |    8.2 |
+| Biographical         | Shershaah                |    8.3 |
+| Action               | Satyameva Jayate         |    5.7 |
+| Aerial Action        | Fighter                  |    6.1 |
+| Patriotic Thriller   | Article 370              |    7.8 |
+| Science & Patriotism | Mission Mangal           |    6.9 |
+| Historical           | Kesari 2                 |    7.5 |
+| Patriotic Action     | Sankalp                  |    7.5 |
++----------------------+--------------------------+--------+
+12 rows in set (0.00 sec)
+
+mysql> SELECT m.Movie_Name
+    -> FROM MOVIES m
+    -> WHERE m.Box_Office >
+    -> (
+    -> SELECT AVG(n.Box_Office)
+    -> FROM MOVIES n
+    -> WHERE m.Release_Year = n.Release_Year
+    -> )
+    -> AND m.Rating >
+    -> (
+    -> SELECT AVG(n.Rating)
+    -> FROM MOVIES n
+    -> WHERE m.Release_Year = n.Release_Year
+    -> );
++---------------+
+| Movie_Name    |
++---------------+
+| Raazi         |
+| Vande Mataram |
+| Bharat Maa    |
+| Jai Hind      |
+| Bharat Veer   |
+| Jai Bharat    |
++---------------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT Movie_Name, Box_Office, Rating, Budget
+    -> FROM MOVIES
+    -> WHERE Box_Office > (SELECT AVG(Box_Office) FROM MOVIES)
+    -> AND Rating > (SELECT AVG(Rating) FROM MOVIES)
+    -> AND Budget < (SELECT AVG(Budget) FROM MOVIES);
++--------------------------+------------+--------+--------+
+| Movie_Name               | Box_Office | Rating | Budget |
++--------------------------+------------+--------+--------+
+| Uri: The Surgical Strike |     245.00 |    8.2 |  25.00 |
+| Vande Mataram            |     180.00 |    7.9 |  35.00 |
+| Bharat Maa               |     225.00 |    7.6 |  45.00 |
++--------------------------+------------+--------+--------+
+3 rows in set (0.00 sec)
+
+mysql> exit

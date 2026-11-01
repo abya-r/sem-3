@@ -1,0 +1,41 @@
+  GNU nano 2.9.8                       q1.c
+
+    for (int i=0; i<n; i++)
+    {
+        if (arr[i]>max)
+            max = arr[i];
+    }
+    return max;
+}
+
+int minm(int arr[], int n)
+{
+    int min = arr[0];
+    for (int i=0; i<n; i++)
+    {
+        if (arr[i]<min)
+            min = arr[i];
+    }
+    return min;
+}
+
+int main()
+{
+    int n;
+    printf("enter no. of elements: ");
+    scanf("%d", &n);
+    int arr[n];
+    printf("enter elements: ");
+    for (int i=0; i<n; i++)
+        scanf("%d", &arr[i]);
+    printf("Sum of all elements = %d\n", sum(arr, n));
+    printf("Average of the elements = %d\n", avg(arr, n));
+    printf("Maximum element = %d\n", maxm(arr, n));
+    printf("Minimum element = %d\n", minm(arr, n));
+    return 0;
+}
+
+
+
+^G Get Help    ^O Write Out   ^W Where Is    ^K Cut Text    ^J Justify
+^X Exit        ^R Read File   ^\ Replace     ^U Uncut Text  ^T To Spell

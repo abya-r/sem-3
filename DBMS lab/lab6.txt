@@ -1,0 +1,480 @@
+mysql> USE 251B010;
+Database changed
+mysql> CREATE DATABASE PATRIOTIC_MOVIES_DB; 
+Query OK, 1 row affected (0.01 sec)
+
+mysql> USE PATRIOTIC_MOVIES_DB; 
+Database changed
+mysql> CREATE TABLE MOVIES ( 
+    -> Movie_ID INT PRIMARY KEY, 
+    -> Movie_Name VARCHAR(50), 
+    -> Actor VARCHAR(40), 
+    -> Actress VARCHAR(40), 
+    -> Director VARCHAR(40), 
+    -> Genre VARCHAR(30), 
+    -> Release_Year INT, 
+    -> Budget DECIMAL(10,2), 
+    -> Box_Office DECIMAL(10,2), 
+    -> Rating DECIMAL(3,1) 
+    -> );
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> INSERT INTO MOVIES 
+    -> (Movie_ID, Movie_Name, Actor, Actress, Director, Genre, Release_Year, Budget, Box_Office, Rating) 
+    -> VALUES 
+    -> (101,'Tiranga','Rudra Pratap','Seema Sharma','Patriotic Director','Patriotic Action',1993,8.00,12.00,7.5), 
+    -> (102,'Border','Major Kuldeep Singh','Kamla Singh','J. P. Dutta','War',1997,10.00,65.00,7.9), 
+    -> (103,'LOC Kargil','Colonel Yash Thakur','Meera Thakur','J. P. Dutta','War',2003,40.00,42.00,6.7), 
+    -> (104,'Lakshya','Karan Shergill','Romi','Farhan Akhtar','War',2004,32.00,42.00,7.8), 
+    -> (105,'Swades','Mohan Bhargava','Gita','Ashutosh Gowariker','Drama',2004,30.00,34.00,8.2), 
+    -> (106,'Rang De Basanti','Daljit Singh','Sonia','Rakeysh Omprakash Mehra','Patriotic Drama',2006,28.00,96.00,8.1), 
+    -> (107,'Chak De! India','Kabir Khan','Vidya Sharma','Shimit Amin','Sports',2007,20.00,109.00,8.1), 
+    -> (108,'The Legend of Bhagat Singh','Bhagat Singh','Durga Bhabhi','Rajkumar Santoshi','Biographical',2002,12.00,25.00,8.1), 
+    -> (109,'Raazi','Sehmat Khan','Iqbal Syed','Meghna Gulzar','Patriotic Thriller',2018,35.00,123.00,7.7), 
+    -> (110,'Parmanu','Ashwat Raina','Ambalika Raina','Abhishek Sharma','Patriotic Thriller',2018,45.00,93.00,7.6), 
+    -> (111,'Uri: The Surgical Strike','Major Vihaan Singh Shergill','Pallavi Sharma','Aditya Dhar','War',2019,25.00,245.00,8.2), 
+    -> (112,'Kesari','Havildar Ishar Singh','Jeevani Kaur','Anurag Singh','War',2019,80.00,207.00,7.4), 
+    -> (113,'Shershaah','Captain Vikram Batra','Dimple Cheema','Vishnuvardhan','Biographical',2021,50.00,135.00,8.3), 
+    -> (114,'Satyameva Jayate','Virendra Rathod','Shikha Rathod','Milap Zaveri','Action',2018,45.00,108.00,5.7), 
+    -> (115,'Major','Major Sandeep Unnikrishnan','Isha','Sashi Kiran Tikka','Biographical',2022,30.00,65.00,8.1), 
+    -> (116,'Sam Bahadur','Sam Manekshaw','Silloo Manekshaw','Meghna Gulzar','Biographical',2023,55.00,128.00,8.1), 
+    -> (117,'Fighter','Shamsher Pathania','Minal Rathore','Siddharth Anand','Aerial Action',2024,250.00,358.00,6.1), 
+    -> (118,'Article 370','Zooni Haksar','Rajeshwari Swaminathan','Aditya Suhas Jambhale','Patriotic Thriller',2024,20.00,110.00,7.8), 
+    -> (119,'Mission Mangal','Rakesh Dhawan','Tara Shinde','Jagan Shakti','Science & Patriotism',2019,32.00,290.00,6.9), 
+    -> (120,'Parmanu 2','Ashwat Raina','Ambalika Raina','Abhishek Sharma','Patriotic Thriller',2023,60.00,155.00,7.1), 
+    -> (121,'Kesari 2','Arjun Singh','Harleen Kaur','Patriotic Director','Historical',2025,90.00,210.00,7.5), 
+    -> (122,'Vande Mataram','Arjun Deshmukh','Kavya Deshmukh','National Pride Films','Patriotic Drama',2022,35.00,180.00,7.9), 
+    -> (123,'Bharat Maa','Veer Pratap','Gauri','National Pride Films','Patriotic Drama',2023,45.00,225.00,7.6), 
+    -> (124,'Jai Hind','Surya Pratap','Ananya','Patriotic Director','Patriotic Action',2024,70.00,310.00,7.3), 
+    -> (125,'Veer Kesari','Veer Singh','Radha','Patriotic Director','War',2021,65.00,190.00,7.2), 
+    -> (126,'Desh Ke Sipahi','Vikram Singh','Nandini','National Pride Films','War',2020,40.00,175.00,7.4), 
+    -> (127,'Bharat Veer','Arjun Deshmukh','Kavya Deshmukh','National Pride Films','Patriotic Drama',2024,55.00,260.00,7.8), 
+    -> (128,'Sankalp','Surya Pratap','Ananya','Patriotic Director','Patriotic Action',2022,40.00,205.00,7.5), 
+    -> (129,'Veer Yodha','Veer Singh','Radha','Patriotic Director','War',2023,75.00,235.00,7.4), 
+    -> (130,'Jai Bharat','Arjun Deshmukh','Kavya Deshmukh','National Pride Films','Patriotic Drama',2025,80.00,330.00,8.0);
+Query OK, 30 rows affected (0.01 sec)
+Records: 30  Duplicates: 0  Warnings: 0
+
+mysql> ^C
+mysql> 
+mysql> SELECT * FROM MOVIES;
++----------+----------------------------+-----------------------------+------------------------+-------------------------+----------------------+--------------+--------+------------+--------+
+| Movie_ID | Movie_Name                 | Actor                       | Actress                | Director                | Genre                | Release_Year | Budget | Box_Office | Rating |
++----------+----------------------------+-----------------------------+------------------------+-------------------------+----------------------+--------------+--------+------------+--------+
+|      101 | Tiranga                    | Rudra Pratap                | Seema Sharma           | Patriotic Director      | Patriotic Action     |         1993 |   8.00 |      12.00 |    7.5 |
+|      102 | Border                     | Major Kuldeep Singh         | Kamla Singh            | J. P. Dutta             | War                  |         1997 |  10.00 |      65.00 |    7.9 |
+|      103 | LOC Kargil                 | Colonel Yash Thakur         | Meera Thakur           | J. P. Dutta             | War                  |         2003 |  40.00 |      42.00 |    6.7 |
+|      104 | Lakshya                    | Karan Shergill              | Romi                   | Farhan Akhtar           | War                  |         2004 |  32.00 |      42.00 |    7.8 |
+|      105 | Swades                     | Mohan Bhargava              | Gita                   | Ashutosh Gowariker      | Drama                |         2004 |  30.00 |      34.00 |    8.2 |
+|      106 | Rang De Basanti            | Daljit Singh                | Sonia                  | Rakeysh Omprakash Mehra | Patriotic Drama      |         2006 |  28.00 |      96.00 |    8.1 |
+|      107 | Chak De! India             | Kabir Khan                  | Vidya Sharma           | Shimit Amin             | Sports               |         2007 |  20.00 |     109.00 |    8.1 |
+|      108 | The Legend of Bhagat Singh | Bhagat Singh                | Durga Bhabhi           | Rajkumar Santoshi       | Biographical         |         2002 |  12.00 |      25.00 |    8.1 |
+|      109 | Raazi                      | Sehmat Khan                 | Iqbal Syed             | Meghna Gulzar           | Patriotic Thriller   |         2018 |  35.00 |     123.00 |    7.7 |
+|      110 | Parmanu                    | Ashwat Raina                | Ambalika Raina         | Abhishek Sharma         | Patriotic Thriller   |         2018 |  45.00 |      93.00 |    7.6 |
+|      111 | Uri: The Surgical Strike   | Major Vihaan Singh Shergill | Pallavi Sharma         | Aditya Dhar             | War                  |         2019 |  25.00 |     245.00 |    8.2 |
+|      112 | Kesari                     | Havildar Ishar Singh        | Jeevani Kaur           | Anurag Singh            | War                  |         2019 |  80.00 |     207.00 |    7.4 |
+|      113 | Shershaah                  | Captain Vikram Batra        | Dimple Cheema          | Vishnuvardhan           | Biographical         |         2021 |  50.00 |     135.00 |    8.3 |
+|      114 | Satyameva Jayate           | Virendra Rathod             | Shikha Rathod          | Milap Zaveri            | Action               |         2018 |  45.00 |     108.00 |    5.7 |
+|      115 | Major                      | Major Sandeep Unnikrishnan  | Isha                   | Sashi Kiran Tikka       | Biographical         |         2022 |  30.00 |      65.00 |    8.1 |
+|      116 | Sam Bahadur                | Sam Manekshaw               | Silloo Manekshaw       | Meghna Gulzar           | Biographical         |         2023 |  55.00 |     128.00 |    8.1 |
+|      117 | Fighter                    | Shamsher Pathania           | Minal Rathore          | Siddharth Anand         | Aerial Action        |         2024 | 250.00 |     358.00 |    6.1 |
+|      118 | Article 370                | Zooni Haksar                | Rajeshwari Swaminathan | Aditya Suhas Jambhale   | Patriotic Thriller   |         2024 |  20.00 |     110.00 |    7.8 |
+|      119 | Mission Mangal             | Rakesh Dhawan               | Tara Shinde            | Jagan Shakti            | Science & Patriotism |         2019 |  32.00 |     290.00 |    6.9 |
+|      120 | Parmanu 2                  | Ashwat Raina                | Ambalika Raina         | Abhishek Sharma         | Patriotic Thriller   |         2023 |  60.00 |     155.00 |    7.1 |
+|      121 | Kesari 2                   | Arjun Singh                 | Harleen Kaur           | Patriotic Director      | Historical           |         2025 |  90.00 |     210.00 |    7.5 |
+|      122 | Vande Mataram              | Arjun Deshmukh              | Kavya Deshmukh         | National Pride Films    | Patriotic Drama      |         2022 |  35.00 |     180.00 |    7.9 |
+|      123 | Bharat Maa                 | Veer Pratap                 | Gauri                  | National Pride Films    | Patriotic Drama      |         2023 |  45.00 |     225.00 |    7.6 |
+|      124 | Jai Hind                   | Surya Pratap                | Ananya                 | Patriotic Director      | Patriotic Action     |         2024 |  70.00 |     310.00 |    7.3 |
+|      125 | Veer Kesari                | Veer Singh                  | Radha                  | Patriotic Director      | War                  |         2021 |  65.00 |     190.00 |    7.2 |
+|      126 | Desh Ke Sipahi             | Vikram Singh                | Nandini                | National Pride Films    | War                  |         2020 |  40.00 |     175.00 |    7.4 |
+|      127 | Bharat Veer                | Arjun Deshmukh              | Kavya Deshmukh         | National Pride Films    | Patriotic Drama      |         2024 |  55.00 |     260.00 |    7.8 |
+|      128 | Sankalp                    | Surya Pratap                | Ananya                 | Patriotic Director      | Patriotic Action     |         2022 |  40.00 |     205.00 |    7.5 |
+|      129 | Veer Yodha                 | Veer Singh                  | Radha                  | Patriotic Director      | War                  |         2023 |  75.00 |     235.00 |    7.4 |
+|      130 | Jai Bharat                 | Arjun Deshmukh              | Kavya Deshmukh         | National Pride Films    | Patriotic Drama      |         2025 |  80.00 |     330.00 |    8.0 |
++----------+----------------------------+-----------------------------+------------------------+-------------------------+----------------------+--------------+--------+------------+--------+
+30 rows in set (0.00 sec)
+
+mysql> SELECT Actor, COUNT(*) AS No_Of_Movies
+    -> FROM Movies
+    -> GROUP BY Actor
+    -> SORT BY COUNT(*) DESC;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'SORT BY COUNT(*) DESC' at line 4
+mysql> SELECT Actor, COUNT(*) AS No_Of_Movies
+    -> FROM Movies
+    -> GROUP BY Actor
+    -> ORDER BY COUNT(*) DESC;
++-----------------------------+--------------+
+| Actor                       | No_Of_Movies |
++-----------------------------+--------------+
+| Arjun Deshmukh              |            3 |
+| Ashwat Raina                |            2 |
+| Surya Pratap                |            2 |
+| Veer Singh                  |            2 |
+| Rudra Pratap                |            1 |
+| Major Kuldeep Singh         |            1 |
+| Colonel Yash Thakur         |            1 |
+| Karan Shergill              |            1 |
+| Mohan Bhargava              |            1 |
+| Daljit Singh                |            1 |
+| Kabir Khan                  |            1 |
+| Bhagat Singh                |            1 |
+| Sehmat Khan                 |            1 |
+| Major Vihaan Singh Shergill |            1 |
+| Havildar Ishar Singh        |            1 |
+| Captain Vikram Batra        |            1 |
+| Virendra Rathod             |            1 |
+| Major Sandeep Unnikrishnan  |            1 |
+| Sam Manekshaw               |            1 |
+| Shamsher Pathania           |            1 |
+| Zooni Haksar                |            1 |
+| Rakesh Dhawan               |            1 |
+| Arjun Singh                 |            1 |
+| Veer Pratap                 |            1 |
+| Vikram Singh                |            1 |
++-----------------------------+--------------+
+25 rows in set (0.00 sec)
+
+mysql> SELECT Actor, SUM(Box_Office) AS Total_Box_Office_Collection
+    -> FROM Movies
+    -> GROUP BY Actor
+    -> ORDER BY SUM(Box_Office) DESC;
++-----------------------------+-----------------------------+
+| Actor                       | Total_Box_Office_Collection |
++-----------------------------+-----------------------------+
+| Arjun Deshmukh              |                      770.00 |
+| Surya Pratap                |                      515.00 |
+| Veer Singh                  |                      425.00 |
+| Shamsher Pathania           |                      358.00 |
+| Rakesh Dhawan               |                      290.00 |
+| Ashwat Raina                |                      248.00 |
+| Major Vihaan Singh Shergill |                      245.00 |
+| Veer Pratap                 |                      225.00 |
+| Arjun Singh                 |                      210.00 |
+| Havildar Ishar Singh        |                      207.00 |
+| Vikram Singh                |                      175.00 |
+| Captain Vikram Batra        |                      135.00 |
+| Sam Manekshaw               |                      128.00 |
+| Sehmat Khan                 |                      123.00 |
+| Zooni Haksar                |                      110.00 |
+| Kabir Khan                  |                      109.00 |
+| Virendra Rathod             |                      108.00 |
+| Daljit Singh                |                       96.00 |
+| Major Kuldeep Singh         |                       65.00 |
+| Major Sandeep Unnikrishnan  |                       65.00 |
+| Colonel Yash Thakur         |                       42.00 |
+| Karan Shergill              |                       42.00 |
+| Mohan Bhargava              |                       34.00 |
+| Bhagat Singh                |                       25.00 |
+| Rudra Pratap                |                       12.00 |
++-----------------------------+-----------------------------+
+25 rows in set (0.00 sec)
+
+mysql> SELECT Actor, COUNT(*) AS Movie_Count, SUM(Box_Office) AS Total_Box_Office
+    -> FROM Movies
+    -> GROUP BY Actor
+    -> HAVING SUM(Box_Office)>500
+    -> ORDER BY 3 DESC;
++----------------+-------------+------------------+
+| Actor          | Movie_Count | Total_Box_Office |
++----------------+-------------+------------------+
+| Arjun Deshmukh |           3 |           770.00 |
+| Surya Pratap   |           2 |           515.00 |
++----------------+-------------+------------------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT Actor, AVG(Rating) AS Avg_Movie_Rating
+    -> FROM Movies
+    -> GROUP BY Actor
+    -> HAVING AVG(Rating)>7.0
+    -> ORDER BY 2 DESC;
++-----------------------------+------------------+
+| Actor                       | Avg_Movie_Rating |
++-----------------------------+------------------+
+| Captain Vikram Batra        |          8.30000 |
+| Mohan Bhargava              |          8.20000 |
+| Major Vihaan Singh Shergill |          8.20000 |
+| Daljit Singh                |          8.10000 |
+| Kabir Khan                  |          8.10000 |
+| Bhagat Singh                |          8.10000 |
+| Major Sandeep Unnikrishnan  |          8.10000 |
+| Sam Manekshaw               |          8.10000 |
+| Major Kuldeep Singh         |          7.90000 |
+| Arjun Deshmukh              |          7.90000 |
+| Karan Shergill              |          7.80000 |
+| Zooni Haksar                |          7.80000 |
+| Sehmat Khan                 |          7.70000 |
+| Veer Pratap                 |          7.60000 |
+| Rudra Pratap                |          7.50000 |
+| Arjun Singh                 |          7.50000 |
+| Havildar Ishar Singh        |          7.40000 |
+| Surya Pratap                |          7.40000 |
+| Vikram Singh                |          7.40000 |
+| Ashwat Raina                |          7.35000 |
+| Veer Singh                  |          7.30000 |
++-----------------------------+------------------+
+21 rows in set (0.01 sec)
+
+mysql> SELECT Actor, COUNT(*) AS Movie_Count, SUM(Budget) AS Total_Budget, SUM(Box_Office) AS Total_Box_Office,
+    -> SUM(Box_Office - Budget) AS Total_Profit
+    -> FROM MOVIES
+    -> GROUP BY Actor
+    -> ORDER BY Total_Profit DESC;
++-----------------------------+-------------+--------------+------------------+--------------+
+| Actor                       | Movie_Count | Total_Budget | Total_Box_Office | Total_Profit |
++-----------------------------+-------------+--------------+------------------+--------------+
+| Arjun Deshmukh              |           3 |       170.00 |           770.00 |       600.00 |
+| Surya Pratap                |           2 |       110.00 |           515.00 |       405.00 |
+| Veer Singh                  |           2 |       140.00 |           425.00 |       285.00 |
+| Rakesh Dhawan               |           1 |        32.00 |           290.00 |       258.00 |
+| Major Vihaan Singh Shergill |           1 |        25.00 |           245.00 |       220.00 |
+| Veer Pratap                 |           1 |        45.00 |           225.00 |       180.00 |
+| Ashwat Raina                |           2 |       105.00 |           248.00 |       143.00 |
+| Vikram Singh                |           1 |        40.00 |           175.00 |       135.00 |
+| Havildar Ishar Singh        |           1 |        80.00 |           207.00 |       127.00 |
+| Arjun Singh                 |           1 |        90.00 |           210.00 |       120.00 |
+| Shamsher Pathania           |           1 |       250.00 |           358.00 |       108.00 |
+| Zooni Haksar                |           1 |        20.00 |           110.00 |        90.00 |
+| Kabir Khan                  |           1 |        20.00 |           109.00 |        89.00 |
+| Sehmat Khan                 |           1 |        35.00 |           123.00 |        88.00 |
+| Captain Vikram Batra        |           1 |        50.00 |           135.00 |        85.00 |
+| Sam Manekshaw               |           1 |        55.00 |           128.00 |        73.00 |
+| Daljit Singh                |           1 |        28.00 |            96.00 |        68.00 |
+| Virendra Rathod             |           1 |        45.00 |           108.00 |        63.00 |
+| Major Kuldeep Singh         |           1 |        10.00 |            65.00 |        55.00 |
+| Major Sandeep Unnikrishnan  |           1 |        30.00 |            65.00 |        35.00 |
+| Bhagat Singh                |           1 |        12.00 |            25.00 |        13.00 |
+| Karan Shergill              |           1 |        32.00 |            42.00 |        10.00 |
+| Rudra Pratap                |           1 |         8.00 |            12.00 |         4.00 |
+| Mohan Bhargava              |           1 |        30.00 |            34.00 |         4.00 |
+| Colonel Yash Thakur         |           1 |        40.00 |            42.00 |         2.00 |
++-----------------------------+-------------+--------------+------------------+--------------+
+25 rows in set (0.00 sec)
+
+mysql> SELECT Actor, COUNT(*) AS Movie_Count, AVG(Rating) AS Avg_Rating
+    -> FROM MOVIES
+    -> GROUP BY Actor
+    -> HAVING COUNT(*) > 2;
++----------------+-------------+------------+
+| Actor          | Movie_Count | Avg_Rating |
++----------------+-------------+------------+
+| Arjun Deshmukh |           3 |    7.90000 |
++----------------+-------------+------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT Genre, COUNT(*) AS Movie_Count, SUM(Budget) AS Total_Budget, SUM(Box_Office) AS Total_Box_Office
+    -> FROM MOVIES
+    -> GROUP BY Genre
+    -> ORDER BY Total_Box_Office DESC;
++----------------------+-------------+--------------+------------------+
+| Genre                | Movie_Count | Total_Budget | Total_Box_Office |
++----------------------+-------------+--------------+------------------+
+| War                  |           8 |       367.00 |          1201.00 |
+| Patriotic Drama      |           5 |       243.00 |          1091.00 |
+| Patriotic Action     |           3 |       118.00 |           527.00 |
+| Patriotic Thriller   |           4 |       160.00 |           481.00 |
+| Aerial Action        |           1 |       250.00 |           358.00 |
+| Biographical         |           4 |       147.00 |           353.00 |
+| Science & Patriotism |           1 |        32.00 |           290.00 |
+| Historical           |           1 |        90.00 |           210.00 |
+| Sports               |           1 |        20.00 |           109.00 |
+| Action               |           1 |        45.00 |           108.00 |
+| Drama                |           1 |        30.00 |            34.00 |
++----------------------+-------------+--------------+------------------+
+11 rows in set (0.00 sec)
+
+mysql> SELECT Genre, SUM(Budget) AS Total_Budget, SUM(Box_Office) AS Total_Box_Office,
+    -> SUM(Box_Office - Budget) AS Profit
+    -> FROM MOVIES
+    -> GROUP BY Genre
+    -> HAVING SUM(Box_Office) > SUM(Budget) * 2;
++----------------------+--------------+------------------+--------+
+| Genre                | Total_Budget | Total_Box_Office | Profit |
++----------------------+--------------+------------------+--------+
+| Patriotic Action     |       118.00 |           527.00 | 409.00 |
+| War                  |       367.00 |          1201.00 | 834.00 |
+| Patriotic Drama      |       243.00 |          1091.00 | 848.00 |
+| Sports               |        20.00 |           109.00 |  89.00 |
+| Biographical         |       147.00 |           353.00 | 206.00 |
+| Patriotic Thriller   |       160.00 |           481.00 | 321.00 |
+| Action               |        45.00 |           108.00 |  63.00 |
+| Science & Patriotism |        32.00 |           290.00 | 258.00 |
+| Historical           |        90.00 |           210.00 | 120.00 |
++----------------------+--------------+------------------+--------+
+9 rows in set (0.00 sec)
+
+mysql> SELECT Genre, COUNT(*) AS Movie_Count, AVG(Rating) AS Avg_Rating
+    -> FROM MOVIES
+    -> GROUP BY Genre
+    -> HAVING COUNT(*) >= 3 AND AVG(Rating) > 7.0;
++--------------------+-------------+------------+
+| Genre              | Movie_Count | Avg_Rating |
++--------------------+-------------+------------+
+| Patriotic Action   |           3 |    7.43333 |
+| War                |           8 |    7.50000 |
+| Patriotic Drama    |           5 |    7.88000 |
+| Biographical       |           4 |    8.15000 |
+| Patriotic Thriller |           4 |    7.55000 |
++--------------------+-------------+------------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT Genre, AVG(Budget) AS Avg_Budget
+    -> FROM MOVIES
+    -> GROUP BY Genre
+    -> HAVING AVG(Budget) > 50
+    -> ORDER BY Avg_Budget DESC;
++---------------+------------+
+| Genre         | Avg_Budget |
++---------------+------------+
+| Aerial Action | 250.000000 |
+| Historical    |  90.000000 |
++---------------+------------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT Actor, SUM(Box_Office) AS Total_Box_Office
+    -> FROM MOVIES
+    -> GROUP BY Actor
+    -> ORDER BY Total_Box_Office DESC
+    -> LIMIT 3;
++----------------+------------------+
+| Actor          | Total_Box_Office |
++----------------+------------------+
+| Arjun Deshmukh |           770.00 |
+| Surya Pratap   |           515.00 |
+| Veer Singh     |           425.00 |
++----------------+------------------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT Genre, MAX(Budget) AS Max_Budget, MIN(Budget) AS Min_Budget,
+    -> MAX(Budget) - MIN(Budget) AS Budget_Difference
+    -> FROM MOVIES
+    -> GROUP BY Genre
+    -> HAVING MAX(Budget) - MIN(Budget) > 40;
++------------------+------------+------------+-------------------+
+| Genre            | Max_Budget | Min_Budget | Budget_Difference |
++------------------+------------+------------+-------------------+
+| Patriotic Action |      70.00 |       8.00 |             62.00 |
+| War              |      80.00 |      10.00 |             70.00 |
+| Patriotic Drama  |      80.00 |      28.00 |             52.00 |
+| Biographical     |      55.00 |      12.00 |             43.00 |
++------------------+------------+------------+-------------------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT Actor, COUNT(*) AS Movie_Count, SUM(Box_Office) AS Total_Box_Office, AVG(Rating) AS Avg_Rating
+    -> FROM MOVIES
+    -> WHERE Release_Year >= 2018
+    -> GROUP BY Actor
+    -> HAVING COUNT(*) >= 2;
++----------------+-------------+------------------+------------+
+| Actor          | Movie_Count | Total_Box_Office | Avg_Rating |
++----------------+-------------+------------------+------------+
+| Ashwat Raina   |           2 |           248.00 |    7.35000 |
+| Arjun Deshmukh |           3 |           770.00 |    7.90000 |
+| Surya Pratap   |           2 |           515.00 |    7.40000 |
+| Veer Singh     |           2 |           425.00 |    7.30000 |
++----------------+-------------+------------------+------------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT Actor, SUM(Box_Office) AS Combined_Collection
+    -> FROM MOVIES
+    -> WHERE Box_Office > 150
+    -> GROUP BY Actor
+    -> HAVING SUM(Box_Office) > 300;
++-------------------+---------------------+
+| Actor             | Combined_Collection |
++-------------------+---------------------+
+| Shamsher Pathania |              358.00 |
+| Arjun Deshmukh    |              770.00 |
+| Surya Pratap      |              515.00 |
+| Veer Singh        |              425.00 |
++-------------------+---------------------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT Genre, AVG(Rating) AS Avg_Rating, AVG(Box_Office) AS Avg_Box_Office
+    -> FROM MOVIES
+    -> GROUP BY Genre
+    -> HAVING AVG(Rating) > 7.0 AND AVG(Box_Office) > 100;
++--------------------+------------+----------------+
+| Genre              | Avg_Rating | Avg_Box_Office |
++--------------------+------------+----------------+
+| Patriotic Action   |    7.43333 |     175.666667 |
+| War                |    7.50000 |     150.125000 |
+| Patriotic Drama    |    7.88000 |     218.200000 |
+| Sports             |    8.10000 |     109.000000 |
+| Patriotic Thriller |    7.55000 |     120.250000 |
+| Historical         |    7.50000 |     210.000000 |
++--------------------+------------+----------------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT Actor, COUNT(*) AS Movie_Count, AVG(Box_Office - Budget) AS Avg_Profit
+    -> FROM MOVIES
+    -> GROUP BY Actor
+    -> HAVING COUNT(*) >= 2 AND AVG(Box_Office - Budget) > 100;
++----------------+-------------+------------+
+| Actor          | Movie_Count | Avg_Profit |
++----------------+-------------+------------+
+| Arjun Deshmukh |           3 | 200.000000 |
+| Surya Pratap   |           2 | 202.500000 |
+| Veer Singh     |           2 | 142.500000 |
++----------------+-------------+------------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT Genre, SUM(Budget) AS Total_Budget, SUM(Box_Office) AS Total_Box_Office,
+    -> ROUND(((SUM(Box_Office) - SUM(Budget)) / SUM(Budget)) * 100, 2) AS ROI_Percent
+    -> FROM MOVIES
+    -> GROUP BY Genre
+    -> HAVING ((SUM(Box_Office) - SUM(Budget)) / SUM(Budget)) * 100 > 100
+    -> ORDER BY ROI_Percent DESC;
++----------------------+--------------+------------------+-------------+
+| Genre                | Total_Budget | Total_Box_Office | ROI_Percent |
++----------------------+--------------+------------------+-------------+
+| Science & Patriotism |        32.00 |           290.00 |      806.25 |
+| Sports               |        20.00 |           109.00 |      445.00 |
+| Patriotic Drama      |       243.00 |          1091.00 |      348.97 |
+| Patriotic Action     |       118.00 |           527.00 |      346.61 |
+| War                  |       367.00 |          1201.00 |      227.25 |
+| Patriotic Thriller   |       160.00 |           481.00 |      200.63 |
+| Biographical         |       147.00 |           353.00 |      140.14 |
+| Action               |        45.00 |           108.00 |      140.00 |
+| Historical           |        90.00 |           210.00 |      133.33 |
++----------------------+--------------+------------------+-------------+
+9 rows in set (0.00 sec)
+
+mysql> SELECT Genre, AVG(Box_Office) AS Avg_Box_Office
+    -> FROM MOVIES
+    -> GROUP BY Genre
+    -> ORDER BY Avg_Box_Office DESC
+    -> LIMIT 2;
++----------------------+----------------+
+| Genre                | Avg_Box_Office |
++----------------------+----------------+
+| Aerial Action        |     358.000000 |
+| Science & Patriotism |     290.000000 |
++----------------------+----------------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT Actor, COUNT(*) AS Movie_Count, SUM(Box_Office) AS Total_Box_Office, AVG(Rating) AS Avg_Rating
+    -> FROM MOVIES
+    -> GROUP BY Actor
+    -> HAVING COUNT(*) >= 3 AND SUM(Box_Office) > 500 AND AVG(Rating) > 7.0;
++----------------+-------------+------------------+------------+
+| Actor          | Movie_Count | Total_Box_Office | Avg_Rating |
++----------------+-------------+------------------+------------+
+| Arjun Deshmukh |           3 |           770.00 |    7.90000 |
++----------------+-------------+------------------+------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT Actor, COUNT(*) AS Movie_Count, SUM(Budget) AS Total_Budget, SUM(Box_Office) AS Total_Box_Office,
+    -> SUM(Box_Office - Budget) AS Total_Profit, AVG(Rating) AS Avg_Rating
+    -> FROM MOVIES
+    -> GROUP BY Actor
+    -> HAVING COUNT(*) >= 3 AND SUM(Box_Office) > 500 AND AVG(Rating) > 7.0
+    -> ORDER BY Total_Profit DESC
+    -> LIMIT 5;
++----------------+-------------+--------------+------------------+--------------+------------+
+| Actor          | Movie_Count | Total_Budget | Total_Box_Office | Total_Profit | Avg_Rating |
++----------------+-------------+--------------+------------------+--------------+------------+
+| Arjun Deshmukh |           3 |       170.00 |           770.00 |       600.00 |    7.90000 |
++----------------+-------------+--------------+------------------+--------------+------------+
+1 row in set (0.00 sec)
+
+mysql> Terminal close -- exit!

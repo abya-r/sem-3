@@ -1,0 +1,151 @@
+Enter password: *******
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 21
+Server version: 8.4.0 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> CREATE DATABASE 251B010;
+ERROR 1007 (HY000): Can't create database '251b010'; database exists
+mysql> USE 251B010;
+Database changed
+mysql> SHOW TABLES;
++-------------------+
+| Tables_in_251b010 |
++-------------------+
+| details           |
+| enrollments       |
+| students          |
++-------------------+
+3 rows in set (0.03 sec)
+
+mysql> CREATE DATABASE B010;
+Query OK, 1 row affected (0.02 sec)
+
+mysql> DELETE DATABASE 251B010;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'DATABASE 251B010' at line 1
+mysql> USE 251B010;
+Database changed
+mysql> CREATE TABLE Student;
+ERROR 4028 (HY000): A table must have at least one visible column.
+mysql> CREATE TABLE Student (
+    -> StudentID INT PRIMARY KEY,
+    -> FirstName VARCHAR(50),
+    -> LastName VARCHAR(50),
+    -> Age INT,
+    -> Major VARCHAR(50),
+    -> GPA DECIMAL(3,2)
+    -> );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> INSERT INTO Student (StudentID, FirstName, LastName, Age, Major, GPA) VALUES (101, 'Rahul', 'Sharma', 20, 'Computer Science', 3.50),
+    -> (102, 'Priya', 'Patel', 21, 'Electrical', 3.80),
+    -> (103, 'Amit', 'Verma', 19, 'Mechanical', 2.90),
+    -> (104, 'Neha', 'Singh', 22, 'Computer Science', 3.20),
+    -> (105, 'Rohan', 'Mehta', 20, 'Civil', 2.60);
+Query OK, 5 rows affected (0.01 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM Student;
++-----------+-----------+----------+------+------------------+------+
+| StudentID | FirstName | LastName | Age  | Major            | GPA  |
++-----------+-----------+----------+------+------------------+------+
+|       101 | Rahul     | Sharma   |   20 | Computer Science | 3.50 |
+|       102 | Priya     | Patel    |   21 | Electrical       | 3.80 |
+|       103 | Amit      | Verma    |   19 | Mechanical       | 2.90 |
+|       104 | Neha      | Singh    |   22 | Computer Science | 3.20 |
+|       105 | Rohan     | Mehta    |   20 | Civil            | 2.60 |
++-----------+-----------+----------+------+------------------+------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT FirstName, LastName, GPA from Student WHERE Major = 'Computer Science';
++-----------+----------+------+
+| FirstName | LastName | GPA  |
++-----------+----------+------+
+| Rahul     | Sharma   | 3.50 |
+| Neha      | Singh    | 3.20 |
++-----------+----------+------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT * FROM Student WHERE Age>20;
++-----------+-----------+----------+------+------------------+------+
+| StudentID | FirstName | LastName | Age  | Major            | GPA  |
++-----------+-----------+----------+------+------------------+------+
+|       102 | Priya     | Patel    |   21 | Electrical       | 3.80 |
+|       104 | Neha      | Singh    |   22 | Computer Science | 3.20 |
++-----------+-----------+----------+------+------------------+------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT * FROM Student WHERE GPA>3.00 ORDER BY GPA DESC;
++-----------+-----------+----------+------+------------------+------+
+| StudentID | FirstName | LastName | Age  | Major            | GPA  |
++-----------+-----------+----------+------+------------------+------+
+|       102 | Priya     | Patel    |   21 | Electrical       | 3.80 |
+|       101 | Rahul     | Sharma   |   20 | Computer Science | 3.50 |
+|       104 | Neha      | Singh    |   22 | Computer Science | 3.20 |
++-----------+-----------+----------+------+------------------+------+
+3 rows in set (0.00 sec)
+
+mysql> ALTER TABLE Student
+    -> GPA = 3.75
+    -> WHERE StudentID = 101;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'GPA = 3.75
+WHERE StudentID = 101' at line 2
+mysql> UPDATE Student
+    -> SET GPA = 3.75
+    -> WHERE StudentID = 101;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE Student
+    -> SET Major = 'Data Science'
+    -> WHERE StudentID = 103;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> ALTER TABLE Student
+    -> ADD COLUMN Email VARCHAR(100);
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE Student
+    -> DROP Age;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE
+    -> DROP * WHERE StudentID = 105;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'DROP * WHERE StudentID = 105' at line 2
+mysql> DELETE FROM Student
+    -> WHERE StudentID = 105;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> SELECT * FROM Student;
++-----------+-----------+----------+------------------+------+-------+
+| StudentID | FirstName | LastName | Major            | GPA  | Email |
++-----------+-----------+----------+------------------+------+-------+
+|       101 | Rahul     | Sharma   | Computer Science | 3.75 | NULL  |
+|       102 | Priya     | Patel    | Electrical       | 3.80 | NULL  |
+|       103 | Amit      | Verma    | Data Science     | 2.90 | NULL  |
+|       104 | Neha      | Singh    | Computer Science | 3.20 | NULL  |
++-----------+-----------+----------+------------------+------+-------+
+4 rows in set (0.00 sec)
+
+mysql> DESCRIBE Student;
++-----------+--------------+------+-----+---------+-------+
+| Field     | Type         | Null | Key | Default | Extra |
++-----------+--------------+------+-----+---------+-------+
+| StudentID | int          | NO   | PRI | NULL    |       |
+| FirstName | varchar(50)  | YES  |     | NULL    |       |
+| LastName  | varchar(50)  | YES  |     | NULL    |       |
+| Major     | varchar(50)  | YES  |     | NULL    |       |
+| GPA       | decimal(3,2) | YES  |     | NULL    |       |
+| Email     | varchar(100) | YES  |     | NULL    |       |
++-----------+--------------+------+-----+---------+-------+
+6 rows in set (0.01 sec)

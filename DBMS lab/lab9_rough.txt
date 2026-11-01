@@ -1,0 +1,35 @@
+SELECT m.Movie_Name, m.Genre, m.Release_Year, d.Director_Name
+FROM MOVIE m
+JOIN DIRECTOR d
+    ON m.Director_ID = d.Director_ID;
+
+SELECT m.Movie_Name, m.Genre. m.Release_Year, d.Director_Name
+FROM MOVIE m
+JOIN DIRECTOR d
+    ON m.Director_ID = d.Director_ID
+WHERE d.Director_Name = 'Anurag Kashyap';
+
+SELECT m.Movie_Name, a.Actor_Name, r.Role_Name
+FROM MOVIE m
+JOIN MOVIE_CAST mc
+    ON m.Movie_ID = mc.Movie_ID
+JOIN ACTOR a
+    ON a.Actor_ID = mc.Movie_ID;
+
+SELECT m.Movie_Name, m.Release_Year, d.Director_Name, m.Genre
+FROM MOVIE m
+JOIN DIRECTOR d
+    ON m.Director_ID = d.Director_ID
+ORDER BY m.Release_Year;
+
+SELECT m.Movie_Name, p.Producer_Name, p.Company_Name
+FROM MOVIE m
+JOIN MOVIE_PRODUCER mp
+    ON m.Movie_ID - mp.Movie_ID
+JOIN PRODUCER
+    ON mp.Producer_ID = p.Producer_ID;
+
+SELECT m.Movie_Name, d.Director_Name, r.Rating
+FROM MOVIE m
+JOIN DIRECTOR d
+    ON m.Director_ID = d.Director_ID

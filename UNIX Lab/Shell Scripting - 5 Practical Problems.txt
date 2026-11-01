@@ -1,0 +1,120 @@
+Microsoft Windows [Version 10.0.26200.7462]
+(c) Microsoft Corporation. All rights reserved.
+
+N:\>ssh 251b010@192.168.4.3
+#################################################################
+# WARNING: Unauthorized access to this system is forbidden and  #
+# will be prosecuted to the maximum extent as per Cyber Law. All        #
+# Activities are Monitored & use of others Login is prohibited          #
+# Attempt to harm the server / Lab / IT Resources is punishable         #
+# For any issue, contact Mr Shishir Thakur/Dr Mahesh Kumar              #
+#################################################################
+251b010@192.168.4.3's password:
+
+Last login: Mon Aug 10 14:19:48 2026 from 192.168.6.72
+
+[JUET@UnixServer ~]$ nano backup.sh
+[JUET@UnixServer ~]$ chmod +x backup.sh
+[JUET@UnixServer ~]$ mkdir my_files
+[JUET@UnixServer ~]$ touch my_files/test1.txt
+[JUET@UnixServer ~]$ ./backup.sh my_files
+Backup created successfully.
+Backup location: backup_20260831_143948
+
+
+
+[JUET@UnixServer ~]$ nano compress_backup.sh
+[JUET@UnixServer ~]$ chmod +x compress_backup.sh
+[JUET@UnixServer ~]$ mkdir folder2
+[JUET@UnixServer ~]$ touch folder2/file1.txt folder2/file2.txt
+[JUET@UnixServer ~]$ ./compress_backup.sh folder2
+Backup created:
+folder2_20260831_144120.tar.gz
+
+
+
+[JUET@UnixServer ~]$ nano delete_old.sh
+[JUET@UnixServer ~]$ chmod +x delete_old.sh
+[JUET@UnixServer ~]$ mkdir test_dir
+[JUET@UnixServer ~]$ touch test_dir/oldfile.txt
+[JUET@UnixServer ~]$ ./delete_old.sh test_dir 7
+Files older than 7 days:
+Delete these files? (y/n): y
+Old files deleted.
+
+
+
+[JUET@UnixServer ~]$ nano organize.sh
+[JUET@UnixServer ~]$ chmod +x organize.sh
+[JUET@UnixServer ~]$ mkdir raw_files
+[JUET@UnixServer ~]$ touch raw_files/notes.txt raw_files/program.c raw_files/doc.pdf
+[JUET@UnixServer ~]$ ./organize.sh raw_files
+Files organized.
+
+
+
+[JUET@UnixServer ~]$ nano sys_admin.sh
+[JUET@UnixServer ~]$ chmod +x sys_admin.sh
+[JUET@UnixServer ~]$ ./sys_admin.sh
+
+===== SYSTEM ADMINISTRATION MENU =====
+1. Create Backup
+2. Check Disk Usage
+3. Find Large Files
+4. Check Process
+5. System Information
+6. Exit
+======================================
+Enter your choice: 4
+Enter process name: bash
+bash is running.
+6050
+6409
+6628
+6666
+6758
+7352
+7953
+8069
+8210
+8786
+8978
+9148
+9887
+9914
+10203
+10330
+10801
+10883
+11586
+11687
+11768
+11873
+11948
+12211
+12963
+13611
+13783
+14281
+14539
+14689
+15029
+15253
+16294
+16456
+16575
+17144
+17375
+
+===== SYSTEM ADMINISTRATION MENU =====
+1. Create Backup
+2. Check Disk Usage
+3. Find Large Files
+4. Check Process
+5. System Information
+6. Exit
+======================================
+Enter your choice: 6
+Exiting...
+[JUET@UnixServer ~]$ nano palinprimeeven.c
+[JUET@UnixServer ~]$

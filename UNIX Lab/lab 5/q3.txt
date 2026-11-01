@@ -1,0 +1,85 @@
+  GNU nano 2.9.8                       q3.c
+
+     GNU nano 2.9.8                       q3.c
+
+#include <stdio.h>
+
+void swap(int* a, int* b)
+{
+    int temp;
+    temp = a;
+    a = b;
+    b = temp;
+}
+
+void asc(int *arr, int n, int tigger)
+{
+    for (int i=1; i<=n-1; i++)
+    {
+        for (int j=i+1; j<=n-1-i; j++)
+        {
+            if (arr[j]>arr[j+1])
+                swap(&arr[j], &arr[k])
+        }
+    }
+}
+
+void desc(int *arr, int n, int tigger)
+{
+    for (int i=1; i<=n-1; i++)
+    {
+        for (int j=i+1; j<=n-1-i; j++)
+        {
+            if (arr[j]<arr[j+1])
+                swap(&arr[j], &arr[k])
+        }
+    }
+}
+
+int main()
+{
+                             [ Wrote 66 lines ]
+^G Get Help    ^O Write Out   ^W Where Is    ^K Cut Text    ^J Justify
+^X Exit        ^R Read File   ^\ Replace     ^U Uncut Text  ^T To Spell
+
+
+
+ int n;
+    printf("enter no. of elements: ");
+    scanf("%d", &n);
+    printf("enter elements: ");
+    for (int i=0; i<n; i++)
+        scanf("%d", &arr[i]);
+    int choice;
+    printf("1. Sort in Ascending Order\n2. Sort in Descending order\n3. Exi$
+    printf("enter choice: ");
+    scanf("&d", &choice);
+    switch(choice)
+    {
+    case 1:
+        asc(arr, n);
+        for (int i=0; i<n; i++)
+            printf("%d ", arr[i]);
+        break;
+    case 2:
+        desc(arr, n);
+        for (int i=0; i<n; i++)
+            printf("%d ", arr[i]);
+        break;
+    case 3:
+        printf("Exiting...");
+        break;
+    default:
+        printf("Please enter a valid choice");
+    }
+    return 0;
+}
+
+
+
+
+
+
+
+^G Get Help    ^O Write Out   ^W Where Is    ^K Cut Text    ^J Justify
+^X Exit        ^R Read File   ^\ Replace     ^U Uncut Text  ^T To Spell

@@ -1,0 +1,1169 @@
+mysql> CREATE DATABASE movie_db_251b010;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> USE movie_db_251b010;
+Database changed
+mysql> CREATE TABLE MOVIE (
+    ->     Movie_ID INT PRIMARY KEY,
+    ->     Movie_Name VARCHAR(50),
+    ->     Release_Year INT,
+    ->     Genre VARCHAR(20),
+    ->     Language VARCHAR(20),
+    ->     Duration INT,
+    ->     Director_ID INT,
+    ->     FOREIGN KEY (Director_ID) REFERENCES DIRECTOR(Director_ID)
+    -> );
+ERROR 1824 (HY000): Failed to open the referenced table 'DIRECTOR'
+mysql> 
+mysql> CREATE TABLE DIRECTOR (
+    ->     Director_ID INT PRIMARY KEY,
+    ->     Director_Name VARCHAR(50),
+    ->     Nationality VARCHAR(20)
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> 
+mysql> CREATE TABLE MOVIE (
+    ->     Movie_ID INT PRIMARY KEY,
+    ->     Movie_Name VARCHAR(50),
+    ->     Release_Year INT,
+    ->     Genre VARCHAR(20),
+    ->     Language VARCHAR(20),
+    ->     Duration INT,
+    ->     Director_ID INT,
+    ->     FOREIGN KEY (Director_ID) REFERENCES DIRECTOR(Director_ID)
+    -> );
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> 
+mysql> CREATE TABLE ACTOR (
+    ->     Actor_ID INT PRIMARY KEY,
+    ->     Actor_Name VARCHAR(50),
+    ->     Gender CHAR(1),
+    ->     Birth_Year INT
+    -> );
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> 
+mysql> CREATE TABLE MOVIE_CAST (
+    ->     Movie_ID INT,
+    ->     Actor_ID INT,
+    ->     Role_Name VARCHAR(50),
+    ->     PRIMARY KEY (Movie_ID, Actor_ID),
+    ->     FOREIGN KEY (Movie_ID) REFERENCES MOVIE(Movie_ID),
+    ->     FOREIGN KEY (Actor_ID) REFERENCES ACTOR(Actor_ID)
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> 
+mysql> CREATE TABLE PRODUCER (
+    ->     Producer_ID INT PRIMARY KEY,
+    ->     Producer_Name VARCHAR(50),
+    ->     Company_Name VARCHAR(50)
+    -> );
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> 
+mysql> CREATE TABLE MOVIE_PRODUCER (
+    ->     Movie_ID INT,
+    ->     Producer_ID INT,
+    ->     PRIMARY KEY (Movie_ID, Producer_ID),
+    ->     FOREIGN KEY (Movie_ID) REFERENCES MOVIE(Movie_ID),
+    ->     FOREIGN KEY (Producer_ID) REFERENCES PRODUCER(Producer_ID)
+    -> );
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> 
+mysql> CREATE TABLE RATING (
+    ->     Rating_ID INT PRIMARY KEY,
+    ->     Movie_ID INT,
+    ->     Rating DECIMAL(3,1),
+    ->     Review_Count INT,
+    ->     FOREIGN KEY (Movie_ID) REFERENCES MOVIE(Movie_ID)
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> 
+mysql> CREATE TABLE PLATFORM (
+    ->     Platform_ID INT PRIMARY KEY,
+    ->     Platform_Name VARCHAR(30)
+    -> );
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> 
+mysql> CREATE TABLE MOVIE_PLATFORM (
+    ->     Movie_ID INT,
+    ->     Platform_ID INT,
+    ->     Release_Date DATE,
+    ->     PRIMARY KEY (Movie_ID, Platform_ID),
+    ->     FOREIGN KEY (Movie_ID) REFERENCES MOVIE(Movie_ID),
+    ->     FOREIGN KEY (Platform_ID) REFERENCES PLATFORM(Platform_ID)
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> ALTER TABLE MOVIE
+    -> ADD FOREIGN KEY (Director_ID) REFERENCES DIRECTOR (Director_ID);
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO DIRECTOR VALUES
+    -> (1, 'Anurag Kashyap', 'Indian'),
+    -> (2, 'Vikramaditya Motwane', 'Indian'),
+    -> (3, 'Sriram Raghavan', 'Indian'),
+    -> (4, 'Zoya Akhtar', 'Indian'),
+    -> (5, 'Christopher Nolan', 'British');
+Query OK, 5 rows affected (0.00 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> 
+mysql> INSERT INTO MOVIE VALUES
+    -> (1, 'Gangs of Wasseypur', 2012, 'Crime', 'Hindi', 160, 1),
+    -> (2, 'Black Friday', 2007, 'Crime', 'Hindi', 143, 1),
+    -> (3, 'Dev D', 2009, 'Drama', 'Hindi', 144, 1),
+    -> (4, 'Kennedy', 2023, 'Crime', 'Hindi', 120, 1),
+    -> (5, 'Udaan', 2010, 'Drama', 'Hindi', 134, 2),
+    -> (6, 'Lootera', 2013, 'Romance', 'Hindi', 135, 2),
+    -> (7, 'Trapped', 2016, 'Thriller', 'Hindi', 95, 2),
+    -> (8, 'Andhadhun', 2018, 'Thriller', 'Hindi', 139, 3),
+    -> (9, 'Johnny Gaddaar', 2007, 'Crime', 'Hindi', 129, 3),
+    -> (10, 'Badlapur', 2015, 'Crime', 'Hindi', 135, 3),
+    -> (11, 'Merry Christmas', 2024, 'Thriller', 'Hindi', 145, 3),
+    -> (12, 'Zindagi Na Milegi Dobara', 2011, 'Drama', 'Hindi', 155, 4),
+    -> (13, 'Gully Boy', 2019, 'Drama', 'Hindi', 153, 4),
+    -> (14, 'Inception', 2010, 'Sci-Fi', 'English', 148, 5),
+    -> (15, 'Interstellar', 2014, 'Sci-Fi', 'English', 169, 5);
+Query OK, 15 rows affected (0.00 sec)
+Records: 15  Duplicates: 0  Warnings: 0
+
+mysql> 
+mysql> INSERT INTO ACTOR VALUES
+    -> (1, 'Nawazuddin Siddiqui', 'M', 1974),
+    -> (2, 'Jaideep Ahlawat', 'M', 1978),
+    -> (3, 'Manoj Bajpayee', 'M', 1969),
+    -> (4, 'Huma Qureshi', 'F', 1986),
+    -> (5, 'Radhika Apte', 'F', 1985),
+    -> (6, 'Ayushmann Khurrana', 'M', 1984),
+    -> (7, 'Vijay Sethupathi', 'M', 1978),
+    -> (8, 'Katrina Kaif', 'F', 1983),
+    -> (9, 'Ranveer Singh', 'M', 1985),
+    -> (10, 'Leonardo DiCaprio', 'M', 1974),
+    -> (11, 'Alia Bhatt', 'F', 1993),
+    -> (12, 'Matthew McConaughey', 'M', 1969);
+Query OK, 12 rows affected (0.00 sec)
+Records: 12  Duplicates: 0  Warnings: 0
+
+mysql> 
+mysql> INSERT INTO MOVIE_CAST VALUES
+    -> (1, 1, 'Faizal Khan'),
+    -> (1, 3, 'Sardar Khan'),
+    -> (1, 4, 'Mohsina'),
+    -> (1, 2, 'Shahid Khan'),
+    -> (2, 1, 'Asgar'),
+    -> (2, 2, 'Badshah Khan'),
+    -> (3, 5, 'Paro'),
+    -> (3, 3, 'Chunni'),
+    -> (4, 2, 'Inspector'),
+    -> (4, 4, 'Reporter'),
+    -> (5, 2, 'Bhairav'),
+    -> (6, 9, 'Varun'),
+    -> (7, 1, 'Kidnapper'),
+    -> (8, 6, 'Akash'),
+    -> (8, 5, 'Simi'),
+    -> (8, 2, 'Doctor'),
+    -> (8, 1, 'Shopkeeper'),
+    -> (9, 3, 'Vikram'),
+    -> (10, 4, 'Jhimli'),
+    -> (10, 3, 'Raghu'),
+    -> (11, 8, 'Maria'),
+    -> (11, 7, 'Albert'),
+    -> (11, 5, 'Mansi'),
+    -> (12, 8, 'Laila'),
+    -> (12, 11, 'Natasha'),
+    -> (13, 9, 'Murad'),
+    -> (13, 11, 'Safeena'),
+    -> (14, 10, 'Cobb'),
+    -> (15, 12, 'Cooper');
+Query OK, 29 rows affected (0.00 sec)
+Records: 29  Duplicates: 0  Warnings: 0
+
+mysql> 
+mysql> INSERT INTO PRODUCER VALUES
+    -> (1, 'Sunil Bohra', 'Viacom18 Studios'),
+    -> (2, 'Ronnie Screwvala', 'UTV Motion Pictures'),
+    -> (3, 'Ramesh Taurani', 'Tips Films'),
+    -> (4, 'Farhan Akhtar', 'Excel Entertainment'),
+    -> (5, 'Emma Thomas', 'Syncopy');
+Query OK, 5 rows affected (0.00 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> 
+mysql> INSERT INTO MOVIE_PRODUCER VALUES
+    -> (1, 1), (1, 2), (2, 1), (3, 2), (4, 1),
+    -> (5, 2), (6, 2), (6, 3), (7, 3), (8, 3),
+    -> (9, 3), (10, 2), (11, 3), (11, 4), (12, 4),
+    -> (13, 4), (14, 5), (15, 5), (15, 2);
+Query OK, 19 rows affected (0.01 sec)
+Records: 19  Duplicates: 0  Warnings: 0
+
+mysql> 
+mysql> INSERT INTO RATING VALUES
+    -> (1, 1, 8.2, 15000),
+    -> (2, 2, 8.5, 6000),
+    -> (3, 3, 7.2, 8000),
+    -> (4, 4, 5.8, 2000),
+    -> (5, 5, 8.0, 12000),
+    -> (6, 6, 6.9, 7000),
+    -> (7, 7, 7.5, 9000),
+    -> (8, 8, 8.3, 20000),
+    -> (9, 9, 7.8, 5500),
+    -> (10, 10, 7.4, 11000),
+    -> (11, 11, 7.0, 6500),
+    -> (12, 12, 8.1, 25000),
+    -> (13, 13, 7.9, 22000),
+    -> (14, 14, 8.8, 30000),
+    -> (15, 15, 8.7, 28000);
+Query OK, 15 rows affected (0.00 sec)
+Records: 15  Duplicates: 0  Warnings: 0
+
+mysql> 
+mysql> INSERT INTO PLATFORM VALUES
+    -> (1, 'Amazon Prime Video'),
+    -> (2, 'Netflix'),
+    -> (3, 'Disney+ Hotstar'),
+    -> (4, 'Zee5');
+Query OK, 4 rows affected (0.00 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> 
+mysql> INSERT INTO MOVIE_PLATFORM VALUES
+    -> (1, 1, '2020-06-15'), (2, 1, '2021-01-10'), (3, 1, '2019-12-01'),
+    -> (5, 1, '2020-03-20'), (8, 1, '2019-05-17'), (12, 1, '2018-09-05'),
+    -> (14, 1, '2021-07-01'),
+    -> (4, 2, '2023-12-20'), (9, 2, '2020-02-14'), (10, 2, '2019-08-30'),
+    -> (11, 2, '2024-02-09'), (13, 2, '2020-04-11'),
+    -> (6, 3, '2020-09-18'), (7, 3, '2019-11-25'), (15, 3, '2022-01-14'),
+    -> (1, 4, '2021-05-05'), (12, 4, '2022-06-22');
+Query OK, 17 rows affected (0.01 sec)
+Records: 17  Duplicates: 0  Warnings: 0
+
+mysql> SELECT m.Movie_Name, m.Release_Year, d.Director_Name
+    -> FROM MOVIE m
+    -> JOIN DIRECTOR d
+    ->     ON m.Director_ID = d.Director_ID;
++--------------------------+--------------+----------------------+
+| Movie_Name               | Release_Year | Director_Name        |
++--------------------------+--------------+----------------------+
+| Gangs of Wasseypur       |         2012 | Anurag Kashyap       |
+| Black Friday             |         2007 | Anurag Kashyap       |
+| Dev D                    |         2009 | Anurag Kashyap       |
+| Kennedy                  |         2023 | Anurag Kashyap       |
+| Udaan                    |         2010 | Vikramaditya Motwane |
+| Lootera                  |         2013 | Vikramaditya Motwane |
+| Trapped                  |         2016 | Vikramaditya Motwane |
+| Andhadhun                |         2018 | Sriram Raghavan      |
+| Johnny Gaddaar           |         2007 | Sriram Raghavan      |
+| Badlapur                 |         2015 | Sriram Raghavan      |
+| Merry Christmas          |         2024 | Sriram Raghavan      |
+| Zindagi Na Milegi Dobara |         2011 | Zoya Akhtar          |
+| Gully Boy                |         2019 | Zoya Akhtar          |
+| Inception                |         2010 | Christopher Nolan    |
+| Interstellar             |         2014 | Christopher Nolan    |
++--------------------------+--------------+----------------------+
+15 rows in set (0.00 sec)
+
+mysql> SELECT m.Movie_Name, m.Genre, m.Release_Year, d.Director_Name
+    -> FROM MOVIE m
+    -> JOIN DIRECTOR d
+    ->     ON m.Director_ID = d.Director_ID
+    -> WHERE d.Director_Name = Anurag Kashyap;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Kashyap' at line 5
+mysql> 
+mysql> SELECT m.Movie_Name, m.Genre, m.Release_Year, d.Director_Name
+    -> FROM MOVIE m
+    -> JOIN DIRECTOR d
+    ->     ON m.Director_ID = d.Director_ID
+    -> WHERE d.Director_Name = 'Anurag Kashyap';
++--------------------+-------+--------------+----------------+
+| Movie_Name         | Genre | Release_Year | Director_Name  |
++--------------------+-------+--------------+----------------+
+| Gangs of Wasseypur | Crime |         2012 | Anurag Kashyap |
+| Black Friday       | Crime |         2007 | Anurag Kashyap |
+| Dev D              | Drama |         2009 | Anurag Kashyap |
+| Kennedy            | Crime |         2023 | Anurag Kashyap |
++--------------------+-------+--------------+----------------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT m.Movie_Name, a.Actor_Name, mc.Role_Name
+    -> FROM MOVIE m
+    -> JOIN MOVIE_CASTS mc
+    ->     ON m.Movie_ID = mc.Movie_ID
+    -> JOIN ACTOR a
+    ->     ON mc.Actor_ID = a.Actor_ID;
+ERROR 1146 (42S02): Table 'movie_db.MOVIE_CASTS' doesn't exist
+mysql> 
+mysql> SELECT m.Movie_Name, a.Actor_Name, mc.Role_Name
+    -> FROM MOVIE m
+    -> JOIN MOVIE_CAST mc
+    ->     ON m.Movie_ID = mc.Movie_ID
+    -> JOIN ACTOR a
+    ->     ON mc.Actor_ID = a.Actor_ID;
++--------------------------+---------------------+--------------+
+| Movie_Name               | Actor_Name          | Role_Name    |
++--------------------------+---------------------+--------------+
+| Gangs of Wasseypur       | Nawazuddin Siddiqui | Faizal Khan  |
+| Black Friday             | Nawazuddin Siddiqui | Asgar        |
+| Trapped                  | Nawazuddin Siddiqui | Kidnapper    |
+| Andhadhun                | Nawazuddin Siddiqui | Shopkeeper   |
+| Gangs of Wasseypur       | Jaideep Ahlawat     | Shahid Khan  |
+| Black Friday             | Jaideep Ahlawat     | Badshah Khan |
+| Kennedy                  | Jaideep Ahlawat     | Inspector    |
+| Udaan                    | Jaideep Ahlawat     | Bhairav      |
+| Andhadhun                | Jaideep Ahlawat     | Doctor       |
+| Gangs of Wasseypur       | Manoj Bajpayee      | Sardar Khan  |
+| Dev D                    | Manoj Bajpayee      | Chunni       |
+| Johnny Gaddaar           | Manoj Bajpayee      | Vikram       |
+| Badlapur                 | Manoj Bajpayee      | Raghu        |
+| Gangs of Wasseypur       | Huma Qureshi        | Mohsina      |
+| Kennedy                  | Huma Qureshi        | Reporter     |
+| Badlapur                 | Huma Qureshi        | Jhimli       |
+| Dev D                    | Radhika Apte        | Paro         |
+| Andhadhun                | Radhika Apte        | Simi         |
+| Merry Christmas          | Radhika Apte        | Mansi        |
+| Andhadhun                | Ayushmann Khurrana  | Akash        |
+| Merry Christmas          | Vijay Sethupathi    | Albert       |
+| Merry Christmas          | Katrina Kaif        | Maria        |
+| Zindagi Na Milegi Dobara | Katrina Kaif        | Laila        |
+| Lootera                  | Ranveer Singh       | Varun        |
+| Gully Boy                | Ranveer Singh       | Murad        |
+| Inception                | Leonardo DiCaprio   | Cobb         |
+| Zindagi Na Milegi Dobara | Alia Bhatt          | Natasha      |
+| Gully Boy                | Alia Bhatt          | Safeena      |
+| Interstellar             | Matthew McConaughey | Cooper       |
++--------------------------+---------------------+--------------+
+29 rows in set (0.00 sec)
+
+mysql> SELECT m.Movie_Name, m.Release_Year, d.Director_Name, m.Genre
+    -> FROM MOVIE m
+    -> JOIN DIRECTOR d
+    ->     ON m.Director_ID = d.Director_ID
+    -> WHERE m.Genre = 'Crime'
+    -> ORDER BY m.Release_Year;
++--------------------+--------------+-----------------+-------+
+| Movie_Name         | Release_Year | Director_Name   | Genre |
++--------------------+--------------+-----------------+-------+
+| Black Friday       |         2007 | Anurag Kashyap  | Crime |
+| Johnny Gaddaar     |         2007 | Sriram Raghavan | Crime |
+| Gangs of Wasseypur |         2012 | Anurag Kashyap  | Crime |
+| Badlapur           |         2015 | Sriram Raghavan | Crime |
+| Kennedy            |         2023 | Anurag Kashyap  | Crime |
++--------------------+--------------+-----------------+-------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT m.Movie_Name, p.Producer_Name, p.Company_Nme
+    -> FROM MOVIE m
+    -> JOIN MOVIE_PRODUCER mp
+    ->     ON m.Movie_ID = mp.Movie_ID
+    -> JOIN PRODUCER p
+    ->     ON mp.Producer_ID = p.Producer_ID;
+ERROR 1054 (42S22): Unknown column 'p.Company_Nme' in 'field list'
+mysql> 
+mysql> SELECT m.Movie_Name, p.Producer_Name, p.Company_Name
+    -> FROM MOVIE m
+    -> JOIN MOVIE_PRODUCER mp
+    ->     ON m.Movie_ID = mp.Movie_ID
+    -> JOIN PRODUCER p
+    ->     ON mp.Producer_ID = p.Producer_ID;
++--------------------------+------------------+---------------------+
+| Movie_Name               | Producer_Name    | Company_Name        |
++--------------------------+------------------+---------------------+
+| Gangs of Wasseypur       | Sunil Bohra      | Viacom18 Studios    |
+| Black Friday             | Sunil Bohra      | Viacom18 Studios    |
+| Kennedy                  | Sunil Bohra      | Viacom18 Studios    |
+| Gangs of Wasseypur       | Ronnie Screwvala | UTV Motion Pictures |
+| Dev D                    | Ronnie Screwvala | UTV Motion Pictures |
+| Udaan                    | Ronnie Screwvala | UTV Motion Pictures |
+| Lootera                  | Ronnie Screwvala | UTV Motion Pictures |
+| Badlapur                 | Ronnie Screwvala | UTV Motion Pictures |
+| Interstellar             | Ronnie Screwvala | UTV Motion Pictures |
+| Lootera                  | Ramesh Taurani   | Tips Films          |
+| Trapped                  | Ramesh Taurani   | Tips Films          |
+| Andhadhun                | Ramesh Taurani   | Tips Films          |
+| Johnny Gaddaar           | Ramesh Taurani   | Tips Films          |
+| Merry Christmas          | Ramesh Taurani   | Tips Films          |
+| Merry Christmas          | Farhan Akhtar    | Excel Entertainment |
+| Zindagi Na Milegi Dobara | Farhan Akhtar    | Excel Entertainment |
+| Gully Boy                | Farhan Akhtar    | Excel Entertainment |
+| Inception                | Emma Thomas      | Syncopy             |
+| Interstellar             | Emma Thomas      | Syncopy             |
++--------------------------+------------------+---------------------+
+19 rows in set (0.00 sec)
+
+mysql> SELECT m.Movie_Name, d.Director_Name, r.Rating
+    -> FROM MOVIE m
+    -> JOIN DIRECTOR d
+    ->     ON m.Director_ID = d.Director_ID
+    -> JOIN RATING r
+    ->     ON m.Movie_ID = r.Movie_ID
+    -> WHERE r.Rating > 8.0
+    -> ORDER BY r.Rating DESC;
++--------------------------+-------------------+--------+
+| Movie_Name               | Director_Name     | Rating |
++--------------------------+-------------------+--------+
+| Inception                | Christopher Nolan |    8.8 |
+| Interstellar             | Christopher Nolan |    8.7 |
+| Black Friday             | Anurag Kashyap    |    8.5 |
+| Andhadhun                | Sriram Raghavan   |    8.3 |
+| Gangs of Wasseypur       | Anurag Kashyap    |    8.2 |
+| Zindagi Na Milegi Dobara | Zoya Akhtar       |    8.1 |
++--------------------------+-------------------+--------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT m.Movie_Name, m.Release_Year, d.Director_Name, m.Genre
+    -> FROM MOVIE m
+    -> JOIN DIRECTOR d
+    ->     ON m.Director_ID = d.Director_ID
+    -> WHERE m.Release_Year > 2020
+    -> ORDER BY m.Release_Year DECS;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'DECS' at line 6
+mysql> 
+mysql> SELECT m.Movie_Name, m.Release_Year, d.Director_Name, m.Genre
+    -> FROM MOVIE m
+    -> JOIN DIRECTOR d
+    ->     ON m.Director_ID = d.Director_ID
+    -> WHERE m.Release_Year > 2020
+    -> ORDER BY m.Release_Year DESC;
++-----------------+--------------+-----------------+----------+
+| Movie_Name      | Release_Year | Director_Name   | Genre    |
++-----------------+--------------+-----------------+----------+
+| Merry Christmas |         2024 | Sriram Raghavan | Thriller |
+| Kennedy         |         2023 | Anurag Kashyap  | Crime    |
++-----------------+--------------+-----------------+----------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT m.Movie_Name, p.Platform_Name, mp.Release_Date
+    -> FROM MOVIE m
+    -> JOIN MOVIE_PLATFORM mp
+    ->     ON m.Movie_ID = mp.Movie_ID
+    -> JOIN PLATFORM p
+    ->     ON mp.Platform_ID = p.Platform_ID
+    -> WHERE p.Platform_Name = 'Amazon Prime Video';
++--------------------------+--------------------+--------------+
+| Movie_Name               | Platform_Name      | Release_Date |
++--------------------------+--------------------+--------------+
+| Gangs of Wasseypur       | Amazon Prime Video | 2020-06-15   |
+| Black Friday             | Amazon Prime Video | 2021-01-10   |
+| Dev D                    | Amazon Prime Video | 2019-12-01   |
+| Udaan                    | Amazon Prime Video | 2020-03-20   |
+| Andhadhun                | Amazon Prime Video | 2019-05-17   |
+| Zindagi Na Milegi Dobara | Amazon Prime Video | 2018-09-05   |
+| Inception                | Amazon Prime Video | 2021-07-01   |
++--------------------------+--------------------+--------------+
+7 rows in set (0.00 sec)
+
+mysql> SELECT a.Actor_Name, m.Movie_Name, mc.Role_Name, m.Release_Year
+    -> FROM ACTOR a
+    -> JOIN MOVIE_CAST mc
+    ->     ON a.Actor_ID = mc.Actor_ID
+    -> JOIN MOVIE m
+    ->     ON mc.Movie_ID = m.Movie_ID
+    -> WHERE a.Actor_Name = 'Jaideep Ahlawat'
+    -> ORDER BY m.Release_Year;
++-----------------+--------------------+--------------+--------------+
+| Actor_Name      | Movie_Name         | Role_Name    | Release_Year |
++-----------------+--------------------+--------------+--------------+
+| Jaideep Ahlawat | Black Friday       | Badshah Khan |         2007 |
+| Jaideep Ahlawat | Udaan              | Bhairav      |         2010 |
+| Jaideep Ahlawat | Gangs of Wasseypur | Shahid Khan  |         2012 |
+| Jaideep Ahlawat | Andhadhun          | Doctor       |         2018 |
+| Jaideep Ahlawat | Kennedy            | Inspector    |         2023 |
++-----------------+--------------------+--------------+--------------+
+5 rows in set (0.01 sec)
+
+mysql> SELECT m.Movie_Name, d.Director_Name, m.Duration, m.Genre
+    -> FROM MOVIE m
+    -> JOIN DIRECTOR d
+    ->     ON m.Director_ID = d.Director_ID
+    -> WHERE m.Duration > 100
+    -> ORDER BY m.Duration DESC;
++--------------------------+----------------------+----------+----------+
+| Movie_Name               | Director_Name        | Duration | Genre    |
++--------------------------+----------------------+----------+----------+
+| Interstellar             | Christopher Nolan    |      169 | Sci-Fi   |
+| Gangs of Wasseypur       | Anurag Kashyap       |      160 | Crime    |
+| Zindagi Na Milegi Dobara | Zoya Akhtar          |      155 | Drama    |
+| Gully Boy                | Zoya Akhtar          |      153 | Drama    |
+| Inception                | Christopher Nolan    |      148 | Sci-Fi   |
+| Merry Christmas          | Sriram Raghavan      |      145 | Thriller |
+| Dev D                    | Anurag Kashyap       |      144 | Drama    |
+| Black Friday             | Anurag Kashyap       |      143 | Crime    |
+| Andhadhun                | Sriram Raghavan      |      139 | Thriller |
+| Lootera                  | Vikramaditya Motwane |      135 | Romance  |
+| Badlapur                 | Sriram Raghavan      |      135 | Crime    |
+| Udaan                    | Vikramaditya Motwane |      134 | Drama    |
+| Johnny Gaddaar           | Sriram Raghavan      |      129 | Crime    |
+| Kennedy                  | Anurag Kashyap       |      120 | Crime    |
++--------------------------+----------------------+----------+----------+
+14 rows in set (0.00 sec)
+
+mysql> SELECT d.Director_Name, COUNT(m.Movie_ID)
+    -> FROM DIRECTOR d
+    -> JOIN MOVIE m
+    ->     ON d.Director_ID = m.Director_ID;
+ERROR 1140 (42000): In aggregated query without GROUP BY, expression #1 of SELECT list contains nonaggregated column 'movie_db.d.Director_Name'; this is incompatible with sql_mode=only_full_group_by
+mysql> 
+mysql> SELECT d.Director_Name, COUNT(m.Movie_ID)
+    -> FROM DIRECTOR d
+    -> JOIN MOVIE m
+    ->     ON d.Director_ID = m.Director_ID
+    -> GROUP BY d.Director_Name;
++----------------------+-------------------+
+| Director_Name        | COUNT(m.Movie_ID) |
++----------------------+-------------------+
+| Anurag Kashyap       |                 4 |
+| Vikramaditya Motwane |                 3 |
+| Sriram Raghavan      |                 4 |
+| Zoya Akhtar          |                 2 |
+| Christopher Nolan    |                 2 |
++----------------------+-------------------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT d.Director_Name, AVG(r.Rating)
+    -> FROM DIRECTOR d
+    -> JOIN MOVIE m
+    ->     ON d.Director_ID = m.Director_ID
+    -> JOIN RATING r
+    ->     ON m.Movie_ID = r.Movie_ID
+    -> GROUP BY d.Director_Name
+    -> ORDER BY AVG(r.Rating) DESC;
++----------------------+---------------+
+| Director_Name        | AVG(r.Rating) |
++----------------------+---------------+
+| Christopher Nolan    |       8.75000 |
+| Zoya Akhtar          |       8.00000 |
+| Sriram Raghavan      |       7.62500 |
+| Vikramaditya Motwane |       7.46667 |
+| Anurag Kashyap       |       7.42500 |
++----------------------+---------------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT m.Movie_Name, COUNT(a.Actor_ID)
+    -> FROM MOVIE m
+    -> JOIN MOVIE_CAST mc
+    ->     ON m.Movie_ID = mc.Movie_ID
+    -> JOIN ACTOR a
+    ->     ON mc.Actor_ID = a.Actor_ID
+    -> GROUP BY m.Movie_Name;
++--------------------------+-------------------+
+| Movie_Name               | COUNT(a.Actor_ID) |
++--------------------------+-------------------+
+| Gangs of Wasseypur       |                 4 |
+| Black Friday             |                 2 |
+| Trapped                  |                 1 |
+| Andhadhun                |                 4 |
+| Kennedy                  |                 2 |
+| Udaan                    |                 1 |
+| Dev D                    |                 2 |
+| Johnny Gaddaar           |                 1 |
+| Badlapur                 |                 2 |
+| Merry Christmas          |                 3 |
+| Zindagi Na Milegi Dobara |                 2 |
+| Lootera                  |                 1 |
+| Gully Boy                |                 2 |
+| Inception                |                 1 |
+| Interstellar             |                 1 |
++--------------------------+-------------------+
+15 rows in set (0.00 sec)
+
+mysql> SELECT p.Platform_Name, COUNT(mp.Movie_ID)
+    -> FROM PLATFORM p
+    -> JOIN MOVIE_PLATFORM mp
+    ->     ON p.Platform_ID = mp.Platform_ID
+    -> GROUP BY p.Platform_Name;
++--------------------+--------------------+
+| Platform_Name      | COUNT(mp.Movie_ID) |
++--------------------+--------------------+
+| Amazon Prime Video |                  7 |
+| Netflix            |                  5 |
+| Disney+ Hotstar    |                  3 |
+| Zee5               |                  2 |
++--------------------+--------------------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT m.Movie_Name, SUM(r.Review_Count)
+    -> FROM MOVIE m
+    -> JOIN RATING r
+    ->     ON m.Movie_ID = r.Movie_ID
+    -> GROUP BY m.Movie_Name;
++--------------------------+---------------------+
+| Movie_Name               | SUM(r.Review_Count) |
++--------------------------+---------------------+
+| Gangs of Wasseypur       |               15000 |
+| Black Friday             |                6000 |
+| Dev D                    |                8000 |
+| Kennedy                  |                2000 |
+| Udaan                    |               12000 |
+| Lootera                  |                7000 |
+| Trapped                  |                9000 |
+| Andhadhun                |               20000 |
+| Johnny Gaddaar           |                5500 |
+| Badlapur                 |               11000 |
+| Merry Christmas          |                6500 |
+| Zindagi Na Milegi Dobara |               25000 |
+| Gully Boy                |               22000 |
+| Inception                |               30000 |
+| Interstellar             |               28000 |
++--------------------------+---------------------+
+15 rows in set (0.00 sec)
+
+mysql> SELECT d.Director_Name, COUNT(m.Movie_ID)
+    -> FROM DIRECTOR d
+    -> JOIN MOVIE m
+    ->     ON d.Director_ID = m.Director_ID
+    -> WHERE COUNT(m.Movie_ID) > 2
+    -> GROUP BY d.Director_Name;
+ERROR 1111 (HY000): Invalid use of group function
+mysql> 
+mysql> SELECT d.Director_Name, COUNT(m.Movie_ID)
+    -> FROM DIRECTOR d
+    -> JOIN MOVIE m
+    ->     ON d.Director_ID = m.Director_ID
+    -> GROUP BY d.Director_Name
+    -> HAVING COUNT(m.Movie_ID) > 2;
++----------------------+-------------------+
+| Director_Name        | COUNT(m.Movie_ID) |
++----------------------+-------------------+
+| Anurag Kashyap       |                 4 |
+| Vikramaditya Motwane |                 3 |
+| Sriram Raghavan      |                 4 |
++----------------------+-------------------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT m.Movie_Name, COUNT(a.Actor_ID)
+    -> FROM MOVIE m
+    -> JOIN MOVIE_CAST mc
+    ->     ON m.Movie_ID = mc.Movie_ID
+    -> JOIN ACTOR a
+    ->     ON mc.Actor_ID = a.Actor_ID
+    -> GROUP BY m.Movie_Name
+    -> HAVING COUNT(a.Actor_ID) > 3;
++--------------------+-------------------+
+| Movie_Name         | COUNT(a.Actor_ID) |
++--------------------+-------------------+
+| Gangs of Wasseypur |                 4 |
+| Andhadhun          |                 4 |
++--------------------+-------------------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT d.Director_Name, AVG(r.Rating)
+    -> FROM DIRECTOR d
+    -> JOIN MOVIE m
+    ->     ON d.Director_ID = m.Director_ID
+    -> JOIN RATING r
+    ->     ON m.Movie_ID = r.Movie_ID
+    -> GROUP BY d.Director_Name
+    -> HAVING AVG(r.Rating) > 7.5;
++-------------------+---------------+
+| Director_Name     | AVG(r.Rating) |
++-------------------+---------------+
+| Sriram Raghavan   |       7.62500 |
+| Zoya Akhtar       |       8.00000 |
+| Christopher Nolan |       8.75000 |
++-------------------+---------------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT p.Platform_Name, COUNT(mp.Movie_ID)
+    -> FROM PLATFORM p
+    -> JOIN MOVIE_PLATFORM mp
+    ->     ON p.Platform_ID = mp.Platform_ID
+    -> GROUP BY p.Platform_Name
+    -> ORDER BY COUNT(mp.Movie_ID) DESC
+    -> HAVING COUNT(mp.Movie_ID) > 5;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'HAVING COUNT(mp.Movie_ID) > 5' at line 7
+mysql> 
+mysql> SELECT p.Platform_Name, COUNT(mp.Movie_ID)
+    -> FROM PLATFORM p
+    -> JOIN MOVIE_PLATFORM mp
+    ->     ON p.Platform_ID = mp.Platform_ID
+    -> GROUP BY p.Platform_Name
+    -> HAVING COUNT(mp.Movie_ID) > 5
+    -> ORDER BY COUNT(mp.Movie_ID) DESC;
++--------------------+--------------------+
+| Platform_Name      | COUNT(mp.Movie_ID) |
++--------------------+--------------------+
+| Amazon Prime Video |                  7 |
++--------------------+--------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT m.Movie_Name, COUNT(mp.Producer_ID)
+    -> FROM MOVIE m
+    -> JOIN MOVIE_PRODUCER mp
+    ->     ON m.Movie_ID = mp.Movie_ID
+    -> GROUP BY m.Movie_Name
+    -> HAVING COUNT(mp.Producer_ID) > 1;
++--------------------+-----------------------+
+| Movie_Name         | COUNT(mp.Producer_ID) |
++--------------------+-----------------------+
+| Gangs of Wasseypur |                     2 |
+| Lootera            |                     2 |
+| Merry Christmas    |                     2 |
+| Interstellar       |                     2 |
++--------------------+-----------------------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT m.Movie_Name, d.Director_Name, a.Actor_Name, mc.Role_Name, m.Genre, m.Release_Year
+    -> FROM MOVIE m
+    -> JOIN DIRECTOR d
+    ->     ON m.Director_ID = d.Director_ID
+    -> JOIN MOVIE_CAST mc
+    ->     ON m.Movie_ID = mc.Movie_ID
+    -> JOIN ACTOR a
+    ->     ON mc.Actor_ID = a.Actor_ID;
++--------------------------+----------------------+---------------------+--------------+----------+--------------+
+| Movie_Name               | Director_Name        | Actor_Name          | Role_Name    | Genre    | Release_Year |
++--------------------------+----------------------+---------------------+--------------+----------+--------------+
+| Gangs of Wasseypur       | Anurag Kashyap       | Nawazuddin Siddiqui | Faizal Khan  | Crime    |         2012 |
+| Gangs of Wasseypur       | Anurag Kashyap       | Jaideep Ahlawat     | Shahid Khan  | Crime    |         2012 |
+| Gangs of Wasseypur       | Anurag Kashyap       | Manoj Bajpayee      | Sardar Khan  | Crime    |         2012 |
+| Gangs of Wasseypur       | Anurag Kashyap       | Huma Qureshi        | Mohsina      | Crime    |         2012 |
+| Black Friday             | Anurag Kashyap       | Nawazuddin Siddiqui | Asgar        | Crime    |         2007 |
+| Black Friday             | Anurag Kashyap       | Jaideep Ahlawat     | Badshah Khan | Crime    |         2007 |
+| Dev D                    | Anurag Kashyap       | Manoj Bajpayee      | Chunni       | Drama    |         2009 |
+| Dev D                    | Anurag Kashyap       | Radhika Apte        | Paro         | Drama    |         2009 |
+| Kennedy                  | Anurag Kashyap       | Jaideep Ahlawat     | Inspector    | Crime    |         2023 |
+| Kennedy                  | Anurag Kashyap       | Huma Qureshi        | Reporter     | Crime    |         2023 |
+| Udaan                    | Vikramaditya Motwane | Jaideep Ahlawat     | Bhairav      | Drama    |         2010 |
+| Lootera                  | Vikramaditya Motwane | Ranveer Singh       | Varun        | Romance  |         2013 |
+| Trapped                  | Vikramaditya Motwane | Nawazuddin Siddiqui | Kidnapper    | Thriller |         2016 |
+| Andhadhun                | Sriram Raghavan      | Nawazuddin Siddiqui | Shopkeeper   | Thriller |         2018 |
+| Andhadhun                | Sriram Raghavan      | Jaideep Ahlawat     | Doctor       | Thriller |         2018 |
+| Andhadhun                | Sriram Raghavan      | Radhika Apte        | Simi         | Thriller |         2018 |
+| Andhadhun                | Sriram Raghavan      | Ayushmann Khurrana  | Akash        | Thriller |         2018 |
+| Johnny Gaddaar           | Sriram Raghavan      | Manoj Bajpayee      | Vikram       | Crime    |         2007 |
+| Badlapur                 | Sriram Raghavan      | Manoj Bajpayee      | Raghu        | Crime    |         2015 |
+| Badlapur                 | Sriram Raghavan      | Huma Qureshi        | Jhimli       | Crime    |         2015 |
+| Merry Christmas          | Sriram Raghavan      | Radhika Apte        | Mansi        | Thriller |         2024 |
+| Merry Christmas          | Sriram Raghavan      | Vijay Sethupathi    | Albert       | Thriller |         2024 |
+| Merry Christmas          | Sriram Raghavan      | Katrina Kaif        | Maria        | Thriller |         2024 |
+| Zindagi Na Milegi Dobara | Zoya Akhtar          | Katrina Kaif        | Laila        | Drama    |         2011 |
+| Zindagi Na Milegi Dobara | Zoya Akhtar          | Alia Bhatt          | Natasha      | Drama    |         2011 |
+| Gully Boy                | Zoya Akhtar          | Ranveer Singh       | Murad        | Drama    |         2019 |
+| Gully Boy                | Zoya Akhtar          | Alia Bhatt          | Safeena      | Drama    |         2019 |
+| Inception                | Christopher Nolan    | Leonardo DiCaprio   | Cobb         | Sci-Fi   |         2010 |
+| Interstellar             | Christopher Nolan    | Matthew McConaughey | Cooper       | Sci-Fi   |         2014 |
++--------------------------+----------------------+---------------------+--------------+----------+--------------+
+29 rows in set (0.00 sec)
+
+mysql> SELECT m.Movie_Name, d.Director_Name, m.Genre, r.Rating
+    -> FROM MOVIE m
+    -> JOIN DIRECTOR d
+    ->     ON m.Director_ID = d.Director_ID
+    -> JOIN RATING r
+    ->     ON m.Movie_ID = r.Movie_ID
+    -> ORDER BY r.Rating DESC;
++--------------------------+----------------------+----------+--------+
+| Movie_Name               | Director_Name        | Genre    | Rating |
++--------------------------+----------------------+----------+--------+
+| Inception                | Christopher Nolan    | Sci-Fi   |    8.8 |
+| Interstellar             | Christopher Nolan    | Sci-Fi   |    8.7 |
+| Black Friday             | Anurag Kashyap       | Crime    |    8.5 |
+| Andhadhun                | Sriram Raghavan      | Thriller |    8.3 |
+| Gangs of Wasseypur       | Anurag Kashyap       | Crime    |    8.2 |
+| Zindagi Na Milegi Dobara | Zoya Akhtar          | Drama    |    8.1 |
+| Udaan                    | Vikramaditya Motwane | Drama    |    8.0 |
+| Gully Boy                | Zoya Akhtar          | Drama    |    7.9 |
+| Johnny Gaddaar           | Sriram Raghavan      | Crime    |    7.8 |
+| Trapped                  | Vikramaditya Motwane | Thriller |    7.5 |
+| Badlapur                 | Sriram Raghavan      | Crime    |    7.4 |
+| Dev D                    | Anurag Kashyap       | Drama    |    7.2 |
+| Merry Christmas          | Sriram Raghavan      | Thriller |    7.0 |
+| Lootera                  | Vikramaditya Motwane | Romance  |    6.9 |
+| Kennedy                  | Anurag Kashyap       | Crime    |    5.8 |
++--------------------------+----------------------+----------+--------+
+15 rows in set (0.01 sec)
+
+mysql> SELECT m.Movie_Name, d.Director_Name, a.Actor_Name, mc.Role_Name
+    -> FROM MOVIE m
+    -> JOIN DIRECTOR d
+    ->     ON m.Director_ID = Director_ID
+    -> JOIN MOVIE_CAST mc
+    ->     ON m.Movie_ID = mc.Movie_ID
+    -> JOIN ACTOR a
+    ->     ON mc.Actor_ID = a.Actor_ID;
+ERROR 1052 (23000): Column 'Director_ID' in on clause is ambiguous
+mysql> 
+mysql> SELECT m.Movie_Name, d.Director_Name, a.Actor_Name, mc.Role_Name
+    -> FROM MOVIE m
+    -> JOIN DIRECTOR d
+    ->     ON m.Director_ID = d.Director_ID
+    -> JOIN MOVIE_CAST mc
+    ->     ON m.Movie_ID = mc.Movie_ID
+    -> JOIN ACTOR a
+    ->     ON mc.Actor_ID = a.Actor_ID;
++--------------------------+----------------------+---------------------+--------------+
+| Movie_Name               | Director_Name        | Actor_Name          | Role_Name    |
++--------------------------+----------------------+---------------------+--------------+
+| Gangs of Wasseypur       | Anurag Kashyap       | Nawazuddin Siddiqui | Faizal Khan  |
+| Gangs of Wasseypur       | Anurag Kashyap       | Jaideep Ahlawat     | Shahid Khan  |
+| Gangs of Wasseypur       | Anurag Kashyap       | Manoj Bajpayee      | Sardar Khan  |
+| Gangs of Wasseypur       | Anurag Kashyap       | Huma Qureshi        | Mohsina      |
+| Black Friday             | Anurag Kashyap       | Nawazuddin Siddiqui | Asgar        |
+| Black Friday             | Anurag Kashyap       | Jaideep Ahlawat     | Badshah Khan |
+| Dev D                    | Anurag Kashyap       | Manoj Bajpayee      | Chunni       |
+| Dev D                    | Anurag Kashyap       | Radhika Apte        | Paro         |
+| Kennedy                  | Anurag Kashyap       | Jaideep Ahlawat     | Inspector    |
+| Kennedy                  | Anurag Kashyap       | Huma Qureshi        | Reporter     |
+| Udaan                    | Vikramaditya Motwane | Jaideep Ahlawat     | Bhairav      |
+| Lootera                  | Vikramaditya Motwane | Ranveer Singh       | Varun        |
+| Trapped                  | Vikramaditya Motwane | Nawazuddin Siddiqui | Kidnapper    |
+| Andhadhun                | Sriram Raghavan      | Nawazuddin Siddiqui | Shopkeeper   |
+| Andhadhun                | Sriram Raghavan      | Jaideep Ahlawat     | Doctor       |
+| Andhadhun                | Sriram Raghavan      | Radhika Apte        | Simi         |
+| Andhadhun                | Sriram Raghavan      | Ayushmann Khurrana  | Akash        |
+| Johnny Gaddaar           | Sriram Raghavan      | Manoj Bajpayee      | Vikram       |
+| Badlapur                 | Sriram Raghavan      | Manoj Bajpayee      | Raghu        |
+| Badlapur                 | Sriram Raghavan      | Huma Qureshi        | Jhimli       |
+| Merry Christmas          | Sriram Raghavan      | Radhika Apte        | Mansi        |
+| Merry Christmas          | Sriram Raghavan      | Vijay Sethupathi    | Albert       |
+| Merry Christmas          | Sriram Raghavan      | Katrina Kaif        | Maria        |
+| Zindagi Na Milegi Dobara | Zoya Akhtar          | Katrina Kaif        | Laila        |
+| Zindagi Na Milegi Dobara | Zoya Akhtar          | Alia Bhatt          | Natasha      |
+| Gully Boy                | Zoya Akhtar          | Ranveer Singh       | Murad        |
+| Gully Boy                | Zoya Akhtar          | Alia Bhatt          | Safeena      |
+| Inception                | Christopher Nolan    | Leonardo DiCaprio   | Cobb         |
+| Interstellar             | Christopher Nolan    | Matthew McConaughey | Cooper       |
++--------------------------+----------------------+---------------------+--------------+
+29 rows in set (0.00 sec)
+
+mysql> SELECT m.Movie_Name, p.Producer_Name, p.Company_Name, pl.Platform_Name
+    -> FROM MOVIE m
+    -> JOIN MOVIE_PRODUCER mpr
+    ->     ON m.Movie_ID = mpr.Movie_ID
+    -> JOIN PRODUCER p
+    ->     ON mpr.Producer_ID = p.Producer_ID
+    -> JOIN MOVIE_PLATFORM mpl
+    ->     ON m.Movie_ID = mpl.Movie_ID
+    -> JOIN PLATFORM pl
+    ->     ON mpl.Platform_ID = pl.Platform_ID;
++--------------------------+------------------+---------------------+--------------------+
+| Movie_Name               | Producer_Name    | Company_Name        | Platform_Name      |
++--------------------------+------------------+---------------------+--------------------+
+| Gangs of Wasseypur       | Sunil Bohra      | Viacom18 Studios    | Amazon Prime Video |
+| Gangs of Wasseypur       | Ronnie Screwvala | UTV Motion Pictures | Amazon Prime Video |
+| Black Friday             | Sunil Bohra      | Viacom18 Studios    | Amazon Prime Video |
+| Dev D                    | Ronnie Screwvala | UTV Motion Pictures | Amazon Prime Video |
+| Udaan                    | Ronnie Screwvala | UTV Motion Pictures | Amazon Prime Video |
+| Andhadhun                | Ramesh Taurani   | Tips Films          | Amazon Prime Video |
+| Zindagi Na Milegi Dobara | Farhan Akhtar    | Excel Entertainment | Amazon Prime Video |
+| Inception                | Emma Thomas      | Syncopy             | Amazon Prime Video |
+| Kennedy                  | Sunil Bohra      | Viacom18 Studios    | Netflix            |
+| Johnny Gaddaar           | Ramesh Taurani   | Tips Films          | Netflix            |
+| Badlapur                 | Ronnie Screwvala | UTV Motion Pictures | Netflix            |
+| Merry Christmas          | Ramesh Taurani   | Tips Films          | Netflix            |
+| Merry Christmas          | Farhan Akhtar    | Excel Entertainment | Netflix            |
+| Gully Boy                | Farhan Akhtar    | Excel Entertainment | Netflix            |
+| Lootera                  | Ronnie Screwvala | UTV Motion Pictures | Disney+ Hotstar    |
+| Lootera                  | Ramesh Taurani   | Tips Films          | Disney+ Hotstar    |
+| Trapped                  | Ramesh Taurani   | Tips Films          | Disney+ Hotstar    |
+| Interstellar             | Ronnie Screwvala | UTV Motion Pictures | Disney+ Hotstar    |
+| Interstellar             | Emma Thomas      | Syncopy             | Disney+ Hotstar    |
+| Gangs of Wasseypur       | Sunil Bohra      | Viacom18 Studios    | Zee5               |
+| Gangs of Wasseypur       | Ronnie Screwvala | UTV Motion Pictures | Zee5               |
+| Zindagi Na Milegi Dobara | Farhan Akhtar    | Excel Entertainment | Zee5               |
++--------------------------+------------------+---------------------+--------------------+
+22 rows in set (0.00 sec)
+
+mysql> SELECT m.Movie_Name, d.Director_Name, m.Genre, r.Rating, r.Review_Count
+    -> FROM MOVIE m
+    -> JOIN DIRECTOR d
+    ->     ON m.Director_ID = d.Director_ID
+    -> JOIN RATING r
+    ->     ON m.Movie_ID = r.Movie_ID
+    -> ORDER BY r.Rating DESC;
++--------------------------+----------------------+----------+--------+--------------+
+| Movie_Name               | Director_Name        | Genre    | Rating | Review_Count |
++--------------------------+----------------------+----------+--------+--------------+
+| Inception                | Christopher Nolan    | Sci-Fi   |    8.8 |        30000 |
+| Interstellar             | Christopher Nolan    | Sci-Fi   |    8.7 |        28000 |
+| Black Friday             | Anurag Kashyap       | Crime    |    8.5 |         6000 |
+| Andhadhun                | Sriram Raghavan      | Thriller |    8.3 |        20000 |
+| Gangs of Wasseypur       | Anurag Kashyap       | Crime    |    8.2 |        15000 |
+| Zindagi Na Milegi Dobara | Zoya Akhtar          | Drama    |    8.1 |        25000 |
+| Udaan                    | Vikramaditya Motwane | Drama    |    8.0 |        12000 |
+| Gully Boy                | Zoya Akhtar          | Drama    |    7.9 |        22000 |
+| Johnny Gaddaar           | Sriram Raghavan      | Crime    |    7.8 |         5500 |
+| Trapped                  | Vikramaditya Motwane | Thriller |    7.5 |         9000 |
+| Badlapur                 | Sriram Raghavan      | Crime    |    7.4 |        11000 |
+| Dev D                    | Anurag Kashyap       | Drama    |    7.2 |         8000 |
+| Merry Christmas          | Sriram Raghavan      | Thriller |    7.0 |         6500 |
+| Lootera                  | Vikramaditya Motwane | Romance  |    6.9 |         7000 |
+| Kennedy                  | Anurag Kashyap       | Crime    |    5.8 |         2000 |
++--------------------------+----------------------+----------+--------+--------------+
+15 rows in set (0.00 sec)
+
+mysql> SELECT d.Director_Name, COUNT(m.Movie_ID), AVG(r.Rating)
+    -> FROM DIRECTOR d
+    -> JOIN MOVIE m
+    ->     ON d.Director_ID = m.Director_ID
+    -> JOIN RATING r
+    ->     ON m.Movie_ID = r.Movie_ID
+    -> GROUP BY d.Director_Name
+    -> HAVING AVG(r.Rating) > 7.0
+    -> ORDER BY AVG(r.Rating) DESC;
++----------------------+-------------------+---------------+
+| Director_Name        | COUNT(m.Movie_ID) | AVG(r.Rating) |
++----------------------+-------------------+---------------+
+| Christopher Nolan    |                 2 |       8.75000 |
+| Zoya Akhtar          |                 2 |       8.00000 |
+| Sriram Raghavan      |                 4 |       7.62500 |
+| Vikramaditya Motwane |                 3 |       7.46667 |
+| Anurag Kashyap       |                 4 |       7.42500 |
++----------------------+-------------------+---------------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT a.Name, COUNT(mc.Movie_ID)
+    -> FROM ACTOR a
+    -> JOIN MOVIE_CAST mc
+    ->     ON a.Actor_ID = mc.Actor_ID
+    -> GROUP BY a.Actor_Name
+    -> HAVING COUNT(mc.Movie_ID) > 2;
+ERROR 1054 (42S22): Unknown column 'a.Name' in 'field list'
+mysql> 
+mysql> SELECT a.Actor_Name, COUNT(mc.Movie_ID)
+    -> FROM ACTOR a
+    -> JOIN MOVIE_CAST mc
+    ->     ON a.Actor_ID = mc.Actor_ID
+    -> GROUP BY a.Actor_Name
+    -> HAVING COUNT(mc.Movie_ID) > 2;
++---------------------+--------------------+
+| Actor_Name          | COUNT(mc.Movie_ID) |
++---------------------+--------------------+
+| Nawazuddin Siddiqui |                  4 |
+| Jaideep Ahlawat     |                  5 |
+| Manoj Bajpayee      |                  4 |
+| Huma Qureshi        |                  3 |
+| Radhika Apte        |                  3 |
++---------------------+--------------------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT Genre, COUNT(Movie_ID)
+    -> FROM MOVIE
+    -> GROUP BY Genre
+    -> ORDER BY COUNT(Movie_ID) DESC;
++----------+-----------------+
+| Genre    | COUNT(Movie_ID) |
++----------+-----------------+
+| Crime    |               5 |
+| Drama    |               4 |
+| Thriller |               3 |
+| Sci-Fi   |               2 |
+| Romance  |               1 |
++----------+-----------------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT m.Genre, AVG(r.Rating)
+    -> FROM MOVIE m
+    -> JOIN RATING r
+    ->     ON m.Movie_ID = r.Movie_ID
+    -> GROUP BY m.Genre
+    -> HAVING AVG(r.Rating) > 7.0;
++----------+---------------+
+| Genre    | AVG(r.Rating) |
++----------+---------------+
+| Crime    |       7.54000 |
+| Drama    |       7.80000 |
+| Thriller |       7.60000 |
+| Sci-Fi   |       8.75000 |
++----------+---------------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT d.Director_Name, m.Movie_Name, r.Rating
+    -> FROM DIRECTOR d
+    -> JOIN MOVIE m
+    ->     ON d.Director_ID = m.Director_ID
+    -> JOIN RATING r
+    ->     ON m.Movie_ID = r.Movie_ID
+    -> WHERE r.Rating = MAX(r.Rating);
+ERROR 1111 (HY000): Invalid use of group function
+mysql> 
+mysql> SELECT d.Director_Name, m.Movie_Name, r.Rating
+    -> FROM DIRECTOR d
+    -> JOIN MOVIE m
+    ->     ON d.Director_ID = m.Director_ID
+    -> JOIN RATING r
+    ->     ON m.Movie_ID = r.Movie_ID
+    -> WHERE r.Rating = (SELECT MAX(r2.Rating)
+    ->                   FROM MOVIE m2
+    ->                   JOIN RATING r2
+    ->                       ON m2.Movie_ID = r2.Movie_ID
+    ->                   WHERE m2.Director_ID = d.Director_ID);
++----------------------+--------------------------+--------+
+| Director_Name        | Movie_Name               | Rating |
++----------------------+--------------------------+--------+
+| Anurag Kashyap       | Black Friday             |    8.5 |
+| Vikramaditya Motwane | Udaan                    |    8.0 |
+| Sriram Raghavan      | Andhadhun                |    8.3 |
+| Zoya Akhtar          | Zindagi Na Milegi Dobara |    8.1 |
+| Christopher Nolan    | Inception                |    8.8 |
++----------------------+--------------------------+--------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT a.Actor_Name, COUNT(DISTINCT m.Director_ID)
+    -> FROM ACTOR a
+    -> JOIN MOVIE_CAST mc
+    ->     ON a.Actor_ID = mc.Actor_ID
+    -> JOIN MOVIE m
+    ->     ON mc.Movie_ID = m.Movie_ID
+    -> GROUP BY a.Actor_Name
+    -> HAVING COUNT(DISTINCT m.Director_ID) > 2;
++---------------------+-------------------------------+
+| Actor_Name          | COUNT(DISTINCT m.Director_ID) |
++---------------------+-------------------------------+
+| Jaideep Ahlawat     |                             3 |
+| Nawazuddin Siddiqui |                             3 |
++---------------------+-------------------------------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT p.Platform_Name, AVG(r.Rating)
+    -> FROM PLATFORM p
+    -> JOIN MOVIE_PLATFORM mp
+    ->     ON p.Platform_ID = mp.Platform_ID
+    -> JOIN RATING r
+    ->     ON mp.Movie_ID = r.Movie_ID
+    -> GROUP BY p.Platform_Name
+    -> ORDER BY AVG(r.Rating) DESC;
++--------------------+---------------+
+| Platform_Name      | AVG(r.Rating) |
++--------------------+---------------+
+| Amazon Prime Video |       8.15714 |
+| Zee5               |       8.15000 |
+| Disney+ Hotstar    |       7.70000 |
+| Netflix            |       7.18000 |
++--------------------+---------------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT d.Director_Name, SUM(r.Review_Count)
+    -> FROM DIRECTOR d
+    -> JOIN MOVIE m
+    ->     ON d.Director_ID = m.Director_ID
+    -> JOIN RATING r
+    ->     ON m.Movie_ID = r.Movie_ID
+    -> GROUP BY d.Director_Name
+    -> ORDER BY total DESC;
+ERROR 1054 (42S22): Unknown column 'total' in 'order clause'
+mysql> 
+mysql> SELECT d.Director_Name, SUM(r.Review_Count)
+    -> FROM DIRECTOR d
+    -> JOIN MOVIE m
+    ->     ON d.Director_ID = m.Director_ID
+    -> JOIN RATING r
+    ->     ON m.Movie_ID = r.Movie_ID
+    -> GROUP BY d.Director_Name
+    -> ORDER BY SUM(r.Review_Count) DESC;
++----------------------+---------------------+
+| Director_Name        | SUM(r.Review_Count) |
++----------------------+---------------------+
+| Christopher Nolan    |               58000 |
+| Zoya Akhtar          |               47000 |
+| Sriram Raghavan      |               43000 |
+| Anurag Kashyap       |               31000 |
+| Vikramaditya Motwane |               28000 |
++----------------------+---------------------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT a.Actor_Name, d.Director_Name, COUNT(m.Movie_ID)
+    -> FROM ACTOR a
+    -> JOIN MOVIE_CAST mc
+    ->     ON a.Actor_ID = mc.Actor_ID
+    -> JOIN MOVIE m
+    ->     ON mc.Movie_ID = m.Movie_ID
+    -> JOIN DIRECTOR d
+    ->     ON m.Director_ID = d.Director_ID
+    -> GROUP BY a.Actor_Name, d.Director_Name
+    -> HAVING COUNT(m.Movie_ID) > 1;
++---------------------+-----------------+-------------------+
+| Actor_Name          | Director_Name   | COUNT(m.Movie_ID) |
++---------------------+-----------------+-------------------+
+| Nawazuddin Siddiqui | Anurag Kashyap  |                 2 |
+| Jaideep Ahlawat     | Anurag Kashyap  |                 3 |
+| Manoj Bajpayee      | Anurag Kashyap  |                 2 |
+| Huma Qureshi        | Anurag Kashyap  |                 2 |
+| Radhika Apte        | Sriram Raghavan |                 2 |
+| Manoj Bajpayee      | Sriram Raghavan |                 2 |
+| Alia Bhatt          | Zoya Akhtar     |                 2 |
++---------------------+-----------------+-------------------+
+7 rows in set (0.00 sec)
+
+mysql> SELECT m.Movie_Name, m.Release_Year, m.Genre, d.Director_Name, p.Producer_Name,
+    ->        a.Actor_Name, mc.Role_Name, r.Rating, pl.Platform_Name
+    -> FROM MOVIE m
+    -> JOIN DIRECTOR d
+    ->     ON m.Director_ID = d.Director_ID
+    -> JOIN MOVIE_PRODUCER mpr
+    ->     ON m.Movie_ID = mpr.Movie_ID
+    -> JOIN PRODUCER p
+    ->     ON mpr.Producer_ID = p.Producer_ID
+    -> JOIN MOVIE_CAST mc
+    ->     ON m.Movie_ID = mc.Movie_ID
+    -> JOIN ACTOR a
+    ->     ON mc.Actor_ID = a.Actor_ID
+    -> JOIN RATING r
+    ->     ON m.Movie_ID = r.Movie_ID
+    -> JOIN MOVIE_PLATFORM mpl
+    ->     ON m.Movie_ID = mpl.Movie_ID
+    -> JOIN PLATFORM pl
+    ->     ON mpl.Platform_ID = pl.Platform_ID
+    -> ORDER BY m.Genre, m.Release_Year DESC, m.Movie_Name;
++--------------------------+--------------+----------+----------------------+------------------+---------------------+--------------+--------+--------------------+
+| Movie_Name               | Release_Year | Genre    | Director_Name        | Producer_Name    | Actor_Name          | Role_Name    | Rating | Platform_Name      |
++--------------------------+--------------+----------+----------------------+------------------+---------------------+--------------+--------+--------------------+
+| Kennedy                  |         2023 | Crime    | Anurag Kashyap       | Sunil Bohra      | Huma Qureshi        | Reporter     |    5.8 | Netflix            |
+| Kennedy                  |         2023 | Crime    | Anurag Kashyap       | Sunil Bohra      | Jaideep Ahlawat     | Inspector    |    5.8 | Netflix            |
+| Badlapur                 |         2015 | Crime    | Sriram Raghavan      | Ronnie Screwvala | Huma Qureshi        | Jhimli       |    7.4 | Netflix            |
+| Badlapur                 |         2015 | Crime    | Sriram Raghavan      | Ronnie Screwvala | Manoj Bajpayee      | Raghu        |    7.4 | Netflix            |
+| Gangs of Wasseypur       |         2012 | Crime    | Anurag Kashyap       | Sunil Bohra      | Jaideep Ahlawat     | Shahid Khan  |    8.2 | Amazon Prime Video |
+| Gangs of Wasseypur       |         2012 | Crime    | Anurag Kashyap       | Ronnie Screwvala | Huma Qureshi        | Mohsina      |    8.2 | Zee5               |
+| Gangs of Wasseypur       |         2012 | Crime    | Anurag Kashyap       | Ronnie Screwvala | Manoj Bajpayee      | Sardar Khan  |    8.2 | Zee5               |
+| Gangs of Wasseypur       |         2012 | Crime    | Anurag Kashyap       | Ronnie Screwvala | Jaideep Ahlawat     | Shahid Khan  |    8.2 | Zee5               |
+| Gangs of Wasseypur       |         2012 | Crime    | Anurag Kashyap       | Ronnie Screwvala | Nawazuddin Siddiqui | Faizal Khan  |    8.2 | Zee5               |
+| Gangs of Wasseypur       |         2012 | Crime    | Anurag Kashyap       | Sunil Bohra      | Huma Qureshi        | Mohsina      |    8.2 | Zee5               |
+| Gangs of Wasseypur       |         2012 | Crime    | Anurag Kashyap       | Sunil Bohra      | Manoj Bajpayee      | Sardar Khan  |    8.2 | Zee5               |
+| Gangs of Wasseypur       |         2012 | Crime    | Anurag Kashyap       | Sunil Bohra      | Jaideep Ahlawat     | Shahid Khan  |    8.2 | Zee5               |
+| Gangs of Wasseypur       |         2012 | Crime    | Anurag Kashyap       | Sunil Bohra      | Nawazuddin Siddiqui | Faizal Khan  |    8.2 | Zee5               |
+| Gangs of Wasseypur       |         2012 | Crime    | Anurag Kashyap       | Sunil Bohra      | Nawazuddin Siddiqui | Faizal Khan  |    8.2 | Amazon Prime Video |
+| Gangs of Wasseypur       |         2012 | Crime    | Anurag Kashyap       | Ronnie Screwvala | Huma Qureshi        | Mohsina      |    8.2 | Amazon Prime Video |
+| Gangs of Wasseypur       |         2012 | Crime    | Anurag Kashyap       | Ronnie Screwvala | Manoj Bajpayee      | Sardar Khan  |    8.2 | Amazon Prime Video |
+| Gangs of Wasseypur       |         2012 | Crime    | Anurag Kashyap       | Ronnie Screwvala | Jaideep Ahlawat     | Shahid Khan  |    8.2 | Amazon Prime Video |
+| Gangs of Wasseypur       |         2012 | Crime    | Anurag Kashyap       | Ronnie Screwvala | Nawazuddin Siddiqui | Faizal Khan  |    8.2 | Amazon Prime Video |
+| Gangs of Wasseypur       |         2012 | Crime    | Anurag Kashyap       | Sunil Bohra      | Huma Qureshi        | Mohsina      |    8.2 | Amazon Prime Video |
+| Gangs of Wasseypur       |         2012 | Crime    | Anurag Kashyap       | Sunil Bohra      | Manoj Bajpayee      | Sardar Khan  |    8.2 | Amazon Prime Video |
+| Black Friday             |         2007 | Crime    | Anurag Kashyap       | Sunil Bohra      | Nawazuddin Siddiqui | Asgar        |    8.5 | Amazon Prime Video |
+| Black Friday             |         2007 | Crime    | Anurag Kashyap       | Sunil Bohra      | Jaideep Ahlawat     | Badshah Khan |    8.5 | Amazon Prime Video |
+| Johnny Gaddaar           |         2007 | Crime    | Sriram Raghavan      | Ramesh Taurani   | Manoj Bajpayee      | Vikram       |    7.8 | Netflix            |
+| Gully Boy                |         2019 | Drama    | Zoya Akhtar          | Farhan Akhtar    | Alia Bhatt          | Safeena      |    7.9 | Netflix            |
+| Gully Boy                |         2019 | Drama    | Zoya Akhtar          | Farhan Akhtar    | Ranveer Singh       | Murad        |    7.9 | Netflix            |
+| Zindagi Na Milegi Dobara |         2011 | Drama    | Zoya Akhtar          | Farhan Akhtar    | Alia Bhatt          | Natasha      |    8.1 | Zee5               |
+| Zindagi Na Milegi Dobara |         2011 | Drama    | Zoya Akhtar          | Farhan Akhtar    | Alia Bhatt          | Natasha      |    8.1 | Amazon Prime Video |
+| Zindagi Na Milegi Dobara |         2011 | Drama    | Zoya Akhtar          | Farhan Akhtar    | Katrina Kaif        | Laila        |    8.1 | Amazon Prime Video |
+| Zindagi Na Milegi Dobara |         2011 | Drama    | Zoya Akhtar          | Farhan Akhtar    | Katrina Kaif        | Laila        |    8.1 | Zee5               |
+| Udaan                    |         2010 | Drama    | Vikramaditya Motwane | Ronnie Screwvala | Jaideep Ahlawat     | Bhairav      |    8.0 | Amazon Prime Video |
+| Dev D                    |         2009 | Drama    | Anurag Kashyap       | Ronnie Screwvala | Manoj Bajpayee      | Chunni       |    7.2 | Amazon Prime Video |
+| Dev D                    |         2009 | Drama    | Anurag Kashyap       | Ronnie Screwvala | Radhika Apte        | Paro         |    7.2 | Amazon Prime Video |
+| Lootera                  |         2013 | Romance  | Vikramaditya Motwane | Ronnie Screwvala | Ranveer Singh       | Varun        |    6.9 | Disney+ Hotstar    |
+| Lootera                  |         2013 | Romance  | Vikramaditya Motwane | Ramesh Taurani   | Ranveer Singh       | Varun        |    6.9 | Disney+ Hotstar    |
+| Interstellar             |         2014 | Sci-Fi   | Christopher Nolan    | Ronnie Screwvala | Matthew McConaughey | Cooper       |    8.7 | Disney+ Hotstar    |
+| Interstellar             |         2014 | Sci-Fi   | Christopher Nolan    | Emma Thomas      | Matthew McConaughey | Cooper       |    8.7 | Disney+ Hotstar    |
+| Inception                |         2010 | Sci-Fi   | Christopher Nolan    | Emma Thomas      | Leonardo DiCaprio   | Cobb         |    8.8 | Amazon Prime Video |
+| Merry Christmas          |         2024 | Thriller | Sriram Raghavan      | Farhan Akhtar    | Katrina Kaif        | Maria        |    7.0 | Netflix            |
+| Merry Christmas          |         2024 | Thriller | Sriram Raghavan      | Farhan Akhtar    | Vijay Sethupathi    | Albert       |    7.0 | Netflix            |
+| Merry Christmas          |         2024 | Thriller | Sriram Raghavan      | Farhan Akhtar    | Radhika Apte        | Mansi        |    7.0 | Netflix            |
+| Merry Christmas          |         2024 | Thriller | Sriram Raghavan      | Ramesh Taurani   | Katrina Kaif        | Maria        |    7.0 | Netflix            |
+| Merry Christmas          |         2024 | Thriller | Sriram Raghavan      | Ramesh Taurani   | Vijay Sethupathi    | Albert       |    7.0 | Netflix            |
+| Merry Christmas          |         2024 | Thriller | Sriram Raghavan      | Ramesh Taurani   | Radhika Apte        | Mansi        |    7.0 | Netflix            |
+| Andhadhun                |         2018 | Thriller | Sriram Raghavan      | Ramesh Taurani   | Nawazuddin Siddiqui | Shopkeeper   |    8.3 | Amazon Prime Video |
+| Andhadhun                |         2018 | Thriller | Sriram Raghavan      | Ramesh Taurani   | Ayushmann Khurrana  | Akash        |    8.3 | Amazon Prime Video |
+| Andhadhun                |         2018 | Thriller | Sriram Raghavan      | Ramesh Taurani   | Radhika Apte        | Simi         |    8.3 | Amazon Prime Video |
+| Andhadhun                |         2018 | Thriller | Sriram Raghavan      | Ramesh Taurani   | Jaideep Ahlawat     | Doctor       |    8.3 | Amazon Prime Video |
+| Trapped                  |         2016 | Thriller | Vikramaditya Motwane | Ramesh Taurani   | Nawazuddin Siddiqui | Kidnapper    |    7.5 | Disney+ Hotstar    |
++--------------------------+--------------+----------+----------------------+------------------+---------------------+--------------+--------+--------------------+
+48 rows in set (0.00 sec)
+
