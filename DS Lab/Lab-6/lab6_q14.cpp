@@ -1,4 +1,4 @@
-#include <iostream>
+#include <iostream>  //
 using namespace std;
 
 struct Node
@@ -27,7 +27,7 @@ Node* insert_End(Node* START, int data)
     return START;
 }
 
-Node* Traverse_List (Node *START)
+void Traverse_List (Node *START)
 {
     Node *Temp = START;
     while (Temp!=NULL)
@@ -39,49 +39,35 @@ Node* Traverse_List (Node *START)
 
 void mergeLists (Node *S1, Node *S2)
 {
-    Node* temp = S1, *left = S1, *right = S2;
-    int val;
-    while (left!=NULL && right!=NULL)
-    {
-        if ((left->INFO) > (right->INFO))
-        {
-            int t = left->INFO;
-            left->INFO = right->INFO;
-            right->INFO = t;
-            //right=right->NEXT;
-            left = left->NEXT;
-            temp = temp->NEXT;
-        }
-        //if (left->NEXT==NULL)
-            //break;
-    }
-    left->NEXT = S2;
-    if ((right->INFO)>(right->NEXT->INFO))
-    {
-        int t = right->INFO;
-        right->INFO = right->NEXT->INFO;
-        right->NEXT->INFO = t;
-        right = right->NEXT;
-    }
-    /*while (right!=NULL)
-    {
-        temp->INFO = right->INFO;
-    }
-    temp->NEXT = NULL;*/
-    /*
-    while (t1!=NULL)
-    {
-        START = insert_End(START, t1->INFO);
-        t1 = t1->NEXT;
-    }
-    while (t2!=NULL)
-    {
-        START = insert_End(START, t2->INFO);
-        t2 = t2->NEXT;
-    }
-    */
+    Node* temp;
+    temp->NEXT = NULL;
+    Node *tail = temp;
 
-    Traverse_List (S1);
+    Node *t1 = S1;
+    Node *t2 = S2;
+
+    while (t1 != NULL && t2 != NULL)
+    {
+        if (t1->INFO <= t2->INFO)
+        {
+            tail->NEXT = t1;
+            t1 = t1->NEXT;
+        }
+        else
+        {
+            tail->NEXT = t2;
+            t2 = t2->NEXT;
+        }
+        tail = tail->NEXT;
+    }
+
+    // Attach whichever list still has nodes left
+    if (t1 != NULL)
+        tail->NEXT = t1;
+    else
+        tail->NEXT = t2;
+
+    Traverse_List (temp->NEXT);
 }
 
 int main()
@@ -108,6 +94,7 @@ int main()
         START2 = insert_End(START2, val2);
     }
 
+    cout << "merged list: ";
     mergeLists(START1, START2);
 
     return 0;
