@@ -1,0 +1,292 @@
+mysql> CREATE DATABASE 251B010;
+ERROR 1007 (HY000): Can't create database '251b010'; database exists
+mysql> USE 251B010;
+Database changed
+mysql> CREATE TABLE Products (
+    -> ProductId INT PRIMARY KEY,
+    -> ProductName VARCHAR(50),
+    -> Category VARCHAR(30),
+    -> Price DECIMAL(8,2),
+    -> Stock INT
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> INSERT INTO Products VALUES
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> INSERT INTO Products (ProductID, ProductName, Category, Price, Stock) VALUES
+    -> (101, 'Laptop', 'Electronics', 65000, 12),
+    -> (102, 'Office Chair', 'Furniture', 4500, 8),
+    -> (103, 'Notebook', 'Stationery', 120, 100),
+    -> (104, 'USB Drive', 'Electronics', 650, 15),
+    -> (105, 'Study Table', 'Furniture', 6200, 5),
+    -> (106, 'Desk Lamp', NULL, 950, 20),
+    -> (107, 'Printer', 'Electronics', 12500, 6),
+    -> (108, 'White Board', 'Stationery', 1800, 10);
+Query OK, 8 rows affected (0.01 sec)
+Records: 8  Duplicates: 0  Warnings: 0
+
+mysql> SELECT ProductName, Price, Price+500 AS UpdatedPrice FROM Products;
++--------------+----------+--------------+
+| ProductName  | Price    | UpdatedPrice |
++--------------+----------+--------------+
+| Laptop       | 65000.00 |     65500.00 |
+| Office Chair |  4500.00 |      5000.00 |
+| Notebook     |   120.00 |       620.00 |
+| USB Drive    |   650.00 |      1150.00 |
+| Study Table  |  6200.00 |      6700.00 |
+| Desk Lamp    |   950.00 |      1450.00 |
+| Printer      | 12500.00 |     13000.00 |
+| White Board  |  1800.00 |      2300.00 |
++--------------+----------+--------------+
+8 rows in set (0.01 sec)
+
+mysql> SELECT ProductName, Price, Price*Stock AS InventoryValue FROM Products;
++--------------+----------+----------------+
+| ProductName  | Price    | InventoryValue |
++--------------+----------+----------------+
+| Laptop       | 65000.00 |      780000.00 |
+| Office Chair |  4500.00 |       36000.00 |
+| Notebook     |   120.00 |       12000.00 |
+| USB Drive    |   650.00 |        9750.00 |
+| Study Table  |  6200.00 |       31000.00 |
+| Desk Lamp    |   950.00 |       19000.00 |
+| Printer      | 12500.00 |       75000.00 |
+| White Board  |  1800.00 |       18000.00 |
++--------------+----------+----------------+
+8 rows in set (0.00 sec)
+
+mysql> SELECT ProductName, Price/2 AS HalfPrice FROM Products;
++--------------+--------------+
+| ProductName  | HalfPrice    |
++--------------+--------------+
+| Laptop       | 32500.000000 |
+| Office Chair |  2250.000000 |
+| Notebook     |    60.000000 |
+| USB Drive    |   325.000000 |
+| Study Table  |  3100.000000 |
+| Desk Lamp    |   475.000000 |
+| Printer      |  6250.000000 |
+| White Board  |   900.000000 |
++--------------+--------------+
+8 rows in set (0.01 sec)
+
+mysql> SELECT * FROM Products WHERE Price>5000;
++-----------+-------------+-------------+----------+-------+
+| ProductId | ProductName | Category    | Price    | Stock |
++-----------+-------------+-------------+----------+-------+
+|       101 | Laptop      | Electronics | 65000.00 |    12 |
+|       105 | Study Table | Furniture   |  6200.00 |     5 |
+|       107 | Printer     | Electronics | 12500.00 |     6 |
++-----------+-------------+-------------+----------+-------+
+3 rows in set (0.01 sec)
+
+mysql> SELECT * FROM Products WHERE Stock <= 10;
++-----------+--------------+-------------+----------+-------+
+| ProductId | ProductName  | Category    | Price    | Stock |
++-----------+--------------+-------------+----------+-------+
+|       102 | Office Chair | Furniture   |  4500.00 |     8 |
+|       105 | Study Table  | Furniture   |  6200.00 |     5 |
+|       107 | Printer      | Electronics | 12500.00 |     6 |
+|       108 | White Board  | Stationery  |  1800.00 |    10 |
++-----------+--------------+-------------+----------+-------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT * FROM Products WHERE CATEGORY = 'Electronics';
++-----------+-------------+-------------+----------+-------+
+| ProductId | ProductName | Category    | Price    | Stock |
++-----------+-------------+-------------+----------+-------+
+|       101 | Laptop      | Electronics | 65000.00 |    12 |
+|       104 | USB Drive   | Electronics |   650.00 |    15 |
+|       107 | Printer     | Electronics | 12500.00 |     6 |
++-----------+-------------+-------------+----------+-------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT * FROM Products WHERE Category = 'Electronics' AND Price > 10000;
++-----------+-------------+-------------+----------+-------+
+| ProductId | ProductName | Category    | Price    | Stock |
++-----------+-------------+-------------+----------+-------+
+|       101 | Laptop      | Electronics | 65000.00 |    12 |
+|       107 | Printer     | Electronics | 12500.00 |     6 |
++-----------+-------------+-------------+----------+-------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT * FROM Products WHERE Category = 'Furniture' OR Stock>50;
++-----------+--------------+------------+---------+-------+
+| ProductId | ProductName  | Category   | Price   | Stock |
++-----------+--------------+------------+---------+-------+
+|       102 | Office Chair | Furniture  | 4500.00 |     8 |
+|       103 | Notebook     | Stationery |  120.00 |   100 |
+|       105 | Study Table  | Furniture  | 6200.00 |     5 |
++-----------+--------------+------------+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT * FROM Products WHERE Category <> 'Electronics';
++-----------+--------------+------------+---------+-------+
+| ProductId | ProductName  | Category   | Price   | Stock |
++-----------+--------------+------------+---------+-------+
+|       102 | Office Chair | Furniture  | 4500.00 |     8 |
+|       103 | Notebook     | Stationery |  120.00 |   100 |
+|       105 | Study Table  | Furniture  | 6200.00 |     5 |
+|       108 | White Board  | Stationery | 1800.00 |    10 |
++-----------+--------------+------------+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT * FROM Products WHERE Price BETWEEN 500 AND 5000;
++-----------+--------------+-------------+---------+-------+
+| ProductId | ProductName  | Category    | Price   | Stock |
++-----------+--------------+-------------+---------+-------+
+|       102 | Office Chair | Furniture   | 4500.00 |     8 |
+|       104 | USB Drive    | Electronics |  650.00 |    15 |
+|       106 | Desk Lamp    | NULL        |  950.00 |    20 |
+|       108 | White Board  | Stationery  | 1800.00 |    10 |
++-----------+--------------+-------------+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT * FROM Products WHERE Category = 'Electronics' or Category = 'Furniture';
++-----------+--------------+-------------+----------+-------+
+| ProductId | ProductName  | Category    | Price    | Stock |
++-----------+--------------+-------------+----------+-------+
+|       101 | Laptop       | Electronics | 65000.00 |    12 |
+|       102 | Office Chair | Furniture   |  4500.00 |     8 |
+|       104 | USB Drive    | Electronics |   650.00 |    15 |
+|       105 | Study Table  | Furniture   |  6200.00 |     5 |
+|       107 | Printer      | Electronics | 12500.00 |     6 |
++-----------+--------------+-------------+----------+-------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT * FROM Products WHERE ProductName LIKE 'P%';
++-----------+-------------+-------------+----------+-------+
+| ProductId | ProductName | Category    | Price    | Stock |
++-----------+-------------+-------------+----------+-------+
+|       107 | Printer     | Electronics | 12500.00 |     6 |
++-----------+-------------+-------------+----------+-------+
+1 row in set (0.01 sec)
+
+mysql> SELECT * FROM Products WHERE Category = NULL;
+Empty set (0.00 sec)
+
+mysql> SELECT * FROM Products WHERE Category IS NULL;
++-----------+-------------+----------+--------+-------+
+| ProductId | ProductName | Category | Price  | Stock |
++-----------+-------------+----------+--------+-------+
+|       106 | Desk Lamp   | NULL     | 950.00 |    20 |
++-----------+-------------+----------+--------+-------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM Products WHERE Price BETWEEN 500 AND 5000 AND Stock>5;
++-----------+--------------+-------------+---------+-------+
+| ProductId | ProductName  | Category    | Price   | Stock |
++-----------+--------------+-------------+---------+-------+
+|       102 | Office Chair | Furniture   | 4500.00 |     8 |
+|       104 | USB Drive    | Electronics |  650.00 |    15 |
+|       106 | Desk Lamp    | NULL        |  950.00 |    20 |
+|       108 | White Board  | Stationery  | 1800.00 |    10 |
++-----------+--------------+-------------+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT * FROM Products WHERE Category = 'Electronics' OR Category = 'Stationery' ORDER BY Price DESC;
++-----------+-------------+-------------+----------+-------+
+| ProductId | ProductName | Category    | Price    | Stock |
++-----------+-------------+-------------+----------+-------+
+|       101 | Laptop      | Electronics | 65000.00 |    12 |
+|       107 | Printer     | Electronics | 12500.00 |     6 |
+|       108 | White Board | Stationery  |  1800.00 |    10 |
+|       104 | USB Drive   | Electronics |   650.00 |    15 |
+|       103 | Notebook    | Stationery  |   120.00 |   100 |
++-----------+-------------+-------------+----------+-------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT *, Price*18/100 AS GST FROM Products;
++-----------+--------------+-------------+----------+-------+--------------+
+| ProductId | ProductName  | Category    | Price    | Stock | GST          |
++-----------+--------------+-------------+----------+-------+--------------+
+|       101 | Laptop       | Electronics | 65000.00 |    12 | 11700.000000 |
+|       102 | Office Chair | Furniture   |  4500.00 |     8 |   810.000000 |
+|       103 | Notebook     | Stationery  |   120.00 |   100 |    21.600000 |
+|       104 | USB Drive    | Electronics |   650.00 |    15 |   117.000000 |
+|       105 | Study Table  | Furniture   |  6200.00 |     5 |  1116.000000 |
+|       106 | Desk Lamp    | NULL        |   950.00 |    20 |   171.000000 |
+|       107 | Printer      | Electronics | 12500.00 |     6 |  2250.000000 |
+|       108 | White Board  | Stationery  |  1800.00 |    10 |   324.000000 |
++-----------+--------------+-------------+----------+-------+--------------+
+8 rows in set (0.00 sec)
+
+mysql> SELECT * FROM Products WHERE Price NOT BETWEEN 1000 AND 10000;
++-----------+-------------+-------------+----------+-------+
+| ProductId | ProductName | Category    | Price    | Stock |
++-----------+-------------+-------------+----------+-------+
+|       101 | Laptop      | Electronics | 65000.00 |    12 |
+|       103 | Notebook    | Stationery  |   120.00 |   100 |
+|       104 | USB Drive   | Electronics |   650.00 |    15 |
+|       106 | Desk Lamp   | NULL        |   950.00 |    20 |
+|       107 | Printer     | Electronics | 12500.00 |     6 |
++-----------+-------------+-------------+----------+-------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT * FROM Products WHERE ProductName LIKE '%p';
++-----------+-------------+-------------+----------+-------+
+| ProductId | ProductName | Category    | Price    | Stock |
++-----------+-------------+-------------+----------+-------+
+|       101 | Laptop      | Electronics | 65000.00 |    12 |
+|       106 | Desk Lamp   | NULL        |   950.00 |    20 |
++-----------+-------------+-------------+----------+-------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT * FROM Products WHERE ProductName LIKE '%Table%';
++-----------+-------------+-----------+---------+-------+
+| ProductId | ProductName | Category  | Price   | Stock |
++-----------+-------------+-----------+---------+-------+
+|       105 | Study Table | Furniture | 6200.00 |     5 |
++-----------+-------------+-----------+---------+-------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM Products WHERE Stock BETWEEN 5 AND 15 AND Category <> 'Furniture';
++-----------+-------------+-------------+----------+-------+
+| ProductId | ProductName | Category    | Price    | Stock |
++-----------+-------------+-------------+----------+-------+
+|       101 | Laptop      | Electronics | 65000.00 |    12 |
+|       104 | USB Drive   | Electronics |   650.00 |    15 |
+|       107 | Printer     | Electronics | 12500.00 |     6 |
+|       108 | White Board | Stationery  |  1800.00 |    10 |
++-----------+-------------+-------------+----------+-------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT * FROM Products WHERE Category = 'Electronics' or 'Furniture';
++-----------+-------------+-------------+----------+-------+
+| ProductId | ProductName | Category    | Price    | Stock |
++-----------+-------------+-------------+----------+-------+
+|       101 | Laptop      | Electronics | 65000.00 |    12 |
+|       104 | USB Drive   | Electronics |   650.00 |    15 |
+|       107 | Printer     | Electronics | 12500.00 |     6 |
++-----------+-------------+-------------+----------+-------+
+3 rows in set, 1 warning (0.01 sec)
+
+mysql> DESCRIBE Products;
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| ProductId   | int          | NO   | PRI | NULL    |       |
+| ProductName | varchar(50)  | YES  |     | NULL    |       |
+| Category    | varchar(30)  | YES  |     | NULL    |       |
+| Price       | decimal(8,2) | YES  |     | NULL    |       |
+| Stock       | int          | YES  |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT * FROM Products;
++-----------+--------------+-------------+----------+-------+
+| ProductId | ProductName  | Category    | Price    | Stock |
++-----------+--------------+-------------+----------+-------+
+|       101 | Laptop       | Electronics | 65000.00 |    12 |
+|       102 | Office Chair | Furniture   |  4500.00 |     8 |
+|       103 | Notebook     | Stationery  |   120.00 |   100 |
+|       104 | USB Drive    | Electronics |   650.00 |    15 |
+|       105 | Study Table  | Furniture   |  6200.00 |     5 |
+|       106 | Desk Lamp    | NULL        |   950.00 |    20 |
+|       107 | Printer      | Electronics | 12500.00 |     6 |
+|       108 | White Board  | Stationery  |  1800.00 |    10 |
++-----------+--------------+-------------+----------+-------+
+8 rows in set (0.00 sec)
+
+mysql>

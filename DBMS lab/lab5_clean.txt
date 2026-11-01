@@ -1,0 +1,381 @@
+mysql> CREATE TABLE Doctor (
+    -> Doctor_ID INT PRIMARY  KEY,
+    -> Doctor_Name VARCHAR(10) NOT NULL,
+    -> Specialization VARCHAR(20) NOT NULL,
+    -> Salary INT CHECK (Salary>0),
+    -> Department_ID INT,
+    -> FOREIGN KEY (Department_ID) REFERENCES Department(Department_ID)
+    -> );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> CREATE TABLE Patient (
+    -> Patient_ID INT PRIMARY KEY,
+    -> Patient_Name VARCHAR(10) NOT NULL,
+    -> Gender CHAR(1) CHECK(Gender IN ('M', 'F')),
+    -> Age INT CHECK (AGE BETWEEN 0 AND 120),
+    -> City VARCHAR(10) DEFAULT 'Guna'
+    -> );
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> CREATE TABLE Appointment (
+    -> Appointment_ID INT PRIMARY KEY,
+    -> Patient_ID INT,
+    -> Doctor_ID INT,
+    -> Appointment_Date DATE NOT NULL,
+    -> Fee INT CHECK (Fee>=0),
+    -> Status VARCHAR(10) CHECK (Status IN ('Completed', 'Scheduled', 'Cancelled')),
+    -> FOREIGN KEY (Patient_ID) REFERENCES Patient(Patient_ID), 
+    -> FOREIGN KEY (Doctor_ID) REFERENCES Doctor(Doctor_ID)
+    -> );
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> INSERT INTO Department (Department_ID, Department_Name, Location) VALUES
+    -> (1, 'Cardiology', 'Block A'),
+    -> (2, 'Neurology', 'Block B'),
+    -> (3, 'Orthopedics', 'Block C'),
+    -> (4, 'Pediatrics', 'Block A'),
+    -> (5, 'General Medicine', 'Block D');
+Query OK, 5 rows affected (0.01 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO Doctor (Doctor_ID, Doctor_Name, Specialization, Salary, Department_ID) VALUES
+    -> (101, 'Dr. Mehta', 'Cardiologist', 120000, 1),
+    -> (102, 'Dr. Sharma', 'Neurologist', 110000, 2),
+    -> (103, 'Dr. Rao', 'Orthopedic', 95000, 3),
+    -> (104, 'Dr. Gupta', 'Pediatrician', 90000, 4), 
+    -> (105, 'Dr. Khan', 'Physician', 85000, 5),
+    -> (106, 'Dr. Singh', 'Cardiologist', 105000, 1), 
+    -> (107, 'Dr. Verma', 'Neurologist', 98000, 2),
+    -> (108, 'Dr. Patel', 'Orthopedic', 88000, 3),
+    -> (109, 'Dr. Joshi', 'Physician', 82000, 5),
+    -> (110, 'Dr. Iyer', 'Pediatrician', 87000, 4);
+Query OK, 10 rows affected (0.02 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO Patient (Patient_ID, Patient_Name, Gender, Age, City) VALUES
+    -> (201, 'Amit', 'M', 45, 'Bhopal'),
+    -> (202, 'Neha', 'F', 32, 'Indore'),
+    -> (203, 'Rahul', 'M', 61, 'Delhi'),
+    -> (204, 'Priya', 'F', 28, 'Bhopal'), 
+    -> (205, 'Karan', 'M', 54, 'Mumbai'),
+    -> (206, 'Anjali', 'F', 39, 'Indore'), 
+    -> (207, 'Vijay', 'M', 67, 'Gwalior'),
+    -> (208, 'Riya', 'F', 24, 'Bhopal'),
+    -> (209, 'Suresh', 'M', 51, 'Bhopal'), 
+    -> (210, 'Pooja', 'F', 43, 'Indore'),
+    -> (211, 'Arjun', 'M', 36, 'Delhi'),
+    -> (212, 'Kavya', 'F', 29, 'Gwalior'); 
+Query OK, 12 rows affected (0.02 sec)
+Records: 12  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO Appointment (Appointment_ID, Patient_ID, Doctor_ID, Appointment_Date, Fee, Status) VALUES
+    -> (301, 201, 101, '2026-08-01', 1500, 'Completed'),
+    -> (302, 202, 102, '2026-08-01', 1200, 'Completed'),
+    -> (303, 203, 103, '2026-08-02', 1000, 'Completed'),
+    -> (304, 204, 101, '2026-08-02', 1500, 'Scheduled'),
+    -> (305, 205, 105, '2026-08-03', 800, 'Completed'),
+    -> (306, 206, 106, '2026-08-03', 1400, 'Completed'),
+    -> (307, 207, 107, '2026-08-04', 1200, 'Cancelled'),
+    -> (308, 208, 104, '2026-08-04', 900, 'Completed'),
+    -> (309, 209, 109, '2026-08-05', 750, 'Completed'),
+    -> (310, 210, 110, '2026-08-05', 950, 'Scheduled'),
+    -> (311, 211, 102, '2026-08-06', 1200, 'Completed'),
+    -> (312, 212, 104, '2026-08-06', 900, 'Completed'),
+    -> (313, 201, 106, '2026-08-07', 1400, 'Completed'),
+    -> (314, 202, 107, '2026-08-07', 1200, 'Scheduled'),
+    -> (315, 203, 103, '2026-08-08', 1000, 'Completed'),
+    -> (316, 204, 101, '2026-08-08', 1500, 'Completed'),
+    -> (317, 205, 105, '2026-08-09', 800, 'Cancelled'),
+    -> (318, 206, 106, '2026-08-09', 1400, 'Completed'),
+    -> (319, 209, 109, '2026-08-10', 750, 'Completed'),
+    -> (320, 210, 110, '2026-08-10', 950, 'Completed');
+Query OK, 20 rows affected (0.01 sec)
+Records: 20  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM Department;
++---------------+------------------+----------+
+| Department_ID | Department_Name  | Location |
++---------------+------------------+----------+
+|             1 | Cardiology       | Block A  |
+|             2 | Neurology        | Block B  |
+|             3 | Orthopedics      | Block C  |
+|             4 | Pediatrics       | Block A  |
+|             5 | General Medicine | Block D  |
++---------------+------------------+----------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT * FROM Doctor;
++-----------+-------------+----------------+--------+---------------+
+| Doctor_ID | Doctor_Name | Specialization | Salary | Department_ID |
++-----------+-------------+----------------+--------+---------------+
+|       101 | Dr. Mehta   | Cardiologist   | 120000 |             1 |
+|       102 | Dr. Sharma  | Neurologist    | 110000 |             2 |
+|       103 | Dr. Rao     | Orthopedic     |  95000 |             3 |
+|       104 | Dr. Gupta   | Pediatrician   |  90000 |             4 |
+|       105 | Dr. Khan    | Physician      |  85000 |             5 |
+|       106 | Dr. Singh   | Cardiologist   | 105000 |             1 |
+|       107 | Dr. Verma   | Neurologist    |  98000 |             2 |
+|       108 | Dr. Patel   | Orthopedic     |  88000 |             3 |
+|       109 | Dr. Joshi   | Physician      |  82000 |             5 |
+|       110 | Dr. Iyer    | Pediatrician   |  87000 |             4 |
++-----------+-------------+----------------+--------+---------------+
+10 rows in set (0.00 sec)
+
+mysql> SELECT * FROM Patient;
++------------+--------------+--------+------+---------+
+| Patient_ID | Patient_Name | Gender | Age  | City    |
++------------+--------------+--------+------+---------+
+|        201 | Amit         | M      |   45 | Bhopal  |
+|        202 | Neha         | F      |   32 | Indore  |
+|        203 | Rahul        | M      |   61 | Delhi   |
+|        204 | Priya        | F      |   28 | Bhopal  |
+|        205 | Karan        | M      |   54 | Mumbai  |
+|        206 | Anjali       | F      |   39 | Indore  |
+|        207 | Vijay        | M      |   67 | Gwalior |
+|        208 | Riya         | F      |   24 | Bhopal  |
+|        209 | Suresh       | M      |   51 | Bhopal  |
+|        210 | Pooja        | F      |   43 | Indore  |
+|        211 | Arjun        | M      |   36 | Delhi   |
+|        212 | Kavya        | F      |   29 | Gwalior |
++------------+--------------+--------+------+---------+
+12 rows in set (0.00 sec)
+
+mysql> SELECT * FROM Appointment;
++----------------+------------+-----------+------------------+------+-----------+
+| Appointment_ID | Patient_ID | Doctor_ID | Appointment_Date | Fee  | Status    |
++----------------+------------+-----------+------------------+------+-----------+
+|            301 |        201 |       101 | 2026-08-01       | 1500 | Completed |
+|            302 |        202 |       102 | 2026-08-01       | 1200 | Completed |
+|            303 |        203 |       103 | 2026-08-02       | 1000 | Completed |
+|            304 |        204 |       101 | 2026-08-02       | 1500 | Scheduled |
+|            305 |        205 |       105 | 2026-08-03       |  800 | Completed |
+|            306 |        206 |       106 | 2026-08-03       | 1400 | Completed |
+|            307 |        207 |       107 | 2026-08-04       | 1200 | Cancelled |
+|            308 |        208 |       104 | 2026-08-04       |  900 | Completed |
+|            309 |        209 |       109 | 2026-08-05       |  750 | Completed |
+|            310 |        210 |       110 | 2026-08-05       |  950 | Scheduled |
+|            311 |        211 |       102 | 2026-08-06       | 1200 | Completed |
+|            312 |        212 |       104 | 2026-08-06       |  900 | Completed |
+|            313 |        201 |       106 | 2026-08-07       | 1400 | Completed |
+|            314 |        202 |       107 | 2026-08-07       | 1200 | Scheduled |
+|            315 |        203 |       103 | 2026-08-08       | 1000 | Completed |
+|            316 |        204 |       101 | 2026-08-08       | 1500 | Completed |
+|            317 |        205 |       105 | 2026-08-09       |  800 | Cancelled |
+|            318 |        206 |       106 | 2026-08-09       | 1400 | Completed |
+|            319 |        209 |       109 | 2026-08-10       |  750 | Completed |
+|            320 |        210 |       110 | 2026-08-10       |  950 | Completed |
++----------------+------------+-----------+------------------+------+-----------+
+20 rows in set (0.00 sec)
+
+mysql> SELECT COUNT(*) AS No_Of_Patients FROM Patient;
++----------------+
+| No_Of_Patients |
++----------------+
+|             12 |
++----------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT ROUND(AVG(Salary), 2) AS Average_Salary FROM Doctor;
++----------------+
+| Average_Salary |
++----------------+
+|       96000.00 |
++----------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT AVG(Salary) AS Average_Salary FROM Doctor;
++----------------+
+| Average_Salary |
++----------------+
+|     96000.0000 |
++----------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT Department_ID, AVG(Salary) AS Average_Salary, MIN(Salary) AS Min_Salary, MAX(Salary) AS Max_Salary
+    -> FROM Doctor
+    -> GROUP BY Department_ID;
++---------------+----------------+------------+------------+
+| Department_ID | Average_Salary | Min_Salary | Max_Salary |
++---------------+----------------+------------+------------+
+|             1 |    112500.0000 |     105000 |     120000 |
+|             2 |    104000.0000 |      98000 |     110000 |
+|             3 |     91500.0000 |      88000 |      95000 |
+|             4 |     88500.0000 |      87000 |      90000 |
+|             5 |     83500.0000 |      82000 |      85000 |
++---------------+----------------+------------+------------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT Gender, COUNT(*) AS No_Of_Patients
+    -> FROM Patient
+    -> GROUP BY Gender
+    -> ORDER BY COUNT(*) DESC;
++--------+----------------+
+| Gender | No_Of_Patients |
++--------+----------------+
+| M      |              6 |
+| F      |              6 |
++--------+----------------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT City, COUNT(*) AS No_Of_Patients
+    -> FROM Patient
+    -> GROUP BY City
+    -> ORDER BY COUNT(*) DESC;
++---------+----------------+
+| City    | No_Of_Patients |
++---------+----------------+
+| Bhopal  |              4 |
+| Indore  |              3 |
+| Delhi   |              2 |
+| Gwalior |              2 |
+| Mumbai  |              1 |
++---------+----------------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT Doctor_ID, COUNT(*) AS No_Of_Appointments
+    -> FROM Appointment
+    -> GROUP BY Doctor_ID
+    -> ;
++-----------+--------------------+
+| Doctor_ID | No_Of_Appointments |
++-----------+--------------------+
+|       101 |                  3 |
+|       102 |                  2 |
+|       103 |                  2 |
+|       104 |                  2 |
+|       105 |                  2 |
+|       106 |                  3 |
+|       107 |                  2 |
+|       109 |                  2 |
+|       110 |                  2 |
++-----------+--------------------+
+9 rows in set (0.00 sec)
+
+mysql> SELECT Doctor_ID, SUM(Fee) AS Total_Completed_Fee
+    -> FROM Appointment
+    -> WHERE Status = 'Completed'
+    -> GROUP BY Doctor_ID;
++-----------+---------------------+
+| Doctor_ID | Total_Completed_Fee |
++-----------+---------------------+
+|       101 |                3000 |
+|       102 |                2400 |
+|       103 |                2000 |
+|       104 |                1800 |
+|       105 |                 800 |
+|       106 |                4200 |
+|       109 |                1500 |
+|       110 |                 950 |
++-----------+---------------------+
+8 rows in set (0.00 sec)
+
+mysql> SELECT AVG(Fee) AS Average_Fee, MIN(Fee) AS Min_Fee, MAX(Fee) AS Max_Fee
+    -> FROM Appointment;
++-------------+---------+---------+
+| Average_Fee | Min_Fee | Max_Fee |
++-------------+---------+---------+
+|   1115.0000 |     750 |    1500 |
++-------------+---------+---------+
+1 row in set (0.00 sec)
+
+mysql> SELECT Department_ID, AVG(Salary) AS Average_Salary
+    -> FROM Doctor
+    -> GROUP BY Department_ID
+    -> HAVING AVG(Salary)>90000;
++---------------+----------------+
+| Department_ID | Average_Salary |
++---------------+----------------+
+|             1 |    112500.0000 |
+|             2 |    104000.0000 |
+|             3 |     91500.0000 |
++---------------+----------------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT Doctor_ID, COUNT(*) AS No_Of_Appointments
+    -> FROM Appointment
+    -> GROUP BY Doctor_ID
+    -> HAVING COUNT(*)>2;
++-----------+--------------------+
+| Doctor_ID | No_Of_Appointments |
++-----------+--------------------+
+|       101 |                  3 |
+|       106 |                  3 |
++-----------+--------------------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT Doctor_ID, SUM(Fee) AS Total_Completed_Fee
+    -> FROM Appointment
+    -> WHERE Status = 'Completed'
+    -> GROUP BY Doctor_ID
+    -> HAVING SUM(Fee)>2500
+    -> ORDER BY SUM(Fee) DESC;
++-----------+---------------------+
+| Doctor_ID | Total_Completed_Fee |
++-----------+---------------------+
+|       106 |                4200 |
+|       101 |                3000 |
++-----------+---------------------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT Department_ID, COUNT(*) AS No_Of_Doctors, AVG(Salary) AS Average_Salary
+    -> FROM Doctor
+    -> GROUP BY Department_ID
+    -> HAVING COUNT(*)>=2
+    -> ORDER BY AVG(Salary) DESC;
++---------------+---------------+----------------+
+| Department_ID | No_Of_Doctors | Average_Salary |
++---------------+---------------+----------------+
+|             1 |             2 |    112500.0000 |
+|             2 |             2 |    104000.0000 |
+|             3 |             2 |     91500.0000 |
+|             4 |             2 |     88500.0000 |
+|             5 |             2 |     83500.0000 |
++---------------+---------------+----------------+
+5 rows in set (0.01 sec)
+
+mysql> SELECT Status, COUNT(*) AS No_Of_Appointments
+    -> FROM Appointment
+    -> GROUP BY Status
+    -> ORDER BY COUNT(*) DESC;
++-----------+--------------------+
+| Status    | No_Of_Appointments |
++-----------+--------------------+
+| Completed |                 15 |
+| Scheduled |                  3 |
+| Cancelled |                  2 |
++-----------+--------------------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT Department_ID, SUM(Salary) AS Total_Salary
+    -> FROM Doctor
+    -> GROUP BY Department_ID
+    -> ORDER BY SUM(Salary) DESC
+    -> LIMIT 1;
++---------------+--------------+
+| Department_ID | Total_Salary |
++---------------+--------------+
+|             1 |       225000 |
++---------------+--------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT Department_ID, AVG(Salary) AS Average_Salary
+    -> FROM Doctor
+    -> GROUP BY Department_ID
+    -> HAVING AVG(Salary) > (SELECT AVG(Salary) FROM Doctor)
+    -> ORDER BY AVG(Salary) DESC;
++---------------+----------------+
+| Department_ID | Average_Salary |
++---------------+----------------+
+|             1 |    112500.0000 |
+|             2 |    104000.0000 |
++---------------+----------------+
+2 rows in set (0.01 sec)
+
+mysql> SELECT AVG(Salary) FROM Doctor;
++-------------+
+| AVG(Salary) |
++-------------+
+|  96000.0000 |
++-------------+
+1 row in set (0.00 sec)
+

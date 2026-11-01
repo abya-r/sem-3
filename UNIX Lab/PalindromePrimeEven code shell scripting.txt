@@ -1,0 +1,39 @@
+Microsoft Windows [Version 10.0.26200.7462]
+(c) Microsoft Corporation. All rights reserved.
+
+N:\>ssh 251b010@192.168.4.3
+#################################################################
+# WARNING: Unauthorized access to this system is forbidden and  #
+# will be prosecuted to the maximum extent as per Cyber Law. All        #
+# Activities are Monitored & use of others Login is prohibited          #
+# Attempt to harm the server / Lab / IT Resources is punishable         #
+# For any issue, contact Mr Shishir Thakur/Dr Mahesh Kumar              #
+#################################################################
+251b010@192.168.4.3's password:
+
+Last login: Mon Aug 10 14:19:48 2026 from 192.168.6.72
+[JUET@UnixServer ~]$ nano menu5.cpp
+[JUET@UnixServer ~]$ ls
+f1.cpp     hello    Lab-1  labex      palindrome    palindrome.c.save    palindromeprime.c  palpri     prime    prime.sh    xh.txt
+file1.txt  hello.c  lab-2  menu5.cpp  palindrome.c  palindrome.c.save.1  palin.sh           palpri.sh  prime.c  sample.txt
+[JUET@UnixServer ~]$ nano palindromeprime.c
+[JUET@UnixServer ~]$ ls
+f1.cpp     hello    Lab-1  labex      palindrome    palindrome.c.save    palindromeprime.c  palin.sh  palpri.sh  prime.c   sample.txt
+file1.txt  hello.c  lab-2  menu5.cpp  palindrome.c  palindrome.c.save.1  palinprimeeven.c   palpri    prime      prime.sh  xh.txt
+[JUET@UnixServer ~]$ nano palinprimeeven.sh
+[JUET@UnixServer ~]$ chmod +x palinprimeeven.sh
+[JUET@UnixServer ~]$ ./palinprimeeven.sh
+Enter number: 454
+Menu:
+1. Check prime number
+2. Check for palindrome
+3.Check for even number
+enter choice: 3
+Even number[JUET@UnixServer ~]$ ./palinprimeeven.sh
+Enter number: 505
+Menu:
+1. Check prime number
+2. Check for palindrome
+3.Check for even number
+enter choice: 2
+Palindrome

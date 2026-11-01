@@ -1,0 +1,7 @@
+l = float(input("enter length of rectangle: "))
+b = float(input("enter breadth of rectangle: "))
+r = float(input("enter radius of circle: "))
+print("area of rectangle = ", l*b, "sq. units")
+print("perimeter of rectangle = ", 2*(l+b), "units")
+print("area of circle = ", 3.14*r*r, "sq. units")
+print("perimeter of circle = ", 2*3.14*r, "units")

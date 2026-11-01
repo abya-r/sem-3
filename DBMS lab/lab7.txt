@@ -1,0 +1,913 @@
+Enter password: *******
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 66
+Server version: 8.4.0 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> USE PATRIOTIC_MOVIES_DB^C
+mysql> USE PATRIOTIC_MOVIES_DB;
+Database changed
+mysql> SELECT * FROM MOVIES;
++----------+----------------------------+-----------------------------+------------------------+-------------------------+----------------------+--------------+--------+------------+--------+
+| Movie_ID | Movie_Name                 | Actor                       | Actress                | Director                | Genre                | Release_Year | Budget | Box_Office | Rating |
++----------+----------------------------+-----------------------------+------------------------+-------------------------+----------------------+--------------+--------+------------+--------+
+|      101 | Tiranga                    | Rudra Pratap                | Seema Sharma           | Patriotic Director      | Patriotic Action     |         1993 |   8.00 |      12.00 |    7.5 |
+|      102 | Border                     | Major Kuldeep Singh         | Kamla Singh            | J. P. Dutta             | War                  |         1997 |  10.00 |      65.00 |    7.9 |
+|      103 | LOC Kargil                 | Colonel Yash Thakur         | Meera Thakur           | J. P. Dutta             | War                  |         2003 |  40.00 |      42.00 |    6.7 |
+|      104 | Lakshya                    | Karan Shergill              | Romi                   | Farhan Akhtar           | War                  |         2004 |  32.00 |      42.00 |    7.8 |
+|      105 | Swades                     | Mohan Bhargava              | Gita                   | Ashutosh Gowariker      | Drama                |         2004 |  30.00 |      34.00 |    8.2 |
+|      106 | Rang De Basanti            | Daljit Singh                | Sonia                  | Rakeysh Omprakash Mehra | Patriotic Drama      |         2006 |  28.00 |      96.00 |    8.1 |
+|      107 | Chak De! India             | Kabir Khan                  | Vidya Sharma           | Shimit Amin             | Sports               |         2007 |  20.00 |     109.00 |    8.1 |
+|      108 | The Legend of Bhagat Singh | Bhagat Singh                | Durga Bhabhi           | Rajkumar Santoshi       | Biographical         |         2002 |  12.00 |      25.00 |    8.1 |
+|      109 | Raazi                      | Sehmat Khan                 | Iqbal Syed             | Meghna Gulzar           | Patriotic Thriller   |         2018 |  35.00 |     123.00 |    7.7 |
+|      110 | Parmanu                    | Ashwat Raina                | Ambalika Raina         | Abhishek Sharma         | Patriotic Thriller   |         2018 |  45.00 |      93.00 |    7.6 |
+|      111 | Uri: The Surgical Strike   | Major Vihaan Singh Shergill | Pallavi Sharma         | Aditya Dhar             | War                  |         2019 |  25.00 |     245.00 |    8.2 |
+|      112 | Kesari                     | Havildar Ishar Singh        | Jeevani Kaur           | Anurag Singh            | War                  |         2019 |  80.00 |     207.00 |    7.4 |
+|      113 | Shershaah                  | Captain Vikram Batra        | Dimple Cheema          | Vishnuvardhan           | Biographical         |         2021 |  50.00 |     135.00 |    8.3 |
+|      114 | Satyameva Jayate           | Virendra Rathod             | Shikha Rathod          | Milap Zaveri            | Action               |         2018 |  45.00 |     108.00 |    5.7 |
+|      115 | Major                      | Major Sandeep Unnikrishnan  | Isha                   | Sashi Kiran Tikka       | Biographical         |         2022 |  30.00 |      65.00 |    8.1 |
+|      116 | Sam Bahadur                | Sam Manekshaw               | Silloo Manekshaw       | Meghna Gulzar           | Biographical         |         2023 |  55.00 |     128.00 |    8.1 |
+|      117 | Fighter                    | Shamsher Pathania           | Minal Rathore          | Siddharth Anand         | Aerial Action        |         2024 | 250.00 |     358.00 |    6.1 |
+|      118 | Article 370                | Zooni Haksar                | Rajeshwari Swaminathan | Aditya Suhas Jambhale   | Patriotic Thriller   |         2024 |  20.00 |     110.00 |    7.8 |
+|      119 | Mission Mangal             | Rakesh Dhawan               | Tara Shinde            | Jagan Shakti            | Science & Patriotism |         2019 |  32.00 |     290.00 |    6.9 |
+|      120 | Parmanu 2                  | Ashwat Raina                | Ambalika Raina         | Abhishek Sharma         | Patriotic Thriller   |         2023 |  60.00 |     155.00 |    7.1 |
+|      121 | Kesari 2                   | Arjun Singh                 | Harleen Kaur           | Patriotic Director      | Historical           |         2025 |  90.00 |     210.00 |    7.5 |
+|      122 | Vande Mataram              | Arjun Deshmukh              | Kavya Deshmukh         | National Pride Films    | Patriotic Drama      |         2022 |  35.00 |     180.00 |    7.9 |
+|      123 | Bharat Maa                 | Veer Pratap                 | Gauri                  | National Pride Films    | Patriotic Drama      |         2023 |  45.00 |     225.00 |    7.6 |
+|      124 | Jai Hind                   | Surya Pratap                | Ananya                 | Patriotic Director      | Patriotic Action     |         2024 |  70.00 |     310.00 |    7.3 |
+|      125 | Veer Kesari                | Veer Singh                  | Radha                  | Patriotic Director      | War                  |         2021 |  65.00 |     190.00 |    7.2 |
+|      126 | Desh Ke Sipahi             | Vikram Singh                | Nandini                | National Pride Films    | War                  |         2020 |  40.00 |     175.00 |    7.4 |
+|      127 | Bharat Veer                | Arjun Deshmukh              | Kavya Deshmukh         | National Pride Films    | Patriotic Drama      |         2024 |  55.00 |     260.00 |    7.8 |
+|      128 | Sankalp                    | Surya Pratap                | Ananya                 | Patriotic Director      | Patriotic Action     |         2022 |  40.00 |     205.00 |    7.5 |
+|      129 | Veer Yodha                 | Veer Singh                  | Radha                  | Patriotic Director      | War                  |         2023 |  75.00 |     235.00 |    7.4 |
+|      130 | Jai Bharat                 | Arjun Deshmukh              | Kavya Deshmukh         | National Pride Films    | Patriotic Drama      |         2025 |  80.00 |     330.00 |    8.0 |
++----------+----------------------------+-----------------------------+------------------------+-------------------------+----------------------+--------------+--------+------------+--------+
+30 rows in set (0.00 sec)
+       SELECT UPPER(Movie_Name)^C
+mysql> SELECT CONCAT_WS(' ', UPPER(Movie_Name), LEFT(Movie_Name, 3), RIGHT(Movie_Name, 3)) AS Movie_Title,
+    -> LENGTH(Movie_Name), CHAR_LENGTH(Movie_Name)
+    -> FROM MOVIES
+    -> WHERE Release_Year > 2018 AND Rating > 7.0
+    -> ORDER BY 2 DESC;
++----------------------------------+--------------------+-------------------------+
+| Movie_Title                      | LENGTH(Movie_Name) | CHAR_LENGTH(Movie_Name) |
++----------------------------------+--------------------+-------------------------+
+| URI: THE SURGICAL STRIKE Uri ike |                 24 |                      24 |
+| DESH KE SIPAHI Des ahi           |                 14 |                      14 |
+| VANDE MATARAM Van ram            |                 13 |                      13 |
+| SAM BAHADUR Sam dur              |                 11 |                      11 |
+| ARTICLE 370 Art 370              |                 11 |                      11 |
+| VEER KESARI Vee ari              |                 11 |                      11 |
+| BHARAT VEER Bha eer              |                 11 |                      11 |
+| BHARAT MAA Bha Maa               |                 10 |                      10 |
+| VEER YODHA Vee dha               |                 10 |                      10 |
+| JAI BHARAT Jai rat               |                 10 |                      10 |
+| SHERSHAAH She aah                |                  9 |                       9 |
+| PARMANU 2 Par u 2                |                  9 |                       9 |
+| KESARI 2 Kes i 2                 |                  8 |                       8 |
+| JAI HIND Jai ind                 |                  8 |                       8 |
+| SANKALP San alp                  |                  7 |                       7 |
+| KESARI Kes ari                   |                  6 |                       6 |
+| MAJOR Maj jor                    |                  5 |                       5 |
++----------------------------------+--------------------+-------------------------+
+17 rows in set (0.01 sec)
+
+mysql> SELECT UPPER(Movie_Name) AS Movie_Name, LEFT(Movie_Name, 3) AS First_Three, RIGHT(Movie_Name, 3) AS Last_Three,
+    -> LENGTH(Movie_Name) AS Name_Length, CHAR_LENGTH(Movie_Name) AS Char_Count
+    -> FROM MOVIES
+    -> WHERE Release_Year >= 2018 AND Rating > 7.0
+    -> ORDER BY Name_Length DESC;
++--------------------------+-------------+------------+-------------+------------+
+| Movie_Name               | First_Three | Last_Three | Name_Length | Char_Count |
++--------------------------+-------------+------------+-------------+------------+
+| URI: THE SURGICAL STRIKE | Uri         | ike        |          24 |         24 |
+| DESH KE SIPAHI           | Des         | ahi        |          14 |         14 |
+| VANDE MATARAM            | Van         | ram        |          13 |         13 |
+| SAM BAHADUR              | Sam         | dur        |          11 |         11 |
+| ARTICLE 370              | Art         | 370        |          11 |         11 |
+| VEER KESARI              | Vee         | ari        |          11 |         11 |
+| BHARAT VEER              | Bha         | eer        |          11 |         11 |
+| BHARAT MAA               | Bha         | Maa        |          10 |         10 |
+| VEER YODHA               | Vee         | dha        |          10 |         10 |
+| JAI BHARAT               | Jai         | rat        |          10 |         10 |
+| SHERSHAAH                | She         | aah        |           9 |          9 |
+| PARMANU 2                | Par         | u 2        |           9 |          9 |
+| KESARI 2                 | Kes         | i 2        |           8 |          8 |
+| JAI HIND                 | Jai         | ind        |           8 |          8 |
+| PARMANU                  | Par         | anu        |           7 |          7 |
+| SANKALP                  | San         | alp        |           7 |          7 |
+| KESARI                   | Kes         | ari        |           6 |          6 |
+| RAAZI                    | Raa         | azi        |           5 |          5 |
+| MAJOR                    | Maj         | jor        |           5 |          5 |
++--------------------------+-------------+------------+-------------+------------+
+19 rows in set (0.00 sec)
+
+mysql> SELECT Actor, Movie_Name, CONCAT_WS('-', 'ACT', UPPER(LEFT(Actor, 3)), UPPER(RIGHT(Actor, 3))) AS Actor_Code
+    -> FROM MOVIES
+    -> WHERE Actor IS NOT NULL AND Genre IN ('War', 'Patriotic Thriller', 'Patriotic Drama');
++-----------------------------+--------------------------+-------------+
+| Actor                       | Movie_Name               | Actor_Code  |
++-----------------------------+--------------------------+-------------+
+| Major Kuldeep Singh         | Border                   | ACT-MAJ-NGH |
+| Colonel Yash Thakur         | LOC Kargil               | ACT-COL-KUR |
+| Karan Shergill              | Lakshya                  | ACT-KAR-ILL |
+| Daljit Singh                | Rang De Basanti          | ACT-DAL-NGH |
+| Sehmat Khan                 | Raazi                    | ACT-SEH-HAN |
+| Ashwat Raina                | Parmanu                  | ACT-ASH-INA |
+| Major Vihaan Singh Shergill | Uri: The Surgical Strike | ACT-MAJ-ILL |
+| Havildar Ishar Singh        | Kesari                   | ACT-HAV-NGH |
+| Zooni Haksar                | Article 370              | ACT-ZOO-SAR |
+| Ashwat Raina                | Parmanu 2                | ACT-ASH-INA |
+| Arjun Deshmukh              | Vande Mataram            | ACT-ARJ-UKH |
+| Veer Pratap                 | Bharat Maa               | ACT-VEE-TAP |
+| Veer Singh                  | Veer Kesari              | ACT-VEE-NGH |
+| Vikram Singh                | Desh Ke Sipahi           | ACT-VIK-NGH |
+| Arjun Deshmukh              | Bharat Veer              | ACT-ARJ-UKH |
+| Veer Singh                  | Veer Yodha               | ACT-VEE-NGH |
+| Arjun Deshmukh              | Jai Bharat               | ACT-ARJ-UKH |
++-----------------------------+--------------------------+-------------+
+17 rows in set (0.00 sec)
+
+mysql> SELECT UPPER(CONCAT_WS('|', RPAD(Movie_Name, 15, '*'), LPAD(Actor, 20, '*'), Genre)) AS Movie
+    -> FROM MOVIES
+    -> WHERE Rating BETWEEN 7.0 AND 8.5;
++---------------------------------------------------------+
+| Movie                                                   |
++---------------------------------------------------------+
+| TIRANGA********|********RUDRA PRATAP|PATRIOTIC ACTION   |
+| BORDER*********|*MAJOR KULDEEP SINGH|WAR                |
+| LAKSHYA********|******KARAN SHERGILL|WAR                |
+| SWADES*********|******MOHAN BHARGAVA|DRAMA              |
+| RANG DE BASANTI|********DALJIT SINGH|PATRIOTIC DRAMA    |
+| CHAK DE! INDIA*|**********KABIR KHAN|SPORTS             |
+| THE LEGEND OF B|********BHAGAT SINGH|BIOGRAPHICAL       |
+| RAAZI**********|*********SEHMAT KHAN|PATRIOTIC THRILLER |
+| PARMANU********|********ASHWAT RAINA|PATRIOTIC THRILLER |
+| URI: THE SURGIC|MAJOR VIHAAN SINGH S|WAR                |
+| KESARI*********|HAVILDAR ISHAR SINGH|WAR                |
+| SHERSHAAH******|CAPTAIN VIKRAM BATRA|BIOGRAPHICAL       |
+| MAJOR**********|MAJOR SANDEEP UNNIKR|BIOGRAPHICAL       |
+| SAM BAHADUR****|*******SAM MANEKSHAW|BIOGRAPHICAL       |
+| ARTICLE 370****|********ZOONI HAKSAR|PATRIOTIC THRILLER |
+| PARMANU 2******|********ASHWAT RAINA|PATRIOTIC THRILLER |
+| KESARI 2*******|*********ARJUN SINGH|HISTORICAL         |
+| VANDE MATARAM**|******ARJUN DESHMUKH|PATRIOTIC DRAMA    |
+| BHARAT MAA*****|*********VEER PRATAP|PATRIOTIC DRAMA    |
+| JAI HIND*******|********SURYA PRATAP|PATRIOTIC ACTION   |
+| VEER KESARI****|**********VEER SINGH|WAR                |
+| DESH KE SIPAHI*|********VIKRAM SINGH|WAR                |
+| BHARAT VEER****|******ARJUN DESHMUKH|PATRIOTIC DRAMA    |
+| SANKALP********|********SURYA PRATAP|PATRIOTIC ACTION   |
+| VEER YODHA*****|**********VEER SINGH|WAR                |
+| JAI BHARAT*****|******ARJUN DESHMUKH|PATRIOTIC DRAMA    |
++---------------------------------------------------------+
+26 rows in set (0.01 sec)
+
+mysql> SELECT UPPER(CONCAT_WS('|', RPAD(Movie_Name, 15, '*'), RPAD(Actor, 20, '*'), Genre)) AS Movie
+    -> FROM MOVIES
+    -> WHERE Rating BETWEEN 7.0 AND 8.5;
++---------------------------------------------------------+
+| Movie                                                   |
++---------------------------------------------------------+
+| TIRANGA********|RUDRA PRATAP********|PATRIOTIC ACTION   |
+| BORDER*********|MAJOR KULDEEP SINGH*|WAR                |
+| LAKSHYA********|KARAN SHERGILL******|WAR                |
+| SWADES*********|MOHAN BHARGAVA******|DRAMA              |
+| RANG DE BASANTI|DALJIT SINGH********|PATRIOTIC DRAMA    |
+| CHAK DE! INDIA*|KABIR KHAN**********|SPORTS             |
+| THE LEGEND OF B|BHAGAT SINGH********|BIOGRAPHICAL       |
+| RAAZI**********|SEHMAT KHAN*********|PATRIOTIC THRILLER |
+| PARMANU********|ASHWAT RAINA********|PATRIOTIC THRILLER |
+| URI: THE SURGIC|MAJOR VIHAAN SINGH S|WAR                |
+| KESARI*********|HAVILDAR ISHAR SINGH|WAR                |
+| SHERSHAAH******|CAPTAIN VIKRAM BATRA|BIOGRAPHICAL       |
+| MAJOR**********|MAJOR SANDEEP UNNIKR|BIOGRAPHICAL       |
+| SAM BAHADUR****|SAM MANEKSHAW*******|BIOGRAPHICAL       |
+| ARTICLE 370****|ZOONI HAKSAR********|PATRIOTIC THRILLER |
+| PARMANU 2******|ASHWAT RAINA********|PATRIOTIC THRILLER |
+| KESARI 2*******|ARJUN SINGH*********|HISTORICAL         |
+| VANDE MATARAM**|ARJUN DESHMUKH******|PATRIOTIC DRAMA    |
+| BHARAT MAA*****|VEER PRATAP*********|PATRIOTIC DRAMA    |
+| JAI HIND*******|SURYA PRATAP********|PATRIOTIC ACTION   |
+| VEER KESARI****|VEER SINGH**********|WAR                |
+| DESH KE SIPAHI*|VIKRAM SINGH********|WAR                |
+| BHARAT VEER****|ARJUN DESHMUKH******|PATRIOTIC DRAMA    |
+| SANKALP********|SURYA PRATAP********|PATRIOTIC ACTION   |
+| VEER YODHA*****|VEER SINGH**********|WAR                |
+| JAI BHARAT*****|ARJUN DESHMUKH******|PATRIOTIC DRAMA    |
++---------------------------------------------------------+
+26 rows in set (0.00 sec)
+
+mysql> --4
+    -> SELECT UPPER(Movie_Name), LEFT(Movie_Name, 5), RIGHT(Movie_Name, 5), INSTR(Movie_Name, 'a'), LENGTH(Movie_Name), CHAR_LENGTH(Movie_Name)
+    -> FROM MOVIES
+    -> WHERE INSTR(Movie_Name, 'a') != 0
+    -> AND Box_Office IS NOT NULL
+    -> AND Release_Year BETWEEN 2018 AND 2025
+    -> ORDER BY 4, Movie_Name;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '--4
+SELECT UPPER(Movie_Name), LEFT(Movie_Name, 5), RIGHT(Movie_Name, 5), INSTR(M' at line 1
+mysql> SELECT Movie_Name, UPPER(Movie_Name), LEFT(Movie_Name, 5), RIGHT(Movie_Name, 5), INSTR(Movie_Name, 'a'), LENGTH(Movie_Name), CHAR_LENGTH(Movie_Name)
+    -> FROM MOVIES
+    -> WHERE INSTR(Movie_Name, 'a') != 0
+    -> AND Box_Office IS NOT NULL
+    -> AND Release_Year BETWEEN 2018 AND 2025
+    -> ORDER BY 4, Movie_Name;
++--------------------------+--------------------------+---------------------+----------------------+------------------------+--------------------+-------------------------+
+| Movie_Name               | UPPER(Movie_Name)        | LEFT(Movie_Name, 5) | RIGHT(Movie_Name, 5) | INSTR(Movie_Name, 'a') | LENGTH(Movie_Name) | CHAR_LENGTH(Movie_Name) |
++--------------------------+--------------------------+---------------------+----------------------+------------------------+--------------------+-------------------------+
+| Jai Hind                 | JAI HIND                 | Jai H               |  Hind                |                      2 |                  8 |                       8 |
+| Bharat Veer              | BHARAT VEER              | Bhara               |  Veer                |                      3 |                 11 |                      11 |
+| Mission Mangal           | MISSION MANGAL           | Missi               | angal                |                     10 |                 14 |                      14 |
+| Parmanu 2                | PARMANU 2                | Parma               | anu 2                |                      2 |                  9 |                       9 |
+| Kesari 2                 | KESARI 2                 | Kesar               | ari 2                |                      4 |                  8 |                       8 |
+| Satyameva Jayate         | SATYAMEVA JAYATE         | Satya               | ayate                |                      2 |                 16 |                      16 |
+| Article 370              | ARTICLE 370              | Artic               | e 370                |                      1 |                 11 |                      11 |
+| Kesari                   | KESARI                   | Kesar               | esari                |                      4 |                  6 |                       6 |
+| Veer Kesari              | VEER KESARI              | Veer                | esari                |                      9 |                 11 |                      11 |
+| Sam Bahadur              | SAM BAHADUR              | Sam B               | hadur                |                      2 |                 11 |                      11 |
+| Jai Bharat               | JAI BHARAT               | Jai B               | harat                |                      2 |                 10 |                      10 |
+| Desh Ke Sipahi           | DESH KE SIPAHI           | Desh                | ipahi                |                     12 |                 14 |                      14 |
+| Major                    | MAJOR                    | Major               | Major                |                      2 |                  5 |                       5 |
+| Sankalp                  | SANKALP                  | Sanka               | nkalp                |                      2 |                  7 |                       7 |
+| Raazi                    | RAAZI                    | Raazi               | Raazi                |                      2 |                  5 |                       5 |
+| Parmanu                  | PARMANU                  | Parma               | rmanu                |                      2 |                  7 |                       7 |
+| Shershaah                | SHERSHAAH                | Shers               | shaah                |                      7 |                  9 |                       9 |
+| Bharat Maa               | BHARAT MAA               | Bhara               | t Maa                |                      3 |                 10 |                      10 |
+| Vande Mataram            | VANDE MATARAM            | Vande               | taram                |                      2 |                 13 |                      13 |
+| Uri: The Surgical Strike | URI: THE SURGICAL STRIKE | Uri:                | trike                |                     16 |                 24 |                      24 |
+| Veer Yodha               | VEER YODHA               | Veer                | Yodha                |                     10 |                 10 |                      10 |
++--------------------------+--------------------------+---------------------+----------------------+------------------------+--------------------+-------------------------+
+21 rows in set (0.00 sec)
+       ^C ECT ^C
+mysql> --5
+    -> SELECT TRIM(Director_Name) AS Director_Name
+
+    ->
+    ->
+    ->
+    ->
+    ->
+    -> ^C
+mysql> SELECT Director, REPLACE(LOWER(TRIM(Director)), ' ', '_') AS Modified_Director
+    -> FROM MOVIES
+    -> WHERE Release_Year >= 2018 AND Genre NOT IN ('Action', 'Drama');
++-----------------------+-----------------------+
+| Director              | Modified_Director     |
++-----------------------+-----------------------+
+| Meghna Gulzar         | meghna_gulzar         |
+| Abhishek Sharma       | abhishek_sharma       |
+| Aditya Dhar           | aditya_dhar           |
+| Anurag Singh          | anurag_singh          |
+| Vishnuvardhan         | vishnuvardhan         |
+| Sashi Kiran Tikka     | sashi_kiran_tikka     |
+| Meghna Gulzar         | meghna_gulzar         |
+| Siddharth Anand       | siddharth_anand       |
+| Aditya Suhas Jambhale | aditya_suhas_jambhale |
+| Jagan Shakti          | jagan_shakti          |
+| Abhishek Sharma       | abhishek_sharma       |
+| Patriotic Director    | patriotic_director    |
+| National Pride Films  | national_pride_films  |
+| National Pride Films  | national_pride_films  |
+| Patriotic Director    | patriotic_director    |
+| Patriotic Director    | patriotic_director    |
+| National Pride Films  | national_pride_films  |
+| National Pride Films  | national_pride_films  |
+| Patriotic Director    | patriotic_director    |
+| Patriotic Director    | patriotic_director    |
+| National Pride Films  | national_pride_films  |
++-----------------------+-----------------------+
+21 rows in set (0.01 sec)
+
+mysql> --6
+    -> SELECT UPPER(Actor), COUNT(*), AVG(LENGTH(Actor)), MAX(LENGTH(Movie_Name)), SUM(Box_Office)
+    -> FROM MOVIES
+    -> WHERE Box_Office IS NOT NULL, Genre IN ('War', 'Patriotic Thriller', 'Patriotic Drama', 'Biographical')
+    -> HAVING COUNT(*)>=2 AND SUM(Box_Office)>300;^C
+mysql> SELECT UPPER(Actor), COUNT(*), AVG(LENGTH(Actor)), MAX(LENGTH(Movie_Name)), SUM(Box_Office)
+    -> FROM MOVIES
+    -> WHERE Release_Year >= 2018 AND Genre NOT IN ('Action', 'Drama');
+ERROR 1140 (42000): In aggregated query without GROUP BY, expression #1 of SELECT list contains nonaggregated column 'patriotic_movies_db.MOVIES.Actor'; this is incompatible with sql_mode=only_full_group_by
+mysql> SELECT UPPER(Actor), COUNT(*), AVG(LENGTH(Actor)), MAX(LENGTH(Movie_Name)), SUM(Box_Office)
+    -> FROM MOVIES
+    -> WHERE Box_Office IS NOT NULL, Genre IN ('War', 'Patriotic Thriller', 'Patriotic Drama', 'Biographical')
+    -> GROUP BY UPPER(Actor)
+    -> HAVING COUNT(*)>=2 AND SUM(Box_Office)>300;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ', Genre IN ('War', 'Patriotic Thriller', 'Patriotic Drama', 'Biographical')
+GROU' at line 3
+mysql> SELECT UPPER(Actor), COUNT(*), AVG(LENGTH(Actor)), MAX(LENGTH(Movie_Name)), SUM(Box_Office)
+    -> FROM MOVIES
+    -> WHERE Box_Office IS NOT NULL, Genre IN ('War', 'Patriotic Thriller', 'Patriotic Drama', 'Biographical')
+    -> GROUP BY UPPER(Actor)
+    -> HAVING COUNT(*)>=2 AND SUM(Box_Office)>300;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ', Genre IN ('War', 'Patriotic Thriller', 'Patriotic Drama', 'Biographical')
+GROU' at line 3
+mysql> SELECT UPPER(Actor), COUNT(*), AVG(LENGTH(Actor)), MAX(LENGTH(Movie_Name)), SUM(Box_Office)
+    -> FROM MOVIES
+    -> WHERE Box_Office IS NOT NULL AND Genre IN ('War', 'Patriotic Thriller', 'Patriotic Drama', 'Biographical')
+    -> GROUP BY UPPER(Actor)
+    -> HAVING COUNT(*)>=2 AND SUM(Box_Office)>300;
++----------------+----------+--------------------+-------------------------+-----------------+
+| UPPER(Actor)   | COUNT(*) | AVG(LENGTH(Actor)) | MAX(LENGTH(Movie_Name)) | SUM(Box_Office) |
++----------------+----------+--------------------+-------------------------+-----------------+
+| ARJUN DESHMUKH |        3 |            14.0000 |                      13 |          770.00 |
+| VEER SINGH     |        2 |            10.0000 |                      11 |          425.00 |
++----------------+----------+--------------------+-------------------------+-----------------+
+2 rows in set (0.00 sec)
+
+mysql> --7
+    -> SELECT Movie_Name, Budget, ROUND(Budget, 0), TRUNCATE(Budget, 0), ABS(Budget - ROUND(Budget, 0)
+    -> ^C
+mysql> --7
+    -> SELECT Movie_Name, Budget, ROUND(Budget, 0), TRUNCATE(Budget, 0), ABS(Budget - ROUND(Budget, 0))
+    -> FROM MOVIES
+    -> WHERE Budget > 30
+    -> ORDER BY 5 DESC;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '--7
+SELECT Movie_Name, Budget, ROUND(Budget, 0), TRUNCATE(Budget, 0), ABS(Budget' at line 1
+mysql> SELECT Movie_Name, Budget, ROUND(Budget, 0) AS Rounded_Budget, TRUNCATE(Budget, 0) AS Truncated_Budget,
+    -> ABS(Budget - ROUND(Budget, 0)) AS Abs_Difference
+    -> FROM MOVIES
+    -> WHERE Budget > 30
+    -> ORDER BY Abs_Difference DESC;
++------------------+--------+----------------+------------------+----------------+
+| Movie_Name       | Budget | Rounded_Budget | Truncated_Budget | Abs_Difference |
++------------------+--------+----------------+------------------+----------------+
+| LOC Kargil       |  40.00 |             40 |               40 |           0.00 |
+| Lakshya          |  32.00 |             32 |               32 |           0.00 |
+| Raazi            |  35.00 |             35 |               35 |           0.00 |
+| Parmanu          |  45.00 |             45 |               45 |           0.00 |
+| Kesari           |  80.00 |             80 |               80 |           0.00 |
+| Shershaah        |  50.00 |             50 |               50 |           0.00 |
+| Satyameva Jayate |  45.00 |             45 |               45 |           0.00 |
+| Sam Bahadur      |  55.00 |             55 |               55 |           0.00 |
+| Fighter          | 250.00 |            250 |              250 |           0.00 |
+| Mission Mangal   |  32.00 |             32 |               32 |           0.00 |
+| Parmanu 2        |  60.00 |             60 |               60 |           0.00 |
+| Kesari 2         |  90.00 |             90 |               90 |           0.00 |
+| Vande Mataram    |  35.00 |             35 |               35 |           0.00 |
+| Bharat Maa       |  45.00 |             45 |               45 |           0.00 |
+| Jai Hind         |  70.00 |             70 |               70 |           0.00 |
+| Veer Kesari      |  65.00 |             65 |               65 |           0.00 |
+| Desh Ke Sipahi   |  40.00 |             40 |               40 |           0.00 |
+| Bharat Veer      |  55.00 |             55 |               55 |           0.00 |
+| Sankalp          |  40.00 |             40 |               40 |           0.00 |
+| Veer Yodha       |  75.00 |             75 |               75 |           0.00 |
+| Jai Bharat       |  80.00 |             80 |               80 |           0.00 |
++------------------+--------+----------------+------------------+----------------+
+21 rows in set (0.00 sec)
+
+mysql> --8
+    -> SELECT Movie_Name, Budget, Box_Office, (Box_Office - Budget) AS Profit, ROUND((Box_Office-Budget), 2), TRUNCATE((Box_Office-Budget), 2), CEIL(Profit), FLOOR(Profit)
+    -> FROM MOVIES
+    -> WHERE Budget IS NOT NULL AND Box_Office IS NOT NULL AND Box_Office>Budget;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '--8
+SELECT Movie_Name, Budget, Box_Office, (Box_Office - Budget) AS Profit, ROUN' at line 1
+mysql> SELECT Movie_Name, Budget, Box_Office, (Box_Office - Budget) AS Profit, ROUND(Profit, 2), TRUNCATE(Profit, 2), CEIL(Profit), FLOOR(Profit)
+    -> FROM MOVIES
+    -> WHERE Budget IS NOT NULL AND Box_Office IS NOT NULL AND Box_Office>Budget;
+ERROR 1054 (42S22): Unknown column 'Profit' in 'field list'
+mysql> SELECT Movie_Name, Budget, Box_Office, (Box_Office - Budget) AS Profit, ROUND(Box_Office-Budget, 2), TRUNCATE(Box_Office-Budget, 2), CEIL(Box_Office-Budget), FLOOR(Box_Office-Budget)
+    -> FROM MOVIES
+    -> WHERE Budget IS NOT NULL AND Box_Office IS NOT NULL AND Box_Office>Budget;
++----------------------------+--------+------------+--------+-----------------------------+--------------------------------+-------------------------+--------------------------+
+| Movie_Name                 | Budget | Box_Office | Profit | ROUND(Box_Office-Budget, 2) | TRUNCATE(Box_Office-Budget, 2) | CEIL(Box_Office-Budget) | FLOOR(Box_Office-Budget) |
++----------------------------+--------+------------+--------+-----------------------------+--------------------------------+-------------------------+--------------------------+
+| Tiranga                    |   8.00 |      12.00 |   4.00 |                        4.00 |                           4.00 |                       4 |                        4 |
+| Border                     |  10.00 |      65.00 |  55.00 |                       55.00 |                          55.00 |                      55 |                       55 |
+| LOC Kargil                 |  40.00 |      42.00 |   2.00 |                        2.00 |                           2.00 |                       2 |                        2 |
+| Lakshya                    |  32.00 |      42.00 |  10.00 |                       10.00 |                          10.00 |                      10 |                       10 |
+| Swades                     |  30.00 |      34.00 |   4.00 |                        4.00 |                           4.00 |                       4 |                        4 |
+| Rang De Basanti            |  28.00 |      96.00 |  68.00 |                       68.00 |                          68.00 |                      68 |                       68 |
+| Chak De! India             |  20.00 |     109.00 |  89.00 |                       89.00 |                          89.00 |                      89 |                       89 |
+| The Legend of Bhagat Singh |  12.00 |      25.00 |  13.00 |                       13.00 |                          13.00 |                      13 |                       13 |
+| Raazi                      |  35.00 |     123.00 |  88.00 |                       88.00 |                          88.00 |                      88 |                       88 |
+| Parmanu                    |  45.00 |      93.00 |  48.00 |                       48.00 |                          48.00 |                      48 |                       48 |
+| Uri: The Surgical Strike   |  25.00 |     245.00 | 220.00 |                      220.00 |                         220.00 |                     220 |                      220 |
+| Kesari                     |  80.00 |     207.00 | 127.00 |                      127.00 |                         127.00 |                     127 |                      127 |
+| Shershaah                  |  50.00 |     135.00 |  85.00 |                       85.00 |                          85.00 |                      85 |                       85 |
+| Satyameva Jayate           |  45.00 |     108.00 |  63.00 |                       63.00 |                          63.00 |                      63 |                       63 |
+| Major                      |  30.00 |      65.00 |  35.00 |                       35.00 |                          35.00 |                      35 |                       35 |
+| Sam Bahadur                |  55.00 |     128.00 |  73.00 |                       73.00 |                          73.00 |                      73 |                       73 |
+| Fighter                    | 250.00 |     358.00 | 108.00 |                      108.00 |                         108.00 |                     108 |                      108 |
+| Article 370                |  20.00 |     110.00 |  90.00 |                       90.00 |                          90.00 |                      90 |                       90 |
+| Mission Mangal             |  32.00 |     290.00 | 258.00 |                      258.00 |                         258.00 |                     258 |                      258 |
+| Parmanu 2                  |  60.00 |     155.00 |  95.00 |                       95.00 |                          95.00 |                      95 |                       95 |
+| Kesari 2                   |  90.00 |     210.00 | 120.00 |                      120.00 |                         120.00 |                     120 |                      120 |
+| Vande Mataram              |  35.00 |     180.00 | 145.00 |                      145.00 |                         145.00 |                     145 |                      145 |
+| Bharat Maa                 |  45.00 |     225.00 | 180.00 |                      180.00 |                         180.00 |                     180 |                      180 |
+| Jai Hind                   |  70.00 |     310.00 | 240.00 |                      240.00 |                         240.00 |                     240 |                      240 |
+| Veer Kesari                |  65.00 |     190.00 | 125.00 |                      125.00 |                         125.00 |                     125 |                      125 |
+| Desh Ke Sipahi             |  40.00 |     175.00 | 135.00 |                      135.00 |                         135.00 |                     135 |                      135 |
+| Bharat Veer                |  55.00 |     260.00 | 205.00 |                      205.00 |                         205.00 |                     205 |                      205 |
+| Sankalp                    |  40.00 |     205.00 | 165.00 |                      165.00 |                         165.00 |                     165 |                      165 |
+| Veer Yodha                 |  75.00 |     235.00 | 160.00 |                      160.00 |                         160.00 |                     160 |                      160 |
+| Jai Bharat                 |  80.00 |     330.00 | 250.00 |                      250.00 |                         250.00 |                     250 |                      250 |
++----------------------------+--------+------------+--------+-----------------------------+--------------------------------+-------------------------+--------------------------+
+30 rows in set (0.00 sec)
+
+mysql> --9
+    -> SELECT Movie_Name, Box_Office
+    -> FROM MOVIES
+    -> WHERE MOD(Box_Office, 10) != 0 AND Box-Office IS NOT NULL;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '--9
+SELECT Movie_Name, Box_Office
+FROM MOVIES
+WHERE MOD(Box_Office, 10) != 0 AND' at line 1
+mysql> --9
+    -> SELECT Movie_Name, Box_Office
+    -> FROM MOVIES
+    -> WHERE MOD(Box_Office, 10) != 0 AND Box_Office IS NOT NULL;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '--9
+SELECT Movie_Name, Box_Office
+FROM MOVIES
+WHERE MOD(Box_Office, 10) != 0 AND' at line 1
+mysql> SELECT Movie_Name, Box_Office
+    -> FROM MOVIES
+    -> WHERE MOD(Box_Office, 10)<>0 AND Box_Office IS NOT NULL;
++----------------------------+------------+
+| Movie_Name                 | Box_Office |
++----------------------------+------------+
+| Tiranga                    |      12.00 |
+| Border                     |      65.00 |
+| LOC Kargil                 |      42.00 |
+| Lakshya                    |      42.00 |
+| Swades                     |      34.00 |
+| Rang De Basanti            |      96.00 |
+| Chak De! India             |     109.00 |
+| The Legend of Bhagat Singh |      25.00 |
+| Raazi                      |     123.00 |
+| Parmanu                    |      93.00 |
+| Uri: The Surgical Strike   |     245.00 |
+| Kesari                     |     207.00 |
+| Shershaah                  |     135.00 |
+| Satyameva Jayate           |     108.00 |
+| Major                      |      65.00 |
+| Sam Bahadur                |     128.00 |
+| Fighter                    |     358.00 |
+| Parmanu 2                  |     155.00 |
+| Bharat Maa                 |     225.00 |
+| Desh Ke Sipahi             |     175.00 |
+| Sankalp                    |     205.00 |
+| Veer Yodha                 |     235.00 |
++----------------------------+------------+
+22 rows in set (0.00 sec)
+
+mysql> SELECT Movie_Name, Box_Office
+    -> FROM MOVIES
+    -> WHERE MOD(Box_Office, 10)!=0 AND Box_Office IS NOT NULL;
++----------------------------+------------+
+| Movie_Name                 | Box_Office |
++----------------------------+------------+
+| Tiranga                    |      12.00 |
+| Border                     |      65.00 |
+| LOC Kargil                 |      42.00 |
+| Lakshya                    |      42.00 |
+| Swades                     |      34.00 |
+| Rang De Basanti            |      96.00 |
+| Chak De! India             |     109.00 |
+| The Legend of Bhagat Singh |      25.00 |
+| Raazi                      |     123.00 |
+| Parmanu                    |      93.00 |
+| Uri: The Surgical Strike   |     245.00 |
+| Kesari                     |     207.00 |
+| Shershaah                  |     135.00 |
+| Satyameva Jayate           |     108.00 |
+| Major                      |      65.00 |
+| Sam Bahadur                |     128.00 |
+| Fighter                    |     358.00 |
+| Parmanu 2                  |     155.00 |
+| Bharat Maa                 |     225.00 |
+| Desh Ke Sipahi             |     175.00 |
+| Sankalp                    |     205.00 |
+| Veer Yodha                 |     235.00 |
++----------------------------+------------+
+22 rows in set (0.00 sec)
+
+mysql> USE PATRIOTIC_MOVIES_DB;
+Database changed
+mysql> ---10
+    -> ^C
+mysql> SELECT * FROM MOVIES;
++----------+----------------------------+-----------------------------+------------------------+-------------------------+----------------------+--------------+--------+------------+--------+
+| Movie_ID | Movie_Name                 | Actor                       | Actress                | Director                | Genre                | Release_Year | Budget | Box_Office | Rating |
++----------+----------------------------+-----------------------------+------------------------+-------------------------+----------------------+--------------+--------+------------+--------+
+|      101 | Tiranga                    | Rudra Pratap                | Seema Sharma           | Patriotic Director      | Patriotic Action     |         1993 |   8.00 |      12.00 |    7.5 |
+|      102 | Border                     | Major Kuldeep Singh         | Kamla Singh            | J. P. Dutta             | War                  |         1997 |  10.00 |      65.00 |    7.9 |
+|      103 | LOC Kargil                 | Colonel Yash Thakur         | Meera Thakur           | J. P. Dutta             | War                  |         2003 |  40.00 |      42.00 |    6.7 |
+|      104 | Lakshya                    | Karan Shergill              | Romi                   | Farhan Akhtar           | War                  |         2004 |  32.00 |      42.00 |    7.8 |
+|      105 | Swades                     | Mohan Bhargava              | Gita                   | Ashutosh Gowariker      | Drama                |         2004 |  30.00 |      34.00 |    8.2 |
+|      106 | Rang De Basanti            | Daljit Singh                | Sonia                  | Rakeysh Omprakash Mehra | Patriotic Drama      |         2006 |  28.00 |      96.00 |    8.1 |
+|      107 | Chak De! India             | Kabir Khan                  | Vidya Sharma           | Shimit Amin             | Sports               |         2007 |  20.00 |     109.00 |    8.1 |
+|      108 | The Legend of Bhagat Singh | Bhagat Singh                | Durga Bhabhi           | Rajkumar Santoshi       | Biographical         |         2002 |  12.00 |      25.00 |    8.1 |
+|      109 | Raazi                      | Sehmat Khan                 | Iqbal Syed             | Meghna Gulzar           | Patriotic Thriller   |         2018 |  35.00 |     123.00 |    7.7 |
+|      110 | Parmanu                    | Ashwat Raina                | Ambalika Raina         | Abhishek Sharma         | Patriotic Thriller   |         2018 |  45.00 |      93.00 |    7.6 |
+|      111 | Uri: The Surgical Strike   | Major Vihaan Singh Shergill | Pallavi Sharma         | Aditya Dhar             | War                  |         2019 |  25.00 |     245.00 |    8.2 |
+|      112 | Kesari                     | Havildar Ishar Singh        | Jeevani Kaur           | Anurag Singh            | War                  |         2019 |  80.00 |     207.00 |    7.4 |
+|      113 | Shershaah                  | Captain Vikram Batra        | Dimple Cheema          | Vishnuvardhan           | Biographical         |         2021 |  50.00 |     135.00 |    8.3 |
+|      114 | Satyameva Jayate           | Virendra Rathod             | Shikha Rathod          | Milap Zaveri            | Action               |         2018 |  45.00 |     108.00 |    5.7 |
+|      115 | Major                      | Major Sandeep Unnikrishnan  | Isha                   | Sashi Kiran Tikka       | Biographical         |         2022 |  30.00 |      65.00 |    8.1 |
+|      116 | Sam Bahadur                | Sam Manekshaw               | Silloo Manekshaw       | Meghna Gulzar           | Biographical         |         2023 |  55.00 |     128.00 |    8.1 |
+|      117 | Fighter                    | Shamsher Pathania           | Minal Rathore          | Siddharth Anand         | Aerial Action        |         2024 | 250.00 |     358.00 |    6.1 |
+|      118 | Article 370                | Zooni Haksar                | Rajeshwari Swaminathan | Aditya Suhas Jambhale   | Patriotic Thriller   |         2024 |  20.00 |     110.00 |    7.8 |
+|      119 | Mission Mangal             | Rakesh Dhawan               | Tara Shinde            | Jagan Shakti            | Science & Patriotism |         2019 |  32.00 |     290.00 |    6.9 |
+|      120 | Parmanu 2                  | Ashwat Raina                | Ambalika Raina         | Abhishek Sharma         | Patriotic Thriller   |         2023 |  60.00 |     155.00 |    7.1 |
+|      121 | Kesari 2                   | Arjun Singh                 | Harleen Kaur           | Patriotic Director      | Historical           |         2025 |  90.00 |     210.00 |    7.5 |
+|      122 | Vande Mataram              | Arjun Deshmukh              | Kavya Deshmukh         | National Pride Films    | Patriotic Drama      |         2022 |  35.00 |     180.00 |    7.9 |
+|      123 | Bharat Maa                 | Veer Pratap                 | Gauri                  | National Pride Films    | Patriotic Drama      |         2023 |  45.00 |     225.00 |    7.6 |
+|      124 | Jai Hind                   | Surya Pratap                | Ananya                 | Patriotic Director      | Patriotic Action     |         2024 |  70.00 |     310.00 |    7.3 |
+|      125 | Veer Kesari                | Veer Singh                  | Radha                  | Patriotic Director      | War                  |         2021 |  65.00 |     190.00 |    7.2 |
+|      126 | Desh Ke Sipahi             | Vikram Singh                | Nandini                | National Pride Films    | War                  |         2020 |  40.00 |     175.00 |    7.4 |
+|      127 | Bharat Veer                | Arjun Deshmukh              | Kavya Deshmukh         | National Pride Films    | Patriotic Drama      |         2024 |  55.00 |     260.00 |    7.8 |
+|      128 | Sankalp                    | Surya Pratap                | Ananya                 | Patriotic Director      | Patriotic Action     |         2022 |  40.00 |     205.00 |    7.5 |
+|      129 | Veer Yodha                 | Veer Singh                  | Radha                  | Patriotic Director      | War                  |         2023 |  75.00 |     235.00 |    7.4 |
+|      130 | Jai Bharat                 | Arjun Deshmukh              | Kavya Deshmukh         | National Pride Films    | Patriotic Drama      |         2025 |  80.00 |     330.00 |    8.0 |
++----------+----------------------------+-----------------------------+------------------------+-------------------------+----------------------+--------------+--------+------------+--------+
+30 rows in set (0.00 sec)
+       ---10^C
+mysql>
+mysql> ---10
+    -> SELECT Genre, COUNT(*) AS No_Of_Movies, SUM(Budget) AS Total_Budget, SUM(Box_Office) AS Total_Box_Office, ROUND(AVG(Budget), 2) AS Avg_Budget, ROUND(AVG(Box_Office), 2) AS Avg_Box_Office, SUM(Box_Office-Budget) AS Profit
+    -> FROM MOVIES
+    -> WHERE Release_Year > 2018
+    -> GROUP BY Genre
+    -> HAVING COUNT(*)>3 AND SUM(Box_Office)>300 AND SUM(Box_Office-Budget)>100
+    -> ORDER BY 7 DESC;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '---10
+SELECT Genre, COUNT(*) AS No_Of_Movies, SUM(Budget) AS Total_Budget, SUM(B' at line 1
+mysql> SELECT Genre, COUNT(*) AS No_Of_Movies, SUM(Budget) AS Total_Budget, SUM(Box_Office) AS Total_Box_Office, ROUND(AVG(Budget), 2) AS Avg_Budget, ROUND(AVG(Box_Office), 2) AS Avg_Box_Office, SUM(Box_Office-Budget) AS Profit
+    -> FROM MOVIES
+    -> WHERE Release_Year > 2018
+    -> GROUP BY Genre
+    -> HAVING COUNT(*)>3 AND SUM(Box_Office)>300 AND SUM(Box_Office-Budget)>100
+    -> ORDER BY 7 DESC;
++-----------------+--------------+--------------+------------------+------------+----------------+--------+
+| Genre           | No_Of_Movies | Total_Budget | Total_Box_Office | Avg_Budget | Avg_Box_Office | Profit |
++-----------------+--------------+--------------+------------------+------------+----------------+--------+
+| Patriotic Drama |            4 |       215.00 |           995.00 |      53.75 |         248.75 | 780.00 |
+| War             |            5 |       285.00 |          1052.00 |      57.00 |         210.40 | 767.00 |
++-----------------+--------------+--------------+------------------+------------+----------------+--------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT Genre, COUNT(*) AS No_Of_Movies, SUM(Budget) AS Total_Budget, SUM(Box_Office) AS Total_Box_Office, ROUND(AVG(Budget), 2) AS Avg_Budget, ROUND(AVG(Box_Office), 2) AS Avg_Box_Office, SUM(Box_Office-Budget) AS Profit
+    -> FROM MOVIES
+    -> WHERE Release_Year >= 2018
+    -> GROUP BY Genre
+    -> HAVING COUNT(*)>=3 AND SUM(Box_Office)>300 AND SUM(Box_Office-Budget)>100
+    -> ORDER BY 7 DESC;
++--------------------+--------------+--------------+------------------+------------+----------------+--------+
+| Genre              | No_Of_Movies | Total_Budget | Total_Box_Office | Avg_Budget | Avg_Box_Office | Profit |
++--------------------+--------------+--------------+------------------+------------+----------------+--------+
+| Patriotic Drama    |            4 |       215.00 |           995.00 |      53.75 |         248.75 | 780.00 |
+| War                |            5 |       285.00 |          1052.00 |      57.00 |         210.40 | 767.00 |
+| Patriotic Thriller |            4 |       160.00 |           481.00 |      40.00 |         120.25 | 321.00 |
+| Biographical       |            3 |       135.00 |           328.00 |      45.00 |         109.33 | 193.00 |
++--------------------+--------------+--------------+------------------+------------+----------------+--------+
+4 rows in set (0.00 sec)
+
+mysql> --11
+    -> ^C
+mysql> SELECT Movie_Name, YEAR(Release_Year) AS Year, MONTH(Release_Year) AS Month, DAY(Release_Year) AS Day
+    -> FROM MOVIES
+    -> WHERE YEAR(Release_Year) BETWEEN 2021 AND 2025
+    -> ORDER BY 2, 3;
+Empty set, 30 warnings (0.00 sec)
+
+mysql> SELECT Movie_Name, Release_Year, MONTH(CONCAT(Release_Year, '-01-01')) AS Release_Month,
+    -> DAY(CONCAT(Release_Year, '-01-01')) AS Release_Day
+    -> FROM MOVIES
+    -> WHERE Release_Year IN (2021, 2022, 2023, 2024, 2025)
+    -> ORDER BY Release_Year, Release_Month;
++---------------+--------------+---------------+-------------+
+| Movie_Name    | Release_Year | Release_Month | Release_Day |
++---------------+--------------+---------------+-------------+
+| Shershaah     |         2021 |             1 |           1 |
+| Veer Kesari   |         2021 |             1 |           1 |
+| Major         |         2022 |             1 |           1 |
+| Vande Mataram |         2022 |             1 |           1 |
+| Sankalp       |         2022 |             1 |           1 |
+| Sam Bahadur   |         2023 |             1 |           1 |
+| Parmanu 2     |         2023 |             1 |           1 |
+| Bharat Maa    |         2023 |             1 |           1 |
+| Veer Yodha    |         2023 |             1 |           1 |
+| Fighter       |         2024 |             1 |           1 |
+| Article 370   |         2024 |             1 |           1 |
+| Jai Hind      |         2024 |             1 |           1 |
+| Bharat Veer   |         2024 |             1 |           1 |
+| Kesari 2      |         2025 |             1 |           1 |
+| Jai Bharat    |         2025 |             1 |           1 |
++---------------+--------------+---------------+-------------+
+15 rows in set (0.00 sec)
+
+mysql> SELECT Movie_Name, CURRENT_DATE(), CURRENT_TIME(), NOW(), Releasr_Year
+    -> ^C
+mysql> SELECT Movie_Name, CURRENT_DATE(), CURRENT_TIME(), NOW(), Release_Year
+    -> FROM MOVIES
+    -> WHERE Release_Year>=2020;
++----------------+----------------+----------------+---------------------+--------------+
+| Movie_Name     | CURRENT_DATE() | CURRENT_TIME() | NOW()               | Release_Year |
++----------------+----------------+----------------+---------------------+--------------+
+| Shershaah      | 2026-09-19     | 11:22:13       | 2026-09-19 11:22:13 |         2021 |
+| Major          | 2026-09-19     | 11:22:13       | 2026-09-19 11:22:13 |         2022 |
+| Sam Bahadur    | 2026-09-19     | 11:22:13       | 2026-09-19 11:22:13 |         2023 |
+| Fighter        | 2026-09-19     | 11:22:13       | 2026-09-19 11:22:13 |         2024 |
+| Article 370    | 2026-09-19     | 11:22:13       | 2026-09-19 11:22:13 |         2024 |
+| Parmanu 2      | 2026-09-19     | 11:22:13       | 2026-09-19 11:22:13 |         2023 |
+| Kesari 2       | 2026-09-19     | 11:22:13       | 2026-09-19 11:22:13 |         2025 |
+| Vande Mataram  | 2026-09-19     | 11:22:13       | 2026-09-19 11:22:13 |         2022 |
+| Bharat Maa     | 2026-09-19     | 11:22:13       | 2026-09-19 11:22:13 |         2023 |
+| Jai Hind       | 2026-09-19     | 11:22:13       | 2026-09-19 11:22:13 |         2024 |
+| Veer Kesari    | 2026-09-19     | 11:22:13       | 2026-09-19 11:22:13 |         2021 |
+| Desh Ke Sipahi | 2026-09-19     | 11:22:13       | 2026-09-19 11:22:13 |         2020 |
+| Bharat Veer    | 2026-09-19     | 11:22:13       | 2026-09-19 11:22:13 |         2024 |
+| Sankalp        | 2026-09-19     | 11:22:13       | 2026-09-19 11:22:13 |         2022 |
+| Veer Yodha     | 2026-09-19     | 11:22:13       | 2026-09-19 11:22:13 |         2023 |
+| Jai Bharat     | 2026-09-19     | 11:22:13       | 2026-09-19 11:22:13 |         2025 |
++----------------+----------------+----------------+---------------------+--------------+
+16 rows in set (0.01 sec)
+
+mysql> SELECT Movie_Name, ^C
+mysql> SELECT Movie_Name, Release_Year, CONCAT(Release_Year, '-01-01') AS Release_Date,
+    -> DATEDIFF(CURRENT_DATE(), CONCAT(Release_Year, '-01-01')) AS Days_Since_Release
+    -> FROM MOVIES
+    -> ORDER BY Release_Date ASC;
++----------------------------+--------------+--------------+--------------------+
+| Movie_Name                 | Release_Year | Release_Date | Days_Since_Release |
++----------------------------+--------------+--------------+--------------------+
+| Tiranga                    |         1993 | 1993-01-01   |              12314 |
+| Border                     |         1997 | 1997-01-01   |              10853 |
+| The Legend of Bhagat Singh |         2002 | 2002-01-01   |               9027 |
+| LOC Kargil                 |         2003 | 2003-01-01   |               8662 |
+| Lakshya                    |         2004 | 2004-01-01   |               8297 |
+| Swades                     |         2004 | 2004-01-01   |               8297 |
+| Rang De Basanti            |         2006 | 2006-01-01   |               7566 |
+| Chak De! India             |         2007 | 2007-01-01   |               7201 |
+| Raazi                      |         2018 | 2018-01-01   |               3183 |
+| Parmanu                    |         2018 | 2018-01-01   |               3183 |
+| Satyameva Jayate           |         2018 | 2018-01-01   |               3183 |
+| Uri: The Surgical Strike   |         2019 | 2019-01-01   |               2818 |
+| Kesari                     |         2019 | 2019-01-01   |               2818 |
+| Mission Mangal             |         2019 | 2019-01-01   |               2818 |
+| Desh Ke Sipahi             |         2020 | 2020-01-01   |               2453 |
+| Shershaah                  |         2021 | 2021-01-01   |               2087 |
+| Veer Kesari                |         2021 | 2021-01-01   |               2087 |
+| Major                      |         2022 | 2022-01-01   |               1722 |
+| Vande Mataram              |         2022 | 2022-01-01   |               1722 |
+| Sankalp                    |         2022 | 2022-01-01   |               1722 |
+| Sam Bahadur                |         2023 | 2023-01-01   |               1357 |
+| Parmanu 2                  |         2023 | 2023-01-01   |               1357 |
+| Bharat Maa                 |         2023 | 2023-01-01   |               1357 |
+| Veer Yodha                 |         2023 | 2023-01-01   |               1357 |
+| Fighter                    |         2024 | 2024-01-01   |                992 |
+| Article 370                |         2024 | 2024-01-01   |                992 |
+| Jai Hind                   |         2024 | 2024-01-01   |                992 |
+| Bharat Veer                |         2024 | 2024-01-01   |                992 |
+| Kesari 2                   |         2025 | 2025-01-01   |                626 |
+| Jai Bharat                 |         2025 | 2025-01-01   |                626 |
++----------------------------+--------------+--------------+--------------------+
+30 rows in set (0.00 sec)
+
+mysql> SELECT CONCAT_WS(' | ', UPPER(Movie_Name), CONCAT('RELEASED: ', DATE_FORMAT(CONCAT(Release_Year, '-01-01'), '%d-%m-%Y'))) AS Release_Info
+    -> FROM MOVIES
+    -> WHERE Release_Year BETWEEN 2018 AND 2025;
++-------------------------------------------------+
+| Release_Info                                    |
++-------------------------------------------------+
+| RAAZI | RELEASED: 01-01-2018                    |
+| PARMANU | RELEASED: 01-01-2018                  |
+| URI: THE SURGICAL STRIKE | RELEASED: 01-01-2019 |
+| KESARI | RELEASED: 01-01-2019                   |
+| SHERSHAAH | RELEASED: 01-01-2021                |
+| SATYAMEVA JAYATE | RELEASED: 01-01-2018         |
+| MAJOR | RELEASED: 01-01-2022                    |
+| SAM BAHADUR | RELEASED: 01-01-2023              |
+| FIGHTER | RELEASED: 01-01-2024                  |
+| ARTICLE 370 | RELEASED: 01-01-2024              |
+| MISSION MANGAL | RELEASED: 01-01-2019           |
+| PARMANU 2 | RELEASED: 01-01-2023                |
+| KESARI 2 | RELEASED: 01-01-2025                 |
+| VANDE MATARAM | RELEASED: 01-01-2022            |
+| BHARAT MAA | RELEASED: 01-01-2023               |
+| JAI HIND | RELEASED: 01-01-2024                 |
+| VEER KESARI | RELEASED: 01-01-2021              |
+| DESH KE SIPAHI | RELEASED: 01-01-2020           |
+| BHARAT VEER | RELEASED: 01-01-2024              |
+| SANKALP | RELEASED: 01-01-2022                  |
+| VEER YODHA | RELEASED: 01-01-2023               |
+| JAI BHARAT | RELEASED: 01-01-2025               |
++-------------------------------------------------+
+22 rows in set (0.00 sec)
+
+mysql> SELECT Release_Year, COUNT(*) AS Movie_Count, SUM(Budget) AS Total_Budget, SUM(Box_Office) AS Total_Box_Office,
+    -> AVG(Rating) AS Avg_Rating, MAX(Box_Office) AS Max_Box_Office, MIN(Box_Office) AS Min_Box_Office
+    -> FROM MOVIES
+    -> WHERE Rating IS NOT NULL
+    -> GROUP BY Release_Year
+    -> HAVING COUNT(*) >= 2 AND AVG(Rating) > 7.0
+    -> ORDER BY Avg_Rating DESC;
++--------------+-------------+--------------+------------------+------------+----------------+----------------+
+| Release_Year | Movie_Count | Total_Budget | Total_Box_Office | Avg_Rating | Max_Box_Office | Min_Box_Office |
++--------------+-------------+--------------+------------------+------------+----------------+----------------+
+|         2004 |           2 |        62.00 |            76.00 |    8.00000 |          42.00 |          34.00 |
+|         2022 |           3 |       105.00 |           450.00 |    7.83333 |         205.00 |          65.00 |
+|         2021 |           2 |       115.00 |           325.00 |    7.75000 |         190.00 |         135.00 |
+|         2025 |           2 |       170.00 |           540.00 |    7.75000 |         330.00 |         210.00 |
+|         2023 |           4 |       235.00 |           743.00 |    7.55000 |         235.00 |         128.00 |
+|         2019 |           3 |       137.00 |           742.00 |    7.50000 |         290.00 |         207.00 |
+|         2024 |           4 |       395.00 |          1038.00 |    7.25000 |         358.00 |         110.00 |
++--------------+-------------+--------------+------------------+------------+----------------+----------------+
+7 rows in set (0.00 sec)
+
+mysql> SELECT UPPER(Director) AS Director, COUNT(*) AS Movie_Count, SUM(Budget) AS Total_Budget, SUM(Box_Office) AS Total_Box_Office,
+    -> SUM(Box_Office - Budget) AS Total_Profit, ROUND(AVG(Rating), 2) AS Avg_Rating
+    -> FROM MOVIES
+    -> WHERE Release_Year >= 2018 AND Budget IS NOT NULL AND Box_Office IS NOT NULL AND Rating IS NOT NULL
+    -> GROUP BY Director
+    -> HAVING COUNT(*) >= 2 AND SUM(Box_Office) > 400;
++----------------------+-------------+--------------+------------------+--------------+------------+
+| Director             | Movie_Count | Total_Budget | Total_Box_Office | Total_Profit | Avg_Rating |
++----------------------+-------------+--------------+------------------+--------------+------------+
+| PATRIOTIC DIRECTOR   |           5 |       340.00 |          1150.00 |       810.00 |       7.38 |
+| NATIONAL PRIDE FILMS |           5 |       255.00 |          1170.00 |       915.00 |       7.74 |
++----------------------+-------------+--------------+------------------+--------------+------------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT Genre, UPPER(Genre) AS Upper_Genre, LOWER(Genre) AS Lower_Genre, LEFT(Genre, 4) AS First_Four,
+    -> RIGHT(Genre, 4) AS Last_Four, CHAR_LENGTH(Genre) AS Char_Count
+    -> FROM MOVIES
+    -> GROUP BY Genre
+    -> HAVING COUNT(*) >= 2 AND AVG(Rating) > 7.0
+    -> ORDER BY Char_Count DESC;
++--------------------+--------------------+--------------------+------------+-----------+------------+
+| Genre              | Upper_Genre        | Lower_Genre        | First_Four | Last_Four | Char_Count |
++--------------------+--------------------+--------------------+------------+-----------+------------+
+| Patriotic Thriller | PATRIOTIC THRILLER | patriotic thriller | Patr       | ller      |         18 |
+| Patriotic Action   | PATRIOTIC ACTION   | patriotic action   | Patr       | tion      |         16 |
+| Patriotic Drama    | PATRIOTIC DRAMA    | patriotic drama    | Patr       | rama      |         15 |
+| Biographical       | BIOGRAPHICAL       | biographical       | Biog       | ical      |         12 |
+| War                | WAR                | war                | War        | War       |          3 |
++--------------------+--------------------+--------------------+------------+-----------+------------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT UPPER(Actor) AS Actor, COUNT(*) AS Movie_Count, SUM(Budget) AS Total_Budget, SUM(Box_Office) AS Total_Box_Office,
+    -> AVG(Rating) AS Avg_Rating, SUM(Box_Office - Budget) AS Total_Profit, ROUND(SUM(Box_Office - Budget)) AS Rounded_Profit
+    -> FROM MOVIES
+    -> WHERE Release_Year >= 2018 AND Budget IS NOT NULL AND Box_Office IS NOT NULL
+    -> AND Genre IN ('War', 'Patriotic Thriller', 'Patriotic Drama', 'Biographical')
+    -> GROUP BY Actor
+    -> HAVING COUNT(*) >= 2 AND SUM(Box_Office) > 300 AND AVG(Rating) > 7.0
+    -> ORDER BY Total_Profit DESC;
++----------------+-------------+--------------+------------------+------------+--------------+----------------+
+| Actor          | Movie_Count | Total_Budget | Total_Box_Office | Avg_Rating | Total_Profit | Rounded_Profit |
++----------------+-------------+--------------+------------------+------------+--------------+----------------+
+| ARJUN DESHMUKH |           3 |       170.00 |           770.00 |    7.90000 |       600.00 |            600 |
+| VEER SINGH     |           2 |       140.00 |           425.00 |    7.30000 |       285.00 |            285 |
++----------------+-------------+--------------+------------------+------------+--------------+----------------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT CONCAT_WS(' | ', UPPER(Genre), CONCAT('MOVIES: ', LPAD(COUNT(*), 2, '0')),
+    -> CONCAT('AVG RATING: ', ROUND(AVG(Rating), 2)), CONCAT('COLLECTION: ', ROUND(SUM(Box_Office), 0)),
+    -> CONCAT('PROFIT: ', ROUND(SUM(Box_Office - Budget), 0))) AS Genre_Summary
+    -> FROM MOVIES
+    -> WHERE Release_Year >= 2018 AND Budget IS NOT NULL AND Box_Office IS NOT NULL AND Rating IS NOT NULL
+    -> GROUP BY Genre
+    -> HAVING COUNT(*) >= 3 AND SUM(Box_Office) > 500
+    -> ORDER BY SUM(Box_Office - Budget) DESC;
++---------------------------------------------------------------------------------+
+| Genre_Summary                                                                   |
++---------------------------------------------------------------------------------+
+| PATRIOTIC DRAMA | MOVIES: 04 | AVG RATING: 7.83 | COLLECTION: 995 | PROFIT: 780 |
+| WAR | MOVIES: 05 | AVG RATING: 7.52 | COLLECTION: 1052 | PROFIT: 767            |
++---------------------------------------------------------------------------------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT CONCAT_WS('-', 'PAT', UPPER(LEFT(Movie_Name, 3)), Release_Year, ROUND(Box_Office, 0)) AS Movie_Code
+    -> FROM MOVIES
+    -> WHERE Box_Office IS NOT NULL AND Release_Year IN (2019, 2020, 2021, 2022, 2023, 2024, 2025)
+    -> AND Genre NOT IN ('Drama', 'Action');
++------------------+
+| Movie_Code       |
++------------------+
+| PAT-URI-2019-245 |
+| PAT-KES-2019-207 |
+| PAT-SHE-2021-135 |
+| PAT-MAJ-2022-65  |
+| PAT-SAM-2023-128 |
+| PAT-FIG-2024-358 |
+| PAT-ART-2024-110 |
+| PAT-MIS-2019-290 |
+| PAT-PAR-2023-155 |
+| PAT-KES-2025-210 |
+| PAT-VAN-2022-180 |
+| PAT-BHA-2023-225 |
+| PAT-JAI-2024-310 |
+| PAT-VEE-2021-190 |
+| PAT-DES-2020-175 |
+| PAT-BHA-2024-260 |
+| PAT-SAN-2022-205 |
+| PAT-VEE-2023-235 |
+| PAT-JAI-2025-330 |
++------------------+
+19 rows in set (0.00 sec)
+
+mysql> SELECT Actor, COUNT(*) AS Movie_Count, SUM(Box_Office) AS Total_Box_Office, SUM(Budget) AS Total_Budget,
+    -> AVG(Box_Office - Budget) AS Avg_Profit, ROUND(AVG(Box_Office - Budget)) AS Rounded_Avg_Profit, AVG(Rating) AS Avg_Rating
+    -> FROM MOVIES
+    -> WHERE Release_Year >= 2018 AND Budget IS NOT NULL AND Box_Office IS NOT NULL
+    -> GROUP BY Actor
+    -> HAVING COUNT(*) >= 2 AND AVG(Box_Office - Budget) > 50 AND AVG(Rating) > 7.0
+    -> ORDER BY Avg_Profit DESC;
++----------------+-------------+------------------+--------------+------------+--------------------+------------+
+| Actor          | Movie_Count | Total_Box_Office | Total_Budget | Avg_Profit | Rounded_Avg_Profit | Avg_Rating |
++----------------+-------------+------------------+--------------+------------+--------------------+------------+
+| Surya Pratap   |           2 |           515.00 |       110.00 | 202.500000 |                203 |    7.40000 |
+| Arjun Deshmukh |           3 |           770.00 |       170.00 | 200.000000 |                200 |    7.90000 |
+| Veer Singh     |           2 |           425.00 |       140.00 | 142.500000 |                143 |    7.30000 |
+| Ashwat Raina   |           2 |           248.00 |       105.00 |  71.500000 |                 72 |    7.35000 |
++----------------+-------------+------------------+--------------+------------+--------------------+------------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT Genre, COUNT(*) AS Movie_Count, SUM(Budget) AS Total_Budget, SUM(Box_Office) AS Total_Box_Office,
+    -> SUM(Box_Office) - SUM(Budget) AS Profit,
+    -> ROUND(((SUM(Box_Office) - SUM(Budget)) / SUM(Budget)) * 100, 2) AS ROI,
+    -> CEIL(((SUM(Box_Office) - SUM(Budget)) / SUM(Budget)) * 100) AS ROI_Ceil,
+    -> FLOOR(((SUM(Box_Office) - SUM(Budget)) / SUM(Budget)) * 100) AS ROI_Floor
+    -> FROM MOVIES
+    -> WHERE Budget IS NOT NULL AND Box_Office IS NOT NULL
+    -> GROUP BY Genre
+    -> HAVING COUNT(*) >= 3 AND ((SUM(Box_Office) - SUM(Budget)) / SUM(Budget)) * 100 > 100
+    -> ORDER BY ROI DESC;
++--------------------+-------------+--------------+------------------+--------+--------+----------+-----------+
+| Genre              | Movie_Count | Total_Budget | Total_Box_Office | Profit | ROI    | ROI_Ceil | ROI_Floor |
++--------------------+-------------+--------------+------------------+--------+--------+----------+-----------+
+| Patriotic Drama    |           5 |       243.00 |          1091.00 | 848.00 | 348.97 |      349 |       348 |
+| Patriotic Action   |           3 |       118.00 |           527.00 | 409.00 | 346.61 |      347 |       346 |
+| War                |           8 |       367.00 |          1201.00 | 834.00 | 227.25 |      228 |       227 |
+| Patriotic Thriller |           4 |       160.00 |           481.00 | 321.00 | 200.63 |      201 |       200 |
+| Biographical       |           4 |       147.00 |           353.00 | 206.00 | 140.14 |      141 |       140 |
++--------------------+-------------+--------------+------------------+--------+--------+----------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT UPPER(Actor) AS Actor, COUNT(*) AS Movie_Count, SUM(Budget) AS Total_Budget, SUM(Box_Office) AS Total_Box_Office,
+    -> SUM(Box_Office - Budget) AS Total_Profit, AVG(Rating) AS Avg_Rating,
+    -> ROUND(SUM(Box_Office) + SUM(Box_Office - Budget) + (AVG(Rating) * 100), 2) AS Power_Index
+    -> FROM MOVIES
+    -> WHERE Release_Year >= 2018 AND Budget IS NOT NULL AND Box_Office IS NOT NULL AND Rating IS NOT NULL
+    -> GROUP BY Actor
+    -> HAVING COUNT(*) >= 2 AND SUM(Box_Office) > 300 AND AVG(Rating) > 7.0
+    -> ORDER BY Power_Index DESC;
++----------------+-------------+--------------+------------------+--------------+------------+-------------+
+| Actor          | Movie_Count | Total_Budget | Total_Box_Office | Total_Profit | Avg_Rating | Power_Index |
++----------------+-------------+--------------+------------------+--------------+------------+-------------+
+| ARJUN DESHMUKH |           3 |       170.00 |           770.00 |       600.00 |    7.90000 |     2160.00 |
+| SURYA PRATAP   |           2 |       110.00 |           515.00 |       405.00 |    7.40000 |     1660.00 |
+| VEER SINGH     |           2 |       140.00 |           425.00 |       285.00 |    7.30000 |     1440.00 |
++----------------+-------------+--------------+------------------+--------------+------------+-------------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT CONCAT_WS(' | ', UPPER(Director), CONCAT('MOVIES: ', LPAD(COUNT(*), 2, '0')),
+    -> CONCAT('AVG: ', ROUND(AVG(Rating), 2)), CONCAT('BUDGET: ', ROUND(SUM(Budget), 0)),
+    -> CONCAT('COLLECTION: ', ROUND(SUM(Box_Office), 0)), CONCAT('PROFIT: ', ROUND(SUM(Box_Office - Budget), 0))) AS Director_Report
+    -> FROM MOVIES
+    -> WHERE Release_Year >= 2018 AND Budget IS NOT NULL AND Box_Office IS NOT NULL AND Rating IS NOT NULL
+    -> GROUP BY Director
+    -> HAVING COUNT(*) >= 2 AND SUM(Box_Office) > 300 AND AVG(Rating) > 7.0 AND SUM(Box_Office - Budget) > 100
+    -> ORDER BY SUM(Box_Office - Budget) DESC;
++----------------------------------------------------------------------------------------------+
+| Director_Report                                                                              |
++----------------------------------------------------------------------------------------------+
+| NATIONAL PRIDE FILMS | MOVIES: 05 | AVG: 7.74 | BUDGET: 255 | COLLECTION: 1170 | PROFIT: 915 |
+| PATRIOTIC DIRECTOR | MOVIES: 05 | AVG: 7.38 | BUDGET: 340 | COLLECTION: 1150 | PROFIT: 810   |
++----------------------------------------------------------------------------------------------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT UPPER(Actor) AS Actor, UPPER(LEFT(Actor, 3)) AS First_Three, UPPER(RIGHT(Actor, 3)) AS Last_Three,
+    -> COUNT(*) AS Movie_Count, SUM(Budget) AS Total_Budget, SUM(Box_Office) AS Total_Box_Office,
+    -> ROUND(AVG(Rating), 2) AS Avg_Rating, SUM(Box_Office - Budget) AS Total_Profit,
+    -> ROUND(((SUM(Box_Office) - SUM(Budget)) / SUM(Budget)) * 100, 2) AS ROI,
+    -> MAX(CHAR_LENGTH(Movie_Name)) AS Max_Name_Length, MIN(CHAR_LENGTH(Movie_Name)) AS Min_Name_Length
+    -> FROM MOVIES
+    -> WHERE Release_Year IN (2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025)
+    -> AND Budget IS NOT NULL AND Box_Office IS NOT NULL AND Rating IS NOT NULL
+    -> AND Genre NOT IN ('Drama', 'Action')
+    -> GROUP BY Actor
+    -> HAVING COUNT(*) >= 2 AND SUM(Box_Office) > 300 AND AVG(Rating) > 7.0
+    -> AND ((SUM(Box_Office) - SUM(Budget)) / SUM(Budget)) * 100 > 100
+    -> ORDER BY ROI DESC, Total_Box_Office DESC;
++----------------+-------------+------------+-------------+--------------+------------------+------------+--------------+--------+-----------------+-----------------+
+| Actor          | First_Three | Last_Three | Movie_Count | Total_Budget | Total_Box_Office | Avg_Rating | Total_Profit | ROI    | Max_Name_Length | Min_Name_Length |
++----------------+-------------+------------+-------------+--------------+------------------+------------+--------------+--------+-----------------+-----------------+
+| SURYA PRATAP   | SUR         | TAP        |           2 |       110.00 |           515.00 |       7.40 |       405.00 | 368.18 |               8 |               7 |
+| ARJUN DESHMUKH | ARJ         | UKH        |           3 |       170.00 |           770.00 |       7.90 |       600.00 | 352.94 |              13 |              10 |
+| VEER SINGH     | VEE         | NGH        |           2 |       140.00 |           425.00 |       7.30 |       285.00 | 203.57 |              11 |              10 |
++----------------+-------------+------------+-------------+--------------+------------------+------------+--------------+--------+-----------------+-----------------+
+3 rows in set (0.00 sec)
+
+mysql>

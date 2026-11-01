@@ -1,0 +1,393 @@
+mysql> USE 251B010;
+Database changed
+mysql> CREATE TABLE Passenger (
+    -> Passenger_ID INT PRIMARY KEY,
+    -> Passenger_Name VARCHAR(20),
+    -> City VARCHAR(20),
+    -> Passenger_Type VARCHAR(20),
+    -> Loyalty_Points INT,
+    -> Referrer_ID INT
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> CREATE TABLE Booking (
+    -> Booking_ID INT PRIMARY KEY,
+    -> Passenger_ID INT,
+    -> Ticket_Fare INT,
+    -> Discount INT,
+    -> Baggage_Charge INT,
+    -> Flight_Status VARCHAR(10),
+    -> Seat_No CHAR(3)
+    -> );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> ALTER TABLE Booking
+    -> ^C
+mysql> DROP TABLE Booking;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> CREATE TABLE Booking (
+    -> Booking_ID INT PRIMARY KEY,
+    -> Passenger_ID INT,
+    -> Ticket_Fare INT,
+    -> Discount INT,
+    -> Baggage_Charge INT,
+    -> Flight_Status VARCHAR(10),
+    -> Seat_No CHAR(3),
+    -> FOREIGN KEY Passenger_ID REFERENCES Passenger(Passenger_ID)
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'REFERENCES Passenger(Passenger_ID)
+)' at line 9
+mysql> HELP FOREIGN KEY;
+Name: 'FOREIGN KEY'
+Description:
+MySQL supports foreign keys, which permit cross-referencing related
+data across tables, and foreign key constraints, which help keep the
+related data consistent.
+
+A foreign key relationship involves a parent table that holds the
+initial column values, and a child table with column values that
+reference the parent column values. A foreign key constraint is defined
+on the child table.
+
+The essential syntax for a defining a foreign key constraint in a
+CREATE TABLE or ALTER TABLE statement includes the following:
+
+[CONSTRAINT [symbol]] FOREIGN KEY
+    [index_name] (col_name, ...)
+    REFERENCES tbl_name (col_name,...)
+    [ON DELETE reference_option]
+    [ON UPDATE reference_option]
+
+reference_option:
+    RESTRICT | CASCADE | SET NULL | NO ACTION | SET DEFAULT
+
+URL: https://dev.mysql.com/doc/refman/8.4/en/create-table-foreign-keys.html
+
+Examples:
+CREATE TABLE product (
+    category INT NOT NULL, id INT NOT NULL,
+    price DECIMAL,
+    PRIMARY KEY(category, id)
+)   ENGINE=INNODB;
+
+CREATE TABLE customer (
+    id INT NOT NULL,
+    PRIMARY KEY (id)
+)   ENGINE=INNODB;
+
+CREATE TABLE product_order (
+    no INT NOT NULL AUTO_INCREMENT,
+    product_category INT NOT NULL,
+    product_id INT NOT NULL,
+    customer_id INT NOT NULL,
+
+    PRIMARY KEY(no),
+    INDEX (product_category, product_id),
+    INDEX (customer_id),
+
+    FOREIGN KEY (product_category, product_id)
+      REFERENCES product(category, id)
+      ON UPDATE CASCADE ON DELETE RESTRICT,
+
+    FOREIGN KEY (customer_id)
+      REFERENCES customer(id)
+)   ENGINE=INNODB;
+
+mysql> CREATE TABLE Booking (
+    -> Booking_ID INT PRIMARY KEY,
+    -> Passenger_ID INT,
+    -> Ticket_Fare INT,
+    -> Discount INT,
+    -> Baggage_Charge INT,
+    -> Flight_Status VARCHAR(10),
+    -> Seat_No CHAR(3),
+    -> FOREIGN KEY (Passenger_ID) REFERENCES Passenger(Passenger_ID)
+    -> );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> INSERT INTO Passenger (Passenger_ID, Passenger_Name, City, Passenger_Type, Loyalty_Points, Referrer_ID) VALUES
+    -> (101, 'Amit', 'Neha', 'Bhopal', Regular', 2500, NULL),
+    '> ^C
+mysql> INSERT INTO Passenger (Passenger_ID, Passenger_Name, City, Passenger_Type, Loyalty_Points, Referrer_ID) VALUES
+    -> (101, 'Amit', 'Neha', 'Bhopal', 'Regular', 2500, NULL),
+    -> (102, 'Neha', 'Indore', 'Premium', 6500, 101),
+    -> (103, 'Rahul', 'Delhi', 'Premium', 8200, 101),
+    -> (104, 'Priya', 'Bhopal', 'Regular', 1800, NULL),
+    -> (105, 'Karan', 'Mumbai', 'Business', 10500, 103),
+    -> (106, 'Anjali', 'Indore', 'Premium', 7200, 101),
+    -> (107, 'Vijay', 'Gwalior', 'Regular', 3200, NULL),
+    -> (108, 'Riya', 'Bhopal', 'Business', 9500, 104);
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> INSERT INTO Passenger (Passenger_ID, Passenger_Name, City, Passenger_Type, Loyalty_Points, Referrer_ID) VALUES
+    -> (101, 'Amit', 'Bhopal', 'Regular', 2500, NULL),
+    -> (102, 'Neha', 'Indore', 'Premium', 6500, 101),
+    -> (103, 'Rahul', 'Delhi', 'Premium', 8200, 101),
+    -> (104, 'Priya', 'Bhopal', 'Regular', 1800, NULL),
+    -> (105, 'Karan', 'Mumbai', 'Business', 10500, 103),
+    -> (106, 'Anjali', 'Indore', 'Premium', 7200, 101),
+    -> (107, 'Vijay', 'Gwalior', 'Regular', 3200, NULL),
+    -> (108, 'Riya', 'Bhopal', 'Business', 9500, 104);
+Query OK, 8 rows affected (0.01 sec)
+Records: 8  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO Booking (Booking_ID, Passenger_ID, Ticket_Fare, Discount, Baggage_Charge, Flight_Status, Seat_No) VALUES
+    -> (501, 101, 45000, 3000, 1500, 'Confirmed', 'A12'),
+    -> (502, 102, 28000, NULL, 1000, 'Confirmed', 'B14'),
+    -> (503, 103, 75000, 7500, 2000, 'Completed', 'C08'),
+    -> (504, 104, 18000, 1000, 500, 'Cancelled', NULL),
+    -> (505, 105, 62000, 6000, 2500, 'Completed', 'D11'),
+    -> (506, 106, 90000, 10000, 3000, 'Confirmed', 'E05'),
+    -> (507, 107, 22000, NULL, 800, 'Delayed', NULL),
+    -> (508, 108, 55000, 5000, 1500, 'Confirmed', 'F10');
+Query OK, 8 rows affected (0.01 sec)
+Records: 8  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM Passenger;
++--------------+----------------+---------+----------------+----------------+-------------+
+| Passenger_ID | Passenger_Name | City    | Passenger_Type | Loyalty_Points | Referrer_ID |
++--------------+----------------+---------+----------------+----------------+-------------+
+|          101 | Amit           | Bhopal  | Regular        |           2500 |        NULL |
+|          102 | Neha           | Indore  | Premium        |           6500 |         101 |
+|          103 | Rahul          | Delhi   | Premium        |           8200 |         101 |
+|          104 | Priya          | Bhopal  | Regular        |           1800 |        NULL |
+|          105 | Karan          | Mumbai  | Business       |          10500 |         103 |
+|          106 | Anjali         | Indore  | Premium        |           7200 |         101 |
+|          107 | Vijay          | Gwalior | Regular        |           3200 |        NULL |
+|          108 | Riya           | Bhopal  | Business       |           9500 |         104 |
++--------------+----------------+---------+----------------+----------------+-------------+
+8 rows in set (0.00 sec)
+
+mysql> SELECT * FROM Booking;
++------------+--------------+-------------+----------+----------------+---------------+---------+
+| Booking_ID | Passenger_ID | Ticket_Fare | Discount | Baggage_Charge | Flight_Status | Seat_No |
++------------+--------------+-------------+----------+----------------+---------------+---------+
+|        501 |          101 |       45000 |     3000 |           1500 | Confirmed     | A12     |
+|        502 |          102 |       28000 |     NULL |           1000 | Confirmed     | B14     |
+|        503 |          103 |       75000 |     7500 |           2000 | Completed     | C08     |
+|        504 |          104 |       18000 |     1000 |            500 | Cancelled     | NULL    |
+|        505 |          105 |       62000 |     6000 |           2500 | Completed     | D11     |
+|        506 |          106 |       90000 |    10000 |           3000 | Confirmed     | E05     |
+|        507 |          107 |       22000 |     NULL |            800 | Delayed       | NULL    |
+|        508 |          108 |       55000 |     5000 |           1500 | Confirmed     | F10     |
++------------+--------------+-------------+----------+----------------+---------------+---------+
+8 rows in set (0.00 sec)
+
+mysql> SELECT Passenger_Name, City, Passenger_Type FROM Passenger WHERE Passenger_Type IN ('Premium', 'Business');
++----------------+--------+----------------+
+| Passenger_Name | City   | Passenger_Type |
++----------------+--------+----------------+
+| Neha           | Indore | Premium        |
+| Rahul          | Delhi  | Premium        |
+| Karan          | Mumbai | Business       |
+| Anjali         | Indore | Premium        |
+| Riya           | Bhopal | Business       |
++----------------+--------+----------------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT Booking_ID, Passenger_ID, Ticket_Fare FROM Booking WHERE Ticket_Fare BETWEEN 30000 AND 80000;
++------------+--------------+-------------+
+| Booking_ID | Passenger_ID | Ticket_Fare |
++------------+--------------+-------------+
+|        501 |          101 |       45000 |
+|        503 |          103 |       75000 |
+|        505 |          105 |       62000 |
+|        508 |          108 |       55000 |
++------------+--------------+-------------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT Passenger_Name, Loyalty_Points FROM Passenger WHERE Loyalty_Points>=7000;
++----------------+----------------+
+| Passenger_Name | Loyalty_Points |
++----------------+----------------+
+| Rahul          |           8200 |
+| Karan          |          10500 |
+| Anjali         |           7200 |
+| Riya           |           9500 |
++----------------+----------------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT Passenger_Name, City, Passenger_Type FROM Passenger WHERE City IN ('Bhopal', 'Indore') AND Passenger_Type IN ('Premium', 'Business');
++----------------+--------+----------------+
+| Passenger_Name | City   | Passenger_Type |
++----------------+--------+----------------+
+| Neha           | Indore | Premium        |
+| Anjali         | Indore | Premium        |
+| Riya           | Bhopal | Business       |
++----------------+--------+----------------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT * FROM Booking WHERE Ticket_Fare BETWEEN 25000 AND 70000 AND Flight_Status IN ('Confirmed', 'Completed');
++------------+--------------+-------------+----------+----------------+---------------+---------+
+| Booking_ID | Passenger_ID | Ticket_Fare | Discount | Baggage_Charge | Flight_Status | Seat_No |
++------------+--------------+-------------+----------+----------------+---------------+---------+
+|        501 |          101 |       45000 |     3000 |           1500 | Confirmed     | A12     |
+|        502 |          102 |       28000 |     NULL |           1000 | Confirmed     | B14     |
+|        505 |          105 |       62000 |     6000 |           2500 | Completed     | D11     |
+|        508 |          108 |       55000 |     5000 |           1500 | Confirmed     | F10     |
++------------+--------------+-------------+----------+----------------+---------------+---------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT * FROM Passenger WHERE Referrer_ID IS NULL AND Loyalty_Points>2000;
++--------------+----------------+---------+----------------+----------------+-------------+
+| Passenger_ID | Passenger_Name | City    | Passenger_Type | Loyalty_Points | Referrer_ID |
++--------------+----------------+---------+----------------+----------------+-------------+
+|          101 | Amit           | Bhopal  | Regular        |           2500 |        NULL |
+|          107 | Vijay          | Gwalior | Regular        |           3200 |        NULL |
++--------------+----------------+---------+----------------+----------------+-------------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT * FROM Booking WHERE Discount IS NOT NULL AND Ticket_Fare>50000;
++------------+--------------+-------------+----------+----------------+---------------+---------+
+| Booking_ID | Passenger_ID | Ticket_Fare | Discount | Baggage_Charge | Flight_Status | Seat_No |
++------------+--------------+-------------+----------+----------------+---------------+---------+
+|        503 |          103 |       75000 |     7500 |           2000 | Completed     | C08     |
+|        505 |          105 |       62000 |     6000 |           2500 | Completed     | D11     |
+|        506 |          106 |       90000 |    10000 |           3000 | Confirmed     | E05     |
+|        508 |          108 |       55000 |     5000 |           1500 | Confirmed     | F10     |
++------------+--------------+-------------+----------+----------------+---------------+---------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT Booking_ID, Ticket_Fare, Discount, Baggage_Charge, (Ticket_Fare - Discount + Baggage_Charge) AS Final_Cost FROM Booking WHERE Discount IS NOT NULL;
++------------+-------------+----------+----------------+------------+
+| Booking_ID | Ticket_Fare | Discount | Baggage_Charge | Final_Cost |
++------------+-------------+----------+----------------+------------+
+|        501 |       45000 |     3000 |           1500 |      43500 |
+|        503 |       75000 |     7500 |           2000 |      69500 |
+|        504 |       18000 |     1000 |            500 |      17500 |
+|        505 |       62000 |     6000 |           2500 |      58500 |
+|        506 |       90000 |    10000 |           3000 |      83000 |
+|        508 |       55000 |     5000 |           1500 |      51500 |
++------------+-------------+----------+----------------+------------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT Booking_ID, (Ticket_Fare - Discount + Baggage_Charge) AS Final_Cost FROM Booking WHERE Final_Cost>60000;
+ERROR 1054 (42S22): Unknown column 'Final_Cost' in 'where clause'
+mysql> SELECT Booking_ID, (Ticket_Fare - Discount + Baggage_Charge) AS Final_Cost FROM Booking WHERE (Ticket_Fare - Discount + Baggage_Charge)>60000;
++------------+------------+
+| Booking_ID | Final_Cost |
++------------+------------+
+|        503 |      69500 |
+|        506 |      83000 |
++------------+------------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT Passenger_Name, Loyalty_Points AS Existing_Points, (Loyalty_Points+Loyalty_Points/10) AS Revised_Points FROM Passenger;
++----------------+-----------------+----------------+
+| Passenger_Name | Existing_Points | Revised_Points |
++----------------+-----------------+----------------+
+| Amit           |            2500 |      2750.0000 |
+| Neha           |            6500 |      7150.0000 |
+| Rahul          |            8200 |      9020.0000 |
+| Priya          |            1800 |      1980.0000 |
+| Karan          |           10500 |     11550.0000 |
+| Anjali         |            7200 |      7920.0000 |
+| Vijay          |            3200 |      3520.0000 |
+| Riya           |            9500 |     10450.0000 |
++----------------+-----------------+----------------+
+8 rows in set (0.00 sec)
+
+mysql> SELECT Passenger_Name, Loyalty_Points AS Existing_Points, (Loyalty_Points+Loyalty_Points/10) AS Revised_Points FROM Passenger WHERE (Loyalty_Points+Loyalty_Points/10)>7000;
++----------------+-----------------+----------------+
+| Passenger_Name | Existing_Points | Revised_Points |
++----------------+-----------------+----------------+
+| Neha           |            6500 |      7150.0000 |
+| Rahul          |            8200 |      9020.0000 |
+| Karan          |           10500 |     11550.0000 |
+| Anjali         |            7200 |      7920.0000 |
+| Riya           |            9500 |     10450.0000 |
++----------------+-----------------+----------------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT Passenger_Name, Loyalty_Points AS Existing_Points, (Loyalty_Points+Loyalty_Points/10) AS Revised_Points FROM Passenger WHERE Passenger_Type = 'Premium' AND (Loyalty_Points+Loyalty_Points/10)>7000;
++----------------+-----------------+----------------+
+| Passenger_Name | Existing_Points | Revised_Points |
++----------------+-----------------+----------------+
+| Neha           |            6500 |      7150.0000 |
+| Rahul          |            8200 |      9020.0000 |
+| Anjali         |            7200 |      7920.0000 |
++----------------+-----------------+----------------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT * FROM Booking WHERE Ticket_Fare BETWEEN 50000 AND 100000 AND Flight_Status IN ('Confirmed', 'Completed') AND Discount IS NOT NULL;
++------------+--------------+-------------+----------+----------------+---------------+---------+
+| Booking_ID | Passenger_ID | Ticket_Fare | Discount | Baggage_Charge | Flight_Status | Seat_No |
++------------+--------------+-------------+----------+----------------+---------------+---------+
+|        503 |          103 |       75000 |     7500 |           2000 | Completed     | C08     |
+|        505 |          105 |       62000 |     6000 |           2500 | Completed     | D11     |
+|        506 |          106 |       90000 |    10000 |           3000 | Confirmed     | E05     |
+|        508 |          108 |       55000 |     5000 |           1500 | Confirmed     | F10     |
++------------+--------------+-------------+----------+----------------+---------------+---------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT * FROM Passenger WHERE Passenger_Type IN ('Premium', 'Business') AND Loyalty_Points>=6000 AND (Referrer_ID IS NOT NULL OR City = 'Indore);
+    '> ^C
+mysql> SELECT * FROM Passenger WHERE Passenger_Type IN ('Premium', 'Business') AND Loyalty_Points>=6000 AND (Referrer_ID IS NOT NULL OR City = 'Indore');
++--------------+----------------+--------+----------------+----------------+-------------+
+| Passenger_ID | Passenger_Name | City   | Passenger_Type | Loyalty_Points | Referrer_ID |
++--------------+----------------+--------+----------------+----------------+-------------+
+|          102 | Neha           | Indore | Premium        |           6500 |         101 |
+|          103 | Rahul          | Delhi  | Premium        |           8200 |         101 |
+|          105 | Karan          | Mumbai | Business       |          10500 |         103 |
+|          106 | Anjali         | Indore | Premium        |           7200 |         101 |
+|          108 | Riya           | Bhopal | Business       |           9500 |         104 |
++--------------+----------------+--------+----------------+----------------+-------------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT * FROM Booking WHERE Ticket_Fare>50000 AND (Baggage_Charge>0 OR Discount IS NOT NULL) AND Flight_Status != 'Cancelled';
++------------+--------------+-------------+----------+----------------+---------------+---------+
+| Booking_ID | Passenger_ID | Ticket_Fare | Discount | Baggage_Charge | Flight_Status | Seat_No |
++------------+--------------+-------------+----------+----------------+---------------+---------+
+|        503 |          103 |       75000 |     7500 |           2000 | Completed     | C08     |
+|        505 |          105 |       62000 |     6000 |           2500 | Completed     | D11     |
+|        506 |          106 |       90000 |    10000 |           3000 | Confirmed     | E05     |
+|        508 |          108 |       55000 |     5000 |           1500 | Confirmed     | F10     |
++------------+--------------+-------------+----------+----------------+---------------+---------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT * FROM Passengers WHERE ((Passenger_Type = 'Business' AND Loyalty_Points>=9000) OR (Passenger_Type = 'Premium' AND Loyalty_Points>=7000)) AND Referrer_ID IS NOT NULL;
+ERROR 1146 (42S02): Table '251b010.passengers' doesn't exist
+mysql> SELECT * FROM Passenger WHERE ((Passenger_Type = 'Business' AND Loyalty_Points>=9000) OR (Passenger_Type = 'Premium' AND Loyalty_Points>=7000)) AND Referrer_ID IS NOT NULL;
++--------------+----------------+--------+----------------+----------------+-------------+
+| Passenger_ID | Passenger_Name | City   | Passenger_Type | Loyalty_Points | Referrer_ID |
++--------------+----------------+--------+----------------+----------------+-------------+
+|          103 | Rahul          | Delhi  | Premium        |           8200 |         101 |
+|          105 | Karan          | Mumbai | Business       |          10500 |         103 |
+|          106 | Anjali         | Indore | Premium        |           7200 |         101 |
+|          108 | Riya           | Bhopal | Business       |           9500 |         104 |
++--------------+----------------+--------+----------------+----------------+-------------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT * FROM Passenger WHERE ((Passenger_Type = 'Business' AND Loyalty_Points>=9000) OR (Passenger_Type = 'Premium' AND Loyalty_Points>=7000)) AND Referrer_ID IS NOT NULL AND City != 'Bhopal';
++--------------+----------------+--------+----------------+----------------+-------------+
+| Passenger_ID | Passenger_Name | City   | Passenger_Type | Loyalty_Points | Referrer_ID |
++--------------+----------------+--------+----------------+----------------+-------------+
+|          103 | Rahul          | Delhi  | Premium        |           8200 |         101 |
+|          105 | Karan          | Mumbai | Business       |          10500 |         103 |
+|          106 | Anjali         | Indore | Premium        |           7200 |         101 |
++--------------+----------------+--------+----------------+----------------+-------------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT * FROM Booking WHERE Ticket_Fare BETWEEN 40000 AND 90000 AND Flight_Status IN ('Confirmed', 'Completed') AND ((Discount IS NOT NULL AND (Ticket_Fare - Discount + Baggage_Charge)>45000) OR Baggage_Charge=0));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1
+mysql> SELECT * FROM Booking WHERE Ticket_Fare BETWEEN 40000 AND 90000 AND Flight_Status IN ('Confirmed', 'Completed') AND ((Discount IS NOT NULL AND (Ticket_Fare - Discount + Baggage_Charge)>45000) OR Baggage_Charge=0);
++------------+--------------+-------------+----------+----------------+---------------+---------+
+| Booking_ID | Passenger_ID | Ticket_Fare | Discount | Baggage_Charge | Flight_Status | Seat_No |
++------------+--------------+-------------+----------+----------------+---------------+---------+
+|        503 |          103 |       75000 |     7500 |           2000 | Completed     | C08     |
+|        505 |          105 |       62000 |     6000 |           2500 | Completed     | D11     |
+|        506 |          106 |       90000 |    10000 |           3000 | Confirmed     | E05     |
+|        508 |          108 |       55000 |     5000 |           1500 | Confirmed     | F10     |
++------------+--------------+-------------+----------+----------------+---------------+---------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT * FROM Passenger WHERE City != 'Bhopal' AND (Passenger_Type IN ('Premium', 'Business') AND Loyalty_Points BETWEEN 5000 AND 12000 AND (Referrer_ID IS NOT NULL OR City = 'Indore'));
++--------------+----------------+--------+----------------+----------------+-------------+
+| Passenger_ID | Passenger_Name | City   | Passenger_Type | Loyalty_Points | Referrer_ID |
++--------------+----------------+--------+----------------+----------------+-------------+
+|          102 | Neha           | Indore | Premium        |           6500 |         101 |
+|          103 | Rahul          | Delhi  | Premium        |           8200 |         101 |
+|          105 | Karan          | Mumbai | Business       |          10500 |         103 |
+|          106 | Anjali         | Indore | Premium        |           7200 |         101 |
++--------------+----------------+--------+----------------+----------------+-------------+
+4 rows in set (0.00 sec)

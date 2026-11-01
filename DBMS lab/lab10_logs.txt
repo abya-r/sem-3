@@ -1,0 +1,1424 @@
+mysql> CREATE DATABASE SALES_251b010;
+Query OK, 1 row affected (0.02 sec)
+
+mysql> CREATE TABLE Customers (
+    -> CustomerID INT PRIMARY KEY,
+    -> CustomerName VARCHAR(40),
+    -> City VARCHAR(30),
+    -> StateName VARCHAR (30),
+    -> Phone INT,
+    -> Email VARCHAR(80),
+    -> JoinDate DATE
+    -> );
+ERROR 1046 (3D000): No database selected
+mysql> USE SALES_251b010;
+Database changed
+mysql> CREATE TABLE Customers (
+    -> CustomerID INT PRIMARY KEY,
+    -> CustomerName VARCHAR(40),
+    -> City VARCHAR(30),
+    -> StateName VARCHAR (30),
+    -> Phone INT,
+    -> Email VARCHAR(80),
+    -> JoinDate DATE
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> CREATE TABLE EMPLOYEES (
+    -> EmployeeID INT PRIMARY KEY,
+    -> EmployeeName VARCHAR(40),
+    -> Department VARCHAR(40),
+    -> HireDate DATE,
+    -> Salary INT
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> CREATE TABLE PRODUCTS (
+    -> ProductID INT PRIMARY KEY,
+    -> ProductName VARCHAR(30),
+    -> Category VARCHAR(30),
+    -> UnitPrice INT,
+    -> StockQty INT,
+    -> LaunchDate INT
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> CREATE TABLE ORDERS (
+    -> OrderID INT PRIMARY KEY,
+    -> CustomerID INT,
+    -> EmployeeID INT,
+    -> OrderDate DATE,
+    -> Status VARCHAR(30),
+    -> DiscountPct INT
+    -> );
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> CREATE TABLE ORDERITEMS (
+    -> OrderItemID INT PRIMARY KEY,
+    -> OrderID INT,
+    -> ProductID INT,
+    -> Quantity INT,
+    -> SalePrice INT,
+    -> FOREIGN KEY (OrderID) REFERENCES ORDERS (Order_ID),
+    -> FOREIGN KEY (ProductID) REFERENCES PRODUCTS(ProductID)
+    -> );
+ERROR 3734 (HY000): Failed to add the foreign key constraint. Missing column 'Order_ID' for constraint 'orderitems_ibfk_1' in the referenced table 'orders'
+mysql> CREATE TABLE ORDERITEMS (
+    -> OrderItemID INT PRIMARY KEY,
+    -> OrderID INT,
+    -> ProductID INT,
+    -> Quantity INT,
+    -> SalePrice INT,
+    -> FOREIGN KEY (OrderID) REFERENCES ORDERS (OrderID),
+    -> FOREIGN KEY (ProductID) REFERENCES PRODUCTS(ProductID)
+    -> );
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> ALTER TABLE ORDERS
+    -> FOREIGN KEY (CustomerID) REFERENCES CUSTOMERS(CustomerID),
+    -> FOREIGN KEY (EmployeeID) REFERENCES EMPLOYEES (EmployeeID);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FOREIGN KEY (CustomerID) REFERENCES CUSTOMERS(CustomerID),
+FOREIGN KEY (Employee' at line 2
+mysql> ALTER TABLE ORDERS
+    -> ADD CONSTRAINT FOREIGN KEY (CustomerID) REFERENCES CUSTOMERS(CustomerID);
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE ORDERS
+    -> ADD CONSTRAINT FOREIGN KEY (EmployeeID) REFERENCES EMPLOYEES(EmployeeID);
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESCRIBE ORDERS;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| OrderID     | int         | NO   | PRI | NULL    |       |
+| CustomerID  | int         | YES  | MUL | NULL    |       |
+| EmployeeID  | int         | YES  | MUL | NULL    |       |
+| OrderDate   | date        | YES  |     | NULL    |       |
+| Status      | varchar(30) | YES  |     | NULL    |       |
+| DiscountPct | int         | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+6 rows in set (0.02 sec)
+
+mysql> DESCRIBE ORDERITEMS;
++-------------+------+------+-----+---------+-------+
+| Field       | Type | Null | Key | Default | Extra |
++-------------+------+------+-----+---------+-------+
+| OrderItemID | int  | NO   | PRI | NULL    |       |
+| OrderID     | int  | YES  | MUL | NULL    |       |
+| ProductID   | int  | YES  | MUL | NULL    |       |
+| Quantity    | int  | YES  |     | NULL    |       |
+| SalePrice   | int  | YES  |     | NULL    |       |
++-------------+------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> INSERT INTO Customers VALUES
+    -> (1, 'Aarav Sharma', 'Guna', 'Madhya Pradesh', '9876501001', 'aarav@example.com', '2024-01-15'),
+    -> (2, 'Diya Verma', 'Bhopal', 'Madhya Pradesh', '9876501002', 'diya@example.com', '2023-11-20'),
+    -> (3, 'Kabir Singh', 'Jaipur', 'Rajasthan', '9876501003', 'kabir@example.com', '2024-03-08'),
+    -> (4, 'Meera Patel', 'Indore', 'Madhya Pradesh', '9876501004', 'meera@example.com', '2022-07-11'),
+    -> (5, 'Ishaan Gupta', 'Kota', 'Rajasthan', '9876501005', 'ishaan@example.com', '2025-01-05'),
+    -> (6, 'Anaya Jain', 'Guna', 'Madhya Pradesh', '9876501006', 'anaya@example.com', '2024-09-17'),
+    -> (7, 'Vivaan Khan', 'Delhi', 'Delhi', '9876501007', 'vivaan@example.com', '2023-05-29'),
+    -> (8, 'Sara Mishra', 'Lucknow', 'Uttar Pradesh', '9876501008', 'sara@example.com', '2025-02-14'),
+    -> (9, 'Reyansh Das', 'Kolkata', 'West Bengal', '9876501009', 'reyansh@example.com', '2022-12-02'),
+    -> (10, 'Myra Nair', 'Pune', 'Maharashtra', '9876501010', 'myra@example.com', '2024-06-21');
+ERROR 1264 (22003): Out of range value for column 'Phone' at row 1
+mysql> 
+mysql> INSERT INTO Employees VALUES
+    -> (101, 'Rohan Mehta', 'Sales', '2021-04-12', 42000.00),
+    -> (102, 'Nisha Rao', 'Sales', '2022-08-01', 46500.00),
+    -> (103, 'Arjun Bose', 'Support', '2020-01-15', 39000.00),
+    -> (104, 'Tanya Roy', 'Online', '2023-06-10', 44000.00),
+    -> (105, 'Dev Malhotra', 'Sales', '2019-11-25', 52000.00),
+    -> (106, 'Pooja Sethi', 'Online', '2024-02-19', 36000.00);
+Query OK, 6 rows affected (0.01 sec)
+Records: 6  Duplicates: 0  Warnings: 0
+
+mysql> 
+mysql> INSERT INTO Products VALUES
+    -> (201, 'Laptop Pro 14', 'Electronics', 68500.00, 18, '2023-09-01'),
+    -> (202, 'Wireless Mouse', 'Accessories', 799.00, 120, '2022-02-15'),
+    -> (203, 'Mechanical Keyboard', 'Accessories', 2499.00, 65, '2022-08-20'),
+    -> (204, 'HD Monitor 27', 'Electronics', 18999.00, 25, '2024-01-10'),
+    -> (205, 'USB-C Hub', 'Accessories', 1799.00, 80, '2023-05-05'),
+    -> (206, 'Office Chair', 'Furniture', 8499.00, 30, '2021-10-12'),
+    -> (207, 'Study Desk', 'Furniture', 6499.00, 14, '2022-11-11'),
+    -> (208, 'Webcam HD', 'Electronics', 3299.00, 40, '2024-04-18'),
+    -> (209, 'Notebook Pack', 'Stationery', 299.00, 200, '2021-06-01'),
+    -> (210, 'Laser Printer', 'Electronics', 12499.00, 12, '2023-12-05'),
+    -> (211, 'Desk Lamp', 'Furniture', 1199.00, 55, '2024-08-22'),
+    -> (212, 'Headset', 'Accessories', 1599.00, 75, '2025-01-15');
+ERROR 1265 (01000): Data truncated for column 'LaunchDate' at row 1
+mysql> 
+mysql> INSERT INTO Orders VALUES
+    -> (1001, 1, 101, '2025-01-10', 'Delivered', 5.00),
+    -> (1002, 2, 102, '2025-01-18', 'Delivered', 0.00),
+    -> (1003, 3, 104, '2025-02-03', 'Shipped', 10.00),
+    -> (1004, 1, 105, '2025-02-14', 'Delivered', 7.50),
+    -> (1005, 4, 101, '2025-03-01', 'Cancelled', 0.00),
+    -> (1006, 5, 102, '2025-03-15', 'Delivered', 5.00),
+    -> (1007, 6, 106, '2025-04-09', 'Processing', 0.00),
+    -> (1008, 7, 104, '2025-04-21', 'Delivered', 12.00),
+    -> (1009, 8, 106, '2025-05-11', 'Shipped', 5.00),
+    -> (1010, 9, 103, '2025-06-06', 'Delivered', 0.00),
+    -> (1011, 10, 105, '2025-07-19', 'Delivered', 8.00),
+    -> (1012, 2, 101, '2025-08-02', 'Processing', 0.00),
+    -> (1013, 3, 102, '2025-08-23', 'Delivered', 10.00),
+    -> (1014, 4, 104, '2025-09-05', 'Shipped', 5.00),
+    -> (1015, 5, 106, '2025-10-17', 'Delivered', 0.00),
+    -> (1016, 6, 105, '2025-11-28', 'Delivered', 15.00),
+    -> (1017, 7, 103, '2025-12-12', 'Returned', 0.00),
+    -> (1018, 8, 101, '2026-01-09', 'Delivered', 5.00),
+    -> (1019, 9, 104, '2026-02-20', 'Processing', 0.00),
+    -> (1020, 10, 102, '2026-03-14', 'Delivered', 10.00);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`sales_251b010`.`orders`, CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`CustomerID`) REFERENCES `customers` (`CustomerID`))
+mysql> 
+mysql> INSERT INTO OrderItems VALUES
+    -> (1, 1001, 201, 1, 67000.00),
+    -> (2, 1001, 202, 2, 749.00),
+    -> (3, 1002, 204, 1, 18500.00),
+    -> (4, 1002, 203, 1, 2399.00),
+    -> (5, 1003, 206, 2, 8299.00),
+    -> (6, 1003, 205, 1, 1699.00),
+    -> (7, 1004, 201, 1, 66000.00),
+    -> (8, 1004, 208, 2, 3199.00),
+    -> (9, 1005, 207, 1, 6299.00),
+    -> (10, 1006, 210, 1, 11999.00),
+    -> (11, 1006, 202, 3, 749.00),
+    -> (12, 1007, 209, 5, 279.00),
+    -> (13, 1008, 204, 2, 18499.00),
+    -> (14, 1008, 203, 2, 2399.00),
+    -> (15, 1009, 212, 2, 1499.00),
+    -> (16, 1009, 205, 2, 1699.00),
+    -> (17, 1010, 206, 1, 8299.00),
+    -> (18, 1010, 207, 1, 6299.00),
+    -> (19, 1011, 201, 1, 67999.00),
+    -> (20, 1011, 210, 1, 12199.00),
+    -> (21, 1012, 211, 3, 1099.00),
+    -> (22, 1013, 208, 1, 3199.00),
+    -> (23, 1013, 202, 4, 749.00),
+    -> (24, 1014, 207, 2, 6299.00),
+    -> (25, 1014, 206, 1, 8299.00),
+    -> (26, 1015, 203, 1, 2399.00),
+    -> (27, 1015, 212, 1, 1499.00),
+    -> (28, 1016, 201, 1, 67500.00),
+    -> (29, 1016, 204, 1, 18499.00),
+    -> (30, 1017, 210, 1, 11999.00),
+    -> (31, 1018, 205, 3, 1699.00),
+    -> (32, 1018, 202, 2, 749.00),
+    -> (33, 1019, 209, 10, 279.00),
+    -> (34, 1019, 211, 2, 1099.00),
+    -> (35, 1020, 201, 1, 68000.00),
+    -> (36, 1020, 208, 1, 3199.00);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`sales_251b010`.`orderitems`, CONSTRAINT `orderitems_ibfk_1` FOREIGN KEY (`OrderID`) REFERENCES `orders` (`OrderID`))
+mysql> SELECT * FROM PRODUCTS;
+Empty set (0.00 sec)
+
+mysql> INSERT INTO Customers VALUES
+    -> (1, 'Aarav Sharma', 'Guna', 'Madhya Pradesh', '9876501001', 'aarav@example.com', '2024-01-15'),
+    -> (2, 'Diya Verma', 'Bhopal', 'Madhya Pradesh', '9876501002', 'diya@example.com', '2023-11-20'),
+    -> (3, 'Kabir Singh', 'Jaipur', 'Rajasthan', '9876501003', 'kabir@example.com', '2024-03-08'),
+    -> (4, 'Meera Patel', 'Indore', 'Madhya Pradesh', '9876501004', 'meera@example.com', '2022-07-11'),
+    -> (5, 'Ishaan Gupta', 'Kota', 'Rajasthan', '9876501005', 'ishaan@example.com', '2025-01-05'),
+    -> (6, 'Anaya Jain', 'Guna', 'Madhya Pradesh', '9876501006', 'anaya@example.com', '2024-09-17'),
+    -> (7, 'Vivaan Khan', 'Delhi', 'Delhi', '9876501007', 'vivaan@example.com', '2023-05-29'),
+    -> (8, 'Sara Mishra', 'Lucknow', 'Uttar Pradesh', '9876501008', 'sara@example.com', '2025-02-14'),
+    -> (9, 'Reyansh Das', 'Kolkata', 'West Bengal', '9876501009', 'reyansh@example.com', '2022-12-02'),
+    -> (10, 'Myra Nair', 'Pune', 'Maharashtra', '9876501010', 'myra@example.com', '2024-06-21');
+ERROR 1264 (22003): Out of range value for column 'Phone' at row 1
+mysql> DROP TABLE CUSTOMERS;
+ERROR 3730 (HY000): Cannot drop table 'customers' referenced by a foreign key constraint 'orders_ibfk_1' on table 'orders'.
+mysql> ALTER TABLE CUSTOMERS
+    -> DROP COLUMN Phone;
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE CUSTOMERS
+    -> ADD Phone INT(10);
+Query OK, 0 rows affected, 1 warning (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+mysql> INSERT INTO Customers VALUES
+    -> (1, 'Aarav Sharma', 'Guna', 'Madhya Pradesh', '9876501001', 'aarav@example.com', '2024-01-15'),
+    -> (2, 'Diya Verma', 'Bhopal', 'Madhya Pradesh', '9876501002', 'diya@example.com', '2023-11-20'),
+    -> (3, 'Kabir Singh', 'Jaipur', 'Rajasthan', '9876501003', 'kabir@example.com', '2024-03-08'),
+    -> (4, 'Meera Patel', 'Indore', 'Madhya Pradesh', '9876501004', 'meera@example.com', '2022-07-11'),
+    -> (5, 'Ishaan Gupta', 'Kota', 'Rajasthan', '9876501005', 'ishaan@example.com', '2025-01-05'),
+    -> (6, 'Anaya Jain', 'Guna', 'Madhya Pradesh', '9876501006', 'anaya@example.com', '2024-09-17'),
+    -> (7, 'Vivaan Khan', 'Delhi', 'Delhi', '9876501007', 'vivaan@example.com', '2023-05-29'),
+    -> (8, 'Sara Mishra', 'Lucknow', 'Uttar Pradesh', '9876501008', 'sara@example.com', '2025-02-14'),
+    -> (9, 'Reyansh Das', 'Kolkata', 'West Bengal', '9876501009', 'reyansh@example.com', '2022-12-02'),
+    -> (10, 'Myra Nair', 'Pune', 'Maharashtra', '9876501010', 'myra@example.com', '2024-06-21');
+ERROR 1292 (22007): Incorrect date value: 'aarav@example.com' for column 'JoinDate' at row 1
+mysql> INSERT INTO Customers (CustomerID, CustomerName, City, StateName, Phone, Email, JoinDate) VALUES
+    -> (1, 'Aarav Sharma', 'Guna', 'Madhya Pradesh', '9876501001', 'aarav@example.com', '2024-01-15'),
+    -> (2, 'Diya Verma', 'Bhopal', 'Madhya Pradesh', '9876501002', 'diya@example.com', '2023-11-20'),
+    -> (3, 'Kabir Singh', 'Jaipur', 'Rajasthan', '9876501003', 'kabir@example.com', '2024-03-08'),
+    -> (4, 'Meera Patel', 'Indore', 'Madhya Pradesh', '9876501004', 'meera@example.com', '2022-07-11'),
+    -> (5, 'Ishaan Gupta', 'Kota', 'Rajasthan', '9876501005', 'ishaan@example.com', '2025-01-05'),
+    -> (6, 'Anaya Jain', 'Guna', 'Madhya Pradesh', '9876501006', 'anaya@example.com', '2024-09-17'),
+    -> (7, 'Vivaan Khan', 'Delhi', 'Delhi', '9876501007', 'vivaan@example.com', '2023-05-29'),
+    -> (8, 'Sara Mishra', 'Lucknow', 'Uttar Pradesh', '9876501008', 'sara@example.com', '2025-02-14'),
+    -> (9, 'Reyansh Das', 'Kolkata', 'West Bengal', '9876501009', 'reyansh@example.com', '2022-12-02'),
+    -> (10, 'Myra Nair', 'Pune', 'Maharashtra', '9876501010', 'myra@example.com', '2024-06-21');
+ERROR 1264 (22003): Out of range value for column 'Phone' at row 1
+mysql> ALTER TABLE CUSTOMERS
+    -> DROP COLUMN Phone;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE CUSTOMERS
+    -> ADD Phone DECIMAL(10, 0);
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO Customers (CustomerID, CustomerName, City, StateName, Phone, Email, JoinDate) VALUES
+    -> (1, 'Aarav Sharma', 'Guna', 'Madhya Pradesh', '9876501001', 'aarav@example.com', '2024-01-15'),
+    -> (2, 'Diya Verma', 'Bhopal', 'Madhya Pradesh', '9876501002', 'diya@example.com', '2023-11-20'),
+    -> (3, 'Kabir Singh', 'Jaipur', 'Rajasthan', '9876501003', 'kabir@example.com', '2024-03-08'),
+    -> (4, 'Meera Patel', 'Indore', 'Madhya Pradesh', '9876501004', 'meera@example.com', '2022-07-11'),
+    -> (5, 'Ishaan Gupta', 'Kota', 'Rajasthan', '9876501005', 'ishaan@example.com', '2025-01-05'),
+    -> (6, 'Anaya Jain', 'Guna', 'Madhya Pradesh', '9876501006', 'anaya@example.com', '2024-09-17'),
+    -> (7, 'Vivaan Khan', 'Delhi', 'Delhi', '9876501007', 'vivaan@example.com', '2023-05-29'),
+    -> (8, 'Sara Mishra', 'Lucknow', 'Uttar Pradesh', '9876501008', 'sara@example.com', '2025-02-14'),
+    -> (9, 'Reyansh Das', 'Kolkata', 'West Bengal', '9876501009', 'reyansh@example.com', '2022-12-02'),
+    -> (10, 'Myra Nair', 'Pune', 'Maharashtra', '9876501010', 'myra@example.com', '2024-06-21');
+Query OK, 10 rows affected (0.01 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO Products VALUES
+    -> (201, 'Laptop Pro 14', 'Electronics', 68500.00, 18, '2023-09-01'),
+    -> (202, 'Wireless Mouse', 'Accessories', 799.00, 120, '2022-02-15'),
+    -> (203, 'Mechanical Keyboard', 'Accessories', 2499.00, 65, '2022-08-20'),
+    -> (204, 'HD Monitor 27', 'Electronics', 18999.00, 25, '2024-01-10'),
+    -> (205, 'USB-C Hub', 'Accessories', 1799.00, 80, '2023-05-05'),
+    -> (206, 'Office Chair', 'Furniture', 8499.00, 30, '2021-10-12'),
+    -> (207, 'Study Desk', 'Furniture', 6499.00, 14, '2022-11-11'),
+    -> (208, 'Webcam HD', 'Electronics', 3299.00, 40, '2024-04-18'),
+    -> (209, 'Notebook Pack', 'Stationery', 299.00, 200, '2021-06-01'),
+    -> (210, 'Laser Printer', 'Electronics', 12499.00, 12, '2023-12-05'),
+    -> (211, 'Desk Lamp', 'Furniture', 1199.00, 55, '2024-08-22'),
+    -> (212, 'Headset', 'Accessories', 1599.00, 75, '2025-01-15');
+ERROR 1265 (01000): Data truncated for column 'LaunchDate' at row 1
+mysql> ALTER TABLE PRODUCTS
+    -> DROP COLUMN LaunchDate
+    -> ;
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> ALTER TABLE PRODUCTS
+    -> ADD LaunchDate DATE;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO Products VALUES
+    -> (201, 'Laptop Pro 14', 'Electronics', 68500.00, 18, '2023-09-01'),
+    -> (202, 'Wireless Mouse', 'Accessories', 799.00, 120, '2022-02-15'),
+    -> (203, 'Mechanical Keyboard', 'Accessories', 2499.00, 65, '2022-08-20'),
+    -> (204, 'HD Monitor 27', 'Electronics', 18999.00, 25, '2024-01-10'),
+    -> (205, 'USB-C Hub', 'Accessories', 1799.00, 80, '2023-05-05'),
+    -> (206, 'Office Chair', 'Furniture', 8499.00, 30, '2021-10-12'),
+    -> (207, 'Study Desk', 'Furniture', 6499.00, 14, '2022-11-11'),
+    -> (208, 'Webcam HD', 'Electronics', 3299.00, 40, '2024-04-18'),
+    -> (209, 'Notebook Pack', 'Stationery', 299.00, 200, '2021-06-01'),
+    -> (210, 'Laser Printer', 'Electronics', 12499.00, 12, '2023-12-05'),
+    -> (211, 'Desk Lamp', 'Furniture', 1199.00, 55, '2024-08-22'),
+    -> (212, 'Headset', 'Accessories', 1599.00, 75, '2025-01-15');
+Query OK, 12 rows affected (0.00 sec)
+Records: 12  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO Orders VALUES
+    -> (1001, 1, 101, '2025-01-10', 'Delivered', 5.00),
+    -> (1002, 2, 102, '2025-01-18', 'Delivered', 0.00),
+    -> (1003, 3, 104, '2025-02-03', 'Shipped', 10.00),
+    -> (1004, 1, 105, '2025-02-14', 'Delivered', 7.50),
+    -> (1005, 4, 101, '2025-03-01', 'Cancelled', 0.00),
+    -> (1006, 5, 102, '2025-03-15', 'Delivered', 5.00),
+    -> (1007, 6, 106, '2025-04-09', 'Processing', 0.00),
+    -> (1008, 7, 104, '2025-04-21', 'Delivered', 12.00),
+    -> (1009, 8, 106, '2025-05-11', 'Shipped', 5.00),
+    -> (1010, 9, 103, '2025-06-06', 'Delivered', 0.00),
+    -> (1011, 10, 105, '2025-07-19', 'Delivered', 8.00),
+    -> (1012, 2, 101, '2025-08-02', 'Processing', 0.00),
+    -> (1013, 3, 102, '2025-08-23', 'Delivered', 10.00),
+    -> (1014, 4, 104, '2025-09-05', 'Shipped', 5.00),
+    -> (1015, 5, 106, '2025-10-17', 'Delivered', 0.00),
+    -> (1016, 6, 105, '2025-11-28', 'Delivered', 15.00),
+    -> (1017, 7, 103, '2025-12-12', 'Returned', 0.00),
+    -> (1018, 8, 101, '2026-01-09', 'Delivered', 5.00),
+    -> (1019, 9, 104, '2026-02-20', 'Processing', 0.00),
+    -> (1020, 10, 102, '2026-03-14', 'Delivered', 10.00);
+Query OK, 20 rows affected (0.01 sec)
+Records: 20  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO OrderItems VALUES
+    -> (1, 1001, 201, 1, 67000.00),
+    -> (2, 1001, 202, 2, 749.00),
+    -> (3, 1002, 204, 1, 18500.00),
+    -> (4, 1002, 203, 1, 2399.00),
+    -> (5, 1003, 206, 2, 8299.00),
+    -> (6, 1003, 205, 1, 1699.00),
+    -> (7, 1004, 201, 1, 66000.00),
+    -> (8, 1004, 208, 2, 3199.00),
+    -> (9, 1005, 207, 1, 6299.00),
+    -> (10, 1006, 210, 1, 11999.00),
+    -> (11, 1006, 202, 3, 749.00),
+    -> (12, 1007, 209, 5, 279.00),
+    -> (13, 1008, 204, 2, 18499.00),
+    -> (14, 1008, 203, 2, 2399.00),
+    -> (15, 1009, 212, 2, 1499.00),
+    -> (16, 1009, 205, 2, 1699.00),
+    -> (17, 1010, 206, 1, 8299.00),
+    -> (18, 1010, 207, 1, 6299.00),
+    -> (19, 1011, 201, 1, 67999.00),
+    -> (20, 1011, 210, 1, 12199.00),
+    -> (21, 1012, 211, 3, 1099.00),
+    -> (22, 1013, 208, 1, 3199.00),
+    -> (23, 1013, 202, 4, 749.00),
+    -> (24, 1014, 207, 2, 6299.00),
+    -> (25, 1014, 206, 1, 8299.00),
+    -> (26, 1015, 203, 1, 2399.00),
+    -> (27, 1015, 212, 1, 1499.00),
+    -> (28, 1016, 201, 1, 67500.00),
+    -> (29, 1016, 204, 1, 18499.00),
+    -> (30, 1017, 210, 1, 11999.00),
+    -> (31, 1018, 205, 3, 1699.00),
+    -> (32, 1018, 202, 2, 749.00),
+    -> (33, 1019, 209, 10, 279.00),
+    -> (34, 1019, 211, 2, 1099.00),
+    -> (35, 1020, 201, 1, 68000.00),
+    -> (36, 1020, 208, 1, 3199.00);
+Query OK, 36 rows affected (0.01 sec)
+Records: 36  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM CUSTOMERS;
++------------+--------------+---------+----------------+---------------------+------------+------------+
+| CustomerID | CustomerName | City    | StateName      | Email               | JoinDate   | Phone      |
++------------+--------------+---------+----------------+---------------------+------------+------------+
+|          1 | Aarav Sharma | Guna    | Madhya Pradesh | aarav@example.com   | 2024-01-15 | 9876501001 |
+|          2 | Diya Verma   | Bhopal  | Madhya Pradesh | diya@example.com    | 2023-11-20 | 9876501002 |
+|          3 | Kabir Singh  | Jaipur  | Rajasthan      | kabir@example.com   | 2024-03-08 | 9876501003 |
+|          4 | Meera Patel  | Indore  | Madhya Pradesh | meera@example.com   | 2022-07-11 | 9876501004 |
+|          5 | Ishaan Gupta | Kota    | Rajasthan      | ishaan@example.com  | 2025-01-05 | 9876501005 |
+|          6 | Anaya Jain   | Guna    | Madhya Pradesh | anaya@example.com   | 2024-09-17 | 9876501006 |
+|          7 | Vivaan Khan  | Delhi   | Delhi          | vivaan@example.com  | 2023-05-29 | 9876501007 |
+|          8 | Sara Mishra  | Lucknow | Uttar Pradesh  | sara@example.com    | 2025-02-14 | 9876501008 |
+|          9 | Reyansh Das  | Kolkata | West Bengal    | reyansh@example.com | 2022-12-02 | 9876501009 |
+|         10 | Myra Nair    | Pune    | Maharashtra    | myra@example.com    | 2024-06-21 | 9876501010 |
++------------+--------------+---------+----------------+---------------------+------------+------------+
+10 rows in set (0.01 sec)
+
+mysql> SELECT * FROM EMPLOYEES;
++------------+--------------+------------+------------+--------+
+| EmployeeID | EmployeeName | Department | HireDate   | Salary |
++------------+--------------+------------+------------+--------+
+|        101 | Rohan Mehta  | Sales      | 2021-04-12 |  42000 |
+|        102 | Nisha Rao    | Sales      | 2022-08-01 |  46500 |
+|        103 | Arjun Bose   | Support    | 2020-01-15 |  39000 |
+|        104 | Tanya Roy    | Online     | 2023-06-10 |  44000 |
+|        105 | Dev Malhotra | Sales      | 2019-11-25 |  52000 |
+|        106 | Pooja Sethi  | Online     | 2024-02-19 |  36000 |
++------------+--------------+------------+------------+--------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT * FROM PRODUCTS;
++-----------+---------------------+-------------+-----------+----------+------------+
+| ProductID | ProductName         | Category    | UnitPrice | StockQty | LaunchDate |
++-----------+---------------------+-------------+-----------+----------+------------+
+|       201 | Laptop Pro 14       | Electronics |     68500 |       18 | 2023-09-01 |
+|       202 | Wireless Mouse      | Accessories |       799 |      120 | 2022-02-15 |
+|       203 | Mechanical Keyboard | Accessories |      2499 |       65 | 2022-08-20 |
+|       204 | HD Monitor 27       | Electronics |     18999 |       25 | 2024-01-10 |
+|       205 | USB-C Hub           | Accessories |      1799 |       80 | 2023-05-05 |
+|       206 | Office Chair        | Furniture   |      8499 |       30 | 2021-10-12 |
+|       207 | Study Desk          | Furniture   |      6499 |       14 | 2022-11-11 |
+|       208 | Webcam HD           | Electronics |      3299 |       40 | 2024-04-18 |
+|       209 | Notebook Pack       | Stationery  |       299 |      200 | 2021-06-01 |
+|       210 | Laser Printer       | Electronics |     12499 |       12 | 2023-12-05 |
+|       211 | Desk Lamp           | Furniture   |      1199 |       55 | 2024-08-22 |
+|       212 | Headset             | Accessories |      1599 |       75 | 2025-01-15 |
++-----------+---------------------+-------------+-----------+----------+------------+
+12 rows in set (0.00 sec)
+
+mysql> SELECT * FROM ORDERS;
++---------+------------+------------+------------+------------+-------------+
+| OrderID | CustomerID | EmployeeID | OrderDate  | Status     | DiscountPct |
++---------+------------+------------+------------+------------+-------------+
+|    1001 |          1 |        101 | 2025-01-10 | Delivered  |           5 |
+|    1002 |          2 |        102 | 2025-01-18 | Delivered  |           0 |
+|    1003 |          3 |        104 | 2025-02-03 | Shipped    |          10 |
+|    1004 |          1 |        105 | 2025-02-14 | Delivered  |           8 |
+|    1005 |          4 |        101 | 2025-03-01 | Cancelled  |           0 |
+|    1006 |          5 |        102 | 2025-03-15 | Delivered  |           5 |
+|    1007 |          6 |        106 | 2025-04-09 | Processing |           0 |
+|    1008 |          7 |        104 | 2025-04-21 | Delivered  |          12 |
+|    1009 |          8 |        106 | 2025-05-11 | Shipped    |           5 |
+|    1010 |          9 |        103 | 2025-06-06 | Delivered  |           0 |
+|    1011 |         10 |        105 | 2025-07-19 | Delivered  |           8 |
+|    1012 |          2 |        101 | 2025-08-02 | Processing |           0 |
+|    1013 |          3 |        102 | 2025-08-23 | Delivered  |          10 |
+|    1014 |          4 |        104 | 2025-09-05 | Shipped    |           5 |
+|    1015 |          5 |        106 | 2025-10-17 | Delivered  |           0 |
+|    1016 |          6 |        105 | 2025-11-28 | Delivered  |          15 |
+|    1017 |          7 |        103 | 2025-12-12 | Returned   |           0 |
+|    1018 |          8 |        101 | 2026-01-09 | Delivered  |           5 |
+|    1019 |          9 |        104 | 2026-02-20 | Processing |           0 |
+|    1020 |         10 |        102 | 2026-03-14 | Delivered  |          10 |
++---------+------------+------------+------------+------------+-------------+
+20 rows in set (0.00 sec)
+
+mysql> SELECT * FROM ORDERITEMS;
++-------------+---------+-----------+----------+-----------+
+| OrderItemID | OrderID | ProductID | Quantity | SalePrice |
++-------------+---------+-----------+----------+-----------+
+|           1 |    1001 |       201 |        1 |     67000 |
+|           2 |    1001 |       202 |        2 |       749 |
+|           3 |    1002 |       204 |        1 |     18500 |
+|           4 |    1002 |       203 |        1 |      2399 |
+|           5 |    1003 |       206 |        2 |      8299 |
+|           6 |    1003 |       205 |        1 |      1699 |
+|           7 |    1004 |       201 |        1 |     66000 |
+|           8 |    1004 |       208 |        2 |      3199 |
+|           9 |    1005 |       207 |        1 |      6299 |
+|          10 |    1006 |       210 |        1 |     11999 |
+|          11 |    1006 |       202 |        3 |       749 |
+|          12 |    1007 |       209 |        5 |       279 |
+|          13 |    1008 |       204 |        2 |     18499 |
+|          14 |    1008 |       203 |        2 |      2399 |
+|          15 |    1009 |       212 |        2 |      1499 |
+|          16 |    1009 |       205 |        2 |      1699 |
+|          17 |    1010 |       206 |        1 |      8299 |
+|          18 |    1010 |       207 |        1 |      6299 |
+|          19 |    1011 |       201 |        1 |     67999 |
+|          20 |    1011 |       210 |        1 |     12199 |
+|          21 |    1012 |       211 |        3 |      1099 |
+|          22 |    1013 |       208 |        1 |      3199 |
+|          23 |    1013 |       202 |        4 |       749 |
+|          24 |    1014 |       207 |        2 |      6299 |
+|          25 |    1014 |       206 |        1 |      8299 |
+|          26 |    1015 |       203 |        1 |      2399 |
+|          27 |    1015 |       212 |        1 |      1499 |
+|          28 |    1016 |       201 |        1 |     67500 |
+|          29 |    1016 |       204 |        1 |     18499 |
+|          30 |    1017 |       210 |        1 |     11999 |
+|          31 |    1018 |       205 |        3 |      1699 |
+|          32 |    1018 |       202 |        2 |       749 |
+|          33 |    1019 |       209 |       10 |       279 |
+|          34 |    1019 |       211 |        2 |      1099 |
+|          35 |    1020 |       201 |        1 |     68000 |
+|          36 |    1020 |       208 |        1 |      3199 |
++-------------+---------+-----------+----------+-----------+
+36 rows in set (0.00 sec)
+
+mysql> SELECT CustomerName, City, State
+    -> FROM CUSTOMERS
+    -> WHERE StateName = 'Madhya Pradesh'
+    -> ORDER BY CustomerName;
+ERROR 1054 (42S22): Unknown column 'State' in 'field list'
+mysql> SELECT CustomerName, City, StateName
+    -> FROM CUSTOMERS
+    -> WHERE StateName = 'Madhya Pradesh'
+    -> ORDER BY CustomerName;
++--------------+--------+----------------+
+| CustomerName | City   | StateName      |
++--------------+--------+----------------+
+| Aarav Sharma | Guna   | Madhya Pradesh |
+| Anaya Jain   | Guna   | Madhya Pradesh |
+| Diya Verma   | Bhopal | Madhya Pradesh |
+| Meera Patel  | Indore | Madhya Pradesh |
++--------------+--------+----------------+
+4 rows in set (0.01 sec)
+
+mysql> SELECT * FROM PRODUCTS
+    -> WHERE UnitPrice IS BETWEEN 1000 AND 10000;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'BETWEEN 1000 AND 10000' at line 2
+mysql> SELECT ProductName, Category, UnitPrice FROM PRODUCTS
+    -> WHERE UnitPrice BETWEEN 1000 AND 10000;
++---------------------+-------------+-----------+
+| ProductName         | Category    | UnitPrice |
++---------------------+-------------+-----------+
+| Mechanical Keyboard | Accessories |      2499 |
+| USB-C Hub           | Accessories |      1799 |
+| Office Chair        | Furniture   |      8499 |
+| Study Desk          | Furniture   |      6499 |
+| Webcam HD           | Electronics |      3299 |
+| Desk Lamp           | Furniture   |      1199 |
+| Headset             | Accessories |      1599 |
++---------------------+-------------+-----------+
+7 rows in set (0.01 sec)
+
+mysql> SELECT CustomerName, Email
+    -> FROM CUSTOMERS
+    -> WHERE CustomerName LIKE 'M%';
++--------------+-------------------+
+| CustomerName | Email             |
++--------------+-------------------+
+| Meera Patel  | meera@example.com |
+| Myra Nair    | myra@example.com  |
++--------------+-------------------+
+2 rows in set (0.02 sec)
+
+mysql> SELECT UPPER(CustomerName), LOWER(City), CHAR_LENGTH(CustomerName)
+    -> FROM CUSTOMERS;
++---------------------+-------------+---------------------------+
+| UPPER(CustomerName) | LOWER(City) | CHAR_LENGTH(CustomerName) |
++---------------------+-------------+---------------------------+
+| AARAV SHARMA        | guna        |                        12 |
+| DIYA VERMA          | bhopal      |                        10 |
+| KABIR SINGH         | jaipur      |                        11 |
+| MEERA PATEL         | indore      |                        11 |
+| ISHAAN GUPTA        | kota        |                        12 |
+| ANAYA JAIN          | guna        |                        10 |
+| VIVAAN KHAN         | delhi       |                        11 |
+| SARA MISHRA         | lucknow     |                        11 |
+| REYANSH DAS         | kolkata     |                        11 |
+| MYRA NAIR           | pune        |                         9 |
++---------------------+-------------+---------------------------+
+10 rows in set (0.01 sec)
+
+mysql> SELECT ProductName, LEFT(ProductName, 5), INSTR(ProductName, 'Pro')
+    -> FROM PRODUCTS;
++---------------------+----------------------+---------------------------+
+| ProductName         | LEFT(ProductName, 5) | INSTR(ProductName, 'Pro') |
++---------------------+----------------------+---------------------------+
+| Laptop Pro 14       | Lapto                |                         8 |
+| Wireless Mouse      | Wirel                |                         0 |
+| Mechanical Keyboard | Mecha                |                         0 |
+| HD Monitor 27       | HD Mo                |                         0 |
+| USB-C Hub           | USB-C                |                         0 |
+| Office Chair        | Offic                |                         0 |
+| Study Desk          | Study                |                         0 |
+| Webcam HD           | Webca                |                         0 |
+| Notebook Pack       | Noteb                |                         0 |
+| Laser Printer       | Laser                |                         0 |
+| Desk Lamp           | Desk                 |                         0 |
+| Headset             | Heads                |                         0 |
++---------------------+----------------------+---------------------------+
+12 rows in set (0.01 sec)
+
+mysql> SELECT EmployeeName, LPAD(EmployeeName, 20, '*')
+    -> FROM EMPLOYEES;
++--------------+-----------------------------+
+| EmployeeName | LPAD(EmployeeName, 20, '*') |
++--------------+-----------------------------+
+| Rohan Mehta  | *********Rohan Mehta        |
+| Nisha Rao    | ***********Nisha Rao        |
+| Arjun Bose   | **********Arjun Bose        |
+| Tanya Roy    | ***********Tanya Roy        |
+| Dev Malhotra | ********Dev Malhotra        |
+| Pooja Sethi  | *********Pooja Sethi        |
++--------------+-----------------------------+
+6 rows in set (0.01 sec)
+
+mysql> SELECT ProductName, UnitPrice, ROUND(UnitPrice, 0), ROUND(UnitPrice, 2)
+    -> FROM PRODUCTS;
++---------------------+-----------+---------------------+---------------------+
+| ProductName         | UnitPrice | ROUND(UnitPrice, 0) | ROUND(UnitPrice, 2) |
++---------------------+-----------+---------------------+---------------------+
+| Laptop Pro 14       |     68500 |               68500 |               68500 |
+| Wireless Mouse      |       799 |                 799 |                 799 |
+| Mechanical Keyboard |      2499 |                2499 |                2499 |
+| HD Monitor 27       |     18999 |               18999 |               18999 |
+| USB-C Hub           |      1799 |                1799 |                1799 |
+| Office Chair        |      8499 |                8499 |                8499 |
+| Study Desk          |      6499 |                6499 |                6499 |
+| Webcam HD           |      3299 |                3299 |                3299 |
+| Notebook Pack       |       299 |                 299 |                 299 |
+| Laser Printer       |     12499 |               12499 |               12499 |
+| Desk Lamp           |      1199 |                1199 |                1199 |
+| Headset             |      1599 |                1599 |                1599 |
++---------------------+-----------+---------------------+---------------------+
+12 rows in set (0.01 sec)
+
+mysql> SELECT oi.Quantity*oi.SalePrice AS Line_Amount, (oi.Quantity*oi.SalePrice)-(o.DiscountPct/100*oi.Quantity*oi.SalePrice) AS Discounted_Price
+    -> FROM ORDERITEMS oi
+    -> JOIN ORDERS o
+    ->     ON o.OrderID = oi.OrderID;
++-------------+------------------+
+| Line_Amount | Discounted_Price |
++-------------+------------------+
+|       67000 |       63650.0000 |
+|        1498 |        1423.1000 |
+|       18500 |       18500.0000 |
+|        2399 |        2399.0000 |
+|       16598 |       14938.2000 |
+|        1699 |        1529.1000 |
+|       66000 |       60720.0000 |
+|        6398 |        5886.1600 |
+|        6299 |        6299.0000 |
+|       11999 |       11399.0500 |
+|        2247 |        2134.6500 |
+|        1395 |        1395.0000 |
+|       36998 |       32558.2400 |
+|        4798 |        4222.2400 |
+|        2998 |        2848.1000 |
+|        3398 |        3228.1000 |
+|        8299 |        8299.0000 |
+|        6299 |        6299.0000 |
+|       67999 |       62559.0800 |
+|       12199 |       11223.0800 |
+|        3297 |        3297.0000 |
+|        3199 |        2879.1000 |
+|        2996 |        2696.4000 |
+|       12598 |       11968.1000 |
+|        8299 |        7884.0500 |
+|        2399 |        2399.0000 |
+|        1499 |        1499.0000 |
+|       67500 |       57375.0000 |
+|       18499 |       15724.1500 |
+|       11999 |       11999.0000 |
+|        5097 |        4842.1500 |
+|        1498 |        1423.1000 |
+|        2790 |        2790.0000 |
+|        2198 |        2198.0000 |
+|       68000 |       61200.0000 |
+|        3199 |        2879.1000 |
++-------------+------------------+
+36 rows in set (0.01 sec)
+
+mysql> SELECT oi.Quantity*oi.SalePrice AS Line_Amount, ROUND((oi.Quantity*oi.SalePrice)-(o.DiscountPct/100*oi.Quantity*oi.SalePrice),2) AS Discounted_Price
+    -> FROM ORDERITEMS oi
+    -> JOIN ORDERS o
+    ->     ON o.OrderID = oi.OrderID;
++-------------+------------------+
+| Line_Amount | Discounted_Price |
++-------------+------------------+
+|       67000 |         63650.00 |
+|        1498 |          1423.10 |
+|       18500 |         18500.00 |
+|        2399 |          2399.00 |
+|       16598 |         14938.20 |
+|        1699 |          1529.10 |
+|       66000 |         60720.00 |
+|        6398 |          5886.16 |
+|        6299 |          6299.00 |
+|       11999 |         11399.05 |
+|        2247 |          2134.65 |
+|        1395 |          1395.00 |
+|       36998 |         32558.24 |
+|        4798 |          4222.24 |
+|        2998 |          2848.10 |
+|        3398 |          3228.10 |
+|        8299 |          8299.00 |
+|        6299 |          6299.00 |
+|       67999 |         62559.08 |
+|       12199 |         11223.08 |
+|        3297 |          3297.00 |
+|        3199 |          2879.10 |
+|        2996 |          2696.40 |
+|       12598 |         11968.10 |
+|        8299 |          7884.05 |
+|        2399 |          2399.00 |
+|        1499 |          1499.00 |
+|       67500 |         57375.00 |
+|       18499 |         15724.15 |
+|       11999 |         11999.00 |
+|        5097 |          4842.15 |
+|        1498 |          1423.10 |
+|        2790 |          2790.00 |
+|        2198 |          2198.00 |
+|       68000 |         61200.00 |
+|        3199 |          2879.10 |
++-------------+------------------+
+36 rows in set (0.00 sec)
+
+mysql> SELECT UnitPrice, ROUND(UnitPrice*18/100, 2) AS GST, ROUND(UnitPrice + UnitPrice*15/100, 2) AS Price_Inc_GST 
+    -> FROM PRODUCTS;
++-----------+----------+---------------+
+| UnitPrice | GST      | Price_Inc_GST |
++-----------+----------+---------------+
+|     68500 | 12330.00 |      78775.00 |
+|       799 |   143.82 |        918.85 |
+|      2499 |   449.82 |       2873.85 |
+|     18999 |  3419.82 |      21848.85 |
+|      1799 |   323.82 |       2068.85 |
+|      8499 |  1529.82 |       9773.85 |
+|      6499 |  1169.82 |       7473.85 |
+|      3299 |   593.82 |       3793.85 |
+|       299 |    53.82 |        343.85 |
+|     12499 |  2249.82 |      14373.85 |
+|      1199 |   215.82 |       1378.85 |
+|      1599 |   287.82 |       1838.85 |
++-----------+----------+---------------+
+12 rows in set (0.00 sec)
+
+mysql> SELECT UnitPrice, ROUND(UnitPrice*18/100, 2) AS GST, ROUND(UnitPrice + UnitPrice*18/100, 2) AS Price_Inc_GST 
+    -> FROM PRODUCTS;
++-----------+----------+---------------+
+| UnitPrice | GST      | Price_Inc_GST |
++-----------+----------+---------------+
+|     68500 | 12330.00 |      80830.00 |
+|       799 |   143.82 |        942.82 |
+|      2499 |   449.82 |       2948.82 |
+|     18999 |  3419.82 |      22418.82 |
+|      1799 |   323.82 |       2122.82 |
+|      8499 |  1529.82 |      10028.82 |
+|      6499 |  1169.82 |       7668.82 |
+|      3299 |   593.82 |       3892.82 |
+|       299 |    53.82 |        352.82 |
+|     12499 |  2249.82 |      14748.82 |
+|      1199 |   215.82 |       1414.82 |
+|      1599 |   287.82 |       1886.82 |
++-----------+----------+---------------+
+12 rows in set (0.00 sec)
+
+mysql> SELECT CustomerName, JoinDate, DATEDIFF(CURRENT_DATE, JoinDate)
+    -> FROM CUSTOMERS;
++--------------+------------+----------------------------------+
+| CustomerName | JoinDate   | DATEDIFF(CURRENT_DATE, JoinDate) |
++--------------+------------+----------------------------------+
+| Aarav Sharma | 2024-01-15 |                             1013 |
+| Diya Verma   | 2023-11-20 |                             1069 |
+| Kabir Singh  | 2024-03-08 |                              960 |
+| Meera Patel  | 2022-07-11 |                             1566 |
+| Ishaan Gupta | 2025-01-05 |                              657 |
+| Anaya Jain   | 2024-09-17 |                              767 |
+| Vivaan Khan  | 2023-05-29 |                             1244 |
+| Sara Mishra  | 2025-02-14 |                              617 |
+| Reyansh Das  | 2022-12-02 |                             1422 |
+| Myra Nair    | 2024-06-21 |                              855 |
++--------------+------------+----------------------------------+
+10 rows in set (0.01 sec)
+
+mysql> SELECT OrderID, OrderDate, Status
+    -> FROM ORDERS
+    -> WHERE YEAR(OrderDate) = 2015;
+Empty set (0.03 sec)
+
+mysql> SELECT OrderID, OrderDate, Status
+    -> FROM ORDERS
+    -> WHERE YEAR(OrderDate) = 2025;
++---------+------------+------------+
+| OrderID | OrderDate  | Status     |
++---------+------------+------------+
+|    1001 | 2025-01-10 | Delivered  |
+|    1002 | 2025-01-18 | Delivered  |
+|    1003 | 2025-02-03 | Shipped    |
+|    1004 | 2025-02-14 | Delivered  |
+|    1005 | 2025-03-01 | Cancelled  |
+|    1006 | 2025-03-15 | Delivered  |
+|    1007 | 2025-04-09 | Processing |
+|    1008 | 2025-04-21 | Delivered  |
+|    1009 | 2025-05-11 | Shipped    |
+|    1010 | 2025-06-06 | Delivered  |
+|    1011 | 2025-07-19 | Delivered  |
+|    1012 | 2025-08-02 | Processing |
+|    1013 | 2025-08-23 | Delivered  |
+|    1014 | 2025-09-05 | Shipped    |
+|    1015 | 2025-10-17 | Delivered  |
+|    1016 | 2025-11-28 | Delivered  |
+|    1017 | 2025-12-12 | Returned   |
++---------+------------+------------+
+17 rows in set (0.00 sec)
+
+mysql> SELECT EmployeeName, HireDate, TINESTAMPDIFF(YEAR(CURRENT_DATE), YEAR(HireDate))
+    -> FROM EMPLOYEES;
+ERROR 1305 (42000): FUNCTION sales_251b010.TINESTAMPDIFF does not exist
+mysql> SELECT EmployeeName, HireDate, TIMESTAMPDIFF(YEAR(CURRENT_DATE), YEAR(HireDate))
+    -> FROM EMPLOYEES;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(CURRENT_DATE), YEAR(HireDate))
+FROM EMPLOYEES' at line 1
+mysql> SELECT EmployeeName, HireDate, TIMESTAMPDIFF(CURRENT_DATE, HireDate)
+    -> FROM EMPLOYEES;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'CURRENT_DATE, HireDate)
+FROM EMPLOYEES' at line 1
+mysql> SELECT OrderID, OrderDate, MONTH(DATE_FORMAT(OrderDate, '%y-%M-%d))
+    '> ^C
+mysql> SELECT OrderID, OrderDate, MONTH(DATE_FORMAT(OrderDate, '%y-%M-%d'))
+    -> FROM ORDERS;
++---------+------------+-------------------------------------------+
+| OrderID | OrderDate  | MONTH(DATE_FORMAT(OrderDate, '%y-%M-%d')) |
++---------+------------+-------------------------------------------+
+|    1001 | 2025-01-10 |                                      NULL |
+|    1002 | 2025-01-18 |                                      NULL |
+|    1003 | 2025-02-03 |                                      NULL |
+|    1004 | 2025-02-14 |                                      NULL |
+|    1005 | 2025-03-01 |                                      NULL |
+|    1006 | 2025-03-15 |                                      NULL |
+|    1007 | 2025-04-09 |                                      NULL |
+|    1008 | 2025-04-21 |                                      NULL |
+|    1009 | 2025-05-11 |                                      NULL |
+|    1010 | 2025-06-06 |                                      NULL |
+|    1011 | 2025-07-19 |                                      NULL |
+|    1012 | 2025-08-02 |                                      NULL |
+|    1013 | 2025-08-23 |                                      NULL |
+|    1014 | 2025-09-05 |                                      NULL |
+|    1015 | 2025-10-17 |                                      NULL |
+|    1016 | 2025-11-28 |                                      NULL |
+|    1017 | 2025-12-12 |                                      NULL |
+|    1018 | 2026-01-09 |                                      NULL |
+|    1019 | 2026-02-20 |                                      NULL |
+|    1020 | 2026-03-14 |                                      NULL |
++---------+------------+-------------------------------------------+
+20 rows in set, 20 warnings (0.01 sec)
+
+mysql> SELECT OrderID, OrderDate, DATE_FORMAT(OrderDate, '%y-%M-%d')
+    -> FROM ORDERS;
++---------+------------+------------------------------------+
+| OrderID | OrderDate  | DATE_FORMAT(OrderDate, '%y-%M-%d') |
++---------+------------+------------------------------------+
+|    1001 | 2025-01-10 | 25-January-10                      |
+|    1002 | 2025-01-18 | 25-January-18                      |
+|    1003 | 2025-02-03 | 25-February-03                     |
+|    1004 | 2025-02-14 | 25-February-14                     |
+|    1005 | 2025-03-01 | 25-March-01                        |
+|    1006 | 2025-03-15 | 25-March-15                        |
+|    1007 | 2025-04-09 | 25-April-09                        |
+|    1008 | 2025-04-21 | 25-April-21                        |
+|    1009 | 2025-05-11 | 25-May-11                          |
+|    1010 | 2025-06-06 | 25-June-06                         |
+|    1011 | 2025-07-19 | 25-July-19                         |
+|    1012 | 2025-08-02 | 25-August-02                       |
+|    1013 | 2025-08-23 | 25-August-23                       |
+|    1014 | 2025-09-05 | 25-September-05                    |
+|    1015 | 2025-10-17 | 25-October-17                      |
+|    1016 | 2025-11-28 | 25-November-28                     |
+|    1017 | 2025-12-12 | 25-December-12                     |
+|    1018 | 2026-01-09 | 26-January-09                      |
+|    1019 | 2026-02-20 | 26-February-20                     |
+|    1020 | 2026-03-14 | 26-March-14                        |
++---------+------------+------------------------------------+
+20 rows in set (0.00 sec)
+
+mysql> SELECT OrderID, OrderDate, MONTH(DATE_FORMAT(OrderDate, '%y-%M-%d'))
+    -> FROM ORDERS;
++---------+------------+-------------------------------------------+
+| OrderID | OrderDate  | MONTH(DATE_FORMAT(OrderDate, '%y-%M-%d')) |
++---------+------------+-------------------------------------------+
+|    1001 | 2025-01-10 |                                      NULL |
+|    1002 | 2025-01-18 |                                      NULL |
+|    1003 | 2025-02-03 |                                      NULL |
+|    1004 | 2025-02-14 |                                      NULL |
+|    1005 | 2025-03-01 |                                      NULL |
+|    1006 | 2025-03-15 |                                      NULL |
+|    1007 | 2025-04-09 |                                      NULL |
+|    1008 | 2025-04-21 |                                      NULL |
+|    1009 | 2025-05-11 |                                      NULL |
+|    1010 | 2025-06-06 |                                      NULL |
+|    1011 | 2025-07-19 |                                      NULL |
+|    1012 | 2025-08-02 |                                      NULL |
+|    1013 | 2025-08-23 |                                      NULL |
+|    1014 | 2025-09-05 |                                      NULL |
+|    1015 | 2025-10-17 |                                      NULL |
+|    1016 | 2025-11-28 |                                      NULL |
+|    1017 | 2025-12-12 |                                      NULL |
+|    1018 | 2026-01-09 |                                      NULL |
+|    1019 | 2026-02-20 |                                      NULL |
+|    1020 | 2026-03-14 |                                      NULL |
++---------+------------+-------------------------------------------+
+20 rows in set, 20 warnings (0.00 sec)
+
+mysql> SELECT StateName, COUNT(*)
+    -> FROM CUSTOMERS
+    -> GROUP BY StateName;
++----------------+----------+
+| StateName      | COUNT(*) |
++----------------+----------+
+| Madhya Pradesh |        4 |
+| Rajasthan      |        2 |
+| Delhi          |        1 |
+| Uttar Pradesh  |        1 |
+| West Bengal    |        1 |
+| Maharashtra    |        1 |
++----------------+----------+
+6 rows in set (0.01 sec)
+
+mysql> SELECT Category, COUNT(*), AVG(UnitPrice), MIN(UnitPrice*StockQty), MAX(UnitPrice*StockQty)
+    -> FROM PRODUCTS
+    -> GROUP BY Category;
++-------------+----------+----------------+-------------------------+-------------------------+
+| Category    | COUNT(*) | AVG(UnitPrice) | MIN(UnitPrice*StockQty) | MAX(UnitPrice*StockQty) |
++-------------+----------+----------------+-------------------------+-------------------------+
+| Electronics |        4 |     25824.2500 |                  131960 |                 1233000 |
+| Accessories |        4 |      1674.0000 |                   95880 |                  162435 |
+| Furniture   |        3 |      5399.0000 |                   65945 |                  254970 |
+| Stationery  |        1 |       299.0000 |                   59800 |                   59800 |
++-------------+----------+----------------+-------------------------+-------------------------+
+4 rows in set (0.01 sec)
+
+mysql> SELECT Category, COUNT(*), AVG(UnitPrice), MIN(UnitPrice), MAX(UnitPrice)
+    -> FROM PRODUCTS
+    -> GROUP BY Category;
++-------------+----------+----------------+----------------+----------------+
+| Category    | COUNT(*) | AVG(UnitPrice) | MIN(UnitPrice) | MAX(UnitPrice) |
++-------------+----------+----------------+----------------+----------------+
+| Electronics |        4 |     25824.2500 |           3299 |          68500 |
+| Accessories |        4 |      1674.0000 |            799 |           2499 |
+| Furniture   |        3 |      5399.0000 |           1199 |           8499 |
+| Stationery  |        1 |       299.0000 |            299 |            299 |
++-------------+----------+----------------+----------------+----------------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT EmployeeName, HireDate, TIMESTAMPDIFF(YEAR, HireDate, CURRENT_DATE)
+    -> FROM EMPLOYEES;
++--------------+------------+---------------------------------------------+
+| EmployeeName | HireDate   | TIMESTAMPDIFF(YEAR, HireDate, CURRENT_DATE) |
++--------------+------------+---------------------------------------------+
+| Rohan Mehta  | 2021-04-12 |                                           5 |
+| Nisha Rao    | 2022-08-01 |                                           4 |
+| Arjun Bose   | 2020-01-15 |                                           6 |
+| Tanya Roy    | 2023-06-10 |                                           3 |
+| Dev Malhotra | 2019-11-25 |                                           6 |
+| Pooja Sethi  | 2024-02-19 |                                           2 |
++--------------+------------+---------------------------------------------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT OrderID, OrderDate, MONTH(DATE_FORMAT(OrderDate, '%y-%M-%d'))
+    -> FROM ORDERS;
++---------+------------+-------------------------------------------+
+| OrderID | OrderDate  | MONTH(DATE_FORMAT(OrderDate, '%y-%M-%d')) |
++---------+------------+-------------------------------------------+
+|    1001 | 2025-01-10 |                                      NULL |
+|    1002 | 2025-01-18 |                                      NULL |
+|    1003 | 2025-02-03 |                                      NULL |
+|    1004 | 2025-02-14 |                                      NULL |
+|    1005 | 2025-03-01 |                                      NULL |
+|    1006 | 2025-03-15 |                                      NULL |
+|    1007 | 2025-04-09 |                                      NULL |
+|    1008 | 2025-04-21 |                                      NULL |
+|    1009 | 2025-05-11 |                                      NULL |
+|    1010 | 2025-06-06 |                                      NULL |
+|    1011 | 2025-07-19 |                                      NULL |
+|    1012 | 2025-08-02 |                                      NULL |
+|    1013 | 2025-08-23 |                                      NULL |
+|    1014 | 2025-09-05 |                                      NULL |
+|    1015 | 2025-10-17 |                                      NULL |
+|    1016 | 2025-11-28 |                                      NULL |
+|    1017 | 2025-12-12 |                                      NULL |
+|    1018 | 2026-01-09 |                                      NULL |
+|    1019 | 2026-02-20 |                                      NULL |
+|    1020 | 2026-03-14 |                                      NULL |
++---------+------------+-------------------------------------------+
+20 rows in set, 20 warnings (0.00 sec)
+
+mysql> SELECT OrderID, OrderDate, MONTHNAME(OrderDate)
+    -> FROM ORDERS;
++---------+------------+----------------------+
+| OrderID | OrderDate  | MONTHNAME(OrderDate) |
++---------+------------+----------------------+
+|    1001 | 2025-01-10 | January              |
+|    1002 | 2025-01-18 | January              |
+|    1003 | 2025-02-03 | February             |
+|    1004 | 2025-02-14 | February             |
+|    1005 | 2025-03-01 | March                |
+|    1006 | 2025-03-15 | March                |
+|    1007 | 2025-04-09 | April                |
+|    1008 | 2025-04-21 | April                |
+|    1009 | 2025-05-11 | May                  |
+|    1010 | 2025-06-06 | June                 |
+|    1011 | 2025-07-19 | July                 |
+|    1012 | 2025-08-02 | August               |
+|    1013 | 2025-08-23 | August               |
+|    1014 | 2025-09-05 | September            |
+|    1015 | 2025-10-17 | October              |
+|    1016 | 2025-11-28 | November             |
+|    1017 | 2025-12-12 | December             |
+|    1018 | 2026-01-09 | January              |
+|    1019 | 2026-02-20 | February             |
+|    1020 | 2026-03-14 | March                |
++---------+------------+----------------------+
+20 rows in set (0.01 sec)
+
+mysql> SELECT Category
+    -> FROM PRODUCTS
+    -> GROUP BY Category
+    -> HAVING AVG(UnitPrice) > 5000;
++-------------+
+| Category    |
++-------------+
+| Electronics |
+| Furniture   |
++-------------+
+2 rows in set (0.01 sec)
+
+mysql> SELECT Status, COUNT(*)
+    -> WHERE Status != 'Cancelled' AND OrderDate >= 2025-07-01
+    -> GROUP BY Status;
+ERROR 1054 (42S22): Unknown column 'Status' in 'field list'
+mysql> SELECT Status, COUNT(*)
+    -> FROM ORDERS
+    -> WHERE Status != 'Cancelled' AND OrderDate >= 2025-07-01
+    -> GROUP BY Status;
++------------+----------+
+| Status     | COUNT(*) |
++------------+----------+
+| Delivered  |       12 |
+| Shipped    |        3 |
+| Processing |        3 |
+| Returned   |        1 |
++------------+----------+
+4 rows in set, 1 warning (0.00 sec)
+
+mysql> SELECT Status, COUNT(*)
+    -> FROM ORDERS
+    -> WHERE Status != 'Cancelled' AND OrderDate >= '2025-07-01'
+    -> GROUP BY Status;
++------------+----------+
+| Status     | COUNT(*) |
++------------+----------+
+| Delivered  |        6 |
+| Processing |        2 |
+| Shipped    |        1 |
+| Returned   |        1 |
++------------+----------+
+4 rows in set (0.01 sec)
+
+mysql> SELECT c.CustomerName, COUNT(o.Order_ID)
+    -> FROM CUSTOMERS c
+    -> JOIN ORDERS o
+    ->     ON c.Customer_ID = o.Order_ID
+    -> GROUP BY c.Customer_Name
+    -> HAVING COUNT(o.Order_ID) >= 2;
+ERROR 1054 (42S22): Unknown column 'o.Order_ID' in 'field list'
+mysql> SELECT c.CustomerName, COUNT(o.OrderID)
+    -> FROM CUSTOMERS c
+    -> JOIN ORDERS o
+    ->     ON c.CustomerID = o.OrderID
+    -> GROUP BY c.Customer_Name
+    -> HAVING COUNT(o.OrderID) >= 2;
+ERROR 1054 (42S22): Unknown column 'c.Customer_Name' in 'group statement'
+mysql> SELECT c.CustomerName, COUNT(o.OrderID)
+    -> FROM CUSTOMERS c
+    -> JOIN ORDERS o
+    ->     ON c.CustomerID = o.OrderID
+    -> GROUP BY c.CustomerName
+    -> HAVING COUNT(o.OrderID) >= 2;
+Empty set (0.00 sec)
+
+mysql> SELECT c.CustomerID, c.CustomerName, COUNT(o.OrderID)
+    -> FROM CUSTOMERS c
+    -> JOIN ORDERS o
+    ->     ON c.CustomerID = o.OrderID
+    -> GROUP BY c.CustomerName, c.CustomerID
+    -> HAVING COUNT(o.OrderID) >= 2;
+Empty set (0.00 sec)
+
+mysql> SELECT OrderID
+    -> ^C
+mysql> SELECT OrderID, UnitPrice*StockQty AS Price_Bef_Discount
+    -> FROM ORDERS
+    -> GROUP BY OrderID
+    -> HAVING Price_Bef_Discount > 10000;
+ERROR 1054 (42S22): Unknown column 'UnitPrice' in 'field list'
+mysql> SELECT OrderID, SalePrice*Quantity AS Total_Price
+    -> FROM ORDERITEMS
+    -> GROUP BY OrderID
+    -> HAVING Price_Bef_Discount > 10000;
+ERROR 1054 (42S22): Unknown column 'Price_Bef_Discount' in 'having clause'
+mysql> SELECT OrderID, SalePrice*Quantity AS Total_Price
+    -> FROM ORDERITEMS
+    -> GROUP BY OrderID
+    -> HAVING Total_Price > 10000;
+ERROR 1055 (42000): Expression #2 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'sales_251b010.ORDERITEMS.SalePrice' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
+mysql> SELECT OrderID, SUM(SalePrice*Quantity) AS Total_Price
+    -> FROM ORDERITEMS
+    -> GROUP BY OrderID
+    -> HAVING Total_Price > 10000;
++---------+-------------+
+| OrderID | Total_Price |
++---------+-------------+
+|    1001 |       68498 |
+|    1002 |       20899 |
+|    1003 |       18297 |
+|    1004 |       72398 |
+|    1006 |       14246 |
+|    1008 |       41796 |
+|    1010 |       14598 |
+|    1011 |       80198 |
+|    1014 |       20897 |
+|    1016 |       85999 |
+|    1017 |       11999 |
+|    1020 |       71199 |
++---------+-------------+
+12 rows in set (0.00 sec)
+
+mysql> SELECT e.EmployeeID, e.EmployeeName, COUNT(o.Order_ID)
+    -> FROM EMPLOYEES e
+    -> JOIN ORDERS o
+    ->     ON e.EmployeeID = o.EmployeeID
+    -> GROUP BY e.EmployeeID, e.EmployeeName
+    -> HAVING COUNT(o.OrderID) >= 3;
+ERROR 1054 (42S22): Unknown column 'o.Order_ID' in 'field list'
+mysql> SELECT e.EmployeeID, e.EmployeeName, COUNT(o.OrderID)
+    -> FROM EMPLOYEES e
+    -> JOIN ORDERS o
+    ->     ON e.EmployeeID = o.EmployeeID
+    -> GROUP BY e.EmployeeID, e.EmployeeName
+    -> HAVING COUNT(o.OrderID) >= 3;
++------------+--------------+------------------+
+| EmployeeID | EmployeeName | COUNT(o.OrderID) |
++------------+--------------+------------------+
+|        101 | Rohan Mehta  |                4 |
+|        102 | Nisha Rao    |                4 |
+|        104 | Tanya Roy    |                4 |
+|        105 | Dev Malhotra |                3 |
+|        106 | Pooja Sethi  |                3 |
++------------+--------------+------------------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT * FROM PRODUCTS
+    -> WHERE UnitPrice >
+    -> (
+    -> SELECT AVG(UnitPrice) FROM PRODUCTS
+    -> );
++-----------+---------------+-------------+-----------+----------+------------+
+| ProductID | ProductName   | Category    | UnitPrice | StockQty | LaunchDate |
++-----------+---------------+-------------+-----------+----------+------------+
+|       201 | Laptop Pro 14 | Electronics |     68500 |       18 | 2023-09-01 |
+|       204 | HD Monitor 27 | Electronics |     18999 |       25 | 2024-01-10 |
+|       210 | Laser Printer | Electronics |     12499 |       12 | 2023-12-05 |
++-----------+---------------+-------------+-----------+----------+------------+
+3 rows in set (0.01 sec)
+
+mysql> SELECT c.CustomerID, c.CustomerName
+    -> FROM CUSTOMERS c
+    -> WHERE c.CustomerID IN
+    -> (
+    -> SELECT CustomerID
+    -> FROM ORDERS
+    -> WHERE STATUS = 'Delivered'
+    -> );
++------------+--------------+
+| CustomerID | CustomerName |
++------------+--------------+
+|          1 | Aarav Sharma |
+|          2 | Diya Verma   |
+|          5 | Ishaan Gupta |
+|          7 | Vivaan Khan  |
+|          9 | Reyansh Das  |
+|         10 | Myra Nair    |
+|          3 | Kabir Singh  |
+|          6 | Anaya Jain   |
+|          8 | Sara Mishra  |
++------------+--------------+
+9 rows in set (0.00 sec)
+
+mysql> SELECT CustomerID, CustomerName
+    -> FROM CUSTOMERS
+    -> WHERE NOT EXISTS
+    -> (
+    -> ^C
+mysql> SELECT c.CustomerID, c.CustomerName
+    -> FROM CUSTOMERS c
+    -> WHERE NOT EXISTS
+    -> (
+    -> SELECT 1 FROM ORDERS
+    -> WHERE c.CustomerID = o.CustomerID
+    -> );
+ERROR 1054 (42S22): Unknown column 'o.CustomerID' in 'where clause'
+mysql> SELECT CustomerID, CustomerName
+    -> FROM CUSTOMERS C
+    -> ^C
+mysql> SELECT c.CustomerID, c.CustomerName
+    -> FROM CUSTOMERS c
+    -> WHERE NOT EXISTS
+    -> (
+    -> SELECT 1 FROM ORDERS O
+    -> WHERE c.CustomerID = O.CustomerID
+    -> );
+Empty set (0.00 sec)
+
+mysql> SELECT * FROM PRODUCTS
+    -> ^C
+mysql> SELECT p.* FROM PRODUCTS
+    -> WHERE p.UnitPrice >
+    -> (
+    -> ^C
+mysql> SELECT p.* FROM PRODUCTS p
+    -> WHERE p.UnitPrice >
+    -> (
+    -> SELECT AVG(p2.UnitPrice)
+    -> FROM PRODUCTS p2
+    -> WHERE p.Category = p2.Category
+    -> );
++-----------+---------------------+-------------+-----------+----------+------------+
+| ProductID | ProductName         | Category    | UnitPrice | StockQty | LaunchDate |
++-----------+---------------------+-------------+-----------+----------+------------+
+|       201 | Laptop Pro 14       | Electronics |     68500 |       18 | 2023-09-01 |
+|       203 | Mechanical Keyboard | Accessories |      2499 |       65 | 2022-08-20 |
+|       205 | USB-C Hub           | Accessories |      1799 |       80 | 2023-05-05 |
+|       206 | Office Chair        | Furniture   |      8499 |       30 | 2021-10-12 |
+|       207 | Study Desk          | Furniture   |      6499 |       14 | 2022-11-11 |
++-----------+---------------------+-------------+-----------+----------+------------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT * FROM EMPLOYEES
+    -> WHERE Salary =
+    -> (
+    -> SELECT MAX(Salary) FROM EMPLOYEES
+    -> );
++------------+--------------+------------+------------+--------+
+| EmployeeID | EmployeeName | Department | HireDate   | Salary |
++------------+--------------+------------+------------+--------+
+|        105 | Dev Malhotra | Sales      | 2019-11-25 |  52000 |
++------------+--------------+------------+------------+--------+
+1 row in set (0.00 sec)
+
+mysql> SELECT OrderID, CustomerID, OrderDate
+    -> FROM ORDERS
+    -> WHERE OrderDate >
+    -> (
+    -> SELECT MIN(OrderDate) FROM ORDERS
+    -> );
++---------+------------+------------+
+| OrderID | CustomerID | OrderDate  |
++---------+------------+------------+
+|    1002 |          2 | 2025-01-18 |
+|    1003 |          3 | 2025-02-03 |
+|    1004 |          1 | 2025-02-14 |
+|    1005 |          4 | 2025-03-01 |
+|    1006 |          5 | 2025-03-15 |
+|    1007 |          6 | 2025-04-09 |
+|    1008 |          7 | 2025-04-21 |
+|    1009 |          8 | 2025-05-11 |
+|    1010 |          9 | 2025-06-06 |
+|    1011 |         10 | 2025-07-19 |
+|    1012 |          2 | 2025-08-02 |
+|    1013 |          3 | 2025-08-23 |
+|    1014 |          4 | 2025-09-05 |
+|    1015 |          5 | 2025-10-17 |
+|    1016 |          6 | 2025-11-28 |
+|    1017 |          7 | 2025-12-12 |
+|    1018 |          8 | 2026-01-09 |
+|    1019 |          9 | 2026-02-20 |
+|    1020 |         10 | 2026-03-14 |
++---------+------------+------------+
+19 rows in set (0.00 sec)
+
+mysql> SELECT * FROM PRODUCTS
+    -> WHERE ProductName LIKE '%Desk%' OR ProductName LIKE '%Book%';
++-----------+---------------+------------+-----------+----------+------------+
+| ProductID | ProductName   | Category   | UnitPrice | StockQty | LaunchDate |
++-----------+---------------+------------+-----------+----------+------------+
+|       207 | Study Desk    | Furniture  |      6499 |       14 | 2022-11-11 |
+|       209 | Notebook Pack | Stationery |       299 |      200 | 2021-06-01 |
+|       211 | Desk Lamp     | Furniture  |      1199 |       55 | 2024-08-22 |
++-----------+---------------+------------+-----------+----------+------------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT Status FROM ORDERS
+    -> WHERE COUNT(OrderID) > 2
+    -> ^C
+mysql> SELECT Status FROM ORDERS
+    -> GROUP BY Status
+    -> HAVING COUNT(OrderID) > 2
+    -> AND AVG(DiscountPct) > 4;
++-----------+
+| Status    |
++-----------+
+| Delivered |
+| Shipped   |
++-----------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT Category, ProductName
+    -> ^C
+mysql> SELECT p.Category, p.ProductName
+    -> FROM PRODUCTS p
+    -> WHERE p.UnitPrice >
+    -> (
+    -> SELECT AVG(p2.UnitPrice)
+    -> FROM PRODUCTS p2
+    -> GROUP BY Category
+    -> WHERE p.Category = p2.Category
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE p.Category = p2.Category
+)' at line 8
+mysql> SELECT p.Category, p.ProductName
+    -> FROM PRODUCTS p
+    -> WHERE p.UnitPrice >
+    -> (
+    -> SELECT AVG(p2.UnitPrice)
+    -> FROM PRODUCTS p2
+    -> WHERE p.Category = p2.Category
+    -> GROUP BY Category
+    -> );
++-------------+---------------------+
+| Category    | ProductName         |
++-------------+---------------------+
+| Electronics | Laptop Pro 14       |
+| Accessories | Mechanical Keyboard |
+| Accessories | USB-C Hub           |
+| Furniture   | Office Chair        |
+| Furniture   | Study Desk          |
++-------------+---------------------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT c.CustomerName, COUNT(o.*), SUM(oi.SalePrice*oi.Quantity)
+    -> FROM CUSTOMERS c
+    -> JOIN ORDERS o
+    ->     ON c.CustomerID = 0.CustomerID
+    -> JOIN ORDERITEMS oi
+    ->     ON o.OrderID = oi.OrderID
+    -> GROUP BY c.CustomerName, c.CustomerID
+    -> ^C
+mysql> SELECT c.CustomerName, COUNT(o.*), SUM(oi.SalePrice*oi.Quantity)
+    -> FROM CUSTOMERS c
+    -> JOIN ORDERS o
+    ->     ON c.CustomerID = 0.CustomerID
+    -> JOIN ORDERITEMS oi
+    ->     ON o.OrderID = oi.OrderID
+    -> WHERE c.StateName = 'Madhya Pradesh;
+    '> ^C
+mysql> SELECT c.CustomerName, COUNT(o.*), SUM(oi.SalePrice*oi.Quantity)
+    -> FROM CUSTOMERS c
+    -> JOIN ORDERS o
+    ->     ON c.CustomerID = 0.CustomerID
+    -> JOIN ORDERITEMS oi
+    ->     ON o.OrderID = oi.OrderID
+    -> WHERE c.StateName = 'Madhya Pradesh'
+    -> GROUP BY c.CustomerID, c.CustomerName
+    -> HAVING SUM(oi.SalePrice*oi.Quantity) > 20000;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '*), SUM(oi.SalePrice*oi.Quantity)
+FROM CUSTOMERS c
+JOIN ORDERS o
+    ON c.Custom' at line 1
+mysql> SELECT c.CustomerName, COUNT(o.OrderID), SUM(oi.SalePrice*oi.Quantity)
+    -> FROM CUSTOMERS c
+    -> JOIN ORDERS o
+    ->     ON c.CustomerID = 0.CustomerID
+    -> JOIN ORDERITEMS oi
+    ->     ON o.OrderID = oi.OrderID
+    -> WHERE c.StateName = 'Madhya Pradesh'
+    -> GROUP BY c.CustomerID, c.CustomerName
+    -> HAVING SUM(oi.SalePrice*oi.Quantity) > 20000;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'CustomerID
+JOIN ORDERITEMS oi
+    ON o.OrderID = oi.OrderID
+WHERE c.StateName = ' at line 4
+mysql> SELECT c.CustomerName, COUNT(o.*), SUM(oi.SalePrice*oi.Quantity)
+    -> FROM CUSTOMERS c
+    -> JOIN ORDERS o
+    ->     ON c.CustomerID = o.CustomerID
+    -> JOIN ORDERITEMS oi
+    ->     ON o.OrderID = oi.OrderID
+    -> WHERE c.StateName = 'Madhya Pradesh'
+    -> GROUP BY c.CustomerID, c.CustomerName
+    -> HAVING SUM(oi.SalePrice*oi.Quantity) > 20000;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '*), SUM(oi.SalePrice*oi.Quantity)
+FROM CUSTOMERS c
+JOIN ORDERS o
+    ON c.Custom' at line 1
+mysql> SELECT c.CustomerName, COUNT(o.OrderID), SUM(oi.SalePrice*oi.Quantity)
+    -> FROM CUSTOMERS c
+    -> JOIN ORDERS o
+    ->     ON c.CustomerID = o.CustomerID
+    -> JOIN ORDERITEMS oi
+    ->     ON o.OrderID = oi.OrderID
+    -> WHERE c.StateName = 'Madhya Pradesh'
+    -> GROUP BY c.CustomerID, c.CustomerName
+    -> HAVING SUM(oi.SalePrice*oi.Quantity) > 20000;
++--------------+------------------+-------------------------------+
+| CustomerName | COUNT(o.OrderID) | SUM(oi.SalePrice*oi.Quantity) |
++--------------+------------------+-------------------------------+
+| Aarav Sharma |                4 |                        140896 |
+| Diya Verma   |                3 |                         24196 |
+| Meera Patel  |                3 |                         27196 |
+| Anaya Jain   |                3 |                         87394 |
++--------------+------------------+-------------------------------+
+4 rows in set (0.00 sec)
+
+mysql> exit

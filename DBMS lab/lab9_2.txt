@@ -1,0 +1,625 @@
+mysql> CREATE TABLE Director (
+    -> Director_ID INT PRIMARY KEY,
+    -> Director_Name VARCHAR(40),
+    -> Nationality VARCHAR(30)
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> CREATE TABLE Movie (
+    -> Movie_ID INT PRIMARY KEY,
+    -> Movie_Name VARCHAR(50),
+    -> Release_Year INT,
+    -> Genre VARCHAR(30),
+    -> Language VARCHAR(30),
+    -> Duration TIME,
+    -> Director_ID INT,
+    -> FOREIGN KEY (Director_ID) REFERENCES Director(Director_ID)
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> CREATE TABLE Actor (
+    -> Actor_ID INT PRIMARY KEY,
+    -> Actor_Name VARCHAR(40),
+    -> Gender CHAR(1),
+    -> Birth_Year INT
+    -> );
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> CREATE TABLE Platform (
+    -> Platform_ID INT PRIMARY KEY,
+    -> Platform_Name VARCHAR(30)
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> CREATE TABLE Movie_Cast (
+    -> Movie_ID INT PRIMARY KEY,
+    -> Actor_ID INT,
+    -> Role_Name VARCHAR(30)
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> DROP TABLE Movie_Cast;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> CREATE TABLE Movie_Cast (
+    -> Movie_ID INT PRIMARY KEY,
+    -> Actor_ID INT,
+    -> FOREIGN KEY (Movie_ID) REFERENCES Movie(Movie_ID),
+    -> FOREIGN KEY (Actor_ID) REFERENCES Actor(Actor_ID)
+    -> );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> SHOW TABLES;
++--------------------------+
+| Tables_in_movie_database |
++--------------------------+
+| actor                    |
+| director                 |
+| movie                    |
+| movie_cast               |
+| platform                 |
++--------------------------+
+5 rows in set (0.00 sec)
+
+mysql> CREATE TABLE Producer (
+    -> Producer_ID INT PRIMARY KEY,
+    -> Producer_Name VARCHAR(40),
+    -> Company_Name VARCHAR(50)
+    -> );
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> CREATE TABLE Movie_Producer (
+    -> Movie_ID INT,
+    -> ^C
+mysql> CREATE TABLE Movie_Producer (
+    -> Movie_ID INT NOT NULL UNIQUE,
+    -> Producer_ID INT,
+    -> FOREIGN KEY (Movie_ID) REFERENCES Movie (Movie_ID),
+    -> FOREIGN KEY (Producer_ID) REFERENCES Producer (Producer_ID)
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> CREATE TABLE Rating (
+    -> Rating_ID INT PRIMARY KEY,
+    -> Movie_ID INT NOT NULL UNIQUE,
+    -> Rating DECIMAL(2,1),
+    -> Review_Count INT,
+    -> FOREIGN KEY (Movie_ID) REFERENCES Movie (Movie_ID)
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> CREATE TABLE Platform (
+    -> Platform_ID INT PRIMARY KEY,
+    -> Platform_Name VARCHAR(50)
+    -> );
+ERROR 1050 (42S01): Table 'platform' already exists
+mysql> DESCRIBE PLATFORM;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| Platform_ID   | int         | NO   | PRI | NULL    |       |
+| Platform_Name | varchar(30) | YES  |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> CREATE TABLE Movie_Platform (
+    -> Movie_ID INT PRIMARY KEY,
+    -> ^C
+mysql> CREATE TABLE Movie_Platform (
+    -> Movie_ID INT NOT NULL UNIQUE,
+    -> Platform_ID INT,
+    -> Release_Date Date,
+    -> FOREIGN KEY (Movie_ID) REFERENCES Movie (Movie_ID),
+    -> FOREIGN KEY (Platform_ID) REFERENCES Platform (Platform_ID)
+    -> );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> SHOW TABLES;
++--------------------------+
+| Tables_in_movie_database |
++--------------------------+
+| actor                    |
+| director                 |
+| movie                    |
+| movie_cast               |
+| movie_platform           |
+| movie_producer           |
+| platform                 |
+| producer                 |
+| rating                   |
++--------------------------+
+9 rows in set (0.00 sec)
+
+mysql> DESCRIBE MOVIE;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| Movie_ID     | int         | NO   | PRI | NULL    |       |
+| Movie_Name   | varchar(50) | YES  |     | NULL    |       |
+| Release_Year | int         | YES  |     | NULL    |       |
+| Genre        | varchar(30) | YES  |     | NULL    |       |
+| Language     | varchar(30) | YES  |     | NULL    |       |
+| Duration     | time        | YES  |     | NULL    |       |
+| Director_ID  | int         | YES  | MUL | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+7 rows in set (0.00 sec)
+
+mysql> INSERT INTO Movie (Movie_ID, Movie_Name, Release_Year, Genre, Language, Duration, Director_ID) VALUES
+    -> (101, 'Taare Zameen Par', 2012, 'Coming of Age', 'Hindi', 160, 203),
+    -> (102, 'Bhootnath', 2009, 'Drama', 'Hindi', 145, 202),
+    -> (103, 'Kabhi Khushi Kabhi Gham', 1998, 'Drama', 'Hindi', 180, 201),
+    -> (104, 'Ra-One', 2013, 'Fantasy', 'Hindi', ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 5
+mysql> USE PATRIOTICz_MOVIES_DB;
+ERROR 1049 (42000): Unknown database 'patrioticz_movies_db'
+mysql> SHOW DATABASES;
++----------------------------+
+| Database                   |
++----------------------------+
+| 241b040                    |
+| 241b071                    |
+| 241b163                    |
+| 241b225                    |
+| 241b331                    |
+| 241b621                    |
+| 251b010                    |
+| 251b010_p1                 |
+| 251b077                    |
+| 251b077_p1                 |
+| 251b077_testdb             |
+| 251b177                    |
+| 251b253                    |
+| 251b651                    |
+| 251b710                    |
+| 251b711                    |
+| 251b711_5                  |
+| 251b711_6                  |
+| a6                         |
+| airline                    |
+| airline_reservation_system |
+| anuj                       |
+| b010                       |
+| b22_251b651                |
+| bb                         |
+| bookstore_db               |
+| college_db                 |
+| company                    |
+| company251b651             |
+| company_241b286            |
+| company_241b331            |
+| company_241b621            |
+| company_251b253            |
+| company_251b651            |
+| company_lab                |
+| compoany_241b163           |
+| dbms                       |
+| dbs_241b286                |
+| dev                        |
+| exam                       |
+| films                      |
+| hospital                   |
+| information_schema         |
+| irctc241b331               |
+| join241b331                |
+| juet                       |
+| lab10                      |
+| lab10241b331               |
+| lab10_241b286              |
+| lab10_ques                 |
+| lab11241b331               |
+| lab11_241b286              |
+| lab12_241b286              |
+| lab3_241b286               |
+| lab4_241b286               |
+| lab5_241b286               |
+| lab5_251b253               |
+| lab6                       |
+| lab6_241b286               |
+| lab6_251b253               |
+| lab7_241b286               |
+| lab8241b331                |
+| lab8_241b225               |
+| lab9_251b010               |
+| lab_11_241b225             |
+| lab_12_241b225             |
+| labassignment12            |
+| library                    |
+| librarymanagement          |
+| movie_database             |
+| mysql                      |
+| online_food_delivery       |
+| p1                         |
+| p1_253                     |
+| p2                         |
+| p2_241b286                 |
+| patriotic_movies_db        |
+| performance_schema         |
+| prac_222                   |
+| restaurants                |
+| sakila                     |
+| student_241b286            |
+| sys                        |
+| test241b163                |
+| testdb                     |
+| traindata                  |
+| university                 |
+| universityy                |
+| work                       |
+| world                      |
+| xyz                        |
++----------------------------+
+91 rows in set (0.00 sec)
+
+mysql> USE PARTIOTIC_MOVIES_DB;
+ERROR 1049 (42000): Unknown database 'partiotic_movies_db'
+mysql> USE PATRIOTIC_MOVIES_DB;
+Database changed
+mysql> SHOW TABLES;
++-------------------------------+
+| Tables_in_patriotic_movies_db |
++-------------------------------+
+| actor                         |
+| director                      |
+| movie                         |
+| movie_cast                    |
+| movies                        |
+| platform                      |
++-------------------------------+
+6 rows in set (0.00 sec)
+
+mysql> DESCRIBE ACTOR;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| Actor_ID   | int         | NO   | PRI | NULL    |       |
+| Actor_Name | varchar(40) | YES  |     | NULL    |       |
+| Gender     | char(1)     | YES  |     | NULL    |       |
+| Birth_Year | int         | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT * from actor;
+Empty set (0.00 sec)
+
+mysql> SELECT * FROM MOVIE;
+Empty set (0.00 sec)
+
+mysql> USE Lab9_251;
+ERROR 1049 (42000): Unknown database 'lab9_251'
+mysql> SHOW DATABASES;
++----------------------------+
+| Database                   |
++----------------------------+
+| 241b040                    |
+| 241b071                    |
+| 241b163                    |
+| 241b225                    |
+| 241b331                    |
+| 241b621                    |
+| 251b010                    |
+| 251b010_p1                 |
+| 251b077                    |
+| 251b077_p1                 |
+| 251b077_testdb             |
+| 251b177                    |
+| 251b253                    |
+| 251b651                    |
+| 251b710                    |
+| 251b711                    |
+| 251b711_5                  |
+| 251b711_6                  |
+| a6                         |
+| airline                    |
+| airline_reservation_system |
+| anuj                       |
+| b010                       |
+| b22_251b651                |
+| bb                         |
+| bookstore_db               |
+| college_db                 |
+| company                    |
+| company251b651             |
+| company_241b286            |
+| company_241b331            |
+| company_241b621            |
+| company_251b253            |
+| company_251b651            |
+| company_lab                |
+| compoany_241b163           |
+| dbms                       |
+| dbs_241b286                |
+| dev                        |
+| exam                       |
+| films                      |
+| hospital                   |
+| information_schema         |
+| irctc241b331               |
+| join241b331                |
+| juet                       |
+| lab10                      |
+| lab10241b331               |
+| lab10_241b286              |
+| lab10_ques                 |
+| lab11241b331               |
+| lab11_241b286              |
+| lab12_241b286              |
+| lab3_241b286               |
+| lab4_241b286               |
+| lab5_241b286               |
+| lab5_251b253               |
+| lab6                       |
+| lab6_241b286               |
+| lab6_251b253               |
+| lab7_241b286               |
+| lab8241b331                |
+| lab8_241b225               |
+| lab9_251b010               |
+| lab_11_241b225             |
+| lab_12_241b225             |
+| labassignment12            |
+| library                    |
+| librarymanagement          |
+| movie_database             |
+| mysql                      |
+| online_food_delivery       |
+| p1                         |
+| p1_253                     |
+| p2                         |
+| p2_241b286                 |
+| patriotic_movies_db        |
+| performance_schema         |
+| prac_222                   |
+| restaurants                |
+| sakila                     |
+| student_241b286            |
+| sys                        |
+| test241b163                |
+| testdb                     |
+| traindata                  |
+| university                 |
+| universityy                |
+| work                       |
+| world                      |
+| xyz                        |
++----------------------------+
+91 rows in set (0.00 sec)
+
+mysql> USE MOVIE_DATABASE;
+Database changed
+mysql> SHOW TABLES;
++--------------------------+
+| Tables_in_movie_database |
++--------------------------+
+| actor                    |
+| director                 |
+| movie                    |
+| movie_cast               |
+| movie_platform           |
+| movie_producer           |
+| platform                 |
+| producer                 |
+| rating                   |
++--------------------------+
+9 rows in set (0.00 sec)
+
+mysql> SELECT * FROM MOVIE;
+Empty set (0.00 sec)
+
+mysql> USE Lab9_251B010;
+Database changed
+mysql> SHOW TABLES;
+Empty set (0.00 sec)
+
+mysql> USE MOVIE_DATABASE;
+Database changed
+mysql> SHOW TABLES;
++--------------------------+
+| Tables_in_movie_database |
++--------------------------+
+| actor                    |
+| director                 |
+| movie                    |
+| movie_cast               |
+| movie_platform           |
+| movie_producer           |
+| platform                 |
+| producer                 |
+| rating                   |
++--------------------------+
+9 rows in set (0.00 sec)
+
+mysql> INSERT INTO Movie (Movie_ID, Movie_Name, Release_Year, Genre, Language, Duration, Director_ID) VALUES
+    -> (101, 'Taare Zameen Par', 2012, 'Coming of Age', 'Hindi', 160, 203),
+    -> (102, 'Bhootnath', 2009, 'Drama', 'Hindi', 145, 202),
+    -> (103, 'Kabhi Khushi Kabhi Gham', 1998, 'Drama', 'Hindi', 180, 201),
+    -> (104, 'Ra-One', 2013, 'Fantasy', 'Hindi', ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 5
+mysql> SELECT m.Movie_Name, m.Genre, m.Release_Year, d.Director_Name
+    -> FROM MOVIE m
+    -> JOIN DIRECTOR d
+    ->     ON m.Director_ID = d.Director_ID;
+Empty set (0.00 sec)
+
+mysql> 
+mysql> SELECT m.Movie_Name, m.Genre. m.Release_Year, d.Director_Name
+    -> FROM MOVIE m
+    -> JOIN DIRECTOR d
+    ->     ON m.Director_ID = d.Director_ID
+    -> WHERE d.Director_Name = 'Anurag Kashyap';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '.Release_Year, d.Director_Name
+FROM MOVIE m
+JOIN DIRECTOR d
+    ON m.Director_ID' at line 1
+mysql> 
+mysql> SELECT m.Movie_Name, a.Actor_Name, r.Role_Name
+    -> FROM MOVIE m
+    -> JOIN MOVIE_CAST mc
+    ->     ON m.Movie_ID = mc.Movie_ID
+    -> JOIN ACTOR a
+    ->     ON a.Actor_ID = mc.Movie_ID;
+ERROR 1054 (42S22): Unknown column 'r.Role_Name' in 'field list'
+mysql> 
+mysql> SELECT m.Movie_Name, m.Release_Year, d.Director_Name, m.Genre
+    -> FROM MOVIE m
+    -> JOIN DIRECTOR d
+    ->     ON m.Director_ID = d.Director_ID
+    -> ORDER BY m.Release_Year;
+Empty set (0.00 sec)
+
+mysql> 
+mysql> SELECT m.Movie_Name, p.Producer_Name, p.Company_Name
+    -> FROM MOVIE m
+    -> JOIN MOVIE_PRODUCER mp
+    ->     ON m.Movie_ID - mp.Movie_ID
+    -> JOIN PRODUCER
+    ->     ON mp.Producer_ID = p.Producer_ID;
+ERROR 1054 (42S22): Unknown column 'p.Producer_Name' in 'field list'
+mysql> SELECT m.Movie_Name, m.Release_Year, d.Director_Name
+    -> FROM Movie
+    -> ^C
+mysql> SELECT m.Movie_Name, m.Release_Year, d.Director_Name
+    -> FROM MOVIE m
+    -> LEFT JOIN DIRECTOR d
+    ->     ON m.Director_ID = d.Director_ID
+    -> ;
+Empty set (0.00 sec)
+
+mysql> SELECT m.Movie_Name, m.Genre, m.Release_Year, d.Director_Name
+    -> FROM MOVIE m
+    -> JOIN DIRECTOR d
+    ->     ON m.Director_ID = d.Director_ID
+    -> WHERE d.Director_Name = 'Anurag Kashyap';
+Empty set (0.00 sec)
+
+mysql> SELECT m.Movie_Name, a.Actor_Name, mc.Role_Name
+    -> FROM MOVIE m
+    -> JOIN ACTOR a
+    -> ;
+ERROR 1054 (42S22): Unknown column 'mc.Role_Name' in 'field list'
+mysql> SELECT m.Movie_Name, a.Actor_Name, mc.Role_Name
+    -> FROM MOVIE m
+    -> JOIN MOVIE_CAST mc
+    ->     ON m.Movie_ID = mc.Movie_ID
+    -> JOIN ACTOR a
+    ->     ON mc.Actor_ID = a.Actor_ID
+    -> ;
+ERROR 1054 (42S22): Unknown column 'mc.Role_Name' in 'field list'
+mysql> DESCRIBE MOVIE_CAST;
++----------+------+------+-----+---------+-------+
+| Field    | Type | Null | Key | Default | Extra |
++----------+------+------+-----+---------+-------+
+| Movie_ID | int  | NO   | PRI | NULL    |       |
+| Actor_ID | int  | YES  | MUL | NULL    |       |
++----------+------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> UPDATE TABLE MOVIE_CAST
+    -> ADD COLUMN Role_Name VARCHAR(30);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'TABLE MOVIE_CAST
+ADD COLUMN Role_Name VARCHAR(30)' at line 1
+mysql> UPDATE MOVIE_CAST
+    -> ADD COLUMN Role_Name VARCHAR(30);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ADD COLUMN Role_Name VARCHAR(30)' at line 2
+mysql> UPDATE TABLE MOVIE_CAST
+    -> ADD Role_Name VARCHAR(30);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'TABLE MOVIE_CAST
+ADD Role_Name VARCHAR(30)' at line 1
+mysql> ALTER TABLE MOVIE_CAST
+    -> ADD Role_Name VARCHAR(30);
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> SELECT m.Movie_Name, a.Actor_Name, mc.Role_Name
+    -> FROM MOVIE m
+    -> JOIN MOVIE_CAST mc
+    ->     ON m.Movie_ID = mc.Movie_ID
+    -> JOIN ACTOR a
+    ->     ON mc.Actor_ID = a.Actor_ID
+    -> ;
+Empty set (0.00 sec)
+
+mysql> SELECT m.Movie_Name, p.Producer_Name, p.Company_Name
+    -> FROM MOVIE m
+    -> LEFT JOIN PRODUCER p
+    ->     ON ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 4
+mysql> SELECT m.Movie_Name, p.Producer_Name, p.Company_Name
+    -> FROM MOVIE m
+    -> LEFT JOIN MOVIE_PRODUCER mp
+    ->     ON m.Movie_ID = mp.Movie_ID
+    -> JOIN PRODUCER p
+    ->     ON p.Producer_ID = mp.Producer_ID;
+Empty set (0.00 sec)
+
+mysql> SELECT m.Movie_Name, d.Director_Name, r.Rating
+    -> FROM MOVIE m
+    -> JOIN DIRECTOR d
+    ->     ON m.Director_ID = d.Director_ID
+    -> JOIN RATING r
+    ->     ON m.Movie_ID = r.Movie_ID
+    -> GROUP BY M.Movie_ID
+    -> ^C
+mysql> SELECT m.Movie_Name, d.Director_Name, r.Rating
+    -> FROM MOVIE m
+    -> JOIN DIRECTOR d
+    ->     ON m.Director_ID = d.Director_ID
+    -> JOIN RATING r
+    ->     ON m.Movie_ID = r.Movie_ID
+    -> WHERE r.Rating > 8.0
+    -> ORDER BY r.Rating DESC;
+Empty set (0.00 sec)
+
+mysql> SELECT m.Movie_Name, m.Release_Year, d.Director_Name, m.Genre
+    -> FROM MOVIES m
+    -> JOIN DIRECTOR d
+    ->     ON m.Director_ID = d.Director_ID
+    -> WHERE m.Release_Year > 2020;
+ERROR 1146 (42S02): Table 'movie_database.movies' doesn't exist
+mysql> SELECT m.Movie_Name, m.Release_Year, d.Director_Name, m.Genre
+    -> FROM MOVIE m
+    -> JOIN DIRECTOR d
+    ->     ON m.Director_ID = d.Director_ID
+    -> WHERE m.Release_Year > 2020;
+Empty set (0.00 sec)
+
+mysql> SELECT m.Movie_Name, m.Release_Year, d.Director_Name, m.Genre
+    -> FROM MOVIE m
+    -> JOIN DIRECTOR d
+    ->     ON m.Director_ID = d.Director_ID
+    -> WHERE m.Release_Year > 2020
+    -> ORDER BY m.Release_Year DESC;
+Empty set (0.00 sec)
+
+mysql> SELECT d.Director_Name, COUNT(m.Movie_ID), AVG(r.Rating)
+    -> FROM DIRECTOR d
+    -> JOIN MOVIE m
+    ->     ON m.Director_ID = d.Director_ID
+    -> JOIN RATING r
+    ->     ON m.Movie_ID = r.Movie_ID
+    -> GROUP BY d.Director_Name
+    -> HAVING AVG(r.Rating) > 7.0
+    -> ORDER BY AVG(r.Rating) DESC;
+Empty set (0.00 sec)
+
+mysql> SELECT a.Actor_Name, COUNT(r.Movie_ID)
+    -> FROM ACTOR a
+    -> LEFT JOIN MOVIE_ROLE r
+    ->     ON a.Actor_ID = r.Actor_ID
+    -> GROUP BY a.Actor_Name
+    -> HAVING COUNT(r.Movie_ID) > 2;
+ERROR 1146 (42S02): Table 'movie_database.movie_role' doesn't exist
+mysql> SELECT a.Actor_Name, COUNT(r.Movie_ID)
+    -> FROM ACTOR a
+    -> LEFT JOIN MOVIE_CAST r
+    ->     ON a.Actor_ID = r.Actor_ID
+    -> GROUP BY a.Actor_Name
+    -> HAVING COUNT(r.Movie_ID) > 2;
+Empty set (0.00 sec)
+
+mysql> SELECT Genre, COUNT(Movie_ID)
+    -> FROM MOVIE
+    -> GROUP BY Genre
+    -> ORDER BY COUNT(Movie_ID) DESC;
+Empty set (0.00 sec)
+
+mysql> Terminal close -- exit!

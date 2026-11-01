@@ -1,0 +1,53 @@
+mysql> SELECT VERSION();
++-----------+
+| VERSION() |
++-----------+
+| 8.4.0     |
++-----------+
+1 row in set (0.00 sec)
+
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+4 rows in set (0.01 sec)
+
+mysql> CREATE DATABASE TestDB;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> CREATE DATABASE DBMS104;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> USE DBMS104;
+Database changed
+mysql> CREATE TABLE Students (
+    -> ID INT PRIMARY KEY,
+    -> Name VARCHAR(50),
+    -> Age INT
+    -> );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> SHOW TABLES;
++-------------------+
+| Tables_in_dbms104 |
++-------------------+
+| students          |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql> DESCRIBE Students;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| ID    | int         | NO   | PRI | NULL    |       |
+| Name  | varchar(50) | YES  |     | NULL    |       |
+| Age   | int         | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+mysql>

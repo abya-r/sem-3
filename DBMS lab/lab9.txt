@@ -1,0 +1,81 @@
+mysql> CREATE DATABASE Movie_Database;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> CREATE TABLE Movie (
+    -> Movie_ID INT PRIMARY KEY,
+    -> Movie_Name VARCHAR(50),
+    -> Release_Year INT,
+    -> Genre VARCHAR(30),
+    -> Language VARCHAR(30),
+    -> Duration TIME,
+    -> Director_ID INT
+    -> ^C
+mysql> CREATE TABLE Director (
+    -> Director_ID INT PRIMARY KEY,
+    -> Director_Name VARCHAR(40),
+    -> Nationality VARCHAR(30)
+    -> );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> CREATE TABLE Movie (
+    -> Movie_ID INT PRIMARY KEY,
+    -> Movie_Name VARCHAR(50),
+    -> Release_Year INT,
+    -> Genre VARCHAR(30),
+    -> Language VARCHAR(30),
+    -> Duration TIME,
+    -> Director_ID INT,
+    -> FOREIGN KEY (Director_ID) REFERENCES Director(Director_ID)
+    -> );
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> CREATE TABLE Actor
+    -> (^C
+mysql> CREATE TABLE Actor (
+    -> Actor_ID INT PRIMARY KEY,
+    -> Actor_Name VARCHAR(40),
+    -> Gender CHAR(1),
+    -> Birth_Year INT
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> CREATE TABLE Platform (
+    -> Platform_ID INT PRIMARY KEY,
+    -> Platform_Name VARCHAR(30)
+    -> );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> CREATE TABLE Movie_Cast (
+    -> Movie_ID INT PRIMARY KEY,
+    -> Actor_ID INT,
+    -> Role_Name VARCHAR(30)
+    -> );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> CREATE TABLE Producer (
+    -> Movie_ID^C
+mysql> DROP TABLE Movie_Cast;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> CREATE TABLE Movie_Cast (
+    -> Movie_ID INT PRIMARY KEY,
+    -> Actor_ID INT,
+    -> FOREIGN KEY (Movie_ID) REFERENCES Movie(Movie_ID),
+    -> FOREIGN KEY (Actor_ID) REFERENCES Actor(Actor_ID)
+    -> );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> SHOW TABLES;
++-------------------------------+
+| Tables_in_patriotic_movies_db |
++-------------------------------+
+| actor                         |
+| director                      |
+| movie                         |
+| movie_cast                    |
+| movies                        |
+| platform                      |
++-------------------------------+
+6 rows in set (0.00 sec)
+
+mysql>
