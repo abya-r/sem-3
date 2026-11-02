@@ -1,4 +1,5 @@
-D1 = {141152:'Sanjay Jain',
+D1 = {
+      141152:'Sanjay Jain',
       141153:'Abhinav Agarwal',
       141154:'Abhishek Nigam',
       141155:'Aditya Arora',
@@ -35,7 +36,6 @@ D4 = {
     141167: 'Maharashtra',
     141168: 'Madhya Pradesh'
     }
-
 
 state = input("enter state: ")
 for enrol, s in D4.items():
