@@ -1,4 +1,5 @@
-D1 = {141152:'Sanjay Jain',
+D1 = {
+      141152:'Sanjay Jain',
       141153:'Abhinav Agarwal',
       141154:'Abhishek Nigam',
       141155:'Aditya Arora',
@@ -35,7 +36,8 @@ D3 = {
     141167: 8836687424,
     141168: 9856687425
     }
-providers = {94: 'BSNL',
+providers = {
+             94: 'BSNL',
              98: 'Airtel',
              89: 'Idea',
              77: 'Reliance',
@@ -44,4 +46,14 @@ providers = {94: 'BSNL',
              79: 'Docomo'
              }
 
-prov = int("input provider: ")
+prov = input("input provider: ")
+
+num = []
+for no, provider in providers.items():
+    if provider == prov:
+        num.append(no)
+
+for enrol, number in D3.items():
+    prefix = int(str(number)[:2])
+    if prefix in num:
+        print(enrol, D1[enrol])
