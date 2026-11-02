@@ -45,4 +45,4 @@ for enrol, marks in D5.items():
 print(f"Highest Maths Mark: {max_maths}")
 for enrol, marks in D5.items():
     if marks[2] == max_maths:
-        print(enrol, D1[enrol], marks)
+        print(enrol, D1[enrol])

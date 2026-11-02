@@ -46,4 +46,4 @@ for enrol, marks in D5.items():
 print(f"highest physics marks: {max_phy}")
 for enrol, marks in D5.items():
     if marks[0] == max_phy:
-        print(enrol, D1[enrol], marks)
+        print(enrol, D1[enrol])

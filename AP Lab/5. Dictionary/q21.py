@@ -40,8 +40,8 @@ D5 = {
 enrol_input = int(input("Enter student's enrollment: "))
 
 if enrol_input in D1:
-    print("Enrollment:", enrol_input)
-    print("Name:", D1[enrol_input])
+    print("erno:", enrol_input)
+    print("name:", D1[enrol_input])
     if enrol_input in D5:
         print("Marks (Phy, Chem, Maths):", D5[enrol_input])
 else:

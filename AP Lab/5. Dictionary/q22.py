@@ -42,8 +42,8 @@ found = False
 
 for enrol, stud_name in D1.items():
     if stud_name.lower() == name.lower():
-        print("Enrollment:", enrol)
-        print("Name:", stud_name)
+        print("Erno:", enrol)
+        print("name:", stud_name)
         if enrol in D5:
             print("Marks (Phy, Chem, Maths):", D5[enrol])
         found = True

@@ -46,4 +46,4 @@ for enrol, marks in D5.items():
 print(f"Highest Chemistry Mark: {max_chem}")
 for enrol, marks in D5.items():
     if marks[1] == max_chem:
-        print(enrol, D1[enrol], marks)
+        print(enrol, D1[enrol])
