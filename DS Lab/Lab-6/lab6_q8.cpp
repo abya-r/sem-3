@@ -1,4 +1,4 @@
-#include <iostream>  //
+#include <iostream>  /////
 using namespace std;
 
 struct Node
@@ -7,94 +7,109 @@ struct Node
     struct Node *NEXT;
 };
 
-Node* insert_End(Node* START, int data)
+// Time: O(n), Auxiliary space: O(1)
+Node* Append_List(Node *START, int info)
 {
-    Node* NewNode = new Node;
-    Node* Temp;
+    Node *New_Node = new Node;
+    Node *Temp = START;
 
-    NewNode->INFO = data;
-    NewNode->NEXT = NULL;
+    New_Node->INFO = info;
+    New_Node->NEXT = NULL;
 
-    if (START==NULL)
-        START = NewNode;
+    if (START == NULL)
+        START = New_Node;
     else
     {
-        Temp = START;
         while (Temp->NEXT != NULL)
             Temp = Temp->NEXT;
-        Temp->NEXT = NewNode;
+        Temp->NEXT = New_Node;
     }
     return START;
 }
 
-Node* insert_kthLoc (Node* START, int data, int k)
+// Time: O(n), Auxiliary space: O(1)
+void Traverse_List(struct Node *START)
 {
-    if (k<1)
+    struct Node *Temp = START;
+
+    if (START == NULL)
     {
-        cout << "invalid location";
-        return START;
+        cout << "List is empty\n";
+        return;
     }
-
-    Node* NewNode = new Node;
-    NewNode->INFO = data;
-
-    if (k==1)
-    {
-        NewNode->NEXT = START;
-        START = NewNode;
-        return START;
-    }
-
-    Node* Temp = START;
-    for (int i=0; i<k-1 && Temp!=NULL; i++)
-        Temp = Temp->NEXT;
-    if (Temp==NULL)
-    {
-        cout << "invalid location: k>n+1";
-        return START;
-    }
-    NewNode->NEXT = Temp->NEXT;
-    Temp->NEXT = NewNode;
-    return START;
-}
-
-void printList(struct Node *START)
-{
-    struct Node *Temp;
-
-    Temp = START;
 
     while (Temp != NULL)
     {
         cout << Temp->INFO << "  ";
         Temp = Temp->NEXT;
     }
-    cout << "\n";
+    cout << "NULL";
+}
+
+// Time: O(Loc) -> best O(1) (Loc = 1), worst O(n) (end of list). Auxiliary space: O(1)
+Node* InsertAt_Given_Loc(Node *START, int info, int Loc)
+{
+    Node *Temp = START;
+    Node *New_Node;
+
+    if (Loc < 1)
+    {
+        cout << "invalid location !\n";
+        return START;
+    }
+
+    New_Node = new Node;
+    New_Node->INFO = info;
+
+    if (Loc == 1)
+    {
+        New_Node->NEXT = START;
+        START = New_Node;
+        return START;
+    }
+
+    for (int i = 1; i < Loc - 1 && Temp != NULL; i++)
+        Temp = Temp->NEXT;
+
+    if (Temp == NULL)
+    {
+        cout << "Loc is greater than number of nodes + 1\n";
+        delete New_Node;
+        return START;
+    }
+
+    New_Node->NEXT = Temp->NEXT;
+    Temp->NEXT = New_Node;
+    return START;
 }
 
 int main()
 {
-    Node* START = NULL;
-    int val, data, k;
+    Node *START = NULL;
+    int value;
 
-    cout << "enter values: (-1 to stop)\n";
-
-    while (val!=-1)
+    cout << "Enter values (-1 to stop):\n";
+    while (true)
     {
-        cin >> val;
-        START = insert_End(START, val);
+        cin >> value;
+        if (value == -1)
+            break;
+
+        START = Append_List(START, value);
     }
 
-    cout << "list before insertion: ";
-    printList(START);
+    int Loc;
 
-    cout << "enter number and position to insert: ";
-    cin >> data >> k;
+    cout << "\nList before insertion: ";
+    Traverse_List(START);
 
-    insert_kthLoc (START, data, k);
+    cout << "\n\nEnter value and position to insert: ";
+    cin >> value >> Loc;
 
-    cout << "list after insertion: ";
-    printList(START);
+    START = InsertAt_Given_Loc(START, value, Loc);
+
+    cout << "List after insertion: ";
+    Traverse_List(START);
 
     return 0;
 }

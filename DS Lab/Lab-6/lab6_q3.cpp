@@ -1,4 +1,4 @@
-#include <iostream>  //
+#include <iostream>  /////
 using namespace std;
 
 struct Node
@@ -7,9 +7,10 @@ struct Node
     struct Node *NEXT;
 };
 
+// Time: O(1), Auxiliary space: O(1)
 struct Node* Insert_Beginning(struct Node *START, int value)
 {
-    Node *NewNode = new Node;
+    Node *NewNode = new struct Node;
 
     NewNode->INFO = value;
     NewNode->NEXT = START;
@@ -19,33 +20,44 @@ struct Node* Insert_Beginning(struct Node *START, int value)
     return START;
 }
 
-int noOfNodes (Node* START)
+// Time: O(n), Auxiliary space: O(1)
+int Count_Nodes(Node *START)
 {
-    Node* temp;
-    temp = START;
-    int nodes = 0;
-    while (temp->NEXT!=NULL)
+    Node *Temp = START;
+    int count = 0;
+
+    if (START == NULL)
     {
-        nodes++;
-        temp = temp -> NEXT;
+        cout << "List is empty\n";
+        return 0;
     }
-    return nodes;
+
+    while (Temp != NULL)
+    {
+        count++;
+        Temp = Temp->NEXT;
+    }
+    return count;
 }
 
 int main()
 {
-    Node* START = NULL;
-    int val;
+    Node *START = NULL;
+    int value;
 
-    cout << "enter values: (-1 to stop)\n";
-
-    while (val!=-1)
+    cout << "Enter values (-1 to stop):\n";
+    while (true)
     {
-        cin >> val;
-        START = Insert_Beginning(START, val);
+        cin >> value;
+        if (value == -1)
+            break;
+
+        START = Insert_Beginning(START, value);
     }
 
-    cout << "\nno. of nodes = " << noOfNodes(START);
+    int count = Count_Nodes(START);
+
+    cout << "\nNumber of nodes = " << count;
 
     return 0;
 }
