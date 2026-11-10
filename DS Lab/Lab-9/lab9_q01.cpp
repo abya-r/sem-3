@@ -13,6 +13,7 @@ void init_stack(stack *STK)
 {
     STK->TOP = -1;
 }
+
 void push(stack *STK, int item);
 void pop(stack *STK);
 int peek(stack *STK);
@@ -26,7 +27,7 @@ int main()
     init_stack(&STK);
 
     int num;
-    cout << "enter elements for stack: (-1 to stop)" << endl;
+    cout << "Enter elements for stack: (-1 to stop)" << endl;
     while (true)
     {
         cin >> num;
@@ -35,7 +36,7 @@ int main()
         push(&STK, num);
     }
 
-    cout << "original stack: ";
+    cout << "Original stack: ";
     print(&STK);
 
     cout << endl
@@ -47,51 +48,44 @@ int main()
          << "e. Check whether stack is empty" << endl
          << "f. Check whether stack is full" << endl;
     char choice;
-    cout << "enter choice: ";
+    cout << "Enter choice: ";
     cin >> choice;
 
     switch (choice)
     {
-
     case 'a':
         int a;
-        cout << "enter number to push: ";
+        cout << "Enter number to push: ";
         cin >> a;
         push(&STK, a);
-        cout << "new stack: ";
+        cout << "New stack: ";
         print(&STK);
         break;
-
     case 'b':
         pop(&STK);
-        cout << "new stack: ";
+        cout << "New stack: ";
         print(&STK);
         break;
-
     case 'c':
-        cout << peek(&STK);
+        cout << "Top element: " << peek(&STK) << endl;
         break;
-
     case 'd':
-        cout << elementCount(&STK);
+        cout << "Element count: " << elementCount(&STK) << endl;
         break;
-
     case 'e':
         if (isEmpty(&STK))
-            cout << "stack is empty" << endl;
+            cout << "Stack is empty" << endl;
         else
-            cout << "stack is not empty" << endl;
+            cout << "Stack is not empty" << endl;
         break;
-
     case 'f':
         if (isFull(&STK))
-            cout << "stack is full" << endl;
+            cout << "Stack is full" << endl;
         else
-            cout << "stack is not full" << endl;
+            cout << "Stack is not full" << endl;
         break;
-
     default:
-        cout << "invalid choice.";
+        cout << "Invalid choice." << endl;
     }
 
     return 0;
@@ -101,7 +95,7 @@ void push(stack *STK, int item)
 {
     if (isFull(STK))
     {
-        cout << "stack is full";
+        cout << "Stack is full" << endl;
         return;
     }
     STK->TOP = STK->TOP + 1;
@@ -112,16 +106,21 @@ void pop(stack *STK)
 {
     if (isEmpty(STK))
     {
-        cout << "stack is empty";
+        cout << "Stack is empty" << endl;
         return;
     }
     int item = STK->array[STK->TOP];
     STK->TOP = STK->TOP - 1;
-    cout << "popped item: " << item << endl;
+    cout << "Popped item: " << item << endl;
 }
 
 int peek(stack *STK)
 {
+    if (isEmpty(STK))
+    {
+        cout << "Stack is empty" << endl;
+        return -1;
+    }
     return STK->array[STK->TOP];
 }
 
@@ -132,27 +131,22 @@ int elementCount(stack *STK)
 
 bool isEmpty(stack *STK)
 {
-    if (STK->TOP == -1)
-        return true;
-    else
-        return false;
+    return (STK->TOP == -1);
 }
 
 bool isFull(stack *STK)
 {
-    if (STK->TOP == SIZE - 1)
-        return true;
-    else
-        return false;
+    return (STK->TOP == SIZE - 1);
 }
 
 void print(stack *STK)
 {
-    if (STK->TOP == -1)
+    if (isEmpty(STK))
     {
-        cout << "stack is empty";
+        cout << "Stack is empty" << endl;
         return;
     }
     for (int i = STK->TOP; i >= 0; i--)
         cout << STK->array[i] << " ";
+    cout << endl;
 }
