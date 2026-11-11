@@ -1,59 +1,53 @@
-#include <iostream>
-#include <stack>
-using namespace std;
+class SpecialStack {
+  public:
+    stack<int> st;
+    int minEle;
 
-class MinStack
-{
-    stack<int> s;
-    stack<int> minStack;
+    SpecialStack() {
+        // Define Stack
+        minEle = -1;
+    }
 
-public:
-    void push(int val)
-    {
-        s.push(val);
-        if (minStack.empty() || val <= minStack.top())
-        {
-            minStack.push(val);
+    void push(int x) {
+        // Add an element to the top of Stack
+        if (st.empty()) {
+            minEle = x;
+            st.push(x);
+        }
+        else if (x < minEle) {
+            st.push(2*x - minEle);
+            minEle = x;
+        }
+        else {
+            st.push(x);
         }
     }
 
-    void pop()
-    {
-        if (s.empty()) return;
-        if (s.top() == minStack.top())
-        {
-            minStack.pop();
+    void pop() {
+        // Remove the top element from the Stack
+        if (st.empty()) return;
+        int top = st.top();
+        st.pop();
+        if (top < minEle) {
+            minEle = 2*minEle - top;
         }
-        s.pop();
     }
 
-    int top()
-    {
-        if (s.empty()) return -1;
-        return s.top();
+    int peek() {
+        // Returns top element of the Stack
+        if (st.empty()) return -1;
+        int top = st.top();
+        return (minEle > top) ? minEle : top;
     }
 
-    int getMin()
-    {
-        if (minStack.empty()) return -1;
-        return minStack.top();
+    bool isEmpty() {
+        // Check if stack is empty
+        return st.empty();
+    }
+
+    int getMin() {
+        // Finds minimum element of Stack
+        if (st.empty()) return -1;
+        return minEle;
     }
 };
-
-int main()
-{
-    MinStack ms;
-    int num;
-    cout << "Enter elements for MinStack: (-1 to stop)" << endl;
-    while (true)
-    {
-        cin >> num;
-        if (num == -1) break;
-        ms.push(num);
-    }
-
-    cout << "Current Minimum Element: " << ms.getMin() << endl;
-    ms.pop();
-    cout << "Minimum Element after pop: " << ms.getMin() << endl;
-    return 0;
-}
