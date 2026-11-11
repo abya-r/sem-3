@@ -1,4 +1,4 @@
-class Solution {
+class Solution {   ///DONED
   public:
     Node* segregate(Node* head) {
         // code here

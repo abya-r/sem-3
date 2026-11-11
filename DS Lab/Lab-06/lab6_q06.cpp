@@ -1,4 +1,4 @@
-class Solution {
+class Solution {   ///DONED
   public:
     bool searchKey(Node* head, int key) {
         // Code here
