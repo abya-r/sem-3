@@ -1,68 +1,66 @@
-#include <iostream>
-#include <string>
-#include <stack>
-using namespace std;
+class Solution {
+  public:
+    string infixToPostfix(string& s) {
+        // code here
+        stack<char> st;
+        string res;
 
-int precedence(char op)
-{
-    if (op == '^') return 3;
-    if (op == '*' || op == '/' || op == '%') return 2;
-    if (op == '+' || op == '-') return 1;
-    return -1;
-}
+        for (int i = 0; i < s.length(); i++) {
+            char c = s[i];
 
-string infixToPostfix(string exp)
-{
-    stack<char> st;
-    string postfix = "";
+            // If operand, add to result
+            if ((c >= 'a' && c <= 'z') || 
+                (c >= 'A' && c <= 'Z') || 
+                (c >= '0' && c <= '9'))
+                res += c;
 
-    for (int i = 0; i < exp.length(); i++)
-    {
-        char c = exp[i];
+            // If '(', push to stack
+            else if (c == '(')
+                st.push('(');
 
-        if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9'))
-        {
-            postfix += c;
-        }
-        else if (c == '(')
-        {
-            st.push('(');
-        }
-        else if (c == ')')
-        {
-            while (!st.empty() && st.top() != '(')
-            {
-                postfix += st.top();
+            // If ')', pop until '('
+            else if (c == ')') {
+                while (!st.empty() && st.top() != '(') {
+                    res += st.top();
+                    st.pop();
+                }
                 st.pop();
             }
-            if (!st.empty()) st.pop();
+
+            // If operator
+            else {
+                while (!st.empty() && st.top() != '(' &&
+                       (prec(st.top()) > prec(c) ||
+                       (prec(st.top()) == prec(c) && !isRightAssociative(c)))) {
+                    res += st.top();
+                    st.pop();
+                }
+                st.push(c);
+            }
         }
+
+        // Pop remaining operators
+        while (!st.empty()) {
+            res += st.top();
+            st.pop();
+        }
+
+        return res;
+    }
+    
+    int prec(char c) {
+        if (c == '^')
+            return 3;
+        else if (c == '/' || c == '*')
+            return 2;
+        else if (c == '+' || c == '-')
+            return 1;
         else
-        {
-            while (!st.empty() && precedence(c) <= precedence(st.top()))
-            {
-                postfix += st.top();
-                st.pop();
-            }
-            st.push(c);
-        }
+            return -1;
     }
 
-    while (!st.empty())
-    {
-        postfix += st.top();
-        st.pop();
+    // Function to check if operator is right-associative
+    bool isRightAssociative(char c) {
+        return c == '^';
     }
-
-    return postfix;
-}
-
-int main()
-{
-    string exp;
-    cout << "Enter Infix Expression: ";
-    cin >> exp;
-
-    cout << "Postfix Expression: " << infixToPostfix(exp) << endl;
-    return 0;
-}
+};
