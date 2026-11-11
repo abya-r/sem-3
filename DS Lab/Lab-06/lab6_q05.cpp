@@ -1,5 +1,6 @@
-class Solution {   ///DONED
+class Solution {
   public:
+    // Time: O(n), Auxiliary space: O(1) (the returned vector is output space)
     vector<int> printList(Node *head) {
         // code here
         vector<int> res;

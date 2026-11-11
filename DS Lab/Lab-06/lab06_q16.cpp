@@ -12,6 +12,8 @@ class Node {
 
 class Solution {   ///DONED
   public:
+    // Floyd's cycle detection
+    // Time: O(n), Auxiliary space: O(1)
     bool detectLoop(Node* head) {
         // code here
         Node *fast = head, *slow = head;

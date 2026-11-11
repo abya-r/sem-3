@@ -12,6 +12,7 @@ class Node {
 
 class Solution {   ///DONED
   public:
+    // Time: O(n), Auxiliary space: O(1)
     int getMiddle(Node* head) {
         // code here
         Node *fast = head, *slow = head;

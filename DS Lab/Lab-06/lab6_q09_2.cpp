@@ -13,6 +13,7 @@ class Node {
 
 class Solution {   ///DONED
   public:
+    // Time: O(n), Auxiliary space: O(1)
     Node* reverseList(Node* head) {
         // code here
         if (head==NULL)

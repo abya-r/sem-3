@@ -1,4 +1,4 @@
-#include <iostream>  /////
+#include <iostream>
 using namespace std;
 
 struct Node
@@ -50,8 +50,8 @@ void Traverse_List(struct Node *START)
 // Time: O(n + m), Auxiliary space: O(1)
 Node* Merge_NoExtraNodes(Node *S1, Node *S2)
 {
-    Node *START;
-    Node *tail;
+    Node *START = NULL;
+    Node *tail = NULL;
     Node *t1 = S1;
     Node *t2 = S2;
 

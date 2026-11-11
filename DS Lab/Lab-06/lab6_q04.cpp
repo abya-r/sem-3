@@ -1,9 +1,10 @@
-class Solution {   ///DONED
+class Solution {
   public:
+    // Time: O(n), Auxiliary space: O(n) for the recursion stack
     int getCount(Node* head, int nodes=0) {
         // Code here
-        if (head->next == NULL)
-            return nodes+1;
+        if (head == NULL)
+            return nodes;
         return getCount(head->next, nodes+1);
     }
 };
