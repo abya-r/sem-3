@@ -1,46 +1,95 @@
 #include <iostream>
-#include <vector>
-#include <stack>
 using namespace std;
 
-void buildMonotonicIncreasingStack(const vector<int> &arr)
-{
-    stack<int> st;
-    for (int i = 0; i < arr.size(); i++)
-    {
-        while (!st.empty() && st.top() > arr[i])
-        {
-            st.pop();
-        }
-        st.push(arr[i]);
-    }
+#define SIZE 100
 
-    vector<int> res;
-    while (!st.empty())
-    {
-        res.push_back(st.top());
-        st.pop();
+struct stack {
+    int array[SIZE];
+    int TOP;
+};
+
+void Init_Stack(struct stack* STK) {
+    STK->TOP = -1;                       // -1 means stack is empty
+}
+
+int IsEmpty(struct stack* STK) {
+    if (STK->TOP == -1)
+        return 1;
+    else
+        return 0;
+}
+
+int IsFull(struct stack* STK) {
+    if (STK->TOP == SIZE - 1)
+        return 1;
+    else
+        return 0;
+}
+
+void Push(struct stack* STK, int Item) {
+    if (STK->TOP == (SIZE - 1)) {        // Check overflow condition
+        cout << "Stack is full" << endl;
+        return;
     }
-    cout << "Monotonic Increasing Stack (bottom to top): ";
-    for (int i = res.size() - 1; i >= 0; i--)
-    {
-        cout << res[i] << " ";
+    STK->TOP = STK->TOP + 1;
+    STK->array[STK->TOP] = Item;
+}
+
+int Pop(struct stack* STK) {
+    int Item;
+    if (STK->TOP == -1) {                // Check underflow condition
+        cout << "Stack is empty" << endl;
+        return -1;
     }
+    Item = STK->array[STK->TOP];
+    STK->TOP = STK->TOP - 1;
+    return Item;
+}
+
+int Peek(struct stack* STK) {
+    if (STK->TOP == -1) {                // Check underflow condition
+        cout << "Stack is empty" << endl;
+        return -1;
+    }
+    return STK->array[STK->TOP];
+}
+
+void Print(struct stack* STK) {          // bottom to top
+    if (STK->TOP == -1) {
+        cout << "Stack is empty" << endl;
+        return;
+    }
+    for (int i = 0; i <= STK->TOP; i = i + 1)
+        cout << STK->array[i] << " ";
     cout << endl;
 }
 
-int main()
-{
-    int n;
-    cout << "Enter number of elements in array: ";
-    cin >> n;
-    vector<int> arr(n);
-    cout << "Enter elements: ";
-    for (int i = 0; i < n; i++)
-    {
-        cin >> arr[i];
+void MonotonicIncreasing(int A[], int n, struct stack* STK) {
+    for (int i = 0; i < n; i++) {
+        // pop all greater elements to keep the order increasing
+        while (!IsEmpty(STK) && Peek(STK) > A[i]) {
+            cout << "Pop " << Pop(STK) << endl;
+        }
+        Push(STK, A[i]);
+        cout << "Push " << A[i] << endl;
     }
+}
 
-    buildMonotonicIncreasingStack(arr);
+int main() {
+    int n, A[SIZE];
+    struct stack s;
+    struct stack* STK = &s;
+
+    cout << "Enter number of elements: ";
+    cin >> n;
+    cout << "Enter the elements: ";
+    for (int i = 0; i < n; i++)
+        cin >> A[i];
+
+    Init_Stack(STK);
+    MonotonicIncreasing(A, n, STK);
+
+    cout << "Monotonic increasing stack (bottom to top): ";
+    Print(STK);
     return 0;
 }

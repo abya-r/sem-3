@@ -1,49 +1,29 @@
-#include <iostream>
-#include <stack>
-using namespace std;
+class Solution {   ///DONED
+  public:
+    void sortStack(stack<int> &st) {
+        // code here
+        stack<int> temp;
 
-void sortStack(stack<int> &input)
-{
-    stack<int> tmpStack;
-    while (!input.empty())
-    {
-        int tmp = input.top();
-        input.pop();
-
-        while (!tmpStack.empty() && tmpStack.top() < tmp)
+        while (!st.empty())
         {
-            input.push(tmpStack.top());
-            tmpStack.pop();
+            int x = st.top();
+            st.pop();
+
+            // Move smaller elements back to st
+            while (!temp.empty() && temp.top() < x)
+            {
+                st.push(temp.top());
+                temp.pop();
+            }
+
+            temp.push(x);
         }
-        tmpStack.push(tmp);
-    }
-    while (!tmpStack.empty())
-    {
-        input.push(tmpStack.top());
-        tmpStack.pop();
-    }
-}
 
-int main()
-{
-    stack<int> input;
-    int num;
-    cout << "Enter elements for stack: (-1 to stop)" << endl;
-    while (true)
-    {
-        cin >> num;
-        if (num == -1) break;
-        input.push(num);
+        // Move sorted elements back to st
+        while (!temp.empty())
+        {
+            st.push(temp.top());
+            temp.pop();
+        }
     }
-
-    sortStack(input);
-
-    cout << "Sorted Stack (top to bottom): ";
-    while (!input.empty())
-    {
-        cout << input.top() << " ";
-        input.pop();
-    }
-    cout << endl;
-    return 0;
-}
+};

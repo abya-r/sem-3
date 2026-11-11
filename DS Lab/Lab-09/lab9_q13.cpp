@@ -1,39 +1,39 @@
-#include <iostream>
-#include <vector>
-#include <cmath>
-#include <numeric>
+#include <bits/stdc++.h>   ///DONED
 using namespace std;
 
-void findMinDifference(int index, const vector<int> &stones, int currentSum, int totalSum, int &minDiff)
-{
-    if (index == stones.size())
-    {
-        int diff = abs(currentSum - (totalSum - currentSum));
-        minDiff = min(minDiff, diff);
-        return;
+int main() {
+    // your code goes here
+    int T;
+    cin >> T;
+    while (T--) {
+        int n;
+        cin >> n;
+        deque<long long> dq;
+        for (int i = 0; i < n; i++) {
+            long long x;
+            cin >> x;
+            dq.push_back(x);
+        }
+
+        int turn = 1;      // 1 = Aman, 0 = Akshat
+        int lastMove = 1;
+
+        while (dq.size() > 1) {
+            lastMove = turn;
+            int rotations = (turn == 1) ? 1 : 2;
+
+            // Move 1: top goes to bottom
+            for (int r = 0; r < rotations; r++) {
+                dq.push_back(dq.front());
+                dq.pop_front();
+            }
+            // Move 2: throw the top away
+            dq.pop_front();
+
+            turn = 1 - turn;
+        }
+
+        cout << lastMove << " " << dq.front() << "\n";
     }
-
-    findMinDifference(index + 1, stones, currentSum + stones[index], totalSum, minDiff);
-    findMinDifference(index + 1, stones, currentSum, totalSum, minDiff);
-}
-
-int main()
-{
-    int n;
-    cout << "Enter number of stones: ";
-    cin >> n;
-    vector<int> stones(n);
-    int totalSum = 0;
-    cout << "Enter weights of stones: ";
-    for (int i = 0; i < n; i++)
-    {
-        cin >> stones[i];
-        totalSum += stones[i];
-    }
-
-    int minDiff = INT32_MAX;
-    findMinDifference(0, stones, 0, totalSum, minDiff);
-
-    cout << "Minimum possible difference between stone piles: " << minDiff << endl;
     return 0;
 }

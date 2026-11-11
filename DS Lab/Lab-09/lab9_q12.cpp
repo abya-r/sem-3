@@ -1,42 +1,28 @@
-#include <iostream>
-#include <vector>
-#include <stack>
-using namespace std;
+class Solution {   ///DONED
+  public:
+    vector<int> prevSmaller(vector<int>& arr) {
+        //  code here
+        int n = arr.size();
+        vector<int> result(n, -1);
 
-vector<int> findPreviousSmaller(const vector<int> &arr)
-{
-    stack<int> st;
-    vector<int> pse(arr.size());
+        stack<int> st;
 
-    for (int i = 0; i < arr.size(); i++)
-    {
-        while (!st.empty() && st.top() >= arr[i])
-        {
-            st.pop();
+        for (int i = 0; i < n; i++) {
+
+            // pop elements from stack until a smaller 
+            // element is found or stack becomes empty
+            while (!st.empty() && st.top() >= arr[i]) {
+                st.pop();
+            }
+
+            // if stack is not empty, top is nearest smaller
+            if (!st.empty()) {
+                result[i] = st.top();
+            }
+
+            // push current element to stack
+            st.push(arr[i]);
         }
-        if (st.empty()) pse[i] = -1;
-        else pse[i] = st.top();
-
-        st.push(arr[i]);
+        return result;
     }
-    return pse;
-}
-
-int main()
-{
-    int n;
-    cout << "Enter number of elements in array: ";
-    cin >> n;
-    vector<int> arr(n);
-    cout << "Enter elements: ";
-    for (int i = 0; i < n; i++)
-    {
-        cin >> arr[i];
-    }
-
-    vector<int> pse = findPreviousSmaller(arr);
-    cout << "Previous Smaller Elements: ";
-    for (int x : pse) cout << x << " ";
-    cout << endl;
-    return 0;
-}
+};
