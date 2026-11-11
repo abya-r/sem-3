@@ -1,42 +1,28 @@
-#include <iostream>
-#include <stack>
-using namespace std;
-
-void deleteMid(stack<int> &st, int n, int current = 0)
-{
-    if (st.empty() || current == n) return;
-
-    int x = st.top();
-    st.pop();
-
-    deleteMid(st, n, current + 1);
-
-    if (current != n / 2)
-    {
-        st.push(x);
+class Solution {
+  public:
+    void deleteMid(stack<int>& s) {
+        // code here
+        // Start recursion from the top of the stack
+        deleteMid_util(s, s.size(), 0);
     }
-}
-
-int main()
-{
-    stack<int> st;
-    int num;
-    cout << "Enter elements for stack: (-1 to stop)" << endl;
-    while (true)
+    
+    void deleteMid_util(stack<int> &st, int sizeOfStack, int current)
     {
-        cin >> num;
-        if (num == -1) break;
-        st.push(num);
-    }
+        // Remove the middle element
+        if (current == sizeOfStack / 2)
+        {
+            st.pop();
+            return;
+        }
 
-    deleteMid(st, st.size());
-
-    cout << "Stack after deleting middle element (top to bottom): ";
-    while (!st.empty())
-    {
-        cout << st.top() << " ";
+        // Store and remove the top element
+        int topElement = st.top();
         st.pop();
+
+        // Recursively reach the middle element
+        deleteMid_util(st, sizeOfStack, current + 1);
+
+        // Restore the element after recursion
+        st.push(topElement);
     }
-    cout << endl;
-    return 0;
-}
+};
