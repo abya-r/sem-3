@@ -1,78 +1,67 @@
-#include <iostream>
-#include <string>
-#include <stack>
-#include <algorithm>
-using namespace std;
+class Solution {
+  public:
+    string infixToPrefix(string &s) {
+        // code here
+        stack<char> st;
+        string result = "";
 
-int precedence(char c)
-{
-    if (c == '^') return 3;
-    if (c == '*' || c == '/' || c == '%') return 2;
-    if (c == '+' || c == '-') return 1;
-    return -1;
-}
+        // scan from right to left
+        for (int i = s.length() - 1; i >= 0; i--) {
+            char c = s[i];
 
-string infixToPrefix(string s)
-{
-    reverse(s.begin(), s.end());
-
-    for (int i = 0; i < s.length(); i++)
-    {
-        if (s[i] == '(') s[i] = ')';
-        else if (s[i] == ')') s[i] = '(';
-    }
-
-    stack<char> st;
-    string prefix = "";
-
-    for (int i = 0; i < s.length(); i++)
-    {
-        char c = s[i];
-
-        if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9'))
-        {
-            prefix += c;
-        }
-        else if (c == '(')
-        {
-            st.push('(');
-        }
-        else if (c == ')')
-        {
-            while (!st.empty() && st.top() != '(')
-            {
-                prefix += st.top();
-                st.pop();
+            if (isalnum(c)) {
+                result += c;
             }
-            if (!st.empty()) st.pop();
-        }
-        else
-        {
-            while (!st.empty() && precedence(c) < precedence(st.top()))
-            {
-                prefix += st.top();
-                st.pop();
+            else if (c == ')') {
+                st.push(c);
             }
-            st.push(c);
+            else if (c == '(') {
+                while (!st.empty() && st.top() != ')') {
+                    result += st.top();
+                    st.pop();
+                }
+
+                // pop ')'
+                if (!st.empty()) st.pop(); 
+            }
+            else if (isOperator(c)) {
+                while (!st.empty() && isOperator(st.top()) &&
+                    (precedence(st.top()) > precedence(c) ||
+                    (precedence(st.top()) == precedence(c) && isRightAssociative(c)))) {
+                    result += st.top();
+                    st.pop();
+                }
+                st.push(c);
+            }
         }
+
+        // pop remaining operators
+        while (!st.empty()) {
+            result += st.top();
+            st.pop();
+        }
+
+        // reverse at the end to get correct prefix
+        reverse(result.begin(), result.end());
+        return result;
+    }
+    
+    // function to return precedence of operators
+    int precedence(char c) {
+        if (c == '^') return 3;
+        else if (c == '*' || c == '/') return 2;
+        else if (c == '+' || c == '-') return 1;
+        else return -1;
     }
 
-    while (!st.empty())
-    {
-        prefix += st.top();
-        st.pop();
+    // function to check if operator is right-associative
+    bool isRightAssociative(char c) {
+        return c == '^';
     }
 
-    reverse(prefix.begin(), prefix.end());
-    return prefix;
-}
-
-int main()
-{
-    string exp;
-    cout << "Enter Infix Expression: ";
-    cin >> exp;
-
-    cout << "Prefix Expression: " << infixToPrefix(exp) << endl;
-    return 0;
-}
+    // function to check if a character is an operator
+    bool isOperator(char c) {
+        return (c == '+' || c == '-' || c == '*' || c == '/' || c == '^');
+    }
+    
+};
