@@ -1,50 +1,34 @@
-#include <iostream>
-#include <string>
-#include <stack>
-using namespace std;
+class Solution {
+  public:
+    bool isBalanced(string& s) {
+        // code here
 
-bool areParenthesesBalanced(string expr)
-{
-    stack<char> s;
-    for (int i = 0; i < expr.length(); i++)
-    {
-        if (expr[i] == '(' || expr[i] == '[' || expr[i] == '{')
-        {
-            s.push(expr[i]);
-            continue;
+    stack<char> st; 
+
+    for (char c : s) {
+        if (c == '(' || c == '{' || c == '[') {
+            st.push(c);
         }
 
-        if (s.empty()) return false;
+        else if (c == ')' || c == '}' || c == ']') {
 
-        char x;
-        switch (expr[i])
-        {
-        case ')':
-            x = s.top(); s.pop();
-            if (x == '{' || x == '[') return false;
-            break;
-        case '}':
-            x = s.top(); s.pop();
-            if (x == '(' || x == '[') return false;
-            break;
-        case ']':
-            x = s.top(); s.pop();
-            if (x == '(' || x == '{') return false;
-            break;
+            // No opening bracket
+            if (st.empty()) return false; 
+            char top = st.top();
+            if ((c == ')' && top != '(') ||
+                (c == '}' && top != '{') ||
+                (c == ']' && top != '[')) {
+                return false;
+            }
+
+            // Pop matching opening bracket
+            st.pop(); 
         }
     }
-    return s.empty();
-}
 
-int main()
-{
-    string expr;
-    cout << "Enter expression with parentheses: ";
-    cin >> expr;
-
-    if (areParenthesesBalanced(expr))
-        cout << "Balanced" << endl;
-    else
-        cout << "Not Balanced" << endl;
-    return 0;
-}
+    // Balanced if stack is empty
+    return st.empty(); 
+        
+    }
+    
+};
