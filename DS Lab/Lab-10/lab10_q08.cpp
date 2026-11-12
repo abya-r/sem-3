@@ -1,66 +1,46 @@
-#include <iostream>
-#include <stack>
-using namespace std;
+/// DONED
 
-class QueueUsingStacks
-{
+class myQueue {
     stack<int> s1, s2;
 
-public:
-    void enqueue(int x)
-    {
-        while (!s1.empty())
-        {
-            s2.push(s1.top());
-            s1.pop();
-        }
+  public:
+    myQueue() {
+        // stacks are empty by default
+    }
+
+    void enqueue(int x) {
         s1.push(x);
-        while (!s2.empty())
-        {
-            s1.push(s2.top());
-            s2.pop();
-        }
     }
 
-    void dequeue()
-    {
-        if (s1.empty())
-        {
-            cout << "Queue Underflow" << endl;
+    void dequeue() {
+        // If both stacks are empty, do nothing
+        if (s1.empty() && s2.empty())
             return;
+
+        // Refill s2 only when it is empty
+        if (s2.empty()) {
+            while (!s1.empty()) {
+                s2.push(s1.top());
+                s1.pop();
+            }
         }
-        cout << "Dequeued: " << s1.top() << endl;
-        s1.pop();
+        s2.pop();
     }
 
-    int front()
-    {
-        if (s1.empty()) return -1;
-        return s1.top();
+    int front() {
+        if (s1.empty() && s2.empty())
+            return -1;
+
+        if (s2.empty()) {
+            while (!s1.empty()) {
+                s2.push(s1.top());
+                s1.pop();
+            }
+        }
+        return s2.top();
     }
 
-    bool empty()
-    {
-        return s1.empty();
+    int size() {
+        return s1.size() + s2.size();
     }
 };
-
-int main()
-{
-    QueueUsingStacks q;
-    int n, val;
-    cout << "Enter number of elements to enqueue: ";
-    cin >> n;
-    cout << "Enter elements: ";
-    for (int i = 0; i < n; i++)
-    {
-        cin >> val;
-        q.enqueue(val);
-    }
-
-    cout << "Front element of queue: " << q.front() << endl;
-    q.dequeue();
-    cout << "New front element: " << q.front() << endl;
-
-    return 0;
-}

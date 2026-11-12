@@ -1,64 +1,42 @@
-#include <iostream>
-#include <queue>
-using namespace std;
+/// DONED
 
-class StackUsingQueues
-{
-    queue<int> q1, q2;
+class myStack {
+    queue<int> q;
 
-public:
-    void push(int x)
-    {
-        q2.push(x);
-        while (!q1.empty())
-        {
-            q2.push(q1.front());
-            q1.pop();
+  public:
+
+    void push(int x) {
+        // Inserts an element x at the top of the stack
+        // Insert x at the back
+        q.push(x);
+
+        // Rotate the older n-1 elements behind x,
+        // so x ends up at the front (top of stack)
+        int sz = q.size();
+        for (int i = 0; i < sz - 1; i++) {
+            q.push(q.front());
+            q.pop();
         }
-        queue<int> temp = q1;
-        q1 = q2;
-        q2 = temp;
     }
 
-    void pop()
-    {
-        if (q1.empty())
-        {
-            cout << "Stack Underflow" << endl;
+    void pop() {
+        // Removes an element from the top of the stack
+        // If stack is empty, do nothing
+        if (q.empty())
             return;
-        }
-        q1.pop();
+        q.pop();
     }
 
-    int top()
-    {
-        if (q1.empty()) return -1;
-        return q1.front();
+    int top() {
+        // Returns the top element of the stack
+        // If stack is empty, return -1
+        if (q.empty())
+            return -1;
+        return q.front();
     }
 
-    bool empty()
-    {
-        return q1.empty();
+    int size() {
+        // Returns the current size of the stack
+        return q.size();
     }
 };
-
-int main()
-{
-    StackUsingQueues st;
-    int n, val;
-    cout << "Enter number of elements to push onto stack: ";
-    cin >> n;
-    cout << "Enter elements: ";
-    for (int i = 0; i < n; i++)
-    {
-        cin >> val;
-        st.push(val);
-    }
-
-    cout << "Top element of stack: " << st.top() << endl;
-    cout << "Popping top element..." << endl;
-    st.pop();
-    cout << "New top element: " << st.top() << endl;
-
-    return 0;
-}

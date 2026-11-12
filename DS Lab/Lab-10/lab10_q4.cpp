@@ -1,92 +1,118 @@
+// Lab 10 - Q4: Queue using linked list
+//
+// Time complexity : create O(1), isEmpty O(1), isFull O(1), enqueue O(1),
+//                   dequeue O(1), front/rear O(1), count O(n), display O(n)
+// Auxiliary space : O(1) per operation (each enqueue allocates one node;
+//                   the whole queue occupies O(n) space for n elements)
+//
+// Note: a linked queue has no fixed capacity. isFull() is true only when
+// memory allocation fails.
+
 #include <iostream>
+#include <cstdlib>
 using namespace std;
 
 struct Node
 {
     int INFO;
-    struct Node *NEXT;
+    Node *NEXT;
 };
 
 struct Queue
 {
-    struct Node *front;
-    struct Node *rear;
+    Node *front;
+    Node *rear;
 };
 
 void createEmptyQueue(struct Queue *Q)
 {
-    Q->front = Q->rear = NULL;
+    Q->front = Q->rear = NULL; // NULL means queue is empty
 }
 
 bool isEmpty(struct Queue *Q)
 {
-    return (Q->front == NULL);
+    return (Q->front == NULL || Q->rear == NULL);
+}
+
+bool isFull(struct Queue *Q)
+{
+    Node *temp = (Node *)malloc(sizeof(Node));
+    if (temp == NULL)
+        return true;
+    free(temp);
+    return false;
 }
 
 void enLqueue(struct Queue *Q, int Item)
 {
-    struct Node *New_node = new struct Node();
-    if (New_node == NULL)
+    Node *new_node = (Node *)malloc(sizeof(Node));
+    if (new_node == NULL) // only when RAM is full
     {
         cout << "Queue Overflow: Out of memory!" << endl;
         return;
     }
-    New_node->INFO = Item;
-    New_node->NEXT = NULL;
+    new_node->INFO = Item;
+    new_node->NEXT = NULL;
 
-    if (Q->front == NULL || Q->rear == NULL)
+    if (isEmpty(Q))
     {
-        Q->front = Q->rear = New_node;
+        Q->front = Q->rear = new_node;
     }
     else
     {
-        (Q->rear)->NEXT = New_node;
-        Q->rear = New_node;
+        (Q->rear)->NEXT = new_node;
+        Q->rear = new_node;
     }
     cout << "Enqueued successfully." << endl;
 }
 
 void deLqueue(struct Queue *Q)
 {
+    Node *temp;
     if (isEmpty(Q))
     {
         cout << "Queue Underflow: Queue is empty!" << endl;
         return;
     }
-    struct Node *Temp = Q->front;
-    cout << "Dequeued item: " << Temp->INFO << endl;
-
-    if (Q->rear == Q->front)
+    int Item = (Q->front)->INFO;
+    temp = Q->front;
+    if (Q->rear == Q->front) // only one element
     {
-        Q->front = Q->rear = NULL;
+        Q->front = NULL;
+        Q->rear = NULL;
     }
     else
     {
         Q->front = (Q->front)->NEXT;
     }
-    delete Temp;
+    free(temp);
+    cout << "Dequeued item: " << Item << endl;
 }
 
 void displayFront(struct Queue *Q)
 {
-    if (isEmpty(Q)) cout << "Queue is empty!" << endl;
-    else cout << "Front element: " << (Q->front)->INFO << endl;
+    if (isEmpty(Q))
+        cout << "Queue is empty!" << endl;
+    else
+        cout << "Front element: " << (Q->front)->INFO << endl;
 }
 
 void displayRear(struct Queue *Q)
 {
-    if (isEmpty(Q)) cout << "Queue is empty!" << endl;
-    else cout << "Rear element: " << (Q->rear)->INFO << endl;
+    if (isEmpty(Q))
+        cout << "Queue is empty!" << endl;
+    else
+        cout << "Rear element: " << (Q->rear)->INFO << endl;
 }
 
 void countElements(struct Queue *Q)
 {
     int count = 0;
-    struct Node *Temp = Q->front;
-    while (Temp != NULL)
+    Node *temp = Q->front;
+    while (temp != NULL)
     {
         count++;
-        Temp = Temp->NEXT;
+        temp = temp->NEXT;
     }
     cout << "Number of elements: " << count << endl;
 }
@@ -99,13 +125,25 @@ void displayQueue(struct Queue *Q)
         return;
     }
     cout << "Linked Queue elements: ";
-    struct Node *Temp = Q->front;
-    while (Temp != NULL)
+    Node *temp = Q->front;
+    while (temp != NULL)
     {
-        cout << Temp->INFO << " ";
-        Temp = Temp->NEXT;
+        cout << temp->INFO << " ";
+        temp = temp->NEXT;
     }
     cout << endl;
+}
+
+void freeQueue(struct Queue *Q) // release all nodes before exiting
+{
+    Node *temp;
+    while (Q->front != NULL)
+    {
+        temp = Q->front;
+        Q->front = (Q->front)->NEXT;
+        free(temp);
+    }
+    Q->rear = NULL;
 }
 
 int main()
@@ -122,9 +160,11 @@ int main()
              << "3. Display Front\n"
              << "4. Display Rear\n"
              << "5. Count Elements\n"
-             << "6. Display Queue\n"
-             << "7. Exit\n"
-             << "Enter choice: ";
+             << "6. Check isEmpty\n"
+             << "7. Check isFull\n"
+             << "8. Display Queue\n"
+             << "9. Exit\n"
+             << "Enter your choice: ";
         cin >> choice;
 
         switch (choice)
@@ -133,9 +173,11 @@ int main()
             cout << "Enter value to enqueue: ";
             cin >> val;
             enLqueue(&Q, val);
+            displayQueue(&Q); // show updated queue
             break;
         case 2:
             deLqueue(&Q);
+            displayQueue(&Q); // show updated queue
             break;
         case 3:
             displayFront(&Q);
@@ -147,15 +189,24 @@ int main()
             countElements(&Q);
             break;
         case 6:
-            displayQueue(&Q);
+            if (isEmpty(&Q)) cout << "Queue is empty." << endl;
+            else cout << "Queue is not empty." << endl;
             break;
         case 7:
+            if (isFull(&Q)) cout << "Queue is full." << endl;
+            else cout << "Queue is not full." << endl;
+            break;
+        case 8:
+            displayQueue(&Q);
+            break;
+        case 9:
+            freeQueue(&Q);
             cout << "Exiting..." << endl;
             break;
         default:
             cout << "Invalid choice!" << endl;
         }
-    } while (choice != 7);
+    } while (choice != 9);
 
     return 0;
 }

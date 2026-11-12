@@ -1,42 +1,19 @@
-#include <iostream>
-#include <queue>
-using namespace std;
+/// DONED
 
-void reverseQueueRecursive(queue<int> &q)
-{
-    if (q.empty())
-        return;
+class Solution {
+  public:
+    void reverseQueue(queue<int>& q) {
 
-    int frontElement = q.front();
-    q.pop();
+        if (q.empty()) return;
 
-    reverseQueueRecursive(q);
-
-    q.push(frontElement);
-}
-
-int main()
-{
-    queue<int> q;
-    int n, val;
-    cout << "Enter number of elements to insert in queue: ";
-    cin >> n;
-    cout << "Enter elements: ";
-    for (int i = 0; i < n; i++)
-    {
-        cin >> val;
-        q.push(val);
-    }
-
-    reverseQueueRecursive(q);
-
-    cout << "Reversed Queue (front to rear): ";
-    while (!q.empty())
-    {
-        cout << q.front() << " ";
+        // remove front element
+        int front = q.front();
         q.pop();
-    }
-    cout << endl;
 
-    return 0;
-}
+        // reverse remaining queue
+        reverseQueue(q);
+
+        // insert removed element at the rear
+        q.push(front);
+    }
+};

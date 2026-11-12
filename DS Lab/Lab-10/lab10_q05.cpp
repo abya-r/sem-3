@@ -1,45 +1,18 @@
-#include <iostream>
-#include <queue>
-#include <stack>
-using namespace std;
+/// DONED
 
-void reverseQueueUsingStack(queue<int> &q)
-{
-    stack<int> s;
-    while (!q.empty())
-    {
-        s.push(q.front());
+void reverseQueue(queue<int>& q) {
+    stack<int> st;
+    
+    // Transfer all elements from queue to stack
+    while (!q.empty()) {
+        st.push(q.front());
         q.pop();
     }
-    while (!s.empty())
-    {
-        q.push(s.top());
-        s.pop();
+    
+    // Transfer all elements back from stack to queue
+    // This reverses the order
+    while (!st.empty()) {
+        q.push(st.top());
+        st.pop();
     }
-}
-
-int main()
-{
-    queue<int> q;
-    int n, val;
-    cout << "Enter number of elements to insert in queue: ";
-    cin >> n;
-    cout << "Enter elements: ";
-    for (int i = 0; i < n; i++)
-    {
-        cin >> val;
-        q.push(val);
-    }
-
-    reverseQueueUsingStack(q);
-
-    cout << "Reversed Queue (front to rear): ";
-    while (!q.empty())
-    {
-        cout << q.front() << " ";
-        q.pop();
-    }
-    cout << endl;
-
-    return 0;
 }
