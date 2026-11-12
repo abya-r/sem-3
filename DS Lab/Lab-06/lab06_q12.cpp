@@ -22,7 +22,7 @@ class Solution {   ///DONED
 
 // question statement: delete kth node from end
 
-Node *deleteNthNodeFromEnd(Node *head, int k)
+Node *deletekthNodeFromEnd(Node *head, int k)
 {
     if (head == nullptr)
         return head;

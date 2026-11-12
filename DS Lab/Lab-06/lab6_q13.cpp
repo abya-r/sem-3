@@ -46,30 +46,15 @@ void Traverse_List(struct Node *START)
     cout << "NULL";
 }
 
-// Appends a node at the end in O(1) using END pointer (both START and END may change)
-Node* Append_Tail(Node *START, Node **END, int info)
-{
-    Node *New_Node = new Node;
-
-    New_Node->INFO = info;
-    New_Node->NEXT = NULL;
-
-    if (START == NULL)
-        START = New_Node;
-    else
-        (*END)->NEXT = New_Node;
-
-    *END = New_Node;
-    return START;
-}
-
 // Time: O(n + m), Auxiliary space: O(n + m) for the new nodes
 Node* Merge_WithSpace(Node *S1, Node *S2)
 {
     Node *START = NULL;
-    Node *END = NULL;
+    Node *tail = NULL;
+    Node *New_Node;
     Node *t1 = S1;
     Node *t2 = S2;
+    int value;
 
     if (S1 == NULL && S2 == NULL)
     {
@@ -77,30 +62,28 @@ Node* Merge_WithSpace(Node *S1, Node *S2)
         return START;
     }
 
-    while (t1 != NULL && t2 != NULL)
+    while (t1 != NULL || t2 != NULL)
     {
-        if (t1->INFO <= t2->INFO)
+        if (t2 == NULL || (t1 != NULL && t1->INFO <= t2->INFO))
         {
-            START = Append_Tail(START, &END, t1->INFO);
+            value = t1->INFO;
             t1 = t1->NEXT;
         }
         else
         {
-            START = Append_Tail(START, &END, t2->INFO);
+            value = t2->INFO;
             t2 = t2->NEXT;
         }
-    }
 
-    while (t1 != NULL)
-    {
-        START = Append_Tail(START, &END, t1->INFO);
-        t1 = t1->NEXT;
-    }
+        New_Node = new Node;
+        New_Node->INFO = value;
+        New_Node->NEXT = NULL;
 
-    while (t2 != NULL)
-    {
-        START = Append_Tail(START, &END, t2->INFO);
-        t2 = t2->NEXT;
+        if (START == NULL)
+            START = New_Node;
+        else
+            tail->NEXT = New_Node;
+        tail = New_Node;
     }
     return START;
 }

@@ -79,8 +79,5 @@ int main()
     else
         Reverse_Display(START);
 
-    cout << "\nList after reverse display (unchanged): ";
-    Traverse_List(START);
-
     return 0;
 }

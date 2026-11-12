@@ -65,7 +65,7 @@ int Position_Iterative(Node *START, int X)
 
 // Recursive. Call with pos = 1. Returns position or -1 if not found
 // Time: O(n), Auxiliary space: O(n) for the recursion stack
-int Position_Recursive(Node *Temp, int X, int pos)
+int Position_Recursive(Node *Temp, int X, int pos=1)
 {
     if (Temp == NULL)
         return -1;
@@ -103,7 +103,7 @@ int main()
     else
         cout << "Iterative: " << X << " not found in the list\n";
 
-    pos = Position_Recursive(START, X, 1);
+    pos = Position_Recursive(START, X);
     if (pos != -1)
         cout << "Recursive: " << X << " present at position " << pos << "\n";
     else
