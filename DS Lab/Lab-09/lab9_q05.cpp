@@ -22,7 +22,7 @@ class Solution {   ///DONED
                 }
 
                 // pop ')'
-                if (!st.empty()) st.pop(); 
+                if (!st.empty()) st.pop();
             }
             else if (isOperator(c)) {
                 while (!st.empty() && isOperator(st.top()) &&
