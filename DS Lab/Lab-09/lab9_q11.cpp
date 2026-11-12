@@ -1,33 +1,33 @@
-#include <iostream>   /////
+#include <iostream>
 using namespace std;
 
 #define SIZE 100
 
-struct stack {
+struct stack
+{
     int array[SIZE];
     int TOP;
 };
 
-void Init_Stack(struct stack* STK) {
-    STK->TOP = -1;                       // -1 means stack is empty
+void Init_Stack(struct stack *STK)
+{
+    STK->TOP = -1; // -1 means stack is empty
 }
 
-int IsEmpty(struct stack* STK) {
-    if (STK->TOP == -1)
-        return 1;
-    else
-        return 0;
+int IsEmpty(struct stack *STK)
+{
+    return (STK->TOP == -1);
 }
 
-int IsFull(struct stack* STK) {
-    if (STK->TOP == SIZE - 1)
-        return 1;
-    else
-        return 0;
+int IsFull(struct stack *STK)
+{
+    return (STK->TOP == SIZE - 1);
 }
 
-void Push(struct stack* STK, int Item) {
-    if (STK->TOP == (SIZE - 1)) {        // Check overflow condition
+void Push(struct stack *STK, int Item)
+{
+    if (IsFull(STK)) // overflow
+    {
         cout << "Stack is full" << endl;
         return;
     }
@@ -35,27 +35,32 @@ void Push(struct stack* STK, int Item) {
     STK->array[STK->TOP] = Item;
 }
 
-int Pop(struct stack* STK) {
-    int Item;
-    if (STK->TOP == -1) {                // Check underflow condition
+int Pop(struct stack *STK)
+{
+    if (IsEmpty(STK)) // underflow
+    {
         cout << "Stack is empty" << endl;
         return -1;
     }
-    Item = STK->array[STK->TOP];
+    int Item = STK->array[STK->TOP];
     STK->TOP = STK->TOP - 1;
     return Item;
 }
 
-int Peek(struct stack* STK) {
-    if (STK->TOP == -1) {                // Check underflow condition
+int Peek(struct stack *STK)
+{
+    if (IsEmpty(STK))
+    {
         cout << "Stack is empty" << endl;
         return -1;
     }
     return STK->array[STK->TOP];
 }
 
-void Print(struct stack* STK) {          // bottom to top
-    if (STK->TOP == -1) {
+void Print(struct stack *STK) // bottom to top
+{
+    if (IsEmpty(STK))
+    {
         cout << "Stack is empty" << endl;
         return;
     }
@@ -64,24 +69,34 @@ void Print(struct stack* STK) {          // bottom to top
     cout << endl;
 }
 
-void MonotonicIncreasing(int A[], int n, struct stack* STK) {
-    for (int i = 0; i < n; i++) {
+// Time: O(n) (each element is pushed and popped at most once), Auxiliary space: O(n)
+// Elements equal to the top are kept (non-decreasing from bottom to top).
+// For a strictly increasing stack change '>' to '>=' in the while condition.
+void MonotonicIncreasing(int A[], int n, struct stack *STK)
+{
+    for (int i = 0; i < n; i++)
+    {
         // pop all greater elements to keep the order increasing
-        while (!IsEmpty(STK) && Peek(STK) > A[i]) {
+        while (!IsEmpty(STK) && Peek(STK) > A[i])
             cout << "Pop " << Pop(STK) << endl;
-        }
         Push(STK, A[i]);
         cout << "Push " << A[i] << endl;
     }
 }
 
-int main() {
+int main()
+{
     int n, A[SIZE];
     struct stack s;
-    struct stack* STK = &s;
+    struct stack *STK = &s;
 
-    cout << "Enter number of elements: ";
+    cout << "Enter number of elements (1 to " << SIZE << "): ";
     cin >> n;
+    if (n < 1 || n > SIZE)
+    {
+        cout << "Invalid number of elements" << endl;
+        return 0;
+    }
     cout << "Enter the elements: ";
     for (int i = 0; i < n; i++)
         cin >> A[i];

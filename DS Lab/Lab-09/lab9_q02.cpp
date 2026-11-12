@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstdlib>
 using namespace std;
 
 struct Node
@@ -7,46 +8,59 @@ struct Node
     struct Node *NEXT;
 };
 
-void init_lstack(struct Node **TOP)
+void Init_LStack(struct Node **TOP)
 {
-    *TOP = NULL;
+    *TOP = NULL; // NULL means stack is empty
 }
 
-bool isEmpty(struct Node *TOP)
+bool LIsEmpty(struct Node *TOP)
 {
     return (TOP == NULL);
 }
 
-void lpush(struct Node **TOP, int item)
+// A linked stack is "full" only when no more memory can be allocated
+bool LIsFull()
 {
-    struct Node *New_Node = new struct Node();
-    if (New_Node == NULL)
+    struct Node *Temp = (struct Node *)malloc(sizeof(struct Node));
+    if (Temp == NULL)
+        return true;
+    free(Temp);
+    return false;
+}
+
+// Time: O(1), Auxiliary space: O(1)
+void LPush(struct Node **TOP, int Item)
+{
+    if (LIsFull()) // overflow
     {
-        cout << "Stack Overflow: Unable to allocate memory" << endl;
+        cout << "Unable to allocate memory" << endl;
         return;
     }
-    New_Node->INFO = item;
+    struct Node *New_Node = (struct Node *)malloc(sizeof(struct Node));
+    New_Node->INFO = Item;
     New_Node->NEXT = *TOP;
     *TOP = New_Node;
 }
 
-void lpop(struct Node **TOP)
+// Time: O(1), Auxiliary space: O(1)
+int LPop(struct Node **TOP)
 {
-    if (isEmpty(*TOP))
+    if (LIsEmpty(*TOP)) // underflow
     {
-        cout << "Stack Underflow: Stack is empty" << endl;
-        return;
+        cout << "Stack is empty" << endl;
+        return -1;
     }
     struct Node *Temp = *TOP;
-    int item = Temp->INFO;
+    int Item = Temp->INFO;
     *TOP = Temp->NEXT;
-    delete Temp;
-    cout << "Popped item: " << item << endl;
+    free(Temp);
+    return Item;
 }
 
-int lpeek(struct Node *TOP)
+// Time: O(1), Auxiliary space: O(1)
+int LPeek(struct Node *TOP)
 {
-    if (isEmpty(TOP))
+    if (LIsEmpty(TOP))
     {
         cout << "Stack is empty" << endl;
         return -1;
@@ -54,7 +68,8 @@ int lpeek(struct Node *TOP)
     return TOP->INFO;
 }
 
-int elementCount(struct Node *TOP)
+// Time: O(n), Auxiliary space: O(1)
+int LCount(struct Node *TOP)
 {
     int count = 0;
     struct Node *Temp = TOP;
@@ -66,9 +81,10 @@ int elementCount(struct Node *TOP)
     return count;
 }
 
-void print(struct Node *TOP)
+// Time: O(n), Auxiliary space: O(1)
+void LPrint(struct Node *TOP) // top to bottom
 {
-    if (isEmpty(TOP))
+    if (LIsEmpty(TOP))
     {
         cout << "Stack is empty" << endl;
         return;
@@ -85,56 +101,73 @@ void print(struct Node *TOP)
 int main()
 {
     struct Node *TOP;
-    init_lstack(&TOP);
+    Init_LStack(&TOP);
 
-    int num;
-    cout << "Enter elements for linked stack: (-1 to stop)" << endl;
-    while (true)
-    {
-        cin >> num;
-        if (num == -1)
-            break;
-        lpush(&TOP, num);
-    }
-
-    cout << "Original stack: ";
-    print(TOP);
-
-    cout << endl
-         << "Menu:" << endl
-         << "a. Push element" << endl
-         << "b. Pop element" << endl
-         << "c. Display top element" << endl
-         << "d. Count elements" << endl
-         << "e. Check empty" << endl;
     char choice;
-    cin >> choice;
-
-    switch (choice)
+    do
     {
-    case 'a':
-        int a;
-        cout << "Enter number to push: ";
-        cin >> a;
-        lpush(&TOP, a);
-        print(TOP);
-        break;
-    case 'b':
-        lpop(&TOP);
-        print(TOP);
-        break;
-    case 'c':
-        cout << "Top element: " << lpeek(TOP) << endl;
-        break;
-    case 'd':
-        cout << "Count: " << elementCount(TOP) << endl;
-        break;
-    case 'e':
-        if (isEmpty(TOP)) cout << "Stack is empty\n";
-        else cout << "Stack is not empty\n";
-        break;
-    default:
-        cout << "Invalid choice\n";
-    }
+        cout << endl
+             << "Menu:" << endl
+             << "a. Push an element onto the stack" << endl
+             << "b. Pop an element from the stack" << endl
+             << "c. Display the top element" << endl
+             << "d. Count the number of elements" << endl
+             << "e. Check whether the stack is empty" << endl
+             << "f. Check whether the stack is full" << endl
+             << "g. Display the stack" << endl
+             << "x. Exit" << endl
+             << "Enter choice: ";
+        cin >> choice;
+
+        switch (choice)
+        {
+        case 'a':
+        {
+            int item;
+            cout << "Enter number to push: ";
+            cin >> item;
+            LPush(&TOP, item);
+            break;
+        }
+        case 'b':
+            if (LIsEmpty(TOP))
+                cout << "Stack is empty" << endl;
+            else
+                cout << "Popped item: " << LPop(&TOP) << endl;
+            break;
+        case 'c':
+            if (LIsEmpty(TOP))
+                cout << "Stack is empty" << endl;
+            else
+                cout << "Top element: " << LPeek(TOP) << endl;
+            break;
+        case 'd':
+            cout << "Element count: " << LCount(TOP) << endl;
+            break;
+        case 'e':
+            if (LIsEmpty(TOP))
+                cout << "Stack is empty" << endl;
+            else
+                cout << "Stack is not empty" << endl;
+            break;
+        case 'f':
+            if (LIsFull())
+                cout << "Stack is full (no memory)" << endl;
+            else
+                cout << "Stack is not full" << endl;
+            break;
+        case 'g':
+            LPrint(TOP);
+            break;
+        case 'x':
+            break;
+        default:
+            cout << "Invalid choice" << endl;
+        }
+    } while (choice != 'x');
+
+    while (!LIsEmpty(TOP)) // free remaining nodes
+        LPop(&TOP);
+
     return 0;
 }
