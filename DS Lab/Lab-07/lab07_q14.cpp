@@ -42,9 +42,3 @@ class Solution {
         return ans;
     }
 };
-
-/*
-### Complexity
-* **Time Complexity:** $O(n)$ — Each node is visited at most twice (`end` moves forward once, and `start` moves forward once)[cite: 10]. Comparing two fixed-size arrays of length 26 takes $O(26) = O(1)$ time.
-* **Auxiliary Space:** $O(1)$ — The two frequency arrays are fixed at size 26 regardless of the linked list size
-*/

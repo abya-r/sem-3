@@ -42,12 +42,10 @@ public:
                 i++;
             }
         }
-        bool isIntersection = false;
         while (t1 != nullptr && t2 != nullptr)
         {
             if (t1 == t2)
             {
-                isIntersection = true;
                 return t1;
             }
             t1 = t1->next;
@@ -66,8 +64,8 @@ class Solution {
         Node *t1 = head1, *t2 = head2;
         while (t1!=t2)
         {
-            (t1 == NULL) ? t1 = head2 : t1 = t1->next;
-            (t2 == NULL) ? t2 = head1 : t2 = t2->next;
+            t1 = (t1 == NULL) ? head2 : t1->next;
+            t2 = (t2 == NULL) ? head1 : t2->next;
         }
         return t1;
     }

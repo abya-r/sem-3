@@ -1,3 +1,5 @@
+// ques. swapped with 10
+
 class Solution {
   public:
     Node* removeDuplicates(Node* head) {

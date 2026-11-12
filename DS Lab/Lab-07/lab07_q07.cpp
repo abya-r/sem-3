@@ -33,8 +33,3 @@ class Solution {
         return head;
     }
 };
-```[cite: 2]
-
-### Complexity
-* **Time Complexity:** $O(n)$ — In the worst case, we traverse the list once to find the insertion point or the tail node.
-* **Auxiliary Space:** $O(1)$ — Only a constant amount of extra space is used for pointers.

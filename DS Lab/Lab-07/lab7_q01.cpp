@@ -1,16 +1,14 @@
 class Solution {
   public:
     Node* insertAtBeginning(Node* tail, int key) {
-        // code here
-        Node* NewNode = new Node(key);
-        if (tail==NULL)
-        {
-            NewNode->next==NULL;
-            tail=NewNode;
-            return tail;
+        Node* newNode = new Node(key);
+        if (tail == NULL) {
+            newNode->next = newNode;   // single node points to itself
+            return newNode;
         }
-        NewNode->next = tail->next;
-        tail->next = NewNode;
+        newNode->next = tail->next;
+        tail->next = newNode;
         return tail;
     }
 };
+// Time: O(1), Auxiliary space: O(1)
