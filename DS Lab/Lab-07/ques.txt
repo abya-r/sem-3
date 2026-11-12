@@ -1,0 +1,40 @@
+Lab Exercise 7
+1. Insert at beginning of circular linked list.
+2. Delete first node of singly linked list.
+3. Count total nodes in doubly linked list.
+4. Delete node without accessing head pointer.
+5. Insert at specific position in circular list.
+6. Delete all occurrences of a given key.
+7. Insert into sorted circular linked list.
+8. Insert node into sorted doubly linked list.
+9. Add 1 to linked list number.
+10. Remove all duplicate values from sorted list.
+11. Replace each node with nearest prime number.
+12. Find intersection point of Y-shaped linked lists.
+13. Add two polynomials using linked lists.
+14. Find anagram nodes in a linked list.
+
+Lab Exercise 9
+1. Implement array-based stack with basic operations.
+2. Implement linked-list-based stack with basic operations.
+3. Design stack to retrieve minimum element efficiently.
+4. Convert infix expression to postfix using stack.
+5. Convert infix expression to prefix using stack.
+6. Evaluate postfix expression using a stack.
+7. Check for balanced parentheses using a stack.
+8. Reverse a stack using an auxiliary stack.
+9. Delete middle element of stack using recursion.
+10. Sort a stack using an auxiliary stack.
+11. Construct a monotonic increasing stack from integers.
+12. Find Previous Smaller Element for array elements.
+13. Solve Stone Pile problem using a stack.
+
+Lab Exercise 10
+1. Implement queue using array without element shifting.
+2. Implement queue using array with element shifting.
+3. Implement circular queue using an array.
+4. Implement queue using a linked list.
+5. Reverse a queue using a stack.
+6. Reverse a queue using recursion.
+7. Implement stack operations using a queue.
+8. Implement queue operations using a stack.
